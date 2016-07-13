@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -118,8 +117,8 @@ public class PageOperations {
                         bt.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
                         bt.setPadding(15,0,0,0);
                         bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                        bt.setTextSize(width/45);
-                        bt.setTypeface(null, Typeface.NORMAL);
+                        bt.setTextSize(width/50);
+                        bt.setTextAppearance(context,R.style.QText);
                         bt.setTransformationMethod(null);
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
@@ -129,11 +128,6 @@ public class PageOperations {
                         ImageView iv=new ImageView(context);
                         iv.setVisibility(View.INVISIBLE);
                         hashelements.put(jsonelements.getString("id"),iv);
-                        int width = 300;
-                        int height = 300;
-                        LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
-                        parms.gravity=Gravity.CENTER;
-                        iv.setLayoutParams(parms);
                         layout.addView(iv);
                     }
                     else if (element.equals("SearchView"))
@@ -260,15 +254,6 @@ public class PageOperations {
                         }
 
                     }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));
-                }
-            });
-        }
-        else if (action.equals("signUp")){
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pushNewPage(new PageNode(R.array.page_100_registration,null));
-                    setPage(R.array.page_100_registration,null);
                 }
             });
         }
@@ -623,42 +608,44 @@ public class PageOperations {
                 }
 
             }.execute(AppCodeResources.postUrl("usdamobile", "testpage", ht));
-        }else  if (code == R.array.page_401_friendship){
+        }else if (code== R.array.page_401_friendship) {
             showfriends();
-        }else if(code == R.array.page_305_productsell){
-            showproducts();
         }
         else
             setupUI(playout);
     }
-
     private static void showfriends(){
-        String token_s = UserFileUtility.get_token();
-        Hashtable<String,String> ht = new Hashtable<String, String>();
-        ht.put("os","Android");
+        String token_s=UserFileUtility.get_token();
+        Hashtable<String,String> ht=new Hashtable<String, String>();
+        ht.put("os", "Android");
         ht.put("token",token_s);
         new FetchTask(){
             @Override
-            protected void onPostExecute(JSONObject result){
-                try {
-                    String error = result.getString("error");
-                    if (error.equals("-9")){
-                        TableLayout tl = (TableLayout)hashelements.get("friendshipScrollTable");
+            protected void onPostExecute(JSONObject result) {
+                try
+                {
+                    Log.d("Error", result.getString("error"));
+                    String error=result.getString("error");
+                    if (error.equals("-9")) {
+                        TableLayout tl = (TableLayout) hashelements.get("friendshipScrollTable");
                         tl.removeAllViews();
-                        JSONArray allfriends = result.getJSONArray("results");
-                        for (int i=0; i<allfriends.length();i++){
-                            JSONObject friend = allfriends.getJSONObject(i);
-                            TableRow lv = new TableRow(context);
+                        JSONArray allfriends=result.getJSONArray("results");
+                        for (int i=0;i<allfriends.length();i++)
+                        {
+                            JSONObject friend=allfriends.getJSONObject(i);
+                            TableRow lv=new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
                             //Logo
                             ImageView logo=new ImageView(context);
                             String vendorlogohtml=friend.getString("avatar");
                             int urlstart=vendorlogohtml.indexOf("src=\"")+"src=\"".length();
                             int urlend=urlstart;
-                            for (int j=urlstart; vendorlogohtml.charAt(j)!='\"';j++){
-                                urlend = j;
+                            for (int j=urlstart;vendorlogohtml.charAt(j)!='\"';j++)
+                            {
+                                urlend=j;
                             }
                             String vendorlogourl=vendorlogohtml.substring(urlstart,urlend+1);
+                            Log.d("LOGOURL",vendorlogourl);
                             LoadImage li=new LoadImage();
                             li.img=logo;
                             li.execute(vendorlogourl);
@@ -667,13 +654,14 @@ public class PageOperations {
 
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
-
                             //Name
                             TextView name=new TextView(context);
                             name.setText(friend.getString("displayname"));
+                            name.setTextAppearance(context,R.style.Large);
+                            name.setTextSize(width/50);
                             ll.addView(name);
                             //Business Name
-                            TextView bn=new TextView(context);
+                            final TextView bn=new TextView(context);
                             bn.setText(friend.getString("businessname"));
                             ll.addView(bn);
 
@@ -684,146 +672,27 @@ public class PageOperations {
                             TableRow lk=new TableRow(context);
                             lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             View ldivider=new LinearLayout(context);
-                            ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                            ldivider.setBackgroundColor(Color.BLACK);
                             ldivider.setLayoutParams(new TableRow.LayoutParams(0,2,0.3f));
                             View rdivider=new LinearLayout(context);
-                            rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                            rdivider.setBackgroundColor(Color.BLACK);
                             rdivider.setLayoutParams(new TableRow.LayoutParams(0,2,0.7f));
                             lk.addView(ldivider);
                             lk.addView(rdivider);
                             tl.addView(lk);
                         }
                     }
-                    else {
-
+                    else
+                    {
                     }
                     setupUI(playout);
-                }catch (JSONException e){
+                }catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
             }
         }.execute(AppCodeResources.postUrl("usdafriendship", "friends_list_all_byuser", ht));
     }
-
-
-    private static void showproducts(){
-        String token_s = UserFileUtility.get_token();
-        Hashtable<String,String> ht = new Hashtable<String, String>();
-        ht.put("os","Android");
-        ht.put("token",token_s);
-        new FetchTask(){
-            @Override
-            protected void onPostExecute(JSONObject result){
-                try {
-                    String error = result.getString("error");
-                    if (error.equals("-9")){
-                        TableLayout tl = (TableLayout)hashelements.get("productsellScrollTable");
-                        tl.removeAllViews();
-                        JSONArray allproducts = result.getJSONArray("results");
-                        for (int i=0; i<allproducts.length();i++){
-                            JSONObject product = allproducts.getJSONObject(i);
-                            TableRow lv = new TableRow(context);
-                            lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
-
-                            LinearLayout lltitle=new LinearLayout(context);
-                            lltitle.setOrientation(LinearLayout.VERTICAL);
-                            //Category
-                            TextView category1=new TextView(context);
-                            /*category1.setTextAppearance(context,R.style.QText);
-                            category1.setTextSize(width/55);*/
-                            String categoryt = "Category:";
-                            category1.setText(categoryt);
-                            category1.setTypeface(null, Typeface.BOLD);
-                            lltitle.addView(category1);
-                            //Product Name
-                            TextView pn1=new TextView(context);
-                            /*pn1.setTextAppearance(context,R.style.QText);
-                            pn1.setTextSize(width/55);*/
-                            String productt = "Product:";
-                            pn1.setText(productt);
-                            pn1.setTypeface(null, Typeface.BOLD);
-                            lltitle.addView(pn1);
-                            //Unit
-                            TextView unit1=new TextView(context);
-                            /*unit1.setTextAppearance(context,R.style.QText);
-                            unit1.setTextSize(width/55);*/
-                            String unitt = "Unit:";
-                            unit1.setText(unitt);
-                            unit1.setTypeface(null, Typeface.BOLD);
-                            lltitle.addView(unit1);
-                            //Organic
-                            TextView organic1=new TextView(context);
-                           /* organic1.setTextAppearance(context,R.style.QText);
-                            organic1.setTextSize(width/55);*/
-                            String organict = "Organic:";
-                            organic1.setText(organict);
-                            organic1.setTypeface(null, Typeface.BOLD);
-                            lltitle.addView(organic1);
-
-                            lltitle.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.225f));
-                            lv.addView(lltitle);
-
-                            //Product content
-                            LinearLayout ll=new LinearLayout(context);
-                            ll.setOrientation(LinearLayout.VERTICAL);
-                            //Category
-                            TextView category=new TextView(context);
-                            String categoryline = product.getString("Prd_Category1");
-                            category.setText(categoryline);
-                            ll.addView(category);
-                            //Product Name
-                            TextView pn=new TextView(context);
-                            String productline = product.getString("product_name");
-                            pn.setText(productline);
-                            ll.addView(pn);
-                            //Unit
-                            TextView unit=new TextView(context);
-                            String unitline = product.getString("productunit_name");
-                            unit.setText(unitline);
-                            ll.addView(unit);
-                            //Organic
-                            ImageView organic=new ImageView(context);
-
-                            String organicline = product.getString("organic_usda");
-                            if(organicline.equals("yes")){
-                                organic.setImageResource(R.drawable.usda_organic);
-                                int width = 50;
-                                int height = 50;
-                                LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width,height);
-                                parms.gravity=Gravity.START;
-                                organic.setLayoutParams(parms);
-                            }
-
-                            ll.addView(organic);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.775f));
-                            lv.addView(ll);
-                            tl.addView(lv);
-
-                            TableRow lk=new TableRow(context);
-                            lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                            View ldivider=new LinearLayout(context);
-                            ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
-                            ldivider.setLayoutParams(new TableRow.LayoutParams(0,2,0.3f));
-                            View rdivider=new LinearLayout(context);
-                            rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
-                            rdivider.setLayoutParams(new TableRow.LayoutParams(0,2,0.7f));
-                            lk.addView(ldivider);
-                            lk.addView(rdivider);
-                            tl.addView(lk);
-                        }
-                    }
-                    else {
-
-                    }
-                    setupUI(playout);
-                }catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        }.execute(AppCodeResources.postUrl("usdatestyue", "vendorprofile_product_listall_byuser", ht));
-    }
-
 
     private static void showpublicposts(String search){
         //SEARCH AND SHOW FUNTION FOR FRONT PAGE
@@ -853,6 +722,8 @@ public class PageOperations {
                             Log.d("jpost", jpost.toString());
                             TableRow lv=new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+
+                            //Logo
                             ImageView logo=new ImageView(context);
                             String vendorlogohtml=jpost.getString("vendorlogo");
                             int urlstart=vendorlogohtml.indexOf("src=\"")+"src=\"".length();
@@ -861,13 +732,11 @@ public class PageOperations {
                             {
                                 urlend=j;
                             }
-
                             String vendorlogourl=vendorlogohtml.substring(urlstart,urlend+1);
                             Log.d("LOGOURL",vendorlogourl);
                             LoadImage li=new LoadImage();
                             li.img=logo;
                             li.execute(vendorlogourl);
-
                             logo.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.3f));
                             lv.addView(logo);
 
