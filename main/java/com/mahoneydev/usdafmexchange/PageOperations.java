@@ -531,9 +531,8 @@ public class PageOperations {
                     ((CheckBox)hashelements.get("testCheckbox")).setChecked(!check);
                     String input1=((EditText)hashelements.get("testInput")).getText().toString();
                     ((EditText)hashelements.get("testInput")).setText(input1 + " " + input1);
-                    String spinner1=((Spinner)hashelements.get("testSpinner")).getSelectedItem().toString();
-                    long spinnerp=((Spinner)hashelements.get("testSpinner")).getSelectedItemId();
-                    ((TextView)hashelements.get("testView")).setText("Selected: "+spinner1+", Postion: "+spinnerp);
+                    SpinnerElement spinner1=(SpinnerElement) (((Spinner)hashelements.get("testSpinner")).getSelectedItem());
+                    ((TextView)hashelements.get("testView")).setText("Selected: "+spinner1.getName()+", Postion: "+spinner1.getValue());
                 }
             });
         }
@@ -601,14 +600,15 @@ public class PageOperations {
 
                         if (error.equals("-9"))
                         {
-                            JSONArray ja=result.getJSONArray("list");
-                            String[] arraySpinner = new String[ja.length()];
+                            JSONArray ja=result.getJSONArray("results");
+                            SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
                             for (int i=0;i<ja.length();i++)
                             {
-                                arraySpinner[i]=ja.getString(i);
+                                JSONObject jsonobject=ja.getJSONObject(i);
+                                arraySpinner[i]=new SpinnerElement(jsonobject.getString("Prd_Category1"),jsonobject.getString("Prd_Cat_ID1"));
                             }
 
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
                                     android.R.layout.simple_spinner_item, arraySpinner);
                             ((Spinner)hashelements.get("testSpinner")).setAdapter(adapter);
                         }
@@ -623,7 +623,7 @@ public class PageOperations {
                     }
                 }
 
-            }.execute(AppCodeResources.postUrl("usdamobile", "testpage", ht));
+            }.execute(AppCodeResources.postUrl("usdatestyue", "get_product_category", ht));
         }else  if (code == R.array.page_401_friendship){
             showfriends();
         }else if (code == R.array.page_309_farmermarket){
