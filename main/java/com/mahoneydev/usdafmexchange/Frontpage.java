@@ -22,11 +22,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +50,8 @@ public class Frontpage extends AppCompatActivity
             String action=intent.getAction();
             if (action.equals(QuickstartPreferences.REGISTRATION_COMPLETE))
             {
+
+
                 //switchContent(R.id.content);
             }
             else if (action.equals(QuickstartPreferences.SET_USERNAME))
@@ -338,6 +344,7 @@ public class Frontpage extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
+        //IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (requestCode == AppCodeResources.IMAGE_UPLOAD) {
             if (resultCode == RESULT_OK) {
                 Log.d("Image"," Selected");
