@@ -111,7 +111,6 @@
         <item>{\"element\":\"Button\",\"value\":\"List of farmers markets where I sell at\",\"id\":\"profilevendorView5\", \"clickaction\":\"farmermarket\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"List of products I sell\",\"id\":\"profilevendorView6\", \"clickaction\":\"productsell\"}</item>
-        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postsScroll\"}</item>
     </array>
     <array name="page_205_nameaddress">
         <item>{\"element\":\"TextView\",\"value\":\"Business name and address\",\"id\":\"nameaddressView\"}</item>
@@ -129,7 +128,23 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
     </array>
     <array name="page_305_productsell">
-        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productsellScroll\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"List of products sell\",\"id\":\"productsellView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add product to sell\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>
+    </array>
+    <array name="page_306_addproductform">
+        <item>{\"element\":\"TextView\",\"value\":\"Category\",\"id\":\"categoryView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"categorySpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Product Name\",\"id\":\"productnameView\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"\",\"id\":\"productnameInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Unit (e.g., lb, each, etc)\",\"id\":\"unitView\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"\",\"id\":\"unitInput\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"USDA Organic Certified Product\",\"id\":\"organicCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"Organic, other practice\",\"id\":\"otherCheckbox\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Enter other organic practices here\",\"id\":\"otherorganicInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"saveproductButton\", \"clickaction\":\"saveproduct\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"producterrorView\"}</item>
+
     </array>
 
     <!--social network-->
@@ -184,7 +199,6 @@
     </array>
     <array name="page_106_uploadlogo">
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Upload logo\",\"id\":\"selectimagebutton\", \"clickaction\":\"selectImage\"}</item>
     </array>
     <array name="page_109_qrcode">

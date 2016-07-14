@@ -14,10 +14,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -99,6 +102,16 @@ public class PageOperations {
 
                     } else if (element.equals("EditText")) {
                         EditText et = new EditText(context);
+                        et.setHint(jsonelements.getString("value"));
+                        if (jsonelements.has("inputtype")) {
+                            et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        }
+                        hashelements.put(jsonelements.getString("id"), et);
+                        et.setVisibility(View.INVISIBLE);
+                        et.setBackgroundResource(R.drawable.rounded_text);
+                        layout.addView(et);
+                    }else if (element.equals("AutoCompleteTextView")) {
+                        AutoCompleteTextView et = new AutoCompleteTextView(context);
                         et.setHint(jsonelements.getString("value"));
                         if (jsonelements.has("inputtype")) {
                             et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -569,9 +582,97 @@ public class PageOperations {
                     ((CheckBox)hashelements.get("testCheckbox")).setChecked(!check);
                     String input1=((EditText)hashelements.get("testInput")).getText().toString();
                     ((EditText)hashelements.get("testInput")).setText(input1 + " " + input1);
-                    String spinner1=((Spinner)hashelements.get("testSpinner")).getSelectedItem().toString();
-                    long spinnerp=((Spinner)hashelements.get("testSpinner")).getSelectedItemId();
-                    ((TextView)hashelements.get("testView")).setText("Selected: "+spinner1+", Postion: "+spinnerp);
+                    SpinnerElement spinner1=(SpinnerElement) (((Spinner)hashelements.get("testSpinner")).getSelectedItem());
+                    ((TextView)hashelements.get("testView")).setText("Selected: "+spinner1.getName()+", Postion: "+spinner1.getValue());
+                }
+            });
+        }
+        else if(action.equals("addproduct"))
+        {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(new PageNode(R.array.page_306_addproductform, null));
+                    setPage(R.array.page_306_addproductform, null);
+                }
+            });
+        }
+        else if(action.equals("saveproduct"))
+        {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String productcategoryid=((SpinnerElement)(((Spinner)hashelements.get("categorySpinner")).getSelectedItem())).getValue();
+                    String productname=((AutoCompleteTextView)hashelements.get("productnameInput")).getText().toString();
+                    String unit=((AutoCompleteTextView)hashelements.get("unitInput")).getText().toString();
+                    String organic="";
+                    if (((CheckBox)hashelements.get("organicCheckbox")).isChecked())
+                        organic="yes";
+                    String other="";
+                    if (((CheckBox)hashelements.get("otherCheckbox")).isChecked())
+                        other="yes";
+                    String otherdesc=((EditText)hashelements.get("otherorganicInput")).getText().toString();
+                    boolean flag=true;
+                    TextView errortv=((TextView)hashelements.get("producterrorView"));
+                    if (productcategoryid.equals("0"))
+                    {
+                        errortv.setText("Please Select a Product Category");
+                        flag=false;
+                    }
+                    else if (productname==null||productname.equals(""))
+                    {
+                        errortv.setText("Please Input Product Name");
+                        flag=false;
+                    }
+                    else if (unit==null||unit.equals(""))
+                    {
+                        errortv.setText("Please Input Unit");
+                        flag=false;
+                    }
+                    if (flag)
+                    {
+                        //Build Post Data
+                        Hashtable<String,String> postdataht=new Hashtable<String, String>();
+                        postdataht.put("Prd_Category1",productcategoryid);
+                        postdataht.put("Prd_Name",productname);
+                        postdataht.put("Prd_Unit",unit);
+                        postdataht.put("Prd_organic_usda",organic);
+                        postdataht.put("Prd_organic_other",other);
+                        postdataht.put("Prd_organic_other_desc",otherdesc);
+                        String jsonpostdata=(new JSONObject(postdataht)).toString();
+
+                        Hashtable<String,String> ht=new Hashtable<String, String>();
+                        String token_s=UserFileUtility.get_token();
+                        ht.put("os", "Android");
+                        ht.put("token",token_s);
+                        ht.put("postdata",jsonpostdata);
+                        ht.put("formargs","2");
+                        new FetchTask(){
+                            @Override
+                            protected void onPostExecute(JSONObject result)
+                            {
+                                try {
+                                    Log.d("Error", result.getString("error"));
+                                    String error=result.getString("error");
+                                    if (error.equals("-9"))
+                                    {
+                                        ((TextView)hashelements.get("producterrorView")).setText("Success!");
+                                        removeRecentPage();
+                                        PageNode k= getRecentPage();
+                                        setPage(k.pageId,k.params);
+                                    }
+                                    else
+                                    {
+                                    }
+                                }
+                                catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }.execute(AppCodeResources.postUrl("usdatestyue", "vendorprofile_product_addto_list", ht));
+                    }
                 }
             });
         }
@@ -620,8 +721,143 @@ public class PageOperations {
 
             }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
         }else if (code== R.array.page_407_profile) {
-            ((TextView)hashelements.get("nameView")).setText("Name: "+params.get("friendname"));
+            ((TextView) hashelements.get("nameView")).setText("Name: " + params.get("friendname"));
             setupUI(playout);
+        }else if (code==R.array.page_306_addproductform){
+            Hashtable<String,String> ht=new Hashtable<String, String>();
+            String token_s=UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ((Spinner)hashelements.get("categorySpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i!=0) {
+                        SpinnerElement selecteditem = (SpinnerElement) adapterView.getItemAtPosition(i);
+                        Hashtable<String,String> ht=new Hashtable<String, String>();
+                        String token_s=UserFileUtility.get_token();
+                        ht.put("os", "Android");
+                        ht.put("token", token_s);
+                        ht.put("catetoryid",selecteditem.getValue());
+                        new FetchTask(){
+                            @Override
+                            protected void onPostExecute(JSONObject result)
+                            {
+                                try {
+                                    Log.d("Error", result.getString("error"));
+                                    String error=result.getString("error");
+                                    if (error.equals("-9"))
+                                    {
+                                        JSONArray ja=result.getJSONArray("results");
+                                        String[] arrayString = new String[ja.length()];
+                                        for (int i=0;i<ja.length();i++)
+                                        {
+                                            JSONObject jsonobject=ja.getJSONObject(i);
+                                            arrayString[i]=jsonobject.getString("label");
+                                        }
+                                        MatchAdapter adapter = new MatchAdapter(context,
+                                                android.R.layout.simple_spinner_item, arrayString);
+                                        AutoCompleteTextView actv=((AutoCompleteTextView)hashelements.get("productnameInput"));
+                                        actv.setAdapter(adapter);
+                                        actv.setThreshold(2);
+                                    }
+                                    else
+                                    {
+                                    }
+                                }
+                                catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }.execute(AppCodeResources.postUrl("usdatestyue", "autocomplete_getproductbycatetory", ht));
+                    }
+                    else
+                    {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_item, new String[0]);
+                        AutoCompleteTextView actv=((AutoCompleteTextView)hashelements.get("productnameInput"));
+                        actv.setAdapter(adapter);
+                        actv.setThreshold(2);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+            new FetchTask(){
+                @Override
+                protected void onPostExecute(JSONObject result)
+                {
+                    try {
+                        Log.d("Error", result.getString("error"));
+                        String error=result.getString("error");
+                        if (error.equals("-9"))
+                        {
+                            JSONArray ja=result.getJSONArray("results");
+                            SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()+1];
+                            arraySpinner[0]=new SpinnerElement("Select a Category","0");
+                            for (int i=0;i<ja.length();i++)
+                            {
+                                JSONObject jsonobject=ja.getJSONObject(i);
+                                arraySpinner[i+1]=new SpinnerElement(jsonobject.getString("Prd_Category1"),jsonobject.getString("Prd_Cat_ID1"));
+                            }
+
+                            ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+                                    android.R.layout.simple_spinner_item, arraySpinner);
+                            ((Spinner)hashelements.get("categorySpinner")).setAdapter(adapter);
+                        }
+                        else
+                        {
+                        }
+                        Hashtable<String,String> ht=new Hashtable<String, String>();
+                        String token_s=UserFileUtility.get_token();
+                        ht.put("os", "Android");
+                        ht.put("token", token_s);
+                        new FetchTask(){
+                            @Override
+                            protected void onPostExecute(JSONObject result)
+                            {
+                                try {
+                                    Log.d("Error", result.getString("error"));
+                                    String error=result.getString("error");
+                                    if (error.equals("-9"))
+                                    {
+                                        JSONArray ja=result.getJSONArray("results");
+                                        String[] arrayString = new String[ja.length()];
+                                        for (int i=0;i<ja.length();i++)
+                                        {
+                                            JSONObject jsonobject=ja.getJSONObject(i);
+                                            arrayString[i]=jsonobject.getString("label");
+                                        }
+                                        MatchAdapter adapter = new MatchAdapter(context,
+                                                android.R.layout.simple_spinner_item, arrayString);
+                                        AutoCompleteTextView actv=((AutoCompleteTextView)hashelements.get("unitInput"));
+                                        actv.setAdapter(adapter);
+                                        actv.setThreshold(2);
+                                    }
+                                    else
+                                    {
+                                    }
+                                    setupUI(playout);
+                                }
+                                catch (JSONException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }.execute(AppCodeResources.postUrl("usdatestyue", "autocomplete_getproductunit", ht));
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+            }.execute(AppCodeResources.postUrl("usdatestyue", "get_product_category", ht));
         }else if (code== R.array.page_777_test) {
             Hashtable<String,String> ht=new Hashtable<String, String>();
             String token_s=UserFileUtility.get_token();
@@ -639,14 +875,15 @@ public class PageOperations {
 
                         if (error.equals("-9"))
                         {
-                            JSONArray ja=result.getJSONArray("list");
-                            String[] arraySpinner = new String[ja.length()];
+                            JSONArray ja=result.getJSONArray("results");
+                            SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
                             for (int i=0;i<ja.length();i++)
                             {
-                                arraySpinner[i]=ja.getString(i);
+                                JSONObject jsonobject=ja.getJSONObject(i);
+                                arraySpinner[i]=new SpinnerElement(jsonobject.getString("Prd_Category1"),jsonobject.getString("Prd_Cat_ID1"));
                             }
 
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                            ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
                                     android.R.layout.simple_spinner_item, arraySpinner);
                             ((Spinner)hashelements.get("testSpinner")).setAdapter(adapter);
                         }
@@ -660,17 +897,16 @@ public class PageOperations {
                         e.printStackTrace();
                     }
                 }
-
-            }.execute(AppCodeResources.postUrl("usdamobile", "testpage", ht));
-        }
-        else  if (code == R.array.page_401_friendship){
+            }.execute(AppCodeResources.postUrl("usdatestyue", "get_product_category", ht));
+        }else  if (code == R.array.page_401_friendship){
             showfriends();
         }
         else if (code == R.array.page_309_farmermarket){
             showmarkets();
         }
         else if(code == R.array.page_305_productsell){
-            showproducts();
+            //showproducts();
+            setupUI(playout);
         }
         else if (code == R.array.page_324_posttemplate){
             showtemplate();
