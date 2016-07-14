@@ -86,13 +86,13 @@
         <item>{\"element\":\"TextView\",\"value\":\"New Post\",\"id\":\"newpostView\"}</item>
     </array>
     <array name="page_324_posttemplate">
-        <item>{\"element\":\"TextView\",\"value\":\"New Post from Template\",\"id\":\"posttemplateView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"posttemplateScroll\"}</item>
     </array>
     <array name="page_328_postschedule">
-        <item>{\"element\":\"TextView\",\"value\":\"Scheduled Post\",\"id\":\"postscheduleView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postscheduleScroll\"}</item>
     </array>
     <array name="page_330_postpublish">
-        <item>{\"element\":\"TextView\",\"value\":\"Published Post\",\"id\":\"postpublishView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postpublishScroll\"}</item>
     </array>
 
     <!--vendor profile-->
@@ -125,7 +125,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"USDA Certified Organic Producer\",\"id\":\"certifiedView\"}</item>
     </array>
     <array name="page_309_farmermarket">
-        <item>{\"element\":\"TextView\",\"value\":\"List of farmers markets where sell at\",\"id\":\"farmermarketView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
     </array>
     <array name="page_305_productsell">
         <item>{\"element\":\"TextView\",\"value\":\"List of products sell\",\"id\":\"productsellView\"}</item>
@@ -177,6 +177,8 @@
     <array name="page_110_accountsettings">
         <item>{\"element\":\"TextView\",\"value\":\"Account and Settings\",\"id\":\"accountsettingsView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"accountsettingView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"User account info\",\"id\":\"accountsettingsView1\", \"clickaction\":\"accountinfo\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Upload logo\",\"id\":\"accountsettingsView2\", \"clickaction\":\"uploadlogo"\"}</item>
@@ -204,6 +206,16 @@
     </array>
     <array name="page_111_searchpreference">
         <item>{\"element\":\"TextView\",\"value\":\"Search preference\",\"id\":\"searchpreferenceView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"accountsettingView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Search distance\",\"id\":\"searchpreferenceView1\", \"clickaction\":\"searchdistance\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Preferred products\",\"id\":\"searchpreferenceView2\", \"clickaction\":\"preferproduct"\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Preferred vendors\",\"id\":\"searchpreferenceView3\", \"clickaction\":\"prefervendor\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Preferred farmers markets\",\"id\":\"searchpreferenceView4\", \"clickaction\":\"prefermarket\"}</item>
     </array>
     <array name="page_107_setnotification">
         <item>{\"element\":\"TextView\",\"value\":\"Notification settings\",\"id\":\"setnotificationView\"}</item>
@@ -217,7 +229,19 @@
     <array name="page_101_signasvendor">
         <item>{\"element\":\"TextView\",\"value\":\"Sign up as a vendor\",\"id\":\"signasvendorView\"}</item>
     </array>
-
+    <!--Search Preference-->
+    <array name="page_121_searchdistance">
+    <item>{\"element\":\"TextView\",\"value\":\"Search distance\",\"id\":\"searchdistenceView\"}</item>
+    </array>
+    <array name="page_122_preferproduct">
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"preferproductScroll\"}</item>
+    </array>
+    <array name="page_123_prefervendor">
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"prefervendorScroll\"}</item>
+    </array>
+    <array name="page_124_prefermarket">
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"prefermarketScroll\"}</item>
+    </array>
 
     <array name="page_020_viewpost">
         <item>{\"element\":\"TextView\",\"value\":\"viewpost\",\"id\":\"postView\"}</item>
