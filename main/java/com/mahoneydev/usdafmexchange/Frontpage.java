@@ -51,6 +51,7 @@ public class Frontpage extends AppCompatActivity
             if (action.equals(QuickstartPreferences.REGISTRATION_COMPLETE))
             {
 
+
                 //switchContent(R.id.content);
             }
             else if (action.equals(QuickstartPreferences.SET_USERNAME))

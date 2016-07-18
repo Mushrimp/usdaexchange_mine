@@ -1,11 +1,13 @@
 package com.mahoneydev.usdafmexchange;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageButton;
@@ -35,9 +38,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by mahoneydev on 5/23/2016.
@@ -47,6 +56,7 @@ public class PageOperations {
     public static Resources res = null;
     private static View playout=null;
     private static Hashtable<String, View> hashelements;
+    private static Hashtable<String, String> hashvalues;
     private static List<PageNode> pageHistory=new ArrayList<PageNode>();
     public static int height=0;
     public static int width=0;
@@ -103,7 +113,11 @@ public class PageOperations {
                         EditText et = new EditText(context);
                         et.setHint(jsonelements.getString("value"));
                         if (jsonelements.has("inputtype")) {
-                            et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            String type=jsonelements.getString("inputtype");
+                            if (type.equals("textPassword"))
+                                et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            else if (type.equals("number"))
+                                et.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
                         }
                         hashelements.put(jsonelements.getString("id"), et);
                         et.setVisibility(View.INVISIBLE);
@@ -130,8 +144,8 @@ public class PageOperations {
                         bt.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
                         bt.setPadding(15,0,0,0);
                         bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                        bt.setTextSize(width/50);
-                        bt.setTextAppearance(context,R.style.QText);
+                        bt.setTextSize(width/45);
+                        bt.setTypeface(null, Typeface.NORMAL);
                         bt.setTransformationMethod(null);
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
@@ -195,6 +209,15 @@ public class PageOperations {
                         cb.setVisibility(View.INVISIBLE);
                         hashelements.put(jsonelements.getString("id"), cb);
                         layout.addView(cb);
+                    }else if (element.equals("DatePicker"))
+                    {
+                        Log.e("DatePicker","1");
+                        TextView dp=new TextView(context);
+                        dp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                        dp.setVisibility(View.INVISIBLE);
+                        dp.setText("Select the Date");
+                        hashelements.put(jsonelements.getString("id"), dp);
+                        layout.addView(dp);
                     }
                 }
             }
@@ -273,6 +296,15 @@ public class PageOperations {
                         }
 
                     }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));
+                }
+            });
+        }
+        else if (action.equals("signUp")){
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pushNewPage(new PageNode(R.array.page_100_registration,null));
+                    setPage(R.array.page_100_registration,null);
                 }
             });
         }
@@ -587,6 +619,94 @@ public class PageOperations {
                 }
             });
         }
+        else if (action.equals("publishpost"))
+        {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String price_market_userindex_id = ((SpinnerElement) (((Spinner) hashelements.get("marketSpinner")).getSelectedItem())).getValue();
+                    String price_product_userindex_id = ((SpinnerElement) (((Spinner) hashelements.get("productSpinner")).getSelectedItem())).getValue();
+                    String price_productunit_name = ((AutoCompleteTextView) hashelements.get("unitInput")).getText().toString();
+                    String price_price =  ((EditText) hashelements.get("priceInput")).getText().toString();
+                    String template="";
+                    if (((CheckBox) hashelements.get("postCheckbox")).isChecked())
+                        template = "yes";
+                    boolean flag = true;
+                    TextView errortv = ((TextView) hashelements.get("newposterrorView"));
+                    SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                    if (price_market_userindex_id.equals("")) {
+                        errortv.setText("Please Select a Market");
+                        flag = false;
+                    }
+                    if (price_product_userindex_id.equals("")) {
+                        errortv.setText("Please Select a Product");
+                        flag = false;
+                    }else if (price_price == null || price_price.equals("")) {
+                        errortv.setText("Please Input price");
+                        flag = false;
+                    } else if (price_productunit_name == null || price_productunit_name.equals("")) {
+                        errortv.setText("Please Input Unit");
+                        flag = false;
+                    }
+                    try {
+                        Date date = dateFormatter.parse(((TextView)hashelements.get("marketDay")).getText().toString());
+
+                    } catch (ParseException e) {
+                        errortv.setText("Please Select a Market Day");
+                        flag = false;
+                    }
+                    try {
+                        Date date = dateFormatter.parse(((TextView)hashelements.get("publishDay")).getText().toString());
+
+                    } catch (ParseException e) {
+                        errortv.setText("Please Select a Publish Day");
+                        flag = false;
+                    }
+
+                    if (flag) {
+                        //Build Post Data
+                        Hashtable<String, String> postdataht = new Hashtable<String, String>();
+                        postdataht.put("price_market_userindex_id", price_market_userindex_id);
+                        postdataht.put("price_product_userindex_id", price_product_userindex_id);
+                        postdataht.put("price_productunit_name", price_productunit_name);
+                        postdataht.put("price_price", price_price);
+                        postdataht.put("task", "add");
+                        postdataht.put("price_template", template);
+                        postdataht.put("price_market_date", ((TextView)hashelements.get("marketDay")).getText().toString());
+                        postdataht.put("price_publish_date", ((TextView)hashelements.get("publishDay")).getText().toString());
+                        postdataht.put("price_ad_desc", ((EditText)hashelements.get("descInput")).getText().toString());
+                        postdataht.put("price_publish_date", ((TextView)hashelements.get("publishDay")).getText().toString());
+                        String jsonpostdata = (new JSONObject(postdataht)).toString();
+
+                        Hashtable<String, String> ht = new Hashtable<String, String>();
+                        String token_s = UserFileUtility.get_token();
+                        ht.put("os", "Android");
+                        ht.put("token", token_s);
+                        ht.put("postdata", jsonpostdata);
+                        ht.put("formargs", "2");
+                        new FetchTask() {
+                            @Override
+                            protected void onPostExecute(JSONObject result) {
+                                try {
+                                    Log.d("Error", result.getString("error"));
+                                    String error = result.getString("error");
+                                    if (error.equals("-9")) {
+                                        ((TextView) hashelements.get("newposterrorView")).setText("Success!");
+                                        removeRecentPage();
+                                        PageNode k = getRecentPage();
+                                        setPage(k.pageId, k.params);
+                                    } else {
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_save_postform", ht));
+                    }
+                }
+            });
+        }
         else if(action.equals("saveproduct"))
         {
             bt.setOnClickListener(new View.OnClickListener() {
@@ -713,6 +833,8 @@ public class PageOperations {
         }else if (code== R.array.page_407_profile) {
             ((TextView) hashelements.get("nameView")).setText("Name: " + params.get("friendname"));
             setupUI(playout);
+        }else if (code == R.array.page_322_newpost) {
+            preparepostform();
         }else if (code==R.array.page_306_addproductform){
             Hashtable<String,String> ht=new Hashtable<String, String>();
             String token_s=UserFileUtility.get_token();
@@ -753,6 +875,7 @@ public class PageOperations {
                                     else
                                     {
                                     }
+
                                 }
                                 catch (JSONException e)
                                 {
@@ -896,7 +1019,6 @@ public class PageOperations {
         }
         else if(code == R.array.page_305_productsell){
             showproducts();
-            //setupUI(playout);
         }
         else if (code == R.array.page_324_posttemplate){
             showtemplate();
@@ -919,38 +1041,34 @@ public class PageOperations {
         else
             setupUI(playout);
     }
+
     private static void showfriends(){
-        String token_s=UserFileUtility.get_token();
-        Hashtable<String,String> ht=new Hashtable<String, String>();
-        ht.put("os", "Android");
+        String token_s = UserFileUtility.get_token();
+        Hashtable<String,String> ht = new Hashtable<String, String>();
+        ht.put("os","Android");
         ht.put("token",token_s);
         new FetchTask(){
             @Override
-            protected void onPostExecute(JSONObject result) {
-                try
-                {
-                    Log.d("Error", result.getString("error"));
-                    String error=result.getString("error");
-                    if (error.equals("-9")) {
-                        TableLayout tl = (TableLayout) hashelements.get("friendshipScrollTable");
+            protected void onPostExecute(JSONObject result){
+                try {
+                    String error = result.getString("error");
+                    if (error.equals("-9")){
+                        TableLayout tl = (TableLayout)hashelements.get("friendshipScrollTable");
                         tl.removeAllViews();
-                        JSONArray allfriends=result.getJSONArray("results");
-                        for (int i=0;i<allfriends.length();i++)
-                        {
-                            JSONObject friend=allfriends.getJSONObject(i);
-                            TableRow lv=new TableRow(context);
+                        JSONArray allfriends = result.getJSONArray("results");
+                        for (int i=0; i<allfriends.length();i++){
+                            JSONObject friend = allfriends.getJSONObject(i);
+                            TableRow lv = new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
                             //Logo
                             ImageView logo=new ImageView(context);
                             String vendorlogohtml=friend.getString("avatar");
                             int urlstart=vendorlogohtml.indexOf("src=\"")+"src=\"".length();
                             int urlend=urlstart;
-                            for (int j=urlstart;vendorlogohtml.charAt(j)!='\"';j++)
-                            {
-                                urlend=j;
+                            for (int j=urlstart; vendorlogohtml.charAt(j)!='\"';j++){
+                                urlend = j;
                             }
                             String vendorlogourl=vendorlogohtml.substring(urlstart,urlend+1);
-                            Log.d("LOGOURL",vendorlogourl);
                             LoadImage li=new LoadImage();
                             li.img=logo;
                             li.execute(vendorlogourl);
@@ -959,14 +1077,13 @@ public class PageOperations {
 
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
+
                             //Name
                             TextView name=new TextView(context);
                             name.setText(friend.getString("displayname"));
-                            name.setTextAppearance(context,R.style.Large);
-                            name.setTextSize(width/50);
                             ll.addView(name);
                             //Business Name
-                            final TextView bn=new TextView(context);
+                            TextView bn=new TextView(context);
                             bn.setText(friend.getString("businessname"));
                             ll.addView(bn);
 
@@ -977,28 +1094,243 @@ public class PageOperations {
                             TableRow lk=new TableRow(context);
                             lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             View ldivider=new LinearLayout(context);
-                            ldivider.setBackgroundColor(Color.BLACK);
+                            ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
                             ldivider.setLayoutParams(new TableRow.LayoutParams(0,2,0.3f));
                             View rdivider=new LinearLayout(context);
-                            rdivider.setBackgroundColor(Color.BLACK);
+                            rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
                             rdivider.setLayoutParams(new TableRow.LayoutParams(0,2,0.7f));
                             lk.addView(ldivider);
                             lk.addView(rdivider);
                             tl.addView(lk);
                         }
                     }
-                    else
-                    {
+                    else {
+
                     }
                     setupUI(playout);
-                }catch (JSONException e)
-                {
+                }catch (JSONException e){
                     e.printStackTrace();
                 }
             }
         }.execute(AppCodeResources.postUrl("usdafriendship", "friends_list_all_byuser", ht));
     }
 
+    private static void preparepostform(){
+        Hashtable<String,String> ht=new Hashtable<String, String>();
+        String token_s=UserFileUtility.get_token();
+        ht.put("os", "Android");
+        ht.put("token", token_s);
+        ((Spinner)hashelements.get("productSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i!=0) {
+                    SpinnerElement selecteditem = (SpinnerElement) adapterView.getItemAtPosition(i);
+                    String id=selecteditem.getValue();
+                    ((AutoCompleteTextView)hashelements.get("unitInput")).setText(hashvalues.get(id));
+                }
+                else
+                {
+                    ((AutoCompleteTextView)hashelements.get("unitInput")).setText("");
+                }
+                ((AutoCompleteTextView)hashelements.get("unitInput")).clearFocus();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result)
+            {
+                try {
+                    Log.d("Error", result.getString("error"));
+                    String error=result.getString("error");
+                    if (error.equals("-9"))
+                    {
+                        JSONObject ja=result.getJSONObject("results");
+                        SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
+                        Iterator<?> keys = ja.keys();
+                        int i=0;
+                        while( keys.hasNext() ) {
+                            String key = (String)keys.next();
+                            arraySpinner[i]=new SpinnerElement(ja.getString(key),key);
+                            i++;
+                        }
+
+                        ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+                                android.R.layout.simple_spinner_item, arraySpinner);
+                        ((Spinner)hashelements.get("productSpinner")).setAdapter(adapter);
+                        hashvalues=new Hashtable<String, String>();
+                        JSONArray results=result.getJSONArray("result");
+                        for (i=0;i<results.length();i++)
+                        {
+                            JSONObject unititem=results.getJSONObject(i);
+                            hashvalues.put(unititem.getString("id"),unititem.getString("productunit_name"));
+                        }
+                    }
+                    else
+                    {
+                    }
+                    Hashtable<String,String> ht=new Hashtable<String, String>();
+                    String token_s=UserFileUtility.get_token();
+                    ht.put("os", "Android");
+                    ht.put("token", token_s);
+                    new FetchTask(){
+                        @Override
+                        protected void onPostExecute(JSONObject result)
+                        {
+                            try {
+                                Log.d("Error", result.getString("error"));
+                                String error=result.getString("error");
+                                if (error.equals("-9"))
+                                {
+                                    JSONObject ja=result.getJSONObject("results");
+                                    SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
+                                    Iterator<?> keys = ja.keys();
+                                    int i=0;
+                                    while( keys.hasNext() ) {
+                                        String key = (String)keys.next();
+                                        arraySpinner[i]=new SpinnerElement(ja.getString(key),key);
+                                        i++;
+                                    }
+
+                                    ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+                                            android.R.layout.simple_spinner_item, arraySpinner);
+                                    ((Spinner)hashelements.get("marketSpinner")).setAdapter(adapter);
+                                }
+                                else
+                                {
+                                }
+                                Hashtable<String,String> ht=new Hashtable<String, String>();
+                                String token_s=UserFileUtility.get_token();
+                                ht.put("os", "Android");
+                                ht.put("token", token_s);
+                                new FetchTask(){
+                                    @Override
+                                    protected void onPostExecute(JSONObject result)
+                                    {
+                                        try {
+                                            Log.d("Error", result.getString("error"));
+                                            String error=result.getString("error");
+                                            if (error.equals("-9"))
+                                            {
+                                                JSONArray ja=result.getJSONArray("results");
+                                                String[] arrayString = new String[ja.length()];
+                                                for (int i=0;i<ja.length();i++)
+                                                {
+                                                    JSONObject jsonobject=ja.getJSONObject(i);
+                                                    arrayString[i]=jsonobject.getString("label");
+                                                }
+                                                MatchAdapter adapter = new MatchAdapter(context,
+                                                        android.R.layout.simple_spinner_item, arrayString);
+                                                AutoCompleteTextView actv=((AutoCompleteTextView)hashelements.get("unitInput"));
+                                                actv.setAdapter(adapter);
+                                                actv.setThreshold(2);
+                                            }
+                                            else
+                                            {
+                                            }
+                                            setupUI(playout);
+                                        }
+                                        catch (JSONException e)
+                                        {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                }.execute(AppCodeResources.postUrl("usdatestyue", "autocomplete_getproductunit", ht));
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_marketlist", ht));
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+        }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_productlist", ht));
+        ((TextView)hashelements.get("marketDay")).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                Date date;
+                Calendar newCalendar = Calendar.getInstance();
+                try {
+                    date = dateFormatter.parse(((TextView)hashelements.get("marketDay")).getText().toString());
+                    newCalendar.setTime(date);
+                } catch (ParseException e) {
+
+                }
+                Calendar currentday=Calendar.getInstance();
+                DatePickerDialog fromDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                        ((TextView)hashelements.get("marketDay")).setText(dateFormatter.format(newDate.getTime()));
+                        Calendar currentday=Calendar.getInstance();
+                        Calendar publishday=Calendar.getInstance();
+                        publishday.set(year,monthOfYear,dayOfMonth-2);
+                        if (currentday.getTimeInMillis()>publishday.getTimeInMillis())
+                            ((TextView)hashelements.get("publishDay")).setText(dateFormatter.format(currentday.getTime()));
+                        else
+                            ((TextView)hashelements.get("publishDay")).setText(dateFormatter.format(publishday.getTime()));
+                    }
+                },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+                fromDatePickerDialog.getDatePicker().setMinDate(currentday.getTimeInMillis());
+                newCalendar.set(currentday.get(Calendar.YEAR), currentday.get(Calendar.MONTH), currentday.get(Calendar.DAY_OF_MONTH)+42);
+                fromDatePickerDialog.getDatePicker().setMaxDate(newCalendar.getTimeInMillis());
+                fromDatePickerDialog.show();
+            }
+        });
+        ((TextView)hashelements.get("publishDay")).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar newCalendar = Calendar.getInstance();
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                Date date;
+                try {
+                    date = dateFormatter.parse(((TextView)hashelements.get("publishDay")).getText().toString());
+                } catch (ParseException e) {
+                    return;
+                }
+                newCalendar.setTime(date);
+                DatePickerDialog fromDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Calendar newDate = Calendar.getInstance();
+                        newDate.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                        ((TextView)hashelements.get("publishDay")).setText(dateFormatter.format(newDate.getTime()));
+                    }
+                },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+                Calendar currentday=Calendar.getInstance();
+                Calendar marketday=Calendar.getInstance();
+                try {
+                    date = dateFormatter.parse(((TextView)hashelements.get("marketDay")).getText().toString());
+                } catch (ParseException e) {
+                    return;
+                }
+                marketday.setTime(date);
+                fromDatePickerDialog.getDatePicker().setMaxDate(marketday.getTimeInMillis());
+                Calendar publishday=Calendar.getInstance();
+                publishday.set(newCalendar.get(marketday.YEAR), marketday.get(Calendar.MONTH), marketday.get(Calendar.DAY_OF_MONTH)-2);
+                if (currentday.getTimeInMillis()>publishday.getTimeInMillis())
+                    fromDatePickerDialog.getDatePicker().setMinDate(currentday.getTimeInMillis());
+                else
+                    fromDatePickerDialog.getDatePicker().setMinDate(publishday.getTimeInMillis());
+
+                fromDatePickerDialog.show();
+            }
+        });
+    }
 
     private static void showmarkets(){
         String token_s = UserFileUtility.get_token();
@@ -1022,34 +1354,19 @@ public class PageOperations {
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Market Name
-                            TextView marketnamet=new TextView(context);
-                            marketnamet.setTextAppearance(context,R.style.Title);
-                            marketnamet.setTextSize(width/50);
-                            marketnamet.setText("Market Name:");
-                            ll.addView(marketnamet);
                             TextView marketname=new TextView(context);
                             marketname.setTextAppearance(context,R.style.Bold);
                             marketname.setTextSize(width/45);
                             marketname.setText(market.getString("MarketName"));
                             ll.addView(marketname);
                             //Market Location
-                            TextView marketlocationt=new TextView(context);
-                            marketlocationt.setTextAppearance(context,R.style.Title);
-                            marketlocationt.setTextSize(width/50);
-                            marketlocationt.setText("Address:");
-                            ll.addView(marketlocationt);
                             TextView marketlocation=new TextView(context);
-                            marketlocation.setTextAppearance(context,R.style.Body);
+                            marketlocation.setTextAppearance(context,R.style.Normal);
                             marketlocation.setTextSize(width/50);
                             marketlocation.setText(market.getString("Market_location"));
                             ll.addView(marketlocation);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/7, 1f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1097,63 +1414,72 @@ public class PageOperations {
                             TableRow lv = new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
 
+                            LinearLayout lltitle=new LinearLayout(context);
+                            lltitle.setOrientation(LinearLayout.VERTICAL);
+                            //Category
+                            TextView category1=new TextView(context);
+                            category1.setTextAppearance(context,R.style.Bold);
+                            category1.setTextSize(width/55);
+                            String categoryt = "Category:";
+                            category1.setText(categoryt);
+                            //category1.setTypeface(null, Typeface.BOLD);
+                            lltitle.addView(category1);
+                            //Product Name
+                            TextView pn1=new TextView(context);
+                            pn1.setTextAppearance(context,R.style.Bold);
+                            pn1.setTextSize(width/55);
+                            String productt = "Product:";
+                            pn1.setText(productt);
+                            //pn1.setTypeface(null, Typeface.BOLD);
+                            lltitle.addView(pn1);
+                            //Unit
+                            TextView unit1=new TextView(context);
+                            unit1.setTextAppearance(context,R.style.Bold);
+                            unit1.setTextSize(width/55);
+                            String unitt = "Unit:";
+                            unit1.setText(unitt);
+                            //unit1.setTypeface(null, Typeface.BOLD);
+                            lltitle.addView(unit1);
+                            //Organic
+                            TextView organic1=new TextView(context);
+                            organic1.setTextAppearance(context,R.style.Bold);
+                            organic1.setTextSize(width/55);
+                            String organict = "Organic:";
+                            organic1.setText(organict);
+                            //organic1.setTypeface(null, Typeface.BOLD);
+                            lltitle.addView(organic1);
+
+                            lltitle.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.225f));
+                            lv.addView(lltitle);
+
                             //Product content
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Category
-                            TextView category1=new TextView(context);
-                            category1.setTextAppearance(context,R.style.Title);
-                            category1.setTextSize(width/50);
-                            String categoryt = "Category:";
-                            category1.setText(categoryt);
-                            ll.addView(category1);
                             TextView category=new TextView(context);
                             String categoryline = product.getString("Prd_Category1");
-                            category.setTextAppearance(context,R.style.Bold);
-                            category.setTextSize(width/45);
+                            category.setTextAppearance(context,R.style.Normal);
+                            category.setTextSize(width/55);
                             category.setText(categoryline);
                             ll.addView(category);
                             //Product Name
-                            TextView pn1=new TextView(context);
-                            pn1.setTextAppearance(context,R.style.Title);
-                            pn1.setTextSize(width/50);
-                            String productt = "Product:";
-                            pn1.setText(productt);
-                            ll.addView(pn1);
                             TextView pn=new TextView(context);
                             String productline = product.getString("product_name");
                             pn.setTextAppearance(context,R.style.Normal);
-                            pn.setTextSize(width/45);
+                            pn.setTextSize(width/55);
                             pn.setText(productline);
                             ll.addView(pn);
-
                             //Unit
-                            LinearLayout ll_in1 = new LinearLayout(context);
-                            ll_in1.setOrientation(LinearLayout.HORIZONTAL);
-                            TextView unit1=new TextView(context);
-                            unit1.setTextAppearance(context,R.style.Title);
-                            unit1.setTextSize(width/50);
-                            String unitt = "Unit:          ";
-                            unit1.setText(unitt);
-                            ll_in1.addView(unit1);
                             TextView unit=new TextView(context);
                             String unitline = product.getString("productunit_name");
-                            unit.setTextAppearance(context,R.style.Body);
-                            unit.setTextSize(width/45);
+                            unit.setTextAppearance(context,R.style.Normal);
+                            unit.setTextSize(width/55);
                             unit.setText(unitline);
-                            ll_in1.addView(unit);
-                            ll.addView(ll_in1);
-
+                            //unit.setTextSize(width/55);
+                            ll.addView(unit);
                             //Organic
-                            LinearLayout ll_in2 = new LinearLayout(context);
-                            ll_in2.setOrientation(LinearLayout.HORIZONTAL);
-                            TextView organic1=new TextView(context);
-                            organic1.setTextAppearance(context,R.style.Title);
-                            organic1.setTextSize(width/50);
-                            String organict = "Organic:    ";
-                            organic1.setText(organict);
-                            ll_in2.addView(organic1);
                             ImageView organic=new ImageView(context);
+
                             String organicline = product.getString("organic_usda");
                             if(organicline.equals("yes")){
                                 organic.setImageResource(R.drawable.usda_organic);
@@ -1163,15 +1489,10 @@ public class PageOperations {
                                 parms.gravity=Gravity.START;
                                 organic.setLayoutParams(parms);
                             }
-                            ll_in2.addView(organic);
-                            ll.addView(ll_in2);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
+                            ll.addView(organic);
 
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.775f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1216,54 +1537,59 @@ public class PageOperations {
                         for (int i=0; i<alltemplates.length();i++){
                             JSONObject template = alltemplates.getJSONObject(i);
                             TableRow lv = new TableRow(context);
-                            lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                            lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
+
+                            //Template Title
+                            LinearLayout lltitle=new LinearLayout(context);
+                            lltitle.setOrientation(LinearLayout.VERTICAL);
+                            //Product name
+                            TextView pn1=new TextView(context);
+                            pn1.setTextAppearance(context,R.style.Bold);
+                            pn1.setTextSize(width/45 );
+                            String pntitle = "Product:";
+                            pn1.setText(pntitle);
+                            lltitle.addView(pn1);
+                            //Market Name
+                            TextView mn1=new TextView(context);
+                            mn1.setTextAppearance(context,R.style.Bold);
+                            mn1.setTextSize(width/45);
+                            String mntitle = "Market:\n";
+                            mn1.setText(mntitle);
+                            lltitle.addView(mn1);
+                            //Description
+                            TextView desc1=new TextView(context);
+                            desc1.setTextAppearance(context,R.style.Bold);
+                            desc1.setTextSize(width/45);
+                            String desct = "Description:";
+                            desc1.setText(desct);
+                            lltitle.addView(desc1);
+
+                            lltitle.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.3f));
+                            lv.addView(lltitle);
 
                             //Template content
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Product Name
-                            TextView pn1=new TextView(context);
-                            pn1.setTextAppearance(context,R.style.Title);
-                            pn1.setTextSize(width/50);
-                            String pntitle = "Product:";
-                            pn1.setText(pntitle);
-                            ll.addView(pn1);
                             TextView pn=new TextView(context);
-                            pn.setTextAppearance(context,R.style.Bold);
+                            pn.setTextAppearance(context,R.style.Normal);
                             pn.setTextSize(width/45);
                             pn.setText(template.getString("price_product_name"));
                             ll.addView(pn);
                             //Market Name
-                            TextView mn1=new TextView(context);
-                            mn1.setTextAppearance(context,R.style.Title);
-                            mn1.setTextSize(width/50);
-                            String mntitle = "Market:";
-                            mn1.setText(mntitle);
-                            ll.addView(mn1);
                             TextView mn=new TextView(context);
-                            mn.setTextAppearance(context,R.style.Body);
+                            mn.setTextAppearance(context,R.style.Normal);
                             mn.setTextSize(width/45);
                             mn.setText(template.getString("price_market_name"));
                             ll.addView(mn);
                             //Description
-                            TextView desc1=new TextView(context);
-                            desc1.setTextAppearance(context,R.style.Title);
-                            desc1.setTextSize(width/50);
-                            String desct = "Description:";
-                            desc1.setText(desct);
-                            ll.addView(desc1);
                             TextView desc=new TextView(context);
-                            desc.setTextAppearance(context,R.style.Body);
+                            desc.setTextAppearance(context,R.style.Normal);
                             desc.setTextSize(width/45);
                             desc.setText(template.getString("price_ad_desc"));
                             ll.addView(desc);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.7f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1316,7 +1642,7 @@ public class PageOperations {
                             //Price Product Name
                             TextView nameprice=new TextView(context);
                             nameprice.setTextAppearance(context,R.style.Bold);
-                            nameprice.setTextSize(width/35);
+                            nameprice.setTextSize(width/40);
                             String name = schedule.getString("price_product_name") + " $" + schedule.getString("price_price") + " per " + schedule.getString("price_productunit_name");
                             nameprice.setText(name);
                             ll.addView(nameprice);
@@ -1324,14 +1650,14 @@ public class PageOperations {
                             LinearLayout lh1=new LinearLayout(context);
                             lh1.setOrientation(LinearLayout.HORIZONTAL);
                             TextView marketdatet=new TextView(context);
-                            marketdatet.setTextAppearance(context,R.style.Title);
-                            marketdatet.setTextSize(width/45);
+                            marketdatet.setTextAppearance(context,R.style.Bold);
+                            marketdatet.setTextSize(width/50);
                             String mdt = "Date:   ";
                             marketdatet.setText(mdt);
                             lh1.addView(marketdatet);
                             TextView marketdate=new TextView(context);
-                            marketdate.setTextAppearance(context,R.style.Body);
-                            marketdate.setTextSize(width/45);
+                            marketdate.setTextAppearance(context,R.style.Normal);
+                            marketdate.setTextSize(width/50);
                             String md = schedule.getString("price_market_date");
                             marketdate.setText(md);
                             lh1.addView(marketdate);
@@ -1340,32 +1666,27 @@ public class PageOperations {
                             LinearLayout lh2=new LinearLayout(context);
                             lh2.setOrientation(LinearLayout.HORIZONTAL);
                             TextView publisheddatet=new TextView(context);
-                            publisheddatet.setTextAppearance(context,R.style.Title);
-                            publisheddatet.setTextSize(width/45);
+                            publisheddatet.setTextAppearance(context,R.style.Bold);
+                            publisheddatet.setTextSize(width/50);
                             String pdt = "Published On:   ";
                             publisheddatet.setText(pdt);
                             lh2.addView(publisheddatet);
                             TextView publisheddate=new TextView(context);
-                            publisheddate.setTextAppearance(context,R.style.Body);
-                            publisheddate.setTextSize(width/45);
+                            publisheddate.setTextAppearance(context,R.style.Normal);
+                            publisheddate.setTextSize(width/50);
                             String pd = schedule.getString("price_publish_date");
                             publisheddate.setText(pd);
                             lh2.addView(publisheddate);
                             ll.addView(lh2);
                             //Market Name
                             TextView marketname=new TextView(context);
-                            marketname.setTextAppearance(context,R.style.Body);
-                            marketname.setTextSize(width/45);
+                            marketname.setTextAppearance(context,R.style.Normal);
+                            marketname.setTextSize(width/50);
                             String mn = "@ " + schedule.getString("price_market_name");
                             marketname.setText(mn);
                             ll.addView(marketname);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 1f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1428,14 +1749,14 @@ public class PageOperations {
                             LinearLayout lh1=new LinearLayout(context);
                             lh1.setOrientation(LinearLayout.HORIZONTAL);
                             TextView marketdatet=new TextView(context);
-                            marketdatet.setTextAppearance(context,R.style.Title);
-                            marketdatet.setTextSize(width/45);
+                            marketdatet.setTextAppearance(context,R.style.Bold);
+                            marketdatet.setTextSize(width/50);
                             String mdt = "Market Date:   ";
                             marketdatet.setText(mdt);
                             lh1.addView(marketdatet);
                             TextView marketdate=new TextView(context);
-                            marketdate.setTextAppearance(context,R.style.Body);
-                            marketdate.setTextSize(width/45);
+                            marketdate.setTextAppearance(context,R.style.Normal);
+                            marketdate.setTextSize(width/50);
                             String md = published.getString("price_market_date");
                             marketdate.setText(md);
                             lh1.addView(marketdate);
@@ -1444,32 +1765,27 @@ public class PageOperations {
                             LinearLayout lh2=new LinearLayout(context);
                             lh2.setOrientation(LinearLayout.HORIZONTAL);
                             TextView publisheddatet=new TextView(context);
-                            publisheddatet.setTextAppearance(context,R.style.Title);
-                            publisheddatet.setTextSize(width/45);
+                            publisheddatet.setTextAppearance(context,R.style.Bold);
+                            publisheddatet.setTextSize(width/50);
                             String pdt = "Published Date:   ";
                             publisheddatet.setText(pdt);
                             lh2.addView(publisheddatet);
                             TextView publisheddate=new TextView(context);
-                            publisheddate.setTextAppearance(context,R.style.Body);
-                            publisheddate.setTextSize(width/45);
+                            publisheddate.setTextAppearance(context,R.style.Normal);
+                            publisheddate.setTextSize(width/50);
                             String pd = published.getString("price_publish_date");
                             publisheddate.setText(pd);
                             lh2.addView(publisheddate);
                             ll.addView(lh2);
                             //Market Name
                             TextView marketname=new TextView(context);
-                            marketname.setTextAppearance(context,R.style.Body);
-                            marketname.setTextSize(width/45);
+                            marketname.setTextAppearance(context,R.style.Normal);
+                            marketname.setTextSize(width/50);
                             String mn = "@ " + published.getString("price_market_name");
                             marketname.setText(mn);
                             ll.addView(marketname);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 1f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1517,7 +1833,7 @@ public class PageOperations {
                             TableRow lv = new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
 
-                            /*//Preferred Products Title
+                            //Preferred Products Title
                             LinearLayout lltitle=new LinearLayout(context);
                             lltitle.setOrientation(LinearLayout.VERTICAL);
                             //Category
@@ -1536,42 +1852,25 @@ public class PageOperations {
                             lltitle.addView(pn1);
 
                             lltitle.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.3f));
-                            lv.addView(lltitle);*/
+                            lv.addView(lltitle);
 
                             //Preferred Products content
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Category
-                            TextView category1=new TextView(context);
-                            category1.setTextAppearance(context,R.style.Title);
-                            category1.setTextSize(width/50);
-                            String ctitle = "Category:";
-                            category1.setText(ctitle);
-                            ll.addView(category1);
                             TextView category=new TextView(context);
                             category.setTextAppearance(context,R.style.Normal);
                             category.setTextSize(width/45);
                             category.setText(preproduct.getString("Prd_Category1"));
                             ll.addView(category);
                             //Product Name
-                            TextView pn1=new TextView(context);
-                            pn1.setTextAppearance(context,R.style.Title);
-                            pn1.setTextSize(width/50);
-                            String mntitle = "Product:";
-                            pn1.setText(mntitle);
-                            ll.addView(pn1);
                             TextView pn=new TextView(context);
                             pn.setTextAppearance(context,R.style.Normal);
                             pn.setTextSize(width/45);
                             pn.setText(preproduct.getString("product_name"));
                             ll.addView(pn);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 0.7f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.7f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1635,12 +1934,7 @@ public class PageOperations {
                             address.setText(prevendor.getString("address"));
                             ll.addView(address);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/7, 1f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1702,12 +1996,7 @@ public class PageOperations {
                             address.setText(premarket.getString("address"));
                             ll.addView(address);
 
-                            //
-                            TextView br = new TextView(context);
-                            br.setText("");
-                            ll.addView(br);
-
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/7, 1f));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1732,7 +2021,7 @@ public class PageOperations {
                     e.printStackTrace();
                 }
             }
-        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_getlist", ht));
+        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market _list_getlist", ht));
     }
 
     private static void showpublicposts(String search){
@@ -1763,8 +2052,6 @@ public class PageOperations {
                             Log.d("jpost", jpost.toString());
                             TableRow lv=new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
-                            //Logo
                             ImageView logo=new ImageView(context);
                             String vendorlogohtml=jpost.getString("vendorlogo");
                             int urlstart=vendorlogohtml.indexOf("src=\"")+"src=\"".length();
@@ -1773,11 +2060,13 @@ public class PageOperations {
                             {
                                 urlend=j;
                             }
+
                             String vendorlogourl=vendorlogohtml.substring(urlstart,urlend+1);
                             Log.d("LOGOURL",vendorlogourl);
                             LoadImage li=new LoadImage();
                             li.img=logo;
                             li.execute(vendorlogourl);
+
                             logo.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.3f));
                             lv.addView(logo);
 
