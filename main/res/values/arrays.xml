@@ -83,7 +83,23 @@
         <item>{\"element\":\"Button\",\"value\":\"Published Post\",\"id\":\"postpriceView4\", \"clickaction\":\"postpublish\"}</item>
     </array>
     <array name="page_322_newpost">
-        <item>{\"element\":\"TextView\",\"value\":\"New Post\",\"id\":\"newpostView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Product:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"productSpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Unit:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Selling Unit\",\"id\":\"unitInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Market:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"marketSpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Market date:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Maximum 6 weeks\",\"id\":\"marketdateInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Promotional message:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"if necessaty (max 200 characters)\",\"id\":\"unitInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Publish date:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Maximum 3 days before market date\",\"id\":\"publishdateInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"This from (with product and market information) can be used to enter multiple posts?\",\"id\":\"postCheckbox\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Publish\",\"id\":\"publishButton\", \"clickaction\":\"publishpost\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"newposterrorView\"}</item>
     </array>
     <array name="page_324_posttemplate">
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"posttemplateScroll\"}</item>
@@ -128,8 +144,9 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
     </array>
     <array name="page_305_productsell">
-        <item>{\"element\":\"TextView\",\"value\":\"List of products sell\",\"id\":\"productsellView\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Add product to sell\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productsellScroll\"}</item>
     </array>
     <array name="page_306_addproductform">
         <item>{\"element\":\"TextView\",\"value\":\"Category\",\"id\":\"categoryView\"}</item>
