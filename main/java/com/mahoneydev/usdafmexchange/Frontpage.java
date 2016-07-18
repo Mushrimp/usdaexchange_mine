@@ -50,37 +50,6 @@ public class Frontpage extends AppCompatActivity
             String action=intent.getAction();
             if (action.equals(QuickstartPreferences.REGISTRATION_COMPLETE))
             {
-                Hashtable<String,String> ht=new Hashtable<String, String>();
-                String token_s=UserFileUtility.get_token();
-                ht.put("os", "Android");
-                ht.put("token",token_s);
-                new FetchTask(){
-                    @Override
-                    protected void onPostExecute(JSONObject result)
-                    {
-                        try {
-                            Log.d("Error", result.getString("error"));
-                            String error=result.getString("error");
-                            if (error.equals("-9"))
-                            {
-                                String imageurl=result.getString("avatar_url");
-                                imageurl=imageurl.replace("\\","");
-                                ImageView logo=(ImageView) findViewById(R.id.uavatar);
-                                LoadImage li=new LoadImage();
-                                li.img=logo;
-                                li.execute(imageurl);
-                            }
-                            else
-                            {
-                            }
-                        }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
 
                 //switchContent(R.id.content);
             }
@@ -98,14 +67,47 @@ public class Frontpage extends AppCompatActivity
                     switchContent(content_id, null);
                     PageOperations.pushNewPage(new PageNode(content_id, null));
                 }
-                else if (PageOperations.historyEmpty()) {
-                    switchContent(content_id, null);
-                    PageOperations.pushNewPage(new PageNode(content_id,null));
-                }
-                else
-                {
-                    PageNode k= PageOperations.getRecentPage();
-                    switchContent(k.pageId, k.params);
+                else {
+                    if (PageOperations.historyEmpty()) {
+                        switchContent(content_id, null);
+                        PageOperations.pushNewPage(new PageNode(content_id, null));
+                    } else {
+                        PageNode k = PageOperations.getRecentPage();
+                        switchContent(k.pageId, k.params);
+                    }
+                    Log.d("ddd","image");
+                    Hashtable<String,String> ht=new Hashtable<String, String>();
+                    String token_s=UserFileUtility.get_token();
+                    ht.put("os", "Android");
+                    ht.put("token",token_s);
+                    new FetchTask(){
+                        @Override
+                        protected void onPostExecute(JSONObject result)
+                        {
+                            try {
+                                Log.d("Error", result.getString("error"));
+                                String error=result.getString("error");
+                                if (error.equals("-9"))
+                                {
+                                    String imageurl=result.getString("avatar_url");
+                                    imageurl=imageurl.replace("\\","");
+                                    ImageView logo=(ImageView) findViewById(R.id.uavatar);
+                                    LoadImage li=new LoadImage();
+                                    li.img=logo;
+                                    li.execute(imageurl);
+                                    logo.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
+                                }
+                                else
+                                {
+                                }
+                            }
+                            catch (JSONException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
                 }
             }
             else if (action.equals(QuickstartPreferences.SWITCH_MENU))
