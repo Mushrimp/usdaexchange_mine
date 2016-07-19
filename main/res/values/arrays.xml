@@ -2,10 +2,10 @@
 <resources>
     <array name="page_102_login">
         <item>{\"element\":\"TextView\",\"value\":\"Username:\",\"id\":\"usernameView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"usernameInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"usernameInput\",\"next\":\"passwordInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Password:\",\"id\":\"passwordView\"}</item>
         <item>
-            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\"}
+            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\",\"enter\":\"loginSubmit\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void1View\"}</item>
         <item>
@@ -86,7 +86,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"Product:\",\"id\":\"marketView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"productSpinner\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Unit:\",\"id\":\"marketView\"}</item>
-        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"Selling Unit\",\"id\":\"unitInput\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"Selling Unit\",\"id\":\"unitInput\",\"next\":\"priceInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Price:\",\"id\":\"priceView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"Selling price\",\"id\":\"priceInput\",\"inputtype\":\"number\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Market:\",\"id\":\"marketView\"}</item>
@@ -154,7 +154,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"Category\",\"id\":\"categoryView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"categorySpinner\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Product Name\",\"id\":\"productnameView\"}</item>
-        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"\",\"id\":\"productnameInput\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"\",\"id\":\"productnameInput\",\"next\":\"unitInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Unit (e.g., lb, each, etc)\",\"id\":\"unitView\"}</item>
         <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"\",\"id\":\"unitInput\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"USDA Organic Certified Product\",\"id\":\"organicCheckbox\"}</item>
