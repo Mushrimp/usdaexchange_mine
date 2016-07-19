@@ -263,7 +263,7 @@
     </array>
 
     <array name="page_020_viewpost">
-        <item>{\"element\":\"TextView\",\"value\":\"viewpost\",\"id\":\"postView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"viewpostScroll\"}</item>
     </array>
 
     <array name="page_199_scanqr">

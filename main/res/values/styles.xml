@@ -24,7 +24,7 @@
     </style>
     <style name="Large" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">italic</item>
         <item name="android:typeface">sans</item>
     </style>
     <style name="Bold" parent="@android:style/TextAppearance.Medium">
@@ -52,6 +52,10 @@
         <item name="android:textStyle">normal</item>
         <item name="android:typeface">normal</item>
     </style>
-
+    <style name="Price" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#FF0605</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:typeface">normal</item>
+    </style>
 
 </resources>
