@@ -8,12 +8,17 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +36,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
@@ -86,6 +92,7 @@ public class PageOperations {
                 break;
             }
         }
+        setupUI(context.findViewById(R.id.appbar));
     }
     public static void generateLayout(int code, LinearLayout layout, Hashtable<String,String> params) {
         if ((res == null) || (context == null))
@@ -119,6 +126,84 @@ public class PageOperations {
                             else if (type.equals("number"))
                                 et.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL);
                         }
+                        if (jsonelements.has("next"))
+                        {
+                            final String thisid=jsonelements.getString("id");
+                            final String nextid=jsonelements.getString("next");
+                            et.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    String m=s.toString();
+                                    if (m.indexOf("\n")!=-1)
+                                    {
+                                        ((EditText)hashelements.get(thisid)).setText(m.replace("\n",""));
+                                        ((EditText)hashelements.get(thisid)).clearFocus();
+                                        (hashelements.get(nextid)).requestFocus();
+                                    }
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+
+                                }
+                            });
+                        }
+                        else if (jsonelements.has("enter"))
+                        {
+                            final String action=jsonelements.getString("enter");
+                            final String thisid=jsonelements.getString("id");
+                            et.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    String m=s.toString();
+                                    if (m.indexOf("\n")!=-1)
+                                    {
+                                        ((EditText)hashelements.get(thisid)).setText(m.replace("\n",""));
+                                        ((EditText)hashelements.get(thisid)).clearFocus();
+                                        hideSoftKeyboard(context);
+                                        executeAction(action);
+                                    }
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+
+                                }
+                            });
+                        }
+                        else
+                        {
+                            final String thisid=jsonelements.getString("id");
+                            et.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    String m=s.toString();
+                                    if (m.indexOf("\n")!=-1)
+                                    {
+                                        ((EditText)hashelements.get(thisid)).setText(m.replace("\n",""));
+                                        ((EditText)hashelements.get(thisid)).clearFocus();
+                                        hideSoftKeyboard(context);
+                                    }
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+
+                                }
+                            });
+                        }
                         hashelements.put(jsonelements.getString("id"), et);
                         et.setVisibility(View.INVISIBLE);
                         et.setBackgroundResource(R.drawable.rounded_text);
@@ -128,6 +213,84 @@ public class PageOperations {
                         et.setHint(jsonelements.getString("value"));
                         if (jsonelements.has("inputtype")) {
                             et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        }
+                        if (jsonelements.has("next"))
+                        {
+                            final String thisid=jsonelements.getString("id");
+                            final String nextid=jsonelements.getString("next");
+                            et.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    String m=s.toString();
+                                    if (m.indexOf("\n")!=-1)
+                                    {
+                                        ((AutoCompleteTextView)hashelements.get(thisid)).setText(m.replace("\n",""));
+                                        ((AutoCompleteTextView)hashelements.get(thisid)).clearFocus();
+                                        (hashelements.get(nextid)).requestFocus();
+                                    }
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+
+                                }
+                            });
+                        }
+                        else if (jsonelements.has("enter"))
+                        {
+                            final String action=jsonelements.getString("enter");
+                            final String thisid=jsonelements.getString("id");
+                            et.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    String m=s.toString();
+                                    if (m.indexOf("\n")!=-1)
+                                    {
+                                        ((AutoCompleteTextView)hashelements.get(thisid)).setText(m.replace("\n",""));
+                                        ((AutoCompleteTextView)hashelements.get(thisid)).clearFocus();
+                                        hideSoftKeyboard(context);
+                                        executeAction(action);
+                                    }
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+
+                                }
+                            });
+                        }
+                        else
+                        {
+                            final String thisid=jsonelements.getString("id");
+                            et.addTextChangedListener(new TextWatcher() {
+                                @Override
+                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                }
+
+                                @Override
+                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                    String m=s.toString();
+                                    if (m.indexOf("\n")!=-1)
+                                    {
+                                        ((AutoCompleteTextView)hashelements.get(thisid)).setText(m.replace("\n",""));
+                                        ((AutoCompleteTextView)hashelements.get(thisid)).clearFocus();
+                                        hideSoftKeyboard(context);
+                                    }
+                                }
+
+                                @Override
+                                public void afterTextChanged(Editable s) {
+
+                                }
+                            });
                         }
                         hashelements.put(jsonelements.getString("id"), et);
                         et.setVisibility(View.INVISIBLE);
@@ -226,7 +389,12 @@ public class PageOperations {
             e.printStackTrace();
         }
     }
-
+    private static void executeAction(String action){
+        if (action.equals("loginSubmit"))
+        {
+            loginAction();
+        }
+    }
     private static void setButtonAction(String action, ImageButton bt) {
         if (action.equals("searchPublicPost"))
         {
@@ -247,55 +415,58 @@ public class PageOperations {
             });
         }
     }
+    private static void loginAction(){
+        String username_s=(((EditText)hashelements.get("usernameInput")).getText()).toString();
+        Log.d("username", username_s);
+        final String password_s=(((EditText)hashelements.get("passwordInput")).getText()).toString();
+        Log.d("password",password_s);
+        String token_s=UserFileUtility.get_token();
+        if (token_s.equals(""))
+        {
+            ((TextView)hashelements.get("loginErrorView")).setText("Network Error!");
+            return;
+        }
+        UserFileUtility.set_userlogininfo(username_s,password_s);
+        Hashtable<String,String> ht=new Hashtable<String, String>();
+        ht.put("username",username_s);
+        ht.put("password", password_s);
+        ht.put("os", "Android");
+        ht.put("token",token_s);
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result)
+            {
+                try {
+                    Log.d("Error", result.getString("error"));
+                    String error=result.getString("error");
+                    if (error.equals("-9"))
+                    {
+                        UserFileUtility.save_userinfo();
+                        setPage(R.array.page_001_front,null);
+                        ((TextView)context.findViewById(R.id.username_menu_display)).setText(UserFileUtility.get_username());
+                        setMenu(R.id.login_vendor);
+
+                    }
+                    else
+                    {
+                        ((TextView)hashelements.get("loginErrorView")).setText("Password Error!");
+                        UserFileUtility.clean_userinfo();
+                    }
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+
+        }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));
+    }
     private static void setButtonAction(String action, Button bt){
         if (action.equals("loginSubmit")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String username_s=(((EditText)hashelements.get("usernameInput")).getText()).toString();
-                    Log.d("username", username_s);
-                    final String password_s=(((EditText)hashelements.get("passwordInput")).getText()).toString();
-                    Log.d("password",password_s);
-                    String token_s=UserFileUtility.get_token();
-                    if (token_s.equals(""))
-                    {
-                        ((TextView)hashelements.get("loginErrorView")).setText("Network Error!");
-                        return;
-                    }
-                    UserFileUtility.set_userlogininfo(username_s,password_s);
-                    Hashtable<String,String> ht=new Hashtable<String, String>();
-                    ht.put("username",username_s);
-                    ht.put("password", password_s);
-                    ht.put("os", "Android");
-                    ht.put("token",token_s);
-                    new FetchTask(){
-                        @Override
-                        protected void onPostExecute(JSONObject result)
-                        {
-                            try {
-                                Log.d("Error", result.getString("error"));
-                                String error=result.getString("error");
-                                if (error.equals("-9"))
-                                {
-                                    UserFileUtility.save_userinfo();
-                                    setPage(R.array.page_001_front,null);
-                                    ((TextView)context.findViewById(R.id.username_menu_display)).setText(UserFileUtility.get_username());
-                                    setMenu(R.id.login_vendor);
-
-                                }
-                                else
-                                {
-                                    ((TextView)hashelements.get("loginErrorView")).setText("Password Error!");
-                                    UserFileUtility.clean_userinfo();
-                                }
-                            }
-                            catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));
+                    loginAction();
                 }
             });
         }
@@ -629,6 +800,7 @@ public class PageOperations {
                     String price_productunit_name = ((AutoCompleteTextView) hashelements.get("unitInput")).getText().toString();
                     String price_price =  ((EditText) hashelements.get("priceInput")).getText().toString();
                     String template="";
+                    final String regExp = "[1-9]+([.][0-9]{1,2})?";
                     if (((CheckBox) hashelements.get("postCheckbox")).isChecked())
                         template = "yes";
                     boolean flag = true;
@@ -637,17 +809,25 @@ public class PageOperations {
                     if (price_market_userindex_id.equals("")) {
                         errortv.setText("Please Select a Market");
                         flag = false;
-                    }
-                    if (price_product_userindex_id.equals("")) {
+                    }else if (price_product_userindex_id.equals("")) {
                         errortv.setText("Please Select a Product");
                         flag = false;
                     }else if (price_price == null || price_price.equals("")) {
-                        errortv.setText("Please Input price");
+                        errortv.setText("Please Input Price");
                         flag = false;
                     } else if (price_productunit_name == null || price_productunit_name.equals("")) {
                         errortv.setText("Please Input Unit");
                         flag = false;
                     }
+                    try {
+                        float pricefloat = Float.parseFloat(price_price);
+                        price_price=String.format("%.2f", pricefloat);
+                    } catch (NumberFormatException e)
+                    {
+                        errortv.setText("Please Input Price");
+                        flag = false;
+                    }
+
                     try {
                         Date date = dateFormatter.parse(((TextView)hashelements.get("marketDay")).getText().toString());
 
@@ -692,9 +872,12 @@ public class PageOperations {
                                     String error = result.getString("error");
                                     if (error.equals("-9")) {
                                         ((TextView) hashelements.get("newposterrorView")).setText("Success!");
+
                                         removeRecentPage();
                                         PageNode k = getRecentPage();
                                         setPage(k.pageId, k.params);
+                                        Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                                        toast.show();
                                     } else {
                                     }
                                 } catch (JSONException e) {
@@ -795,6 +978,10 @@ public class PageOperations {
         }else if (code== R.array.page_020_viewpost)
         {
             ((TextView)hashelements.get("postView")).setText("This is post "+params.get("postid"));
+            setupUI(playout);
+        }
+        else if (code== R.array.page_102_login)
+        {
             setupUI(playout);
         }
         else if (code== R.array.page_106_uploadlogo)
@@ -2035,7 +2222,7 @@ public class PageOperations {
                     e.printStackTrace();
                 }
             }
-        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market _list_getlist", ht));
+        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_getlist", ht));
     }
 
     private static void showpublicposts(String search){
