@@ -5,7 +5,7 @@
         <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"usernameInput\",\"next\":\"passwordInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Password:\",\"id\":\"passwordView\"}</item>
         <item>
-            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\",\"enter\":\"loginSubmit\"}
+            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void1View\"}</item>
         <item>
@@ -22,18 +22,18 @@
     </array>
     <array name="page_100_registration">
         <item>{\"element\":\"TextView\",\"value\":\"Username:\",\"id\":\"usernameView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"usernameInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"usernameInput\",\"next\":\"passwordInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Password:\",\"id\":\"passwordView\"}</item>
         <item>
-            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\"}
+            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\",\"next\":\"passwordInput2\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\"Confirm Password:\",\"id\":\"passwordView2\"}</item>
         <item>
-            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput2\"}
+            {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput2\",\"next\":\"emailInput\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"passwordView\"}</item>
         <item>
-            {\"element\":\"EditText\",\"value\":\"\",\"id\":\"emailInput\"}
+            {\"element\":\"EditText\",\"value\":\"\",\"id\":\"emailInput\",\"next\":\"displayInput\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\"Display name:\",\"id\":\"displayView\"}</item>
         <item>
@@ -44,7 +44,7 @@
             {\"element\":\"Button\",\"value\":\"Create Account\",\"id\":\"signupbutton\",\"clickaction\":\"registration\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"loginErrorView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"registrationErrorView\"}</item>
     </array>
     <array name="page_001_front">
         <item>{\"element\":\"SearchView\",\"value\":\"Search Posts...\",\"id\":\"searchpublicposts\",\"clickaction\":\"searchPublicPost\"}</item>

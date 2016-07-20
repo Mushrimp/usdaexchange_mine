@@ -88,7 +88,7 @@ public class RegistrationIntentService extends IntentService {
         {
             Intent nologin = new Intent();
             nologin.setAction(QuickstartPreferences.SWITCH_CONTENT);
-            nologin.putExtra("content", R.array.page_102_login);
+            nologin.putExtra("content", R.array.page_001_front);
             sendBroadcast(nologin);
         }
         Hashtable<String,String> ht=new Hashtable<String, String>();

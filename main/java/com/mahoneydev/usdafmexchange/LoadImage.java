@@ -21,6 +21,7 @@ public class LoadImage extends AsyncTask<String, String, Bitmap> {
             bitmap = BitmapFactory.decodeStream((InputStream) new URL(args[0]).getContent());
 
         } catch (Exception e) {
+            bitmap = null;
             e.printStackTrace();
         }
         return bitmap;
@@ -29,7 +30,8 @@ public class LoadImage extends AsyncTask<String, String, Bitmap> {
     protected void onPostExecute(Bitmap image) {
 
         if (image != null) {
-            img.setImageBitmap(image);
+            Bitmap bt=Bitmap.createScaledBitmap(image,100,100,false);
+            img.setImageBitmap(bt);
         }
     }
 }
