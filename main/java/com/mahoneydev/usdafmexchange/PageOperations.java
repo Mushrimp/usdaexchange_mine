@@ -84,14 +84,21 @@ public class PageOperations {
         if (context!=null)
             context.switchAvatar(exist);
     }
-    public static void generateTitle(int code, LinearLayout toolbar){
+    public static void generateTitle(int code, RelativeLayout toolbar){
         toolbar.removeAllViewsInLayout();
         switch (code){
             case (R.array.page_001_front):
             {
+                toolbar.setGravity(Gravity.LEFT);
                 ImageView iv=new ImageView(context);
                 iv.setImageResource(R.drawable.fme_header_white);
+                iv.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
                 toolbar.addView(iv);
+                Log.e("Toolbar width",""+toolbar.getWidth());
+                Log.e("Toolbar Height",""+toolbar.getHeight());
+                Log.e("iv width",""+iv.getWidth());
+                Log.e("iv height",""+iv.getHeight());
+                iv.setX(width/2-toolbar.getHeight()*80/37);
                 break;
             }
             case (R.array.page_102_login):
@@ -605,6 +612,165 @@ public class PageOperations {
 
         }
     }
+    public static void saveUserInfoAction(){
+        final String currentpass=(((EditText)hashelements.get("currentpassInput")).getText()).toString();
+        final String password_1=(((EditText)hashelements.get("newpassInput")).getText()).toString();
+        final String password_2=(((EditText)hashelements.get("confirmpassInput")).getText()).toString();
+        final String email=(((EditText)hashelements.get("emailInput")).getText()).toString();
+        final String displayname=(((EditText)hashelements.get("displaynameInput")).getText()).toString();
+        final TextView etv=(TextView)hashelements.get("accountErrorView");
+        boolean flag=true;
+        if (!password_1.equals(password_2))
+        {
+            etv.setText("Passwords Do Not Match!");
+            flag=false;
+        }
+        else if (!AppCodeResources.isEmailValid(email))
+        {
+            etv.setText("Email is Invalid!");
+            flag=false;
+        }else if (currentpass.equals("")&&(!password_1.equals("")))
+        {
+            etv.setText("Current Password is Needed!");
+            flag=false;
+        }
+        if (flag)
+        {
+            Hashtable<String,String> ht=new Hashtable<String, String>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("email",email);
+            new FetchTask(){
+                @Override
+                protected void onPostExecute(JSONObject result)
+                {
+                    try {
+                        String error="-9";
+                        if (result.has("error"))
+                            error=result.getString("error");
+                        if (error.equals("-9"))
+                        {
+                            if (currentpass.equals(""))
+                            {
+                                Hashtable<String,String> ht=new Hashtable<String, String>();
+                                String token_s = UserFileUtility.get_token();
+                                ht.put("os", "Android");
+                                ht.put("token", token_s);
+                                ht.put("email",email);
+                                ht.put("display_name",displayname);
+                                ht.put("user_pass","");
+                                ht.put("user_pass2","");
+                                new FetchTask(){
+                                    @Override
+                                    protected void onPostExecute(JSONObject result)
+                                    {
+                                        try {
+                                            String error="-9";
+                                            if (result.has("error"))
+                                                error=result.getString("error");
+                                            if (error.equals("-9"))
+                                            {
+                                                removeRecentPage();
+                                                PageNode k = getRecentPage();
+                                                setPage(k.pageId, k.params);
+                                                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                                                toast.show();
+                                            }
+                                            else
+                                            {
+                                                etv.setText(error);
+                                            }
+
+                                        }
+                                        catch (JSONException e)
+                                        {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                }.execute(AppCodeResources.postUrl("usdalogin", "update_user_account", ht));
+                            }
+                            else {
+                                Hashtable<String, String> ht = new Hashtable<String, String>();
+                                String token_s = UserFileUtility.get_token();
+                                ht.put("os", "Android");
+                                ht.put("token", token_s);
+                                ht.put("currentpassword", currentpass);
+                                new FetchTask() {
+                                    @Override
+                                    protected void onPostExecute(JSONObject result) {
+                                        try {
+                                            String error = "-9";
+                                            if (result.has("error"))
+                                                error = result.getString("error");
+                                            if (error.equals("-9")) {
+                                                Hashtable<String,String> ht=new Hashtable<String, String>();
+                                                String token_s = UserFileUtility.get_token();
+                                                ht.put("os", "Android");
+                                                ht.put("token", token_s);
+                                                ht.put("email",email);
+                                                ht.put("display_name",displayname);
+                                                ht.put("user_pass",password_1);
+                                                ht.put("user_pass2",password_2);
+                                                new FetchTask(){
+                                                    @Override
+                                                    protected void onPostExecute(JSONObject result)
+                                                    {
+                                                        try {
+                                                            String error="-9";
+                                                            if (result.has("error"))
+                                                                error=result.getString("error");
+                                                            if (error.equals("-9"))
+                                                            {
+                                                                removeRecentPage();
+                                                                PageNode k = getRecentPage();
+                                                                setPage(k.pageId, k.params);
+                                                                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                                                                toast.show();
+
+                                                            }
+                                                            else
+                                                            {
+                                                                etv.setText(error);
+                                                            }
+
+                                                        }
+                                                        catch (JSONException e)
+                                                        {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+
+                                                }.execute(AppCodeResources.postUrl("usdalogin", "update_user_account", ht));
+                                            } else {
+                                                etv.setText(error);
+                                            }
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                }.execute(AppCodeResources.postUrl("usdalogin", "check_current_password", ht));
+                            }
+
+                        }
+                        else
+                        {
+                            etv.setText(error);
+                        }
+
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+            }.execute(AppCodeResources.postUrl("usdalogin", "check_email", ht));
+        }
+    }
     private static void setButtonAction(String action, Button bt){
         if (action.equals("loginSubmit")) {
             bt.setOnClickListener(new View.OnClickListener() {
@@ -896,7 +1062,16 @@ public class PageOperations {
                 }
             });
         }
-
+        //Account
+        else if(action.equals("saveinfo"))
+        {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    saveUserInfoAction();
+                }
+            });
+        }
         else if (action.equals("scanQR"))
         {
             bt.setOnClickListener(new View.OnClickListener() {
@@ -1181,6 +1356,8 @@ public class PageOperations {
                 }
 
             }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
+        }else if (code == R.array.page_105_accountinfo){
+            prepareaccountinfoform();
         }else if (code== R.array.page_407_profile) {
             ((TextView) hashelements.get("nameView")).setText("Name: " + params.get("friendname"));
             setupUI(playout);
@@ -1488,7 +1665,41 @@ public class PageOperations {
             }
         }.execute(AppCodeResources.postUrl("usdafriendship", "friends_list_all_byuser", ht));
     }
+    private static void prepareaccountinfoform()
+    {
+        Hashtable<String,String> ht=new Hashtable<String, String>();
+        String token_s=UserFileUtility.get_token();
+        ht.put("os", "Android");
+        ht.put("token", token_s);
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result)
+            {
+                try {
+                    Log.d("Error", result.getString("error"));
+                    String error=result.getString("error");
+                    if (error.equals("-9"))
+                    {
+                        JSONObject ja=(result.getJSONObject("results")).getJSONObject("userinfo");
+                        String email=ja.getString("email");
+                        String displayname=ja.getString("displayname");
+                        ((EditText)hashelements.get("emailInput")).setText(email);
+                        ((EditText)hashelements.get("displaynameInput")).setText(displayname);
+                    }
+                    else
+                    {
+                    }
+                    setupUI(playout);
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+            }
 
+        }.execute(AppCodeResources.postUrl("usdalogin", "get_userinfo", ht));
+
+    }
     private static void preparepostform(){
         Hashtable<String,String> ht=new Hashtable<String, String>();
         String token_s=UserFileUtility.get_token();
