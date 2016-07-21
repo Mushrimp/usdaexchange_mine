@@ -31,6 +31,7 @@ import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -75,13 +76,21 @@ public class PageOperations {
         if (context!=null)
             context.switchMenu(menu_id);
     }
+    public static void setMenuChecked(int checked_id){
+        if (context!=null)
+            context.switchMenuChecked(checked_id);
+    }
+    public static void setAvatar(boolean exist){
+        if (context!=null)
+            context.switchAvatar(exist);
+    }
     public static void generateTitle(int code, LinearLayout toolbar){
         toolbar.removeAllViewsInLayout();
         switch (code){
             case (R.array.page_001_front):
             {
                 ImageView iv=new ImageView(context);
-                iv.setImageResource(R.drawable.fme_header);
+                iv.setImageResource(R.drawable.fme_header_white);
                 toolbar.addView(iv);
                 break;
             }
@@ -93,16 +102,22 @@ public class PageOperations {
                 break;
             }
         }
-        setupUI(context.findViewById(R.id.appbar));
+        setupUIinner(context.findViewById(R.id.appbar));
     }
     public static void generateLayout(int code, LinearLayout layout, Hashtable<String,String> params) {
         if ((res == null) || (context == null))
             return;
         TypedArray pageArray = res.obtainTypedArray(code);
         layout.removeAllViewsInLayout();
+        Log.e("remove","21134124");
+        ProgressBar pb=new ProgressBar(context);
+        pb.setIndeterminate(true);
+        layout.addView(pb);
+        hashelements = new Hashtable<>();
+        hashelements.put("Loading",pb);
         playout=layout;
         try {
-            hashelements = new Hashtable<>();
+
             for (int i = 0; i < pageArray.length(); i++) {
                 String elements = pageArray.getString(i);
                 JSONObject jsonelements = new JSONObject(elements);
@@ -395,6 +410,10 @@ public class PageOperations {
         {
             loginAction();
         }
+        else if (action.equals("registration"))
+        {
+            registrationAction();
+        }
     }
     private static void setButtonAction(String action, ImageButton bt) {
         if (action.equals("searchPublicPost"))
@@ -446,7 +465,7 @@ public class PageOperations {
                         setPage(R.array.page_001_front,null);
                         ((TextView)context.findViewById(R.id.username_menu_display)).setText(UserFileUtility.get_username());
                         setMenu(R.id.login_vendor);
-
+                        setAvatar(true);
                     }
                     else
                     {
@@ -462,12 +481,144 @@ public class PageOperations {
 
         }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));
     }
+    public static void registrationAction(){
+        final String username=(((EditText)hashelements.get("usernameInput")).getText()).toString();
+        final String password_1=(((EditText)hashelements.get("passwordInput")).getText()).toString();
+        final String password_2=(((EditText)hashelements.get("passwordInput2")).getText()).toString();
+        final String email=(((EditText)hashelements.get("emailInput")).getText()).toString();
+        final String displayname=(((EditText)hashelements.get("displayInput")).getText()).toString();
+        final TextView etv=(TextView)hashelements.get("registrationErrorView");
+        boolean flag=true;
+        if (!password_1.equals(password_2))
+        {
+            etv.setText("Passwords Do Not Match!");
+            flag=false;
+        }
+        else if (!AppCodeResources.isEmailValid(email))
+        {
+            etv.setText("Email is Invalid!");
+            flag=false;
+        }else if (password_1.equals(""))
+        {
+            etv.setText("Password Cannot be Empty!");
+            flag=false;
+        }else if (username.equals(""))
+        {
+            etv.setText("User Name Cannot be Empty!");
+            flag=false;
+        }
+        if (flag)
+        {
+            Hashtable<String,String> ht=new Hashtable<String, String>();
+            ht.put("controller","usdalogin");
+            ht.put("method", "register");
+            new FetchTask(){
+                @Override
+                protected void onPostExecute(JSONObject result)
+                {
+                    try {
+                        String error="-9";
+                        if (result.has("error"))
+                            error=result.getString("error");
+                        if (error.equals("-9"))
+                        {
+                            String nonce=result.getString("nonce");
+                            Hashtable<String,String> ht=new Hashtable<String, String>();
+                            ht.put("username",username);
+                            ht.put("user_pass", password_1);
+                            ht.put("user_pass2",password_2);
+                            ht.put("email",email);
+                            ht.put("display_name",displayname);
+                            ht.put("nonce",nonce);
+                            new FetchTask(){
+                                @Override
+                                protected void onPostExecute(JSONObject result)
+                                {
+                                    try {
+                                        Log.d("Error", result.getString("error"));
+                                        String error=result.getString("error");
+                                        if (error.equals("-9"))
+                                        {
+                                            String token_s=UserFileUtility.get_token();
+                                            UserFileUtility.set_userlogininfo(username,password_1);
+                                            Hashtable<String,String> ht=new Hashtable<String, String>();
+                                            ht.put("username",username);
+                                            ht.put("password", password_1);
+                                            ht.put("os", "Android");
+                                            ht.put("token",token_s);
+                                            new FetchTask(){
+                                                @Override
+                                                protected void onPostExecute(JSONObject result)
+                                                {
+                                                    try {
+                                                        Log.d("Error", result.getString("error"));
+                                                        String error=result.getString("error");
+                                                        if (error.equals("-9"))
+                                                        {
+                                                            UserFileUtility.save_userinfo();
+                                                            setPage(R.array.page_001_front,null);
+                                                            ((TextView)context.findViewById(R.id.username_menu_display)).setText(UserFileUtility.get_username());
+                                                            setMenu(R.id.login_vendor);
+                                                            setAvatar(true);
+                                                        }
+                                                        else
+                                                        {
+                                                            ((TextView)hashelements.get("loginErrorView")).setText("Password Error!");
+                                                            UserFileUtility.clean_userinfo();
+                                                        }
+                                                    }
+                                                    catch (JSONException e)
+                                                    {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+
+                                            }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));
+                                        }
+                                        else
+                                        {
+                                            ((TextView)hashelements.get("registrationErrorView")).setText(error);
+                                            UserFileUtility.clean_userinfo();
+                                        }
+                                    }
+                                    catch (JSONException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            }.execute(AppCodeResources.postUrl("usdalogin","register",ht));
+                        }
+
+                        else
+                        {
+                        }
+
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+            }.execute(AppCodeResources.postUrl("", "get_nonce", ht));
+
+        }
+    }
     private static void setButtonAction(String action, Button bt){
         if (action.equals("loginSubmit")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     loginAction();
+                }
+            });
+        }
+        else if (action.equals("registration")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    registrationAction();
                 }
             });
         }
@@ -2946,11 +3097,39 @@ public class PageOperations {
                 View innerView = ((ViewGroup) view).getChildAt(i);
                 innerView.setVisibility(View.VISIBLE);
 
-                setupUI(innerView);
+                setupUIinner(innerView);
+            }
+        }
+        ((ProgressBar)hashelements.get("Loading")).setVisibility(View.GONE);
+    }
+
+    private static void setupUIinner(View view) {
+
+        //Set up touch listener for non-text box views to hide keyboard.
+        if(!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(context);
+                    return false;
+                }
+
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                innerView.setVisibility(View.VISIBLE);
+
+                setupUIinner(innerView);
             }
         }
     }
-
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);

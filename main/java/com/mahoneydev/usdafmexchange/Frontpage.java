@@ -77,38 +77,14 @@ public class Frontpage extends AppCompatActivity
                         switchContent(k.pageId, k.params);
                     }
                     Log.d("ddd","image");
-                    Hashtable<String,String> ht=new Hashtable<String, String>();
-                    String token_s=UserFileUtility.get_token();
-                    ht.put("os", "Android");
-                    ht.put("token",token_s);
-                    new FetchTask(){
-                        @Override
-                        protected void onPostExecute(JSONObject result)
-                        {
-                            try {
-                                Log.d("Error", result.getString("error"));
-                                String error=result.getString("error");
-                                if (error.equals("-9"))
-                                {
-                                    String imageurl=result.getString("avatar_url");
-                                    imageurl=imageurl.replace("\\","");
-                                    ImageView logo=(ImageView) findViewById(R.id.uavatar);
-                                    LoadImage li=new LoadImage();
-                                    li.img=logo;
-                                    li.execute(imageurl);
-                                    logo.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
-                                }
-                                else
-                                {
-                                }
-                            }
-                            catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                        }
+                    String username=UserFileUtility.get_username();
+                    if ((username==null)||(username.equals("")))
+                    {
+                        switchAvatar(false);
+                    }
+                    else
+                        switchAvatar(true);
 
-                    }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
                 }
             }
             else if (action.equals(QuickstartPreferences.SWITCH_MENU))
@@ -137,12 +113,7 @@ public class Frontpage extends AppCompatActivity
         PageOperations.context=this;
         switchContent(R.array.page_000_welcome,null);
         PageOperations.res=getResources();
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int height = metrics.heightPixels;
-        int width = metrics.widthPixels;
-        PageOperations.height=height;
-        PageOperations.width=width;
+
     }
 
     @Override
@@ -150,6 +121,15 @@ public class Frontpage extends AppCompatActivity
         super.onResume();
         //Here we go!
         //switchContent(R.id.login);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int height = metrics.heightPixels;
+        int width = metrics.widthPixels;
+        PageOperations.height=height;
+        PageOperations.width=width;
+        ImageView logo=(ImageView) findViewById(R.id.uavatar);
+//        if (logo!=null)
+//            logo.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.08), (int)(width*0.08)));
         setupReceiver();
         k=1;
         UserFileUtility.set_context(this);
@@ -233,9 +213,12 @@ public class Frontpage extends AppCompatActivity
             PageOperations.pushNewPage(new PageNode(R.array.page_001_front,null));
             UserFileUtility.clean_userinfo();
             UserFileUtility.save_userinfo();
-            ((TextView)findViewById(R.id.username_menu_display)).setText("");
+            if (((TextView)findViewById(R.id.username_menu_display)) != null) {
+                ((TextView)findViewById(R.id.username_menu_display)).setText("");
+            }
             switchMenu(R.id.nologin);
             switchContent(R.array.page_001_front,null);
+            switchAvatar(false);
         }
         else if (id== R.id.about_us)
         {
@@ -335,6 +318,83 @@ public class Frontpage extends AppCompatActivity
         navigationView.getMenu().setGroupVisible(R.id.nologin, false);
         navigationView.getMenu().setGroupVisible(R.id.login_vendor, false);
         navigationView.getMenu().setGroupVisible(menu_id, true);
+    }
+    public void switchMenuChecked(int checked_id)
+    {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView!=null)
+        {
+            navigationView.setCheckedItem(checked_id);
+        }
+    }
+    public void switchAvatar(boolean exist)
+    {
+        if (exist)
+        {
+            Hashtable<String,String> ht=new Hashtable<String, String>();
+            String token_s=UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token",token_s);
+            new FetchTask(){
+                @Override
+                protected void onPostExecute(JSONObject result)
+                {
+                    try {
+                        Log.d("Error", result.getString("error"));
+                        String error=result.getString("error");
+                        if (error.equals("-9"))
+                        {
+                            String imageurl=result.getString("avatar_url");
+                            imageurl=imageurl.replace("\\","");
+                            ImageView logo=(ImageView) findViewById(R.id.uavatar);
+                            LoadImage li=new LoadImage();
+                            li.img=logo;
+                            li.execute(imageurl);
+                            if (logo!=null)
+                                logo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    PageOperations.cleanPageHistory();
+                                    PageOperations.pushNewPage(new PageNode(R.array.page_110_accountsettings,null));
+                                    switchContent(R.array.page_110_accountsettings,null);
+                                    switchMenuChecked(R.id.account_vendor);
+                                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                                    if (drawer!=null)
+                                        drawer.closeDrawer(GravityCompat.START);
+                                }
+                                });
+                        }
+                        else
+                        {
+                        }
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+            }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
+        }
+        else
+        {
+            ImageView logo=(ImageView) findViewById(R.id.uavatar);
+            if (logo != null) {
+                logo.setImageResource(R.drawable.ic_menu_camera);
+                logo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        PageOperations.cleanPageHistory();
+                        PageOperations.pushNewPage(new PageNode(R.array.page_102_login, null));
+                        switchContent(R.array.page_102_login, null);
+                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                        if (drawer!=null)
+                            drawer.closeDrawer(GravityCompat.START);
+                    }
+                });
+            }
+            return;
+        }
     }
     public void login_action(View view)
     {
