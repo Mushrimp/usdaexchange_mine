@@ -1134,6 +1134,16 @@ public class PageOperations {
             /*((TextView)hashelements.get("postView")).setText("This is post "+params.get("postid"));
             setupUI(playout);*/
         }
+        else if (code== R.array.page_016_vendorpage)
+        {
+            String name = params.get("username");
+            showVendorpage(name);
+        }
+        else if (code== R.array.page_017_marketpage)
+        {
+            String id = params.get("marketid");
+            showMarketpage(id);
+        }
         else if (code== R.array.page_102_login)
         {
             setupUI(playout);
@@ -1416,17 +1426,37 @@ public class PageOperations {
                             logo.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.3f));
                             lv.addView(logo);
 
+                            LinearLayout ll_bl = new LinearLayout(context);
+                            ll_bl.setLayoutParams(new  TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,0.04f));
+                            lv.addView(ll_bl);
+
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
-
-                            //Name
+                            //Name & message
+                            RelativeLayout rl_in = new RelativeLayout(context);
+                            rl_in.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,width/10));
                             TextView name=new TextView(context);
+                            RelativeLayout.LayoutParams nameprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                            nameprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT|RelativeLayout.CENTER_VERTICAL);
+                            name.setLayoutParams(nameprams);
                             name.setText(friend.getString("displayname"));
-                            name.setTextAppearance(context,R.style.Large);
-                            name.setTextSize(width/50);
-                            ll.addView(name);
+                            name.setTextAppearance(context,R.style.Bold);
+                            name.setTextSize(width/45);
+                            rl_in.addView(name);
+                            Button message_bt = new Button(context);
+                            RelativeLayout.LayoutParams btprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                            btprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                            message_bt.setLayoutParams(btprams);
+                            message_bt.setText("Message");
+                            message_bt.setTextAppearance(context,R.style.Normal);
+                            message_bt.setTextSize(width/55);
+                            message_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
+                            rl_in.addView(message_bt);
+                            ll.addView(rl_in);
+
                             //Business Name
                             final TextView bn=new TextView(context);
+                            bn.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.5), LinearLayout.LayoutParams.WRAP_CONTENT));
                             bn.setText(friend.getString("businessname"));
                             ll.addView(bn);
 
@@ -1894,57 +1924,52 @@ public class PageOperations {
                             TableRow lv = new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
 
-                            //Template Title
-                            LinearLayout lltitle=new LinearLayout(context);
-                            lltitle.setOrientation(LinearLayout.VERTICAL);
-                            //Product name
-                            TextView pn1=new TextView(context);
-                            pn1.setTextAppearance(context,R.style.Bold);
-                            pn1.setTextSize(width/45 );
-                            String pntitle = "Product:";
-                            pn1.setText(pntitle);
-                            lltitle.addView(pn1);
-                            //Market Name
-                            TextView mn1=new TextView(context);
-                            mn1.setTextAppearance(context,R.style.Bold);
-                            mn1.setTextSize(width/45);
-                            String mntitle = "Market:\n";
-                            mn1.setText(mntitle);
-                            lltitle.addView(mn1);
-                            //Description
-                            TextView desc1=new TextView(context);
-                            desc1.setTextAppearance(context,R.style.Bold);
-                            desc1.setTextSize(width/45);
-                            String desct = "Description:";
-                            desc1.setText(desct);
-                            lltitle.addView(desc1);
-
-                            lltitle.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.3f));
-                            lv.addView(lltitle);
-
                             //Template content
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Product Name
+                            TextView pn1=new TextView(context);
+                            pn1.setTextAppearance(context,R.style.Title);
+                            pn1.setTextSize(width/50);
+                            String pntitle = "Product:";
+                            pn1.setText(pntitle);
+                            ll.addView(pn1);
                             TextView pn=new TextView(context);
-                            pn.setTextAppearance(context,R.style.Normal);
+                            pn.setTextAppearance(context,R.style.Bold);
                             pn.setTextSize(width/45);
                             pn.setText(template.getString("price_product_name"));
                             ll.addView(pn);
                             //Market Name
+                            TextView mn1=new TextView(context);
+                            mn1.setTextAppearance(context,R.style.Title);
+                            mn1.setTextSize(width/50);
+                            String mntitle = "Market:";
+                            mn1.setText(mntitle);
+                            ll.addView(mn1);
                             TextView mn=new TextView(context);
-                            mn.setTextAppearance(context,R.style.Normal);
+                            mn.setTextAppearance(context,R.style.Body);
                             mn.setTextSize(width/45);
                             mn.setText(template.getString("price_market_name"));
                             ll.addView(mn);
                             //Description
+                            TextView desc1=new TextView(context);
+                            desc1.setTextAppearance(context,R.style.Title);
+                            desc1.setTextSize(width/50);
+                            String desct = "Description:";
+                            desc1.setText(desct);
+                            ll.addView(desc1);
                             TextView desc=new TextView(context);
-                            desc.setTextAppearance(context,R.style.Normal);
+                            desc.setTextAppearance(context,R.style.Body);
                             desc.setTextSize(width/45);
                             desc.setText(template.getString("price_ad_desc"));
                             ll.addView(desc);
 
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.7f));
+                            //
+                            TextView br = new TextView(context);
+                            br.setText("");
+                            ll.addView(br);
+
+                            ll.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -1997,7 +2022,7 @@ public class PageOperations {
                             //Price Product Name
                             TextView nameprice=new TextView(context);
                             nameprice.setTextAppearance(context,R.style.Bold);
-                            nameprice.setTextSize(width/40);
+                            nameprice.setTextSize(width/35);
                             String name = schedule.getString("price_product_name") + " $" + schedule.getString("price_price") + " per " + schedule.getString("price_productunit_name");
                             nameprice.setText(name);
                             ll.addView(nameprice);
@@ -2005,14 +2030,14 @@ public class PageOperations {
                             LinearLayout lh1=new LinearLayout(context);
                             lh1.setOrientation(LinearLayout.HORIZONTAL);
                             TextView marketdatet=new TextView(context);
-                            marketdatet.setTextAppearance(context,R.style.Bold);
-                            marketdatet.setTextSize(width/50);
+                            marketdatet.setTextAppearance(context,R.style.Title);
+                            marketdatet.setTextSize(width/45);
                             String mdt = "Date:   ";
                             marketdatet.setText(mdt);
                             lh1.addView(marketdatet);
                             TextView marketdate=new TextView(context);
-                            marketdate.setTextAppearance(context,R.style.Normal);
-                            marketdate.setTextSize(width/50);
+                            marketdate.setTextAppearance(context,R.style.Body);
+                            marketdate.setTextSize(width/45);
                             String md = schedule.getString("price_market_date");
                             marketdate.setText(md);
                             lh1.addView(marketdate);
@@ -2021,27 +2046,32 @@ public class PageOperations {
                             LinearLayout lh2=new LinearLayout(context);
                             lh2.setOrientation(LinearLayout.HORIZONTAL);
                             TextView publisheddatet=new TextView(context);
-                            publisheddatet.setTextAppearance(context,R.style.Bold);
-                            publisheddatet.setTextSize(width/50);
+                            publisheddatet.setTextAppearance(context,R.style.Title);
+                            publisheddatet.setTextSize(width/45);
                             String pdt = "Published On:   ";
                             publisheddatet.setText(pdt);
                             lh2.addView(publisheddatet);
                             TextView publisheddate=new TextView(context);
-                            publisheddate.setTextAppearance(context,R.style.Normal);
-                            publisheddate.setTextSize(width/50);
+                            publisheddate.setTextAppearance(context,R.style.Body);
+                            publisheddate.setTextSize(width/45);
                             String pd = schedule.getString("price_publish_date");
                             publisheddate.setText(pd);
                             lh2.addView(publisheddate);
                             ll.addView(lh2);
                             //Market Name
                             TextView marketname=new TextView(context);
-                            marketname.setTextAppearance(context,R.style.Normal);
-                            marketname.setTextSize(width/50);
+                            marketname.setTextAppearance(context,R.style.Body);
+                            marketname.setTextSize(width/45);
                             String mn = "@ " + schedule.getString("price_market_name");
                             marketname.setText(mn);
                             ll.addView(marketname);
 
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 1f));
+                            //
+                            TextView br = new TextView(context);
+                            br.setText("");
+                            ll.addView(br);
+
+                            ll.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -2104,14 +2134,14 @@ public class PageOperations {
                             LinearLayout lh1=new LinearLayout(context);
                             lh1.setOrientation(LinearLayout.HORIZONTAL);
                             TextView marketdatet=new TextView(context);
-                            marketdatet.setTextAppearance(context,R.style.Bold);
-                            marketdatet.setTextSize(width/50);
+                            marketdatet.setTextAppearance(context,R.style.Title);
+                            marketdatet.setTextSize(width/45);
                             String mdt = "Market Date:   ";
                             marketdatet.setText(mdt);
                             lh1.addView(marketdatet);
                             TextView marketdate=new TextView(context);
-                            marketdate.setTextAppearance(context,R.style.Normal);
-                            marketdate.setTextSize(width/50);
+                            marketdate.setTextAppearance(context,R.style.Body);
+                            marketdate.setTextSize(width/45);
                             String md = published.getString("price_market_date");
                             marketdate.setText(md);
                             lh1.addView(marketdate);
@@ -2120,27 +2150,32 @@ public class PageOperations {
                             LinearLayout lh2=new LinearLayout(context);
                             lh2.setOrientation(LinearLayout.HORIZONTAL);
                             TextView publisheddatet=new TextView(context);
-                            publisheddatet.setTextAppearance(context,R.style.Bold);
-                            publisheddatet.setTextSize(width/50);
+                            publisheddatet.setTextAppearance(context,R.style.Title);
+                            publisheddatet.setTextSize(width/45);
                             String pdt = "Published Date:   ";
                             publisheddatet.setText(pdt);
                             lh2.addView(publisheddatet);
                             TextView publisheddate=new TextView(context);
-                            publisheddate.setTextAppearance(context,R.style.Normal);
-                            publisheddate.setTextSize(width/50);
+                            publisheddate.setTextAppearance(context,R.style.Body);
+                            publisheddate.setTextSize(width/45);
                             String pd = published.getString("price_publish_date");
                             publisheddate.setText(pd);
                             lh2.addView(publisheddate);
                             ll.addView(lh2);
                             //Market Name
                             TextView marketname=new TextView(context);
-                            marketname.setTextAppearance(context,R.style.Normal);
-                            marketname.setTextSize(width/50);
+                            marketname.setTextAppearance(context,R.style.Body);
+                            marketname.setTextSize(width/45);
                             String mn = "@ " + published.getString("price_market_name");
                             marketname.setText(mn);
                             ll.addView(marketname);
 
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 1f));
+                            //
+                            TextView br = new TextView(context);
+                            br.setText("");
+                            ll.addView(br);
+
+                            ll.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.WRAP_CONTENT));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -2188,44 +2223,40 @@ public class PageOperations {
                             TableRow lv = new TableRow(context);
                             lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
 
-                            //Preferred Products Title
-                            LinearLayout lltitle=new LinearLayout(context);
-                            lltitle.setOrientation(LinearLayout.VERTICAL);
-                            //Category
-                            TextView category1=new TextView(context);
-                            category1.setTextAppearance(context,R.style.Bold);
-                            category1.setTextSize(width/45 );
-                            String ctitle = "Category:";
-                            category1.setText(ctitle);
-                            lltitle.addView(category1);
-                            //Product Name
-                            TextView pn1=new TextView(context);
-                            pn1.setTextAppearance(context,R.style.Bold);
-                            pn1.setTextSize(width/45);
-                            String mntitle = "Product:";
-                            pn1.setText(mntitle);
-                            lltitle.addView(pn1);
-
-                            lltitle.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.3f));
-                            lv.addView(lltitle);
-
                             //Preferred Products content
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Category
+                            TextView category1=new TextView(context);
+                            category1.setTextAppearance(context,R.style.Title);
+                            category1.setTextSize(width/50);
+                            String ctitle = "Category:";
+                            category1.setText(ctitle);
+                            ll.addView(category1);
                             TextView category=new TextView(context);
-                            category.setTextAppearance(context,R.style.Normal);
+                            category.setTextAppearance(context,R.style.Bold);
                             category.setTextSize(width/45);
                             category.setText(preproduct.getString("Prd_Category1"));
                             ll.addView(category);
                             //Product Name
+                            TextView pn1=new TextView(context);
+                            pn1.setTextAppearance(context,R.style.Title);
+                            pn1.setTextSize(width/50);
+                            String mntitle = "Product:";
+                            pn1.setText(mntitle);
+                            ll.addView(pn1);
                             TextView pn=new TextView(context);
-                            pn.setTextAppearance(context,R.style.Normal);
+                            pn.setTextAppearance(context,R.style.Body);
                             pn.setTextSize(width/45);
                             pn.setText(preproduct.getString("product_name"));
                             ll.addView(pn);
 
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/5, 0.7f));
+                            //
+                            TextView br = new TextView(context);
+                            br.setText("");
+                            ll.addView(br);
+
+                            ll.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -2275,6 +2306,12 @@ public class PageOperations {
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Display Name
+                            TextView dn1=new TextView(context);
+                            dn1.setTextAppearance(context,R.style.Title);
+                            dn1.setTextSize(width/50);
+                            String name1 = "Vendor name:";
+                            dn1.setText(name1);
+                            ll.addView(dn1);
                             TextView dn=new TextView(context);
                             dn.setTextAppearance(context,R.style.Bold);
                             dn.setTextSize(width/45);
@@ -2283,13 +2320,24 @@ public class PageOperations {
                             dn.setText(namereplace);
                             ll.addView(dn);
                             //Address
+                            TextView address1=new TextView(context);
+                            address1.setTextAppearance(context,R.style.Title);
+                            address1.setTextSize(width/50);
+                            String an = "Address:";
+                            address1.setText(an);
+                            ll.addView(address1);
                             TextView address=new TextView(context);
-                            address.setTextAppearance(context,R.style.Normal);
+                            address.setTextAppearance(context,R.style.Body);
                             address.setTextSize(width/50);
                             address.setText(prevendor.getString("address"));
                             ll.addView(address);
 
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/7, 1f));
+                            //
+                            TextView br = new TextView(context);
+                            br.setText("");
+                            ll.addView(br);
+
+                            ll.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -2339,19 +2387,36 @@ public class PageOperations {
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Display Name
+                            TextView dn1=new TextView(context);
+                            dn1.setTextAppearance(context,R.style.Title);
+                            dn1.setTextSize(width/50);
+                            String name1 = "Market name:";
+                            dn1.setText(name1);
+                            ll.addView(dn1);
                             TextView dn=new TextView(context);
                             dn.setTextAppearance(context,R.style.Bold);
                             dn.setTextSize(width/45);
                             dn.setText(premarket.getString("displayname"));
                             ll.addView(dn);
                             //Address
+                            TextView address1=new TextView(context);
+                            address1.setTextAppearance(context,R.style.Title);
+                            address1.setTextSize(width/50);
+                            String an = "Address name:";
+                            address1.setText(an);
+                            ll.addView(address1);
                             TextView address=new TextView(context);
-                            address.setTextAppearance(context,R.style.Normal);
-                            address.setTextSize(width/50);
+                            address.setTextAppearance(context,R.style.Body);
+                            address.setTextSize(width/45);
                             address.setText(premarket.getString("address"));
                             ll.addView(address);
 
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, height/7, 1f));
+                            //
+                            TextView br = new TextView(context);
+                            br.setText("");
+                            ll.addView(br);
+
+                            ll.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                             lv.addView(ll);
                             tl.addView(lv);
 
@@ -2425,6 +2490,14 @@ public class PageOperations {
                             logo.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.3f));
                             lv.addView(logo);
 
+                            LinearLayout ll_bl = new LinearLayout(context);
+                            ll_bl.setOrientation(LinearLayout.VERTICAL);
+                            ll_bl.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,0.04f));
+                            TextView bl = new TextView(context);
+                            bl.setText("");
+                            ll_bl.addView(bl);
+                            lv.addView(ll_bl);
+
                             LinearLayout ll=new LinearLayout(context);
                             ll.setOrientation(LinearLayout.VERTICAL);
                             //Product Name
@@ -2448,45 +2521,36 @@ public class PageOperations {
                             date.setTextSize(width/55);
                             ll.addView(date);
                             //Price Unit
-                            RelativeLayout ll_p = new RelativeLayout(context);
-                            RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(
-                                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+                            LinearLayout ll_in = new LinearLayout(context);
+                            ll_in.setOrientation(LinearLayout.HORIZONTAL);
+                            ll_in.setGravity(Gravity.RIGHT);
                             String price = jpost.getString("price");/*+ " / " + jpost.getString("unit")*/
                             String[] pricesplit;
                             pricesplit = price.split("\\.");
                             TextView priceint=new TextView(context);
-                            priceint.setId(R.id.price);
-                            relativeParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                            //priceint.setLayoutParams(new RelativeLayout.LayoutParams(
-                            //        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
-                            //priceint.setGravity(Gravity.RIGHT);
+                            priceint.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                            priceint.setGravity(Gravity.RIGHT);
                             priceint.setText("$"+pricesplit[0]+".");
                             priceint.setTextAppearance(context,R.style.Price);
                             priceint.setTextSize(width/30);
-                            ll_p.addView(priceint,relativeParams);
+                            ll_in.addView(priceint);
                             TextView pricedec=new TextView(context);
-                            RelativeLayout.LayoutParams relativeParam2 = new RelativeLayout.LayoutParams(
-                                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-                            relativeParam2.addRule(RelativeLayout.ALIGN_RIGHT, priceint.getId());
-                            pricedec.setRight(50);
+                            pricedec.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                            pricedec.setGravity(Gravity.RIGHT|Gravity.TOP);
                             pricedec.setText(pricesplit[1]);
                             pricedec.setTextAppearance(context,R.style.Price);
                             pricedec.setTextSize(width/45);
-                            ll_p.addView(pricedec,relativeParams);
-                            ll.addView(ll_p);
-
-
+                            ll_in.addView(pricedec);
+                            ll.addView(ll_in);
                             //Market
                             TextView tv2=new TextView(context);
                             tv2.setTextAppearance(context,R.style.Body);
                             tv2.setTextSize(width/60);
                             tv2.setText("@ " + jpost.getString("farmersmarketname"));
                             ll.addView(tv2);
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 0.7f));
+                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 0.66f));
+
                             lv.addView(ll);
-
-
-
 
                             final String postid=jpost.getString("postid");
                             lv.setOnClickListener(new View.OnClickListener() {
@@ -2711,6 +2775,18 @@ public class PageOperations {
                         vd.setGravity(Gravity.RIGHT);
                         tr5.addView(vd);
                         tl_in.addView(tr5);
+
+                        final String username=postView.getString("price_vendorusername");
+                        vd.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Hashtable<String, String> para = new Hashtable<String, String>();
+                                para.put("username", username);
+                                pushNewPage(new PageNode(R.array.page_016_vendorpage, para));
+                                setPage(R.array.page_016_vendorpage, para);
+                            }
+                        });
+
                         //Market name
                         TableRow tr6 = new TableRow(context);
                         TextView mn1 = new TextView(context);
@@ -2738,6 +2814,18 @@ public class PageOperations {
                         md.setGravity(Gravity.RIGHT);
                         tr7.addView(md);
                         tl_in.addView(tr7);
+
+                        final String marketid=postView.getString("price_fmid");
+                        md.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Hashtable<String, String> para = new Hashtable<String, String>();
+                                para.put("marketid", marketid);
+                                pushNewPage(new PageNode(R.array.page_017_marketpage, para));
+                                setPage(R.array.page_017_marketpage, para);
+                            }
+                        });
+
                         //Location
                         TableRow tr8 = new TableRow(context);
                         TextView location1 = new TextView(context);
@@ -2770,6 +2858,220 @@ public class PageOperations {
                 }
             }
         }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_search_table_by_id", ht));
+    }
+
+    private static void showVendorpage(String name){
+        Hashtable<String,String> ht = new Hashtable<String, String>();
+        ht.put("vendorname",name);
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result){
+                try {
+                    String error = result.getString("error");
+                    if (error.equals("-9")){
+                        TableLayout tl = (TableLayout)hashelements.get("vendorpageScrollTable");
+                        tl.removeAllViews();
+                        JSONObject vendorprofile = result.getJSONObject("vendorprofile");
+                        TableRow lv = new TableRow(context);
+                        lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
+                        LinearLayout ll = new LinearLayout(context);
+                        ll.setOrientation(LinearLayout.VERTICAL);
+
+                        //Business Name
+                        TextView pn=new TextView(context);
+                        pn.setTextAppearance(context,R.style.Bold);
+                        pn.setTextSize(width/40);
+                        pn.setText(vendorprofile.getString("business_name"));
+                        pn.setGravity(Gravity.CENTER);
+                        ll.addView(pn);
+                        //
+                        TextView br1 = new TextView(context);
+                        br1.setText("");
+                        ll.addView(br1);
+
+                        //TableLayout
+                        TableLayout tl_in = new TableLayout(context);
+                        //Organic
+                        TableRow tr1 = new TableRow(context);
+                        TextView org1 = new TextView(context);
+                        org1.setLayoutParams(new TableRow.LayoutParams((int)(width*3/10), TableRow.LayoutParams.WRAP_CONTENT));
+                        org1.setTextAppearance(context,R.style.Bold);
+                        org1.setTextSize(width/45);
+                        org1.setText("Organic:");
+                        tr1.addView(org1);
+                        LinearLayout ll_in = new LinearLayout(context);
+                        ImageView org=new ImageView(context);
+                        org.setLayoutParams(new TableRow.LayoutParams((int)(width*6/10), TableRow.LayoutParams.WRAP_CONTENT));
+                        JSONArray organic=vendorprofile.getJSONArray("business_usdaorganic");
+                        if(organic.getString(0).equals("yes")){
+                            org.setImageResource(R.drawable.usda_organic);
+                            LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(50,50);
+                            parms.gravity=Gravity.START;
+                            org.setLayoutParams(parms);
+                        }
+                        ll_in.addView(org);
+                        tr1.addView(ll_in);
+                        tl_in.addView(tr1);
+                        //Phone
+                        TableRow tr2 = new TableRow(context);
+                        TextView phone1 = new TextView(context);
+                        phone1.setTextAppearance(context,R.style.Bold);
+                        phone1.setTextSize(width/45);
+                        phone1.setText("Phone:");
+                        tr2.addView(phone1);
+                        TextView phone = new TextView(context);
+                        phone.setLayoutParams(new TableRow.LayoutParams((int)(width*6/10), TableRow.LayoutParams.WRAP_CONTENT));
+                        phone.setTextAppearance(context,R.style.Normal);
+                        phone.setTextSize(width/45);
+                        phone.setText(vendorprofile.getString("business_phone"));
+                        tr2.addView(phone);
+                        tl_in.addView(tr2);
+                        //Email
+                        TableRow tr3 = new TableRow(context);
+                        TextView email1 = new TextView(context);
+                        email1.setTextAppearance(context,R.style.Bold);
+                        email1.setTextSize(width/45);
+                        email1.setText("Email:");
+                        tr3.addView(email1);
+                        TextView email = new TextView(context);
+                        email.setLayoutParams(new TableRow.LayoutParams((int)(width*6/10), TableRow.LayoutParams.WRAP_CONTENT));
+                        email.setTextAppearance(context,R.style.Normal);
+                        email.setTextSize(width/45);
+                        email.setText(vendorprofile.getString("business_email"));
+                        tr3.addView(email);
+                        tl_in.addView(tr3);
+                        //Address
+                        TableRow tr4 = new TableRow(context);
+                        TextView address1 = new TextView(context);
+                        address1.setTextAppearance(context,R.style.Bold);
+                        address1.setTextSize(width/45);
+                        address1.setText("Address:");
+                        tr4.addView(address1);
+                        TextView address = new TextView(context);
+                        address.setLayoutParams(new TableRow.LayoutParams((int)(width*6/10), TableRow.LayoutParams.WRAP_CONTENT));
+                        address.setTextAppearance(context,R.style.Normal);
+                        address.setTextSize(width/45);
+                        address.setText(vendorprofile.getString("business_street")+vendorprofile.getString("business_street")+", "
+                                +vendorprofile.getString("business_city")+", "+vendorprofile.getString("business_state")+", "+vendorprofile.getString("business_zip"));
+                        tr4.addView(address);
+                        tl_in.addView(tr4);
+
+                        ll.addView(tl_in);
+
+                        //
+                        TextView br2 = new TextView(context);
+                        br2.setText("");
+                        ll.addView(br2);
+
+                        RelativeLayout ll_bt = new RelativeLayout(context);
+                        RelativeLayout.LayoutParams lparam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (int)(width/10));
+                        ll_bt.setLayoutParams(lparam);
+                        //Request Friend
+                        Button rf = new Button(context);
+                        RelativeLayout.LayoutParams rfparams = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        rfparams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                        rf.setLayoutParams(rfparams);
+                        rf.setBackgroundColor(Color.parseColor("#A2D25A"));
+                        rf.setTextAppearance(context,R.style.Date);
+                        rf.setTextSize(width/55);
+                        rf.setText("Request friend");
+                        ll_bt.addView(rf);
+                        //Add to list
+                        Button al = new Button(context);
+                        RelativeLayout.LayoutParams alparams = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        alparams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                        al.setLayoutParams(alparams);
+                        al.setBackgroundColor(Color.parseColor("#A2D25A"));
+                        al.setTextAppearance(context,R.style.Date);
+                        al.setTextSize(width/55);
+                        al.setText("Add to list");
+                        ll_bt.addView(al);
+
+                        ll.addView(ll_bt);
+
+                        //
+                        TextView br3 = new TextView(context);
+                        br3.setText("");
+                        ll.addView(br3);
+
+                        ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                        lv.addView(ll);
+                        tl.addView(lv);
+
+                    }
+                    else {
+
+                    }
+                    setupUI(playout);
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_display_vendorprofile_bypost", ht));
+    }
+
+    private static void showMarketpage(String id){
+        Hashtable<String,String> ht = new Hashtable<String, String>();
+        ht.put("fmid",id);
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result){
+                try {
+                    String error = result.getString("error");
+                    if (error.equals("-9")){
+                        TableLayout tl = (TableLayout)hashelements.get("marketpageScrollTable");
+                        tl.removeAllViews();
+                        JSONArray allmarketprofile=result.getJSONArray("marketprofile");
+                        JSONObject marketprofile = allmarketprofile.getJSONObject(0);
+                        TableRow lv = new TableRow(context);
+                        lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height/5));
+                        LinearLayout ll = new LinearLayout(context);
+                        ll.setOrientation(LinearLayout.VERTICAL);
+
+                        //Market Name
+                        TextView mn=new TextView(context);
+                        mn.setTextAppearance(context,R.style.Bold);
+                        mn.setTextSize(width/40);
+                        mn.setText(marketprofile.getString("price_market_name"));
+                        mn.setGravity(Gravity.CENTER);
+                        ll.addView(mn);
+                        //
+                        TextView br1 = new TextView(context);
+                        br1.setText("");
+                        ll.addView(br1);
+
+                        //Address
+                        TextView address1 = new TextView(context);
+                        address1.setTextAppearance(context,R.style.Title);
+                        address1.setTextSize(width/50);
+                        address1.setText("Address:");
+                        ll.addView(address1);
+                        TextView address = new TextView(context);
+                        address.setTextAppearance(context,R.style.Normal);
+                        address.setTextSize(width/45);
+                        address.setText(marketprofile.getString("price_street")+", "+marketprofile.getString("price_city")+", "
+                                +marketprofile.getString("price_state")+", "+marketprofile.getString("price_zipcode"));
+                        ll.addView(address);
+
+                        //
+                        TextView br3 = new TextView(context);
+                        br3.setText("");
+                        ll.addView(br3);
+
+                        ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                        lv.addView(ll);
+                        tl.addView(lv);
+
+                    }
+                    else {
+
+                    }
+                    setupUI(playout);
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_display_marketprofile_bypost", ht));
     }
 
     private static void setupUI(View view) {
