@@ -50,6 +50,22 @@
         <item>{\"element\":\"SearchView\",\"value\":\"Search Posts...\",\"id\":\"searchpublicposts\",\"clickaction\":\"searchPublicPost\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postsScroll\"}</item>
     </array>
+
+    <array name="page_020_viewpost">
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"viewpostScroll\"}</item>
+    </array>
+
+    <array name="page_016_vendorpage">
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"vendorpageScroll\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"product list\",\"id\":\"vendorpageView1\", \"clickaction\":\"productlist\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"market sell\",\"id\":\"vendorpageView2\", \"clickaction\":\"marketsell\"}</item>
+    </array>
+
+    <array name="page_017_marketpage">
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"marketpageScroll\"}</item>
+    </array>
+
     <array name="page_000_welcome">
         <item>{\"element\":\"TextView\",\"value\":\"Welcome!\",\"id\":\"welcomeView\"}</item>
     </array>
@@ -131,16 +147,48 @@
         <item>{\"element\":\"Button\",\"value\":\"List of products I sell\",\"id\":\"profilevendorView6\", \"clickaction\":\"productsell\"}</item>
     </array>
     <array name="page_205_nameaddress">
-        <item>{\"element\":\"TextView\",\"value\":\"Business name and address\",\"id\":\"nameaddressView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Business name:\",\"id\":\"busnameView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. Farmers Market Exchange\",\"id\":\"busnameInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Address:\",\"id\":\"busaddressView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. No.1 Main St.\",\"id\":\"busaddressInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"City:\",\"id\":\"buscityView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. New York\",\"id\":\"buscityInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"State:\",\"id\":\"busstateView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"busstateSpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Zip code:\",\"id\":\"buszipcodeView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. 12345\",\"id\":\"buszipcodeInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"nameadsressView\", \"clickaction\":\"savenameaddress\"}</item>
     </array>
     <array name="page_206_phoneemail">
-        <item>{\"element\":\"TextView\",\"value\":\"Phone and email\",\"id\":\"phoneemailView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Phon number:\",\"id\":\"phoneView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. 1234567890\",\"id\":\"phoneInput\",\"inputtype\":\"number\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"emailView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. xxxxx@xxx.xxx\",\"id\":\"emailInput\",\"inputtype\":\"email\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"phoneemailView\", \"clickaction\":\"savephoneemail\"}</item>
     </array>
     <array name="page_207_website">
-        <item>{\"element\":\"TextView\",\"value\":\"Website and social media\",\"id\":\"websiteView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Website:\",\"id\":\"websiteView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"websiteInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Facebook:\",\"id\":\"facebookView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"facebookInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Twitter:\",\"id\":\"twitterView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"twitterInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Other social media 1:\",\"id\":\"other1View\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"other1Input\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Other social media 2:\",\"id\":\"other2View\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"other2Input\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"mediaView\", \"clickaction\":\"savemedia\"}</item>
     </array>
     <array name="page_209_certified">
-        <item>{\"element\":\"TextView\",\"value\":\"USDA Certified Organic Producer\",\"id\":\"certifiedView\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"Are you a USDA Organic Certified Producer?\",\"id\":\"certifiedCheckbox\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"USDA Organic Certificate number:\",\"id\":\"certifiedView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. 1234567890\",\"id\":\"certifiedInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"certifiedView\", \"clickaction\":\"savecertified\"}</item>
     </array>
     <array name="page_309_farmermarket">
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
@@ -214,7 +262,18 @@
 
     </array>
     <array name="page_105_accountinfo">
-        <item>{\"element\":\"TextView\",\"value\":\"User account info\",\"id\":\"accountinfoView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Current password:\",\"id\":\"currentpassView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"currnetpassInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"New password:\",\"id\":\"newpassView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"newpassInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Confirm new password:\",\"id\":\"confirmpassView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Re-enter the new password\",\"id\":\"confirmpassInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"emailView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Enter your email\",\"id\":\"emailInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Display name:\",\"id\":\"displaynameView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Enter your display name\",\"id\":\"displaynameInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"saveView\", \"clickaction\":\"saveinfo\"}</item>
     </array>
     <array name="page_106_uploadlogo">
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
@@ -262,9 +321,7 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"prefermarketScroll\"}</item>
     </array>
 
-    <array name="page_020_viewpost">
-        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"viewpostScroll\"}</item>
-    </array>
+
 
     <array name="page_199_scanqr">
         <item>{\"element\":\"Button\",\"value\":\"Scan QR\",\"id\":\"scanqrbutton\", \"clickaction\":\"scanQR\"}</item>
