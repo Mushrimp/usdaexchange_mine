@@ -231,13 +231,16 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"friendshipScroll\"}</item>
     </array>
     <array name="page_412_request">
-        <item>{\"element\":\"TextView\",\"value\":\"Requests\",\"id\":\"requestView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"requestScroll\"}</item>
     </array>
     <array name="page_402_message">
-        <item>{\"element\":\"TextView\",\"value\":\"Messages\",\"id\":\"messageView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageScroll\"}</item>
+    </array>
+    <array name="page_403_messageform">
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageformScroll\"}</item>
     </array>
     <array name="page_404_notification">
-        <item>{\"element\":\"TextView\",\"value\":\"Notifications\",\"id\":\"notificationView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"notificationScroll\"}</item>
     </array>
 
     <!--account settings-->

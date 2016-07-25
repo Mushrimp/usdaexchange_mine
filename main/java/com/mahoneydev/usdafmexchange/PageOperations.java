@@ -133,6 +133,8 @@ public class PageOperations {
                     String element = jsonelements.getString("element");
                     if (element.equals("TextView")) {
                         TextView tv = new TextView(context);
+                        tv.setTextAppearance(R.style.Bold);
+                        tv.setTextSize(width/45);
                         tv.setText(jsonelements.getString("value"));
                         if (jsonelements.has("inputtype")) {
                         }
@@ -143,6 +145,7 @@ public class PageOperations {
                     } else if (element.equals("EditText")) {
                         EditText et = new EditText(context);
                         et.setHint(jsonelements.getString("value"));
+                        et.setTextSize(width/45);
                         if (jsonelements.has("inputtype")) {
                             String type=jsonelements.getString("inputtype");
                             if (type.equals("textPassword"))
@@ -1542,6 +1545,15 @@ public class PageOperations {
             }.execute(AppCodeResources.postUrl("usdatestyue", "get_product_category", ht));
         }else  if (code == R.array.page_401_friendship){
             showfriends();
+        } else  if (code == R.array.page_412_request){
+            showrequests();
+        }else  if (code == R.array.page_402_message){
+            showmessages();
+        }else  if (code == R.array.page_403_messageform) {
+            String id = params.get("id");
+            showmessageform(id);
+        }else  if (code == R.array.page_404_notification){
+            shownotifications();
         }
         else if (code == R.array.page_309_farmermarket){
             showmarkets();
@@ -1700,7 +1712,345 @@ public class PageOperations {
 
         }.execute(AppCodeResources.postUrl("usdalogin", "get_userinfo", ht));
 
+<<<<<<< HEAD
+    private static void showrequests(){
+        String token_s = UserFileUtility.get_token();
+        Hashtable<String,String> ht = new Hashtable<String, String>();
+        ht.put("os","Android");
+        ht.put("token",token_s);
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result){
+                try {
+                    String error = result.getString("error");
+                    if (error.equals("-9")){
+                        TableLayout tl = (TableLayout)hashelements.get("requestScrollTable");
+                        tl.removeAllViews();
+                        JSONArray allrequests = result.getJSONArray("results");
+                        int count = result.getInt("count");
+                        if (count==0){
+                            Toast.makeText(context,"You have no requests.",Toast.LENGTH_SHORT).show();
+                        }else {
+                            //Need to be finished
+                            for (int i = 0; i < allrequests.length(); i++) {
+                                JSONObject request = allrequests.getJSONObject(i);
+                                TableRow lv = new TableRow(context);
+                                lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height / 5));
+
+                                LinearLayout ll = new LinearLayout(context);
+                                ll.setOrientation(LinearLayout.VERTICAL);
+
+                                ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                                lv.addView(ll);
+                                tl.addView(lv);
+
+                                TableRow lk = new TableRow(context);
+                                lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                                View ldivider = new LinearLayout(context);
+                                ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                ldivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.3f));
+                                View rdivider = new LinearLayout(context);
+                                rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                rdivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.7f));
+                                lk.addView(ldivider);
+                                lk.addView(rdivider);
+                                tl.addView(lk);
+                            }
+                        }
+                    }
+                    else {
+
+                    }
+                    setupUI(playout);
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }.execute(AppCodeResources.postUrl("usdafriendship", "friends_list_allrequests_byuser", ht));
     }
+
+    private static void showmessages(){
+        String token_s = UserFileUtility.get_token();
+        Hashtable<String,String> ht = new Hashtable<String, String>();
+        ht.put("os","Android");
+        ht.put("token",token_s);
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result){
+                try {
+                    String error = result.getString("error");
+                    if (error.equals("-9")){
+                        TableLayout tl = (TableLayout)hashelements.get("messageScrollTable");
+                        tl.removeAllViews();
+                        JSONArray allmessages = result.getJSONArray("results");
+                        int count = result.getInt("count");
+                        if (count==0){
+                            Toast.makeText(context,"You have no messages.",Toast.LENGTH_SHORT).show();
+                        }else {
+                            for (int i = 0; i < allmessages.length(); i++) {
+                                JSONObject message = allmessages.getJSONObject(i);
+                                TableRow lv = new TableRow(context);
+                                lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height / 5));
+
+                                LinearLayout ll = new LinearLayout(context);
+                                ll.setOrientation(LinearLayout.VERTICAL);
+
+                                //From
+                                RelativeLayout rl = new RelativeLayout(context);
+                                rl.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.WRAP_CONTENT));
+                                TextView from = new TextView(context);
+                                RelativeLayout.LayoutParams fromprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                                fromprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                                from.setLayoutParams(fromprams);
+                                from.setTextAppearance(context,R.style.Title);
+                                from.setTextSize(width/50);
+                                from.setText("From:");
+                                rl.addView(from);
+                                //count
+                                TextView count_in = new TextView(context);
+                                RelativeLayout.LayoutParams countprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                                countprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                                count_in.setLayoutParams(countprams);
+                                count_in.setText("("+message.getString("count")+")");
+                                count_in.setTextAppearance(context,R.style.Normal);
+                                count_in.setTextSize(width/45);
+                                rl.addView(count_in);
+                                ll.addView(rl);
+
+                                //name
+                                TextView name = new TextView(context);
+                                String name1 = message.getString("from");
+                                String[] namesplit1, namesplit2;
+                                namesplit1 = name1.split("&");
+                                namesplit2 = name1.split(";");
+                                name.setText(namesplit1[0]+namesplit2[1]);
+                                name.setTextAppearance(context,R.style.Bold);
+                                name.setTextSize(width/45);
+                                ll.addView(name);
+
+                                //Subject
+                                TextView subject1 = new TextView(context);
+                                subject1.setText("Subject:");
+                                subject1.setTextAppearance(context,R.style.Title);
+                                subject1.setTextSize(width/50);
+                                ll.addView(subject1);
+                                TextView subject = new TextView(context);
+                                subject.setText(message.getString("subject"));
+                                subject.setTextAppearance(context,R.style.Body);
+                                subject.setTextSize(width/45);
+                                ll.addView(subject);
+
+                                //Time
+                                TextView time = new TextView(context);
+                                time.setText(message.getString("time"));
+                                time.setTextAppearance(context,R.style.Body);
+                                time.setTextSize(width/50);
+                                ll.addView(time);
+
+                                //
+                                TextView bl = new TextView(context);
+                                ll.addView(bl);
+
+                                ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                                lv.addView(ll);
+
+                                final String id=message.getString("ID");
+                                lv.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Hashtable<String, String> pam = new Hashtable<String, String>();
+                                        pam.put("id", id);
+                                        pushNewPage(new PageNode(R.array.page_403_messageform, pam));
+                                        setPage(R.array.page_403_messageform, pam);
+                                    }
+                                });
+
+                                tl.addView(lv);
+
+                                TableRow lk = new TableRow(context);
+                                lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                                View ldivider = new LinearLayout(context);
+                                ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                ldivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.3f));
+                                View rdivider = new LinearLayout(context);
+                                rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                rdivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.7f));
+                                lk.addView(ldivider);
+                                lk.addView(rdivider);
+                                tl.addView(lk);
+                            }
+                        }
+                    }
+                    else {
+
+                    }
+                    setupUI(playout);
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }.execute(AppCodeResources.postUrl("usdafriendship", "messages_list_all_byuser", ht));
+    }
+
+    private static void showmessageform(String id) {
+        String token_s = UserFileUtility.get_token();
+        Hashtable<String, String> ht = new Hashtable<String, String>();
+        ht.put("thread_id",id);
+        ht.put("os", "Android");
+        ht.put("token", token_s);
+        new FetchTask() {
+            @Override
+            protected void onPostExecute(JSONObject result) {
+                try {
+                    String error = result.getString("error");
+                    if (error.equals("-9")) {
+                        TableLayout tl = (TableLayout) hashelements.get("messageformScrollTable");
+                        tl.removeAllViews();
+                        JSONArray allmessageforms = result.getJSONArray("results");
+                            for (int i = 0; i < allmessageforms.length(); i++) {
+                                JSONObject messageform = allmessageforms.getJSONObject(i);
+                                TableRow lv = new TableRow(context);
+                                lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height / 5));
+
+                                LinearLayout ll = new LinearLayout(context);
+                                ll.setOrientation(LinearLayout.VERTICAL);
+
+                                //From
+                                RelativeLayout rl = new RelativeLayout(context);
+                                rl.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+                                TextView from = new TextView(context);
+                                RelativeLayout.LayoutParams fromprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                                fromprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                                from.setLayoutParams(fromprams);
+                                from.setTextAppearance(context, R.style.Title);
+                                from.setTextSize(width / 50);
+                                from.setText("From:");
+                                rl.addView(from);
+                                //Time
+                                TextView time = new TextView(context);
+                                RelativeLayout.LayoutParams timeprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                                timeprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                                time.setLayoutParams(timeprams);
+                                time.setText(messageform.getString("time"));
+                                time.setTextAppearance(context, R.style.Body);
+                                time.setTextSize(width /50);
+                                rl.addView(time);
+                                ll.addView(rl);
+
+                                //name
+                                TextView name = new TextView(context);
+                                String name1 = messageform.getString("from");
+                                String[] namesplit1, namesplit2;
+                                namesplit1 = name1.split("&");
+                                namesplit2 = name1.split(";");
+                                name.setText(namesplit1[0] + namesplit2[1]);
+                                name.setTextAppearance(context, R.style.Bold);
+                                name.setTextSize(width / 45);
+                                ll.addView(name);
+
+                                //Message
+                                TextView message1 = new TextView(context);
+                                message1.setText("Message:");
+                                message1.setTextAppearance(context, R.style.Title);
+                                message1.setTextSize(width / 50);
+                                ll.addView(message1);
+                                TextView message = new TextView(context);
+                                message.setText(messageform.getString("message"));
+                                message.setTextAppearance(context, R.style.Body);
+                                message.setTextSize(width / 45);
+                                ll.addView(message);
+
+                                //
+                                TextView bl = new TextView(context);
+                                ll.addView(bl);
+
+                                ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                                lv.addView(ll);
+
+                                tl.addView(lv);
+
+                                TableRow lk = new TableRow(context);
+                                lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                                View ldivider = new LinearLayout(context);
+                                ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                ldivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.3f));
+                                View rdivider = new LinearLayout(context);
+                                rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                rdivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.7f));
+                                lk.addView(ldivider);
+                                lk.addView(rdivider);
+                                tl.addView(lk);
+                            }
+                    } else {
+
+                    }
+                    setupUI(playout);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.execute(AppCodeResources.postUrl("usdafriendship", "messages_list_all_byuser", ht));
+    }
+
+    private static void shownotifications(){
+        String token_s = UserFileUtility.get_token();
+        Hashtable<String,String> ht = new Hashtable<String, String>();
+        ht.put("os","Android");
+        ht.put("token",token_s);
+        new FetchTask(){
+            @Override
+            protected void onPostExecute(JSONObject result){
+                try {
+                    String error = result.getString("error");
+                    if (error.equals("-9")){
+                        TableLayout tl = (TableLayout)hashelements.get("notificationScrollTable");
+                        tl.removeAllViews();
+                        JSONArray allrequests = result.getJSONArray("results");
+                        int count = result.getInt("count");
+                        if (count==0){
+                            Toast.makeText(context,"You have no notifications.",Toast.LENGTH_SHORT).show();
+                        }else {
+                            //Need to be finished
+                            for (int i = 0; i < allrequests.length(); i++) {
+                                JSONObject request = allrequests.getJSONObject(i);
+                                TableRow lv = new TableRow(context);
+                                lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height / 5));
+
+                                LinearLayout ll = new LinearLayout(context);
+                                ll.setOrientation(LinearLayout.VERTICAL);
+
+                                ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                                lv.addView(ll);
+                                tl.addView(lv);
+
+                                TableRow lk = new TableRow(context);
+                                lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                                View ldivider = new LinearLayout(context);
+                                ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                ldivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.3f));
+                                View rdivider = new LinearLayout(context);
+                                rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                                rdivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.7f));
+                                lk.addView(ldivider);
+                                lk.addView(rdivider);
+                                tl.addView(lk);
+                            }
+                        }
+                    }
+                    else {
+
+                    }
+                    setupUI(playout);
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }.execute(AppCodeResources.postUrl("usdafriendship", "notifications_list_all_byuser", ht));
+    }
+
+=======
+    }
+>>>>>>> Bi
     private static void preparepostform(){
         Hashtable<String,String> ht=new Hashtable<String, String>();
         String token_s=UserFileUtility.get_token();
