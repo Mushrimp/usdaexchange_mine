@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -310,7 +311,7 @@ public class Frontpage extends AppCompatActivity
     public void switchContent(int content_id, Hashtable<String,String> ht)
     {
         PageOperations.generateLayout(content_id, (LinearLayout) findViewById(R.id.content), ht);
-        PageOperations.generateTitle(content_id, (LinearLayout) findViewById(R.id.toolbarLayout));
+        PageOperations.generateTitle(content_id, (RelativeLayout) findViewById(R.id.toolbarLayout));
     }
     public void switchMenu(int menu_id)
     {

@@ -266,17 +266,18 @@
     </array>
     <array name="page_105_accountinfo">
         <item>{\"element\":\"TextView\",\"value\":\"Current password:\",\"id\":\"currentpassView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"currnetpassInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"currentpassInput\",\"next\":\"newpassInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"New password:\",\"id\":\"newpassView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"newpassInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"newpassInput\",\"next\":\"confirmpassInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Confirm new password:\",\"id\":\"confirmpassView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Re-enter the new password\",\"id\":\"confirmpassInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Re-enter the new password\",\"id\":\"confirmpassInput\",\"next\":\"emailInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"emailView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Enter your email\",\"id\":\"emailInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Enter your email\",\"id\":\"emailInput\",\"next\":\"displaynameInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Display name:\",\"id\":\"displaynameView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"Enter your display name\",\"id\":\"displaynameInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"saveView\", \"clickaction\":\"saveinfo\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"accountErrorView\"}</item>
     </array>
     <array name="page_106_uploadlogo">
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
