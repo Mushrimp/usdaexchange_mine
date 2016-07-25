@@ -41,6 +41,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.mahoneydev.usdafmexchange.pages.page_001_front;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,8 +63,8 @@ import java.util.Locale;
 public class PageOperations {
     public static Frontpage context = null;
     public static Resources res = null;
-    private static View playout=null;
-    private static Hashtable<String, View> hashelements;
+    protected static View playout=null;
+    protected static Hashtable<String, View> hashelements;
     private static Hashtable<String, String> hashvalues;
     private static List<PageNode> pageHistory=new ArrayList<PageNode>();
     public static int height=0;
@@ -428,7 +429,7 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showpublicposts((((EditText) hashelements.get("searchpublicpostsInput")).getText()).toString());
+                    page_001_front.showpublicposts((((EditText) hashelements.get("searchpublicpostsInput")).getText()).toString());
                 }
             });
         }else if (action.equals("testSearch"))
@@ -1301,7 +1302,7 @@ public class PageOperations {
     private static void renderUI(int code, Hashtable<String,String> params){
         if (code== R.array.page_001_front)
         {
-            showpublicposts("");
+            page_001_front.showpublicposts("");
         }else if (code== R.array.page_020_viewpost)
         {
             String idvalue = params.get("postid");
@@ -2655,154 +2656,6 @@ public class PageOperations {
         }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_getlist", ht));
     }
 
-    private static void showpublicposts(String search){
-        //SEARCH AND SHOW FUNTION FOR FRONT PAGE
-        final String token_s=UserFileUtility.get_token();
-        Hashtable<String,String> ht=new Hashtable<String, String>();
-        ht.put("liststart","0");
-        ht.put("perpage","5");
-        ht.put("os", "Android");
-        ht.put("search",search);
-        ht.put("token",token_s);
-        new FetchTask(){
-            @Override
-            protected void onPostExecute(JSONObject result)
-            {
-                try {
-                    Log.d("Error", result.getString("error"));
-                    String error=result.getString("error");
-                    if (error.equals("-9"))
-                    {
-                        TableLayout tl=(TableLayout)hashelements.get("postsScrollTable");
-                        tl.removeAllViews();
-                        JSONArray resultposts=result.getJSONArray("results");
-                        Log.d("resultposts", resultposts.toString());
-                        for (int i=0;i<resultposts.length();i++)
-                        {
-                            JSONObject jpost=resultposts.getJSONObject(i);
-                            Log.d("jpost", jpost.toString());
-                            TableRow lv=new TableRow(context);
-                            lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                            ImageView logo=new ImageView(context);
-                            String vendorlogohtml=jpost.getString("vendorlogo");
-                            int urlstart=vendorlogohtml.indexOf("src=\"")+"src=\"".length();
-                            int urlend=urlstart;
-                            for (int j=urlstart;vendorlogohtml.charAt(j)!='\"';j++)
-                            {
-                                urlend=j;
-                            }
-
-                            String vendorlogourl=vendorlogohtml.substring(urlstart,urlend+1);
-                            Log.d("LOGOURL",vendorlogourl);
-                            LoadImage li=new LoadImage();
-                            li.img=logo;
-                            li.execute(vendorlogourl);
-
-                            logo.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.3f));
-                            lv.addView(logo);
-
-                            LinearLayout ll_bl = new LinearLayout(context);
-                            ll_bl.setOrientation(LinearLayout.VERTICAL);
-                            ll_bl.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,0.04f));
-                            TextView bl = new TextView(context);
-                            bl.setText("");
-                            ll_bl.addView(bl);
-                            lv.addView(ll_bl);
-
-                            LinearLayout ll=new LinearLayout(context);
-                            ll.setOrientation(LinearLayout.VERTICAL);
-                            //Product Name
-                            TextView pn=new TextView(context);
-                            pn.setText(jpost.getString("productname"));
-                            pn.setTextAppearance(context,R.style.Normal);
-                            pn.setTextSize(width/40);
-                            ll.addView(pn);
-                            //Vendor
-                            TextView vendor=new TextView(context);
-                            String tv = "By: " + jpost.getString("vendorbusinessname");
-                            vendor.setText(tv);
-                            vendor.setTextAppearance(context,R.style.Title);
-                            vendor.setTextSize(width/55);
-                            ll.addView(vendor);
-                            //Date
-                            TextView date=new TextView(context);
-                            String td = "Date: " + jpost.getString("marketday");
-                            date.setText(td);
-                            date.setTextAppearance(context,R.style.Date);
-                            date.setTextSize(width/55);
-                            ll.addView(date);
-                            //Price Unit
-                            LinearLayout ll_in = new LinearLayout(context);
-                            ll_in.setOrientation(LinearLayout.HORIZONTAL);
-                            ll_in.setGravity(Gravity.RIGHT);
-                            String price = jpost.getString("price");/*+ " / " + jpost.getString("unit")*/
-                            String[] pricesplit;
-                            pricesplit = price.split("\\.");
-                            TextView priceint=new TextView(context);
-                            priceint.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                            priceint.setGravity(Gravity.RIGHT);
-                            priceint.setText("$"+pricesplit[0]+".");
-                            priceint.setTextAppearance(context,R.style.Price);
-                            priceint.setTextSize(width/30);
-                            ll_in.addView(priceint);
-                            TextView pricedec=new TextView(context);
-                            pricedec.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT));
-                            pricedec.setGravity(Gravity.RIGHT|Gravity.TOP);
-                            pricedec.setText(pricesplit[1]);
-                            pricedec.setTextAppearance(context,R.style.Price);
-                            pricedec.setTextSize(width/45);
-                            ll_in.addView(pricedec);
-                            ll.addView(ll_in);
-                            //Market
-                            TextView tv2=new TextView(context);
-                            tv2.setTextAppearance(context,R.style.Body);
-                            tv2.setTextSize(width/60);
-                            tv2.setText("@ " + jpost.getString("farmersmarketname"));
-                            ll.addView(tv2);
-                            ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 0.66f));
-
-                            lv.addView(ll);
-
-                            final String postid=jpost.getString("postid");
-                            lv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Hashtable<String, String> pam = new Hashtable<String, String>();
-                                    pam.put("postid", postid);
-                                    pushNewPage(new PageNode(R.array.page_020_viewpost, pam));
-                                    setPage(R.array.page_020_viewpost, pam);
-                                }
-                            });
-
-                            tl.addView(lv);
-                            TableRow lk=new TableRow(context);
-                            lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-                            View ldivider=new LinearLayout(context);
-                            ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
-                            ldivider.setLayoutParams(new TableRow.LayoutParams(0, 2,0.3f));
-                            View rdivider=new LinearLayout(context);
-                            rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
-                            rdivider.setLayoutParams(new TableRow.LayoutParams(0,2,0.7f));
-                            lk.addView(ldivider);
-                            lk.addView(rdivider);
-                            tl.addView(lk);
-                        }
-
-                    }
-                    else
-                    {
-                    }
-                    setupUI(playout);
-                }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-
-        }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_search_posts", ht));
-    }
-
     private static void showpostView(String idvalue){
         Hashtable<String,String> ht = new Hashtable<String, String>();
         ht.put("tablename","usdafmexchange_publish.usda_price_post_public");
@@ -3285,7 +3138,7 @@ public class PageOperations {
         }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_display_marketprofile_bypost", ht));
     }
 
-    private static void setupUI(View view) {
+    protected static void setupUI(View view) {
 
         //Set up touch listener for non-text box views to hide keyboard.
         if(!(view instanceof EditText)) {
