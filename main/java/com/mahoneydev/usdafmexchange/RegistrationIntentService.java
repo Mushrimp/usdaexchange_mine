@@ -97,14 +97,8 @@ public class RegistrationIntentService extends IntentService {
         ht.put("os","Android");
         ht.put("token",t);
         new FetchTask(){
-            @Override
-            protected void onPostExecute(JSONObject result)
-            {
-                try {
-                    Log.d("Error", result.getString("error"));
-                    String error=result.getString("error");
-                    if (error.equals("-9"))
-                    {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
                         UserFileUtility.save_userinfo();
                         Intent usernameset = new Intent();
                         usernameset.setAction(QuickstartPreferences.SET_USERNAME);
@@ -119,28 +113,28 @@ public class RegistrationIntentService extends IntentService {
                         registrationComplete.putExtra("content", R.array.page_001_front);
                         sendBroadcast(registrationComplete);
                     }
-                    else if (error.equals("-10"))
-                    {
-                        Intent nologin = new Intent();
-                        nologin.setAction(QuickstartPreferences.SWITCH_CONTENT);
-                        nologin.putExtra("content", R.array.page_009_noconnection);
-                        sendBroadcast(nologin);
-                    }
-                    else {
-                        Intent nologin = new Intent();
-                        nologin.setAction(QuickstartPreferences.SWITCH_CONTENT);
-                        nologin.putExtra("content", R.array.page_102_login);
-                        sendBroadcast(nologin);
-                    }
-                }
-                catch (JSONException e)
-                {
-                    Intent nologin = new Intent();
-                    nologin.setAction(QuickstartPreferences.SWITCH_CONTENT);
-                    nologin.putExtra("content", R.array.page_102_login);
-                    sendBroadcast(nologin);
-                }
-            }
+//                    else if (error.equals("-10"))
+//                    {
+//                        Intent nologin = new Intent();
+//                        nologin.setAction(QuickstartPreferences.SWITCH_CONTENT);
+//                        nologin.putExtra("content", R.array.page_009_noconnection);
+//                        sendBroadcast(nologin);
+//                    }
+//                    else {
+//                        Intent nologin = new Intent();
+//                        nologin.setAction(QuickstartPreferences.SWITCH_CONTENT);
+//                        nologin.putExtra("content", R.array.page_102_login);
+//                        sendBroadcast(nologin);
+//                    }
+//                }
+//                catch (JSONException e)
+//                {
+//                    Intent nologin = new Intent();
+//                    nologin.setAction(QuickstartPreferences.SWITCH_CONTENT);
+//                    nologin.putExtra("content", R.array.page_102_login);
+//                    sendBroadcast(nologin);
+//                }
+//            }
 
         }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));
     }
