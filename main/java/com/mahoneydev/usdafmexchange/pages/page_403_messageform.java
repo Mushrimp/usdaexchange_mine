@@ -71,10 +71,14 @@ public class page_403_messageform  extends PageOperations {
                     //name
                     TextView name = new TextView(context);
                     String name1 = messageform.getString("from");
-                    String[] namesplit1, namesplit2;
-                    namesplit1 = name1.split("&");
-                    namesplit2 = name1.split(";");
-                    name.setText(namesplit1[0] + namesplit2[1]);
+                    if (name1.contains("&")&& name1.contains(";")) {
+                        String[] namesplit1, namesplit2;
+                        namesplit1 = name1.split("&");
+                        namesplit2 = name1.split(";");
+                        name.setText(namesplit1[0] + namesplit2[1]);
+                    }else {
+                        name.setText(name1);
+                    }
                     name.setTextAppearance(context, R.style.Bold);
                     name.setTextSize(width / 45);
                     ll.addView(name);
