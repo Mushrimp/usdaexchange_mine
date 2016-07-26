@@ -72,7 +72,7 @@ public class page_122_preferproduct extends PageOperations {
                     br.setText("");
                     ll.addView(br);
 
-                    ll.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                    ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
                     tl.addView(lv);
 

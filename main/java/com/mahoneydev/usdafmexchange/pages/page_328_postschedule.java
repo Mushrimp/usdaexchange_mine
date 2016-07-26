@@ -94,7 +94,7 @@ public class page_328_postschedule extends PageOperations {
                     br.setText("");
                     ll.addView(br);
 
-                    ll.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+                    ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableRow.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
                     tl.addView(lv);
 
