@@ -148,9 +148,9 @@
     </array>
     <array name="page_205_nameaddress">
         <item>{\"element\":\"TextView\",\"value\":\"Business name:\",\"id\":\"busnameView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. Farmers Market Exchange\",\"id\":\"busnameInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. Farmers Market Exchange\",\"id\":\"busnameInput\",\"next\":\"busaddressInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Address:\",\"id\":\"busaddressView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. No.1 Main St.\",\"id\":\"busaddressInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. No.1 Main St.\",\"id\":\"busaddressInput\",\"next\":\"buscityInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"City:\",\"id\":\"buscityView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"eg. New York\",\"id\":\"buscityInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"State:\",\"id\":\"busstateView\"}</item>
@@ -159,24 +159,26 @@
         <item>{\"element\":\"EditText\",\"value\":\"eg. 12345\",\"id\":\"buszipcodeInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"nameadsressView\", \"clickaction\":\"savenameaddress\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"erroraddressView\"}</item>
     </array>
     <array name="page_206_phoneemail">
         <item>{\"element\":\"TextView\",\"value\":\"Phon number:\",\"id\":\"phoneView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. 1234567890\",\"id\":\"phoneInput\",\"inputtype\":\"number\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. 1234567890\",\"id\":\"phoneInput\",\"inputtype\":\"number\",\"next\":\"emailInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"emailView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"eg. xxxxx@xxx.xxx\",\"id\":\"emailInput\",\"inputtype\":\"email\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"phoneemailView\", \"clickaction\":\"savephoneemail\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errorphoneView\"}</item>
     </array>
     <array name="page_207_website">
         <item>{\"element\":\"TextView\",\"value\":\"Website:\",\"id\":\"websiteView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"websiteInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"websiteInput\",\"next\":\"facebookInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Facebook:\",\"id\":\"facebookView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"facebookInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"facebookInput\",\"next\":\"twitterInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Twitter:\",\"id\":\"twitterView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"twitterInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"twitterInput\",\"next\":\"other1Input\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Other social media 1:\",\"id\":\"other1View\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"other1Input\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"other1Input\",\"next\":\"other2Input\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Other social media 2:\",\"id\":\"other2View\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"other2Input\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
