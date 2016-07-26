@@ -1,19 +1,8 @@
 package com.mahoneydev.usdafmexchange;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,12 +14,11 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Hashtable;
 
 /**
  * Created by mahoneydev on 5/11/2016.
  */
-public abstract class FetchTask extends AsyncTask<String, Void, JSONObject> {
+public class FetchTask extends AsyncTask<String, Void, JSONObject> {
     private String action;
     @Override
     protected JSONObject doInBackground(String... para) {
@@ -103,31 +91,5 @@ public abstract class FetchTask extends AsyncTask<String, Void, JSONObject> {
         char[] buffer = new char[len];
         reader.read(buffer);
         return new String(buffer);
-    }
-    protected void onPostExecute(JSONObject result)
-    {
-        try {
-            Log.d("Error", result.getString("error"));
-            String error=result.getString("error");
-            if (error.equals("-9"))
-            {
-                executeSuccess(result);
-            }
-            else if (error.equals("-10"))
-            {
-            }
-            else
-            {
-                executeFailed(result);
-            }
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-    }
-    protected abstract void executeSuccess(JSONObject result) throws JSONException ;
-    protected  void executeFailed(JSONObject result) throws JSONException
-    {
     }
 }

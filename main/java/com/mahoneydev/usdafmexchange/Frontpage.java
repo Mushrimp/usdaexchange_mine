@@ -65,13 +65,17 @@ public class Frontpage extends AppCompatActivity
                 int content_id=intent.getIntExtra("content", R.array.page_001_front);
                 if (content_id== R.array.page_009_noconnection)
                 {
-                    PageOperations.squashNewPage(content_id, null);
+                    PageOperations.cleanPageHistory();
+                    switchContent(content_id, null);
+                    PageOperations.pushNewPage(new PageNode(content_id, null));
                 }
                 else {
                     if (PageOperations.historyEmpty()) {
-                        PageOperations.pushNewPage(content_id, null);
+                        switchContent(content_id, null);
+                        PageOperations.pushNewPage(new PageNode(content_id, null));
                     } else {
-                        PageOperations.showRecentPage();
+                        PageNode k = PageOperations.getRecentPage();
+                        switchContent(k.pageId, k.params);
                     }
                     Log.d("ddd","image");
                     String username=UserFileUtility.get_username();
@@ -153,6 +157,16 @@ public class Frontpage extends AppCompatActivity
             else
             {
                 PageOperations.removeRecentPage();
+                if (PageOperations.historyEmpty())
+                {
+                    PageOperations.pushNewPage(new PageNode(R.array.page_001_front,null));
+                    switchContent(R.array.page_001_front,null);
+                }
+                else
+                {
+                    PageNode k= PageOperations.getRecentPage();
+                    switchContent(k.pageId,k.params);
+                }
             }
         }
     }
@@ -186,59 +200,85 @@ public class Frontpage extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_Login) {
-            PageOperations.squashNewPage(R.array.page_102_login, null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_102_login, null));
+            switchContent(R.array.page_102_login, null);
         } else if (id == R.id.home) {
-            PageOperations.squashNewPage(R.array.page_001_front,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_001_front,null));
+            switchContent(R.array.page_001_front,null);
         }
         else if (id == R.id.sign_out_vendor)
         {
-            PageOperations.squashNewPage(R.array.page_001_front,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_001_front,null));
             UserFileUtility.clean_userinfo();
             UserFileUtility.save_userinfo();
             if (((TextView)findViewById(R.id.username_menu_display)) != null) {
                 ((TextView)findViewById(R.id.username_menu_display)).setText("");
             }
             switchMenu(R.id.nologin);
+            switchContent(R.array.page_001_front,null);
             switchAvatar(false);
         }
         else if (id== R.id.about_us)
         {
-            PageOperations.squashNewPage(R.array.page_003_aboutus,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_003_aboutus,null));
+            switchContent(R.array.page_003_aboutus,null);
         }
         else if (id== R.id.contact_us)
         {
-            PageOperations.squashNewPage(R.array.page_005_contactus,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_005_contactus,null));
+            switchContent(R.array.page_005_contactus,null);
         }
         else if (id == R.id.post_price)
         {
-            PageOperations.squashNewPage(R.array.page_320_postprice,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_320_postprice,null));
+            switchContent(R.array.page_320_postprice,null);
         }
         else if (id == R.id.home_vendor)
         {
-            PageOperations.squashNewPage(R.array.page_001_front,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_001_front,null));
+            switchContent(R.array.page_001_front,null);
         }
         else if (id== R.id.vendor_profile)
         {
-            PageOperations.squashNewPage(R.array.page_203_profilevendor,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_203_profilevendor,null));
+            switchContent(R.array.page_203_profilevendor,null);
         }
         else if (id== R.id.social_network_vendor)
         {
-            PageOperations.squashNewPage(R.array.page_400_socialnetwork,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_400_socialnetwork,null));
+            switchContent(R.array.page_400_socialnetwork,null);
         }
         else if (id== R.id.account_vendor)
         {
-            PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_110_accountsettings,null));
+            switchContent(R.array.page_110_accountsettings,null);
         }
         else if (id== R.id.logo)
         {
-            PageOperations.squashNewPage(R.array.page_106_uploadlogo,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_106_uploadlogo,null));
+            switchContent(R.array.page_106_uploadlogo,null);
         }
         else if (id== R.id.scan_qr)
         {
-            PageOperations.squashNewPage(R.array.page_199_scanqr,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_199_scanqr,null));
+            switchContent(R.array.page_199_scanqr,null);
         }else if (id== R.id.testpage)
         {
-            PageOperations.squashNewPage(R.array.page_777_test,null);
+            PageOperations.cleanPageHistory();
+            PageOperations.pushNewPage(new PageNode(R.array.page_777_test,null));
+            switchContent(R.array.page_777_test,null);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -298,7 +338,13 @@ public class Frontpage extends AppCompatActivity
             ht.put("token",token_s);
             new FetchTask(){
                 @Override
-                protected void executeSuccess(JSONObject result) throws JSONException {
+                protected void onPostExecute(JSONObject result)
+                {
+                    try {
+                        Log.d("Error", result.getString("error"));
+                        String error=result.getString("error");
+                        if (error.equals("-9"))
+                        {
                             String imageurl=result.getString("avatar_url");
                             imageurl=imageurl.replace("\\","");
                             ImageView logo=(ImageView) findViewById(R.id.uavatar);
@@ -309,14 +355,24 @@ public class Frontpage extends AppCompatActivity
                                 logo.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
+                                    PageOperations.cleanPageHistory();
+                                    PageOperations.pushNewPage(new PageNode(R.array.page_110_accountsettings,null));
+                                    switchContent(R.array.page_110_accountsettings,null);
                                     switchMenuChecked(R.id.account_vendor);
                                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                                     if (drawer!=null)
                                         drawer.closeDrawer(GravityCompat.START);
                                 }
                                 });
-
+                        }
+                        else
+                        {
+                        }
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
 
             }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
@@ -329,7 +385,9 @@ public class Frontpage extends AppCompatActivity
                 logo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PageOperations.squashNewPage(R.array.page_102_login, null);
+                        PageOperations.cleanPageHistory();
+                        PageOperations.pushNewPage(new PageNode(R.array.page_102_login, null));
+                        switchContent(R.array.page_102_login, null);
                         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                         if (drawer!=null)
                             drawer.closeDrawer(GravityCompat.START);
@@ -408,7 +466,8 @@ public class Frontpage extends AppCompatActivity
                 Hashtable<String,String> ht=new Hashtable<String, String>();
                 String friendname=contents.replace(AppCodeResources.FRIEND_URL_PRE,"");
                 ht.put("friendname", friendname);
-                PageOperations.pushNewPage(R.array.page_407_profile,ht);
+                PageOperations.pushNewPage(new PageNode(R.array.page_407_profile,ht));
+                switchContent(R.array.page_407_profile, ht);
 //                new FetchTask(){
 //                    @Override
 //                    protected void onPostExecute(JSONObject result)
