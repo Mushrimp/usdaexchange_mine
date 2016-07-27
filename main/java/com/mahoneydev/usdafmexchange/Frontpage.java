@@ -292,13 +292,13 @@ public class Frontpage extends AppCompatActivity
     {
         if (exist)
         {
-            Hashtable<String,String> ht=new Hashtable<String, String>();
-            String token_s=UserFileUtility.get_token();
-            ht.put("os", "Android");
-            ht.put("token",token_s);
-            new FetchTask(){
-                @Override
-                protected void executeSuccess(JSONObject result) throws JSONException {
+                    Hashtable<String,String> ht=new Hashtable<String, String>();
+                    String token_s=UserFileUtility.get_token();
+                    ht.put("os", "Android");
+                    ht.put("token",token_s);
+                    new FetchTask(){
+                        @Override
+                        protected void executeSuccess(JSONObject result) throws JSONException {
                             String imageurl=result.getString("avatar_url");
                             imageurl=imageurl.replace("\\","");
                             ImageView logo=(ImageView) findViewById(R.id.uavatar);
@@ -307,14 +307,14 @@ public class Frontpage extends AppCompatActivity
                             li.execute(imageurl);
                             if (logo!=null)
                                 logo.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
-                                    switchMenuChecked(R.id.account_vendor);
-                                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                                    if (drawer!=null)
-                                        drawer.closeDrawer(GravityCompat.START);
-                                }
+                                    @Override
+                                    public void onClick(View v) {
+                                        PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
+                                        switchMenuChecked(R.id.account_vendor);
+                                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                                        if (drawer!=null)
+                                            drawer.closeDrawer(GravityCompat.START);
+                                    }
                                 });
 
                 }

@@ -1,7 +1,6 @@
 package com.mahoneydev.usdafmexchange.pages;
 
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
@@ -16,55 +15,61 @@ import org.json.JSONObject;
 import java.util.Hashtable;
 
 /**
- * Created by bichongg on 7/26/2016.
+ * Created by bichongg on 7/27/2016.
  */
-public class page_207_website extends PageOperations {
-    public static void preparevendorwebform(){
+public class page_108_socialnetwork extends PageOperations {
+    public static void preparesocial(){
         Hashtable<String, String> ht = new Hashtable<String, String>();
         String token_s = UserFileUtility.get_token();
         ht.put("os", "Android");
         ht.put("token", token_s);
         JSONArray ja=new JSONArray();
-        ja.put("business_website");
-        ja.put("business_facebook");
-        ja.put("business_twitter");
-        ja.put("business_othermedia1");
-        ja.put("business_othermedia2");
+        ja.put("userfriendship_allowaddfriend");
+        ja.put("userfriendship_allowrecievemessage");
+        ja.put("usernoti_addremovefriendrequest");
+        ja.put("usernoti_friendmessage");
         ht.put("form_args",ja.toString());
         new FetchTask() {
             @Override
             protected void executeSuccess(JSONObject result) throws JSONException {
                 JSONObject jo=new JSONObject(result.getString("results"));
-                ((EditText)hashelements.get("websiteInput")).setText(jo.getString("business_website"));
-                ((EditText)hashelements.get("facebookInput")).setText(jo.getString("business_facebook"));
-                ((EditText)hashelements.get("twitterInput")).setText(jo.getString("business_twitter"));
-                ((EditText)hashelements.get("other1Input")).setText(jo.getString("business_othermedia1"));
-                ((EditText)hashelements.get("other2Input")).setText(jo.getString("business_othermedia2"));
-
+                if (jo.getString("userfriendship_allowaddfriend").equals("on"))
+                    ((CheckBox) hashelements.get("nofriendCheckbox")).setChecked(true);
+                if (jo.getString("userfriendship_allowrecievemessage").equals("on"))
+                    ((CheckBox) hashelements.get("nomessageCheckbox")).setChecked(true);
+                if (jo.getString("usernoti_addremovefriendrequest").equals("on"))
+                    ((CheckBox) hashelements.get("friendCheckbox")).setChecked(true);
+                if (jo.getString("usernoti_friendmessage").equals("on"))
+                    ((CheckBox) hashelements.get("messageCheckbox")).setChecked(true);
                 setupUI(playout);
             }
         }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_read", ht));
     }
 
-    public static void saveWebAction(){
+    public static void savesocialsettings(){
         Hashtable<String, String> ht = new Hashtable<String, String>();
         String token_s = UserFileUtility.get_token();
         ht.put("os", "Android");
         ht.put("token", token_s);
         ht.put("post_type","user");
-        String website= ((EditText) hashelements.get("websiteInput")).getText().toString();
-        String facebook=((EditText) hashelements.get("facebookInput")).getText().toString();
-        String twitter= ((EditText) hashelements.get("twitterInput")).getText().toString();
-        String other1=((EditText) hashelements.get("other1Input")).getText().toString();
-        String other2=((EditText) hashelements.get("other2Input")).getText().toString();
-
+        String nofriend="";
+        String nomessage="";
+        String friend="";
+        String message="";
+        if  (((CheckBox) hashelements.get("nofriendCheckbox")).isChecked())
+            nofriend="on";
+        if  (((CheckBox) hashelements.get("nomessageCheckbox")).isChecked())
+            nomessage="on";
+        if  (((CheckBox) hashelements.get("friendCheckbox")).isChecked())
+            friend="on";
+        if  (((CheckBox) hashelements.get("messageCheckbox")).isChecked())
+            message="on";
         try {
             JSONObject jo = new JSONObject();
-            jo.put("business_website",website);
-            jo.put("business_facebook", facebook);
-            jo.put("business_twitter", twitter);
-            jo.put("business_othermedia1", other1);
-            jo.put("business_othermedia2", other2);
+            jo.put("userfriendship_allowaddfriend",nofriend);
+            jo.put("userfriendship_allowrecievemessage", nomessage);
+            jo.put("usernoti_addremovefriendrequest", friend);
+            jo.put("usernoti_friendmessage", message);
             ht.put("postdata",jo.toString());
         }
         catch (JSONException e)
