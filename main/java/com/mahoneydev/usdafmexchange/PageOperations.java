@@ -420,6 +420,13 @@ public class PageOperations {
                     ((TextView) hashelements.get("testView")).setText(k);
                 }
             });
+        } else if (action.equals("searchfriend")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_406_searchfriend.showRequestfriends((((EditText) hashelements.get("searchfriendsInput")).getText()).toString());
+                }
+            });
         }
     }
 
@@ -565,7 +572,14 @@ public class PageOperations {
                     pushNewPage(R.array.page_401_friendship, null);
                 }
             });
-        } else if (action.equals("request")) {
+        } else if (action.equals("requestfriend")) {
+                        bt.setOnClickListener(new View.OnClickListener() {
+                              @Override
+                               public void onClick(View view) {
+                                  pushNewPage(R.array.page_406_searchfriend, null);
+                                    }
+                            });
+                    }else if (action.equals("request")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
