@@ -420,6 +420,13 @@ public class PageOperations {
                     ((TextView) hashelements.get("testView")).setText(k);
                 }
             });
+        } else if (action.equals("searchfriend")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_406_searchfriend.showRequestfriends((((EditText) hashelements.get("searchfriendsInput")).getText()).toString());
+                }
+            });
         }
     }
 
@@ -544,7 +551,14 @@ public class PageOperations {
                     pushNewPage(R.array.page_401_friendship, null);
                 }
             });
-        } else if (action.equals("request")) {
+        } else if (action.equals("requestfriend")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_406_searchfriend, null);
+                }
+            });
+        }else if (action.equals("request")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -712,9 +726,6 @@ public class PageOperations {
             page_106_uploadlogo.loadavatar();
         } else if (code == R.array.page_105_accountinfo) {
             page_105_accountinfo.prepareaccountinfoform();
-        } else if (code == R.array.page_407_profile) {
-            String name=params.get("friendname");
-            page_407_profile.showprofile(name);
         } else if (code == R.array.page_322_newpost) {
             page_322_newpost.preparepostform();
         } else if (code == R.array.page_306_addproductform) {
