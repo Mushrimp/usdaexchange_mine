@@ -230,18 +230,7 @@
         <item>{\"element\":\"Button\",\"value\":\"Notifications\",\"id\":\"socialnetworkView4\", \"clickaction\":\"notification\"}</item>
     </array>
     <array name="page_401_friendship">
-        <item>{\"element\":\"Button\",\"value\":\"Request a friendship\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"friendshipScroll\"}</item>
-    </array>
-    <array name="page_406_searchfriend">
-        <item>{\"element\":\"SearchView\",\"value\":\"Search and request friend...\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
-        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"searchuserScroll\"}</item>
-    </array>
-    <array name="page_407_profile">
-
-        <!--<item>{\"element\":\"TextView\",\"value\":\"Name\",\"id\":\"nameView\"}</item>-->
-        <!--<item>{\"element\":\"Button\",\"value\":\"Add Friend\",\"id\":\"addfriendbutton\", \"clickaction\":\"addFriend\"}</item>-->
     </array>
     <array name="page_412_request">
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"requestScroll\"}</item>
@@ -344,7 +333,10 @@
         <item>{\"element\":\"Button\",\"value\":\"Scan QR\",\"id\":\"scanqrbutton\", \"clickaction\":\"scanQR\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"scanView\"}</item>
     </array>
-
+    <array name="page_407_profile">
+        <item>{\"element\":\"TextView\",\"value\":\"Name\",\"id\":\"nameView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add Friend\",\"id\":\"addfriendbutton\", \"clickaction\":\"addFriend\"}</item>
+    </array>
     <array name="page_777_test">
         <item>{\"element\":\"EditText\",\"value\":\"Input something...?\",\"id\":\"testInput\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"testSpinner\"}</item>
