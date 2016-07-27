@@ -534,6 +534,27 @@ public class PageOperations {
                     pushNewPage(R.array.page_305_productsell, null);
                 }
             });
+        } else if (action.equals("savenameaddress")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_205_nameaddress.saveNameAddressAction();
+                }
+            });
+        } else if (action.equals("savephoneemail")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_206_phoneemail.saveContactAction();
+                }
+            });
+        } else if (action.equals("savemedia")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_207_website.saveWebAction();
+                }
+            });
         }
 
         //social network
@@ -617,7 +638,22 @@ public class PageOperations {
                     pushNewPage(R.array.page_112_deleteaccount, null);
                 }
             });
+        } else if (action.equals("savenotificationsettings")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_107_setnotification.savenotificationsettings();
+                }
+            });
+        } else if (action.equals("savesocialsettings")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_108_socialnetwork.savesocialsettings();
+                }
+            });
         }
+
         //Account and Settings
         else if (action.equals("searchdistance")) {
             bt.setOnClickListener(new View.OnClickListener() {
@@ -712,6 +748,16 @@ public class PageOperations {
             page_106_uploadlogo.loadavatar();
         } else if (code == R.array.page_105_accountinfo) {
             page_105_accountinfo.prepareaccountinfoform();
+        } else if (code == R.array.page_107_setnotification) {
+            page_107_setnotification.preparenotifications();
+        } else if (code == R.array.page_108_socialnetwork) {
+            page_108_socialnetwork.preparesocial();
+        } else if (code == R.array.page_205_nameaddress) {
+            page_205_nameaddress.preparevendorprofileform();
+        } else if (code == R.array.page_206_phoneemail) {
+            page_206_phoneemail.preparevendorcontactform();
+        } else if (code == R.array.page_207_website) {
+            page_207_website.preparevendorwebform();
         } else if (code == R.array.page_407_profile) {
             String name=params.get("friendname");
             page_407_profile.showprofile(name);
