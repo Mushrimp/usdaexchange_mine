@@ -94,7 +94,7 @@ public class PageOperations {
         toolbar.removeAllViewsInLayout();
         switch (code) {
             case (R.array.page_001_front): {
-                toolbar.setGravity(Gravity.LEFT);
+                toolbar.setGravity(Gravity.CENTER);
                 ImageView iv = new ImageView(context);
                 iv.setImageResource(R.drawable.fme_header_white);
                 iv.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
@@ -103,7 +103,6 @@ public class PageOperations {
                 Log.e("Toolbar Height", "" + toolbar.getHeight());
                 Log.e("iv width", "" + iv.getWidth());
                 Log.e("iv height", "" + iv.getHeight());
-                iv.setX(width / 2 - toolbar.getHeight() * 80 / 37);
                 break;
             }
             case (R.array.page_102_login): {
@@ -113,7 +112,7 @@ public class PageOperations {
                 break;
             }
         }
-        setupUIinner(context.findViewById(R.id.appbar));
+        hideKey(context.findViewById(R.id.appbar));
     }
 
     public static void generateLayout(int code, LinearLayout layout, Hashtable<String, String> params) {
@@ -906,7 +905,32 @@ public class PageOperations {
             }
         }
     }
+    private static void hideKey(View view) {
 
+        //Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+
+            view.setOnTouchListener(new View.OnTouchListener() {
+
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(context);
+                    return false;
+                }
+
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+
+                View innerView = ((ViewGroup) view).getChildAt(i);
+
+                hideKey(innerView);
+            }
+        }
+    }
     public static void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);

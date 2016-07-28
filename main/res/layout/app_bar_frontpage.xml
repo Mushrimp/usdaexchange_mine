@@ -22,21 +22,26 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/toolbarLayout">
-                <ImageView
-                    android:id="@+id/toolbar_logo"
-                    android:src="@drawable/fme_header_white"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:scaleType="centerInside"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_gravity="center" />
+                android:orientation="horizontal">
 
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/camerabutton"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_menu_camera"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/camerabutton"
+                    android:id="@+id/toolbarLayout">
+
+                </RelativeLayout>
             </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>
-
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_frontpage"/>
