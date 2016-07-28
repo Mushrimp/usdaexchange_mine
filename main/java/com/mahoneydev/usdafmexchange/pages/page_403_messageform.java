@@ -37,7 +37,8 @@ public class page_403_messageform  extends PageOperations {
             protected void executeSuccess(JSONObject result) throws JSONException {
                 TableLayout tl = (TableLayout) hashelements.get("messageformScrollTable");
                 tl.removeAllViews();
-                JSONArray allmessageforms = result.getJSONArray("results");
+                JSONObject result2=result.getJSONObject("results");
+                JSONArray allmessageforms = result2.getJSONArray("results");
                 for (int i = 0; i < allmessageforms.length(); i++) {
                     JSONObject messageform = allmessageforms.getJSONObject(i);
                     TableRow lv = new TableRow(context);
@@ -70,7 +71,7 @@ public class page_403_messageform  extends PageOperations {
 
                     //name
                     TextView name = new TextView(context);
-                    String name1 = messageform.getString("from");
+                    String name1 = messageform.getString("sender_name");
                     if (name1.contains("&")&& name1.contains(";")) {
                         String[] namesplit1, namesplit2;
                         namesplit1 = name1.split("&");
@@ -118,6 +119,6 @@ public class page_403_messageform  extends PageOperations {
                 }
                 setupUI(playout);
             }
-        }.execute(AppCodeResources.postUrl("usdafriendship", "messages_list_all_byuser", ht));
+        }.execute(AppCodeResources.postUrl("usdafriendship", "messages_check_and_get_thread_messages", ht));
     }
 }

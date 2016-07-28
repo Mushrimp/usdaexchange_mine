@@ -44,7 +44,7 @@
         </item>
         <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"passwordView\"}</item>
         <item>
-            {\"element\":\"EditText\",\"value\":\"\",\"id\":\"emailInput\",\"next\":\"displayInput\"}
+            {\"element\":\"EditText\",\"value\":\"\",\"id\":\"emailInput\",\"next\":\"displayInput\",\"inputtype\":\"email\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\"Display name:\",\"id\":\"displayView\"}</item>
         <item>
@@ -288,6 +288,7 @@
         <item>{\"element\":\"Title\",\"value\":\"Request New Friend\",\"id\":\"searchfriendView\"}</item>
         <item>{\"element\":\"SearchView\",\"value\":\"Search and request friend...\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"searchuserScroll\"}</item>
+
     </array>
     <array name="page_412_request">
         <item>{\"element\":\"Title\",\"value\":\"Requests\",\"id\":\"requestView\"}</item>
@@ -299,10 +300,24 @@
     </array>
     <array name="page_403_messageform">
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageformScroll\"}</item>
+
     </array>
     <array name="page_404_notification">
         <item>{\"element\":\"Title\",\"value\":\"Notifications\",\"id\":\"notificationView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"notificationScroll\"}</item>
+    </array>
+    <array name="page_408_sendmessage">
+        <item>{\"element\":\"TextView\",\"value\":\"Recipient(s)\",\"id\":\"recipientView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"recipientname\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"recipientid\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Subject\",\"id\":\"subjectView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"subjectInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Content\",\"id\":\"contentView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"contentInput\",\"inputtype\":\"multiple\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Send\",\"id\":\"sendButton\", \"clickaction\":\"sendmessageAction\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errormessageView\"}</item>
     </array>
 
     <!--account settings-->
@@ -330,13 +345,13 @@
     <array name="page_105_accountinfo">
         <item>{\"element\":\"Title\",\"value\":\"User Account Info\",\"id\":\"infoView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Current password:\",\"id\":\"currentpassView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"currentpassInput\",\"next\":\"newpassInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"currentpassInput\",\"next\":\"newpassInput\",\"inputtype\":\"textPassword\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"New password:\",\"id\":\"newpassView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"newpassInput\",\"next\":\"confirmpassInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Leave it blank if you don\'t change it\",\"id\":\"newpassInput\",\"next\":\"confirmpassInput\",\"inputtype\":\"textPassword\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Confirm new password:\",\"id\":\"confirmpassView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"Re-enter the new password\",\"id\":\"confirmpassInput\",\"next\":\"emailInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"emailView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Enter your email\",\"id\":\"emailInput\",\"next\":\"displaynameInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Enter your email\",\"id\":\"emailInput\",\"next\":\"displaynameInput\",\"inputtype\":\"email\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Display name:\",\"id\":\"displaynameView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"Enter your display name\",\"id\":\"displaynameInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>

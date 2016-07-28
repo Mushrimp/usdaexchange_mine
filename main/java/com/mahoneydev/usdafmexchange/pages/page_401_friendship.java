@@ -83,6 +83,17 @@ public class page_401_friendship extends PageOperations {
                     message_bt.setTextSize(width / 55);
                     message_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
                     rl_in.addView(message_bt);
+                    final String id=friend.getString("ID");
+                    final String displayname=friend.getString("displayname");
+                    message_bt.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Hashtable<String,String> params=new Hashtable<String, String>();
+                            params.put("recipientsid",id);
+                            params.put("recipientsname",displayname);
+                            pushNewPage(R.array.page_408_sendmessage,params);
+                        }
+                    });
                     ll.addView(rl_in);
 
                     //Business Name
