@@ -427,7 +427,7 @@ public class Frontpage extends AppCompatActivity
                 Hashtable<String,String> ht=new Hashtable<String, String>();
                 String friendname=contents.replace(AppCodeResources.FRIEND_URL_PRE,"");
                 ht.put("friendname", friendname);
-                PageOperations.pushNewPage(R.array.page_407_profile,ht);
+                PageOperations.pushNewPage(R.array.page_016_vendorpage,ht);
 //                new FetchTask(){
 //                    @Override
 //                    protected void onPostExecute(JSONObject result)

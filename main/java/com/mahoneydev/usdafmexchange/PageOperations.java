@@ -39,6 +39,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.mahoneydev.usdafmexchange.pages.*;
@@ -163,7 +164,25 @@ public class PageOperations {
                         }
                         layout.addView(tv);
 
-                    } else if (element.equals("EditText")) {
+                    }
+                    else if (element.equals("Title")){
+                        Log.e("a","aa");
+                        RelativeLayout toolbar = new RelativeLayout(context);
+                        toolbar.removeAllViewsInLayout();
+                        toolbar.setGravity(Gravity.CENTER);
+                        Log.e("a","bb");
+                        TextView tb = new TextView(context);
+                        tb.setTextAppearance(context,R.style.Normal);
+                        tb.setTextColor(Color.WHITE);
+                        Log.e("a","cc");
+                        tb.setText(jsonelements.getString("value"));
+                        toolbar.addView(tb);
+                        Log.e("a","dd");
+                        hideKey(context.findViewById(R.id.toolbarLayout));
+                        Log.e("a","ee");
+
+                    }
+                    else if (element.equals("EditText")) {
                         EditText et = new EditText(context);
                         et.setHint(jsonelements.getString("value"));
                         et.setTextSize(width / 45);
@@ -827,9 +846,6 @@ public class PageOperations {
             page_206_phoneemail.preparevendorcontactform();
         } else if (code == R.array.page_207_website) {
             page_207_website.preparevendorwebform();
-        } else if (code == R.array.page_407_profile) {
-            String name=params.get("friendname");
-            page_407_profile.showprofile(name);
         } else if (code == R.array.page_322_newpost) {
             page_322_newpost.preparepostform();
         } else if (code == R.array.page_306_addproductform) {
