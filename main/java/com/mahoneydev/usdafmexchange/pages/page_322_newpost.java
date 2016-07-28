@@ -16,6 +16,7 @@ import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.MatchAdapter;
 import com.mahoneydev.usdafmexchange.PageOperations;
+import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.SpinnerElement;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
 
@@ -72,7 +73,8 @@ public class page_322_newpost extends PageOperations {
                 }
 
                 ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                        android.R.layout.simple_spinner_item, arraySpinner);
+                        R.layout.simple_spinner_item, arraySpinner);
+                adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
                 ((Spinner) hashelements.get("productSpinner")).setAdapter(adapter);
                 hashvalues = new Hashtable<String, String>();
                 JSONArray results = result.getJSONArray("result");
