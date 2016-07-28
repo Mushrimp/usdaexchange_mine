@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -90,11 +91,11 @@ public class PageOperations {
             context.switchAvatar(exist);
     }
 
-    public static void generateTitle(int code, RelativeLayout toolbar) {
+    public static void generateTitled(int code, RelativeLayout toolbar) {
         toolbar.removeAllViewsInLayout();
+        toolbar.setGravity(Gravity.CENTER);
         switch (code) {
             case (R.array.page_001_front): {
-                toolbar.setGravity(Gravity.CENTER);
                 ImageView iv = new ImageView(context);
                 iv.setImageResource(R.drawable.fme_header_white);
                 iv.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
@@ -107,7 +108,17 @@ public class PageOperations {
             }
             case (R.array.page_102_login): {
                 TextView tv = new TextView(context);
-                tv.setText("Login");
+                tv.setTextAppearance(context,R.style.Normal);
+                tv.setTextColor(Color.WHITE);
+                tv.setText("Sign In");
+                toolbar.addView(tv);
+                break;
+            }
+            default:{
+                TextView tv = new TextView(context);
+                tv.setTextAppearance(context,R.style.Normal);
+                tv.setTextColor(Color.WHITE);
+                tv.setText("SB");
                 toolbar.addView(tv);
                 break;
             }
@@ -143,18 +154,44 @@ public class PageOperations {
                         }
                         hashelements.put(jsonelements.getString("id"), tv);
                         tv.setVisibility(View.INVISIBLE);
+                        if (jsonelements.getString("id").equals("forgotView")){
+                            tv.setGravity(Gravity.RIGHT);
+                            tv.setTextAppearance(context,R.style.Date);
+                            tv.setTextSize(width/55);
+                            tv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    pushNewPage(R.array.page_103_retrievepin, null);
+                                }
+                            });
+                        }else if(jsonelements.getString("id").equals("newView")){
+                            tv.setTextAppearance(context,R.style.Normal);
+                            tv.setTextSize(width/55);
+                        }else if(jsonelements.getString("id").equals("resetView")){
+                            tv.setTextAppearance(context,R.style.Normal);
+                        }
                         layout.addView(tv);
 
                     } else if (element.equals("EditText")) {
                         EditText et = new EditText(context);
                         et.setHint(jsonelements.getString("value"));
                         et.setTextSize(width / 45);
+                        et.setTextAppearance(context,R.style.Normal);
+                        et.setSingleLine();
                         if (jsonelements.has("inputtype")) {
                             String type = jsonelements.getString("inputtype");
-                            if (type.equals("textPassword"))
-                                et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            if (type.equals("textPassword")) {
+                               et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                                et.setTypeface(Typeface.DEFAULT);
+                                et.setTransformationMethod(new PasswordTransformationMethod());
+                            }
                             else if (type.equals("number"))
                                 et.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                            else if (type.equals("send")) {
+                                et.setImeOptions(EditorInfo.IME_ACTION_SEND);
+                            }
+                            else if (type.equals("email"))
+                                et.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                         }
                         if (jsonelements.has("next")) {
                             final String thisid = jsonelements.getString("id");
@@ -637,6 +674,13 @@ public class PageOperations {
                     pushNewPage(R.array.page_404_notification, null);
                 }
             });
+        } else if (action.equals("sendmessageAction")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    page_408_sendmessage.sendmessage();
+                }
+            });
         }
 
         //account and setting
@@ -826,7 +870,9 @@ public class PageOperations {
             page_402_message.showmessages();
         } else if (code == R.array.page_403_messageform) {
             String id = params.get("id");
-            page_403_messageform.showmessageform(id);
+            page_403_messageform.showmessageform(id);}
+        else if (code == R.array.page_408_sendmessage) {
+            page_408_sendmessage.preparemessage(params);
         } else if (code == R.array.page_404_notification) {
             page_404_notification.shownotifications();
         } else if (code == R.array.page_309_farmermarket) {
