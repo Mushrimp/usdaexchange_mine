@@ -11,15 +11,8 @@
             android:id="@+id/nav_Login"
             android:title="Sign In" />
         <item
-            android:id="@+id/about_us"
-            android:title="About Us" />
-        <item
-            android:id="@+id/contact_us"
-            android:title="Contact Us" />
-
-        <item
-            android:id="@+id/fm_dir"
-            android:title="USDA FM Dir" />
+            android:id="@+id/service"
+            android:title="Customer Service" />
     </group>
     <group
         android:id="@+id/login_vendor"

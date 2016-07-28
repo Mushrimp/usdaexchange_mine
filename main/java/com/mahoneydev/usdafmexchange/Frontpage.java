@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -196,18 +202,14 @@ public class Frontpage extends AppCompatActivity
             UserFileUtility.clean_userinfo();
             UserFileUtility.save_userinfo();
             if (((TextView)findViewById(R.id.username_menu_display)) != null) {
-                ((TextView)findViewById(R.id.username_menu_display)).setText("");
+                ((TextView) findViewById(R.id.username_menu_display)).setText("");
             }
             switchMenu(R.id.nologin);
             switchAvatar(false);
         }
-        else if (id== R.id.about_us)
+        else if (id== R.id.service)
         {
-            PageOperations.squashNewPage(R.array.page_003_aboutus,null);
-        }
-        else if (id== R.id.contact_us)
-        {
-            PageOperations.squashNewPage(R.array.page_005_contactus,null);
+            PageOperations.squashNewPage(R.array.page_non_service,null);
         }
         else if (id == R.id.post_price)
         {
@@ -292,13 +294,13 @@ public class Frontpage extends AppCompatActivity
     {
         if (exist)
         {
-                    Hashtable<String,String> ht=new Hashtable<String, String>();
-                    String token_s=UserFileUtility.get_token();
-                    ht.put("os", "Android");
-                    ht.put("token",token_s);
-                    new FetchTask(){
-                        @Override
-                        protected void executeSuccess(JSONObject result) throws JSONException {
+            Hashtable<String,String> ht=new Hashtable<String, String>();
+            String token_s=UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token",token_s);
+            new FetchTask(){
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
                             String imageurl=result.getString("avatar_url");
                             imageurl=imageurl.replace("\\","");
                             ImageView logo=(ImageView) findViewById(R.id.uavatar);
@@ -307,16 +309,25 @@ public class Frontpage extends AppCompatActivity
                             li.execute(imageurl);
                             if (logo!=null)
                                 logo.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
-                                        switchMenuChecked(R.id.account_vendor);
-                                        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                                        if (drawer!=null)
-                                            drawer.closeDrawer(GravityCompat.START);
-                                    }
+                                @Override
+                                public void onClick(View v) {
+                                    PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
+                                    switchMenuChecked(R.id.account_vendor);
+                                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                                    if (drawer!=null)
+                                        drawer.closeDrawer(GravityCompat.START);
+                                }
                                 });
-
+                    String username=UserFileUtility.get_username();
+                    TextView name = (TextView)findViewById(R.id.username_menu_display);
+                    String hello = "Hello,\n"+username;
+                    SpannableString s = new SpannableString(hello);
+                    s.setSpan(new RelativeSizeSpan(0.9f),0,7,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    s.setSpan(new StyleSpan(Typeface.NORMAL),0,7,Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    int end = 7+username.length();
+                    s.setSpan(new RelativeSizeSpan(1f),7,end,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    s.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),7,end,Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    name.setText(s);
                 }
 
             }.execute(AppCodeResources.postUrl("usdamobile", "get_avatarurl", ht));
@@ -325,7 +336,7 @@ public class Frontpage extends AppCompatActivity
         {
             ImageView logo=(ImageView) findViewById(R.id.uavatar);
             if (logo != null) {
-                logo.setImageResource(R.drawable.ic_menu_camera);
+                logo.setImageResource(R.drawable.blank_profile);
                 logo.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -336,6 +347,14 @@ public class Frontpage extends AppCompatActivity
                     }
                 });
             }
+            TextView text = (TextView)findViewById(R.id.username_menu_display);
+            String hi = "Welcome,\nPlease Sign In.";
+            final SpannableString ss = new SpannableString(hi);
+            ss.setSpan(new RelativeSizeSpan(0.9f),0,9,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new StyleSpan(Typeface.NORMAL),0,9,Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            ss.setSpan(new RelativeSizeSpan(1f),9,24,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            ss.setSpan(new StyleSpan(android.graphics.Typeface.BOLD_ITALIC),9,24,Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            text.setText(ss);
             return;
         }
     }
