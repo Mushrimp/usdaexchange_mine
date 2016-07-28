@@ -92,9 +92,9 @@ public class PageOperations {
 
     public static void generateTitle(int code, RelativeLayout toolbar) {
         toolbar.removeAllViewsInLayout();
+        toolbar.setGravity(Gravity.CENTER);
         switch (code) {
             case (R.array.page_001_front): {
-                toolbar.setGravity(Gravity.CENTER);
                 ImageView iv = new ImageView(context);
                 iv.setImageResource(R.drawable.fme_header_white);
                 iv.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
@@ -107,7 +107,9 @@ public class PageOperations {
             }
             case (R.array.page_102_login): {
                 TextView tv = new TextView(context);
-                tv.setText("Login");
+                tv.setTextAppearance(context,R.style.Normal);
+                tv.setTextColor(Color.WHITE);
+                tv.setText("Sign In");
                 toolbar.addView(tv);
                 break;
             }
@@ -143,6 +145,22 @@ public class PageOperations {
                         }
                         hashelements.put(jsonelements.getString("id"), tv);
                         tv.setVisibility(View.INVISIBLE);
+                        if (jsonelements.getString("id").equals("forgotView")){
+                            tv.setGravity(Gravity.RIGHT);
+                            tv.setTextAppearance(context,R.style.Date);
+                            tv.setTextSize(width/55);
+                            tv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    pushNewPage(R.array.page_103_retrievepin, null);
+                                }
+                            });
+                        }else if(jsonelements.getString("id").equals("newView")){
+                            tv.setTextAppearance(context,R.style.Normal);
+                            tv.setTextSize(width/55);
+                        }else if(jsonelements.getString("id").equals("resetView")){
+                            tv.setTextAppearance(context,R.style.Normal);
+                        }
                         layout.addView(tv);
 
                     } else if (element.equals("EditText")) {

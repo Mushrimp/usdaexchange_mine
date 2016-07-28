@@ -8,14 +8,22 @@
             {\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void1View\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Forgot Password?\",\"id\":\"forgotView\"}</item>
         <item>
-            {\"element\":\"Button\",\"value\":\"Submit\",\"id\":\"loginsubmitbutton\",\"clickaction\":\"loginSubmit\"}
+            {\"element\":\"Button\",\"value\":\"Sign in\",\"id\":\"loginsubmitbutton\",\"clickaction\":\"loginSubmit\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"New to USDA Farmers Market Exchange?\",\"id\":\"newView\"}</item>
         <item>
-            {\"element\":\"Button\",\"value\":\"Sign Up\",\"id\":\"signupbutton\",\"clickaction\":\"signUp\"}
+            {\"element\":\"Button\",\"value\":\"Join us\",\"id\":\"signupbutton\",\"clickaction\":\"signUp\"}
         </item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"loginErrorView\"}</item>
+    </array>
+    <array name="page_103_retrievepin">
+        <item>{\"element\":\"TextView\",\"value\":\"To reset your password, please enter te email address you used to sign in to this system.\",\"id\":\"resetView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"Please enter your email\",\"id\":\"reemailInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Send\",\"id\":\"resendbutton\",\"clickaction\":\"sendemail\"}</item>
     </array>
     <array name="page_104_logout">
         <item>{\"element\":\"TextView\",\"value\":\"Log out!\",\"id\":\"logoutView\"}</item>
