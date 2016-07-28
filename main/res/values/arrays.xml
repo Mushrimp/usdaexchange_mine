@@ -72,17 +72,35 @@
     <array name="page_009_noconnection">
         <item>{\"element\":\"TextView\",\"value\":\"Network is not available\",\"id\":\"noconnectionView\"}</item>
     </array>
+
+    <!--Customer Service-->
+    <array name="page_non_service">
+        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"postpriceView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"About us\",\"id\":\"serviceView1\", \"clickaction\":\"about\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Contact us\",\"id\":\"serviceView2\", \"clickaction\":\"contact\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Privacy and term of use\",\"id\":\"serviceView3\", \"clickaction\":\"privacy\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Help center\",\"id\":\"serviceView4\", \"clickaction\":\"help\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"USDA Farmers Market Dirctory\",\"id\":\"serviceView4\", \"clickaction\":\"fmdir\"}</item>
+    </array>
     <array name="page_003_aboutus">
         <item>{\"element\":\"TextView\",\"value\":\"About Us\",\"id\":\"aboutusView\"}</item>
     </array>
     <array name="page_005_contactus">
         <item>{\"element\":\"TextView\",\"value\":\"Contact Us\",\"id\":\"contactusView\"}</item>
     </array>
+    <array name="page_006_privacy">
+        <item>{\"element\":\"TextView\",\"value\":\"Privacy and term of use\",\"id\":\"privacyView\"}</item>
+    </array>
     <array name="page_130_helpcenter">
         <item>{\"element\":\"TextView\",\"value\":\"Help Center\",\"id\":\"helpcenterView\"}</item>
     </array>
-    <array name="page_006_privacy">
-        <item>{\"element\":\"TextView\",\"value\":\"Privacy and term of use\",\"id\":\"privacyView\"}</item>
+    <array name="page_fmdir">
+        <item>{\"element\":\"TextView\",\"value\":\"fm dir\",\"id\":\"fmdirView\"}</item>
     </array>
 
     <!--post price-->
@@ -230,14 +248,19 @@
         <item>{\"element\":\"Button\",\"value\":\"Notifications\",\"id\":\"socialnetworkView4\", \"clickaction\":\"notification\"}</item>
     </array>
     <array name="page_401_friendship">
-                <item>{\"element\":\"Button\",\"value\":\"Request a friendship\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
-               <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Request a friendship\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"friendshipScroll\"}</item>
     </array>
-        <array name="page_406_searchfriend">
-           <item>{\"element\":\"SearchView\",\"value\":\"Search and request friend...\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
-            <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"searchuserScroll\"}</item>
-       </array>
+    <array name="page_406_searchfriend">
+        <item>{\"element\":\"SearchView\",\"value\":\"Search and request friend...\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"searchuserScroll\"}</item>
+    </array>
+    <array name="page_407_profile">
+
+        <!--<item>{\"element\":\"TextView\",\"value\":\"Name\",\"id\":\"nameView\"}</item>-->
+        <!--<item>{\"element\":\"Button\",\"value\":\"Add Friend\",\"id\":\"addfriendbutton\", \"clickaction\":\"addFriend\"}</item>-->
+    </array>
     <array name="page_412_request">
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"requestScroll\"}</item>
     </array>
@@ -350,10 +373,7 @@
         <item>{\"element\":\"Button\",\"value\":\"Scan QR\",\"id\":\"scanqrbutton\", \"clickaction\":\"scanQR\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"scanView\"}</item>
     </array>
-    <array name="page_407_profile">
-        <item>{\"element\":\"TextView\",\"value\":\"Name\",\"id\":\"nameView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add Friend\",\"id\":\"addfriendbutton\", \"clickaction\":\"addFriend\"}</item>
-    </array>
+
     <array name="page_777_test">
         <item>{\"element\":\"EditText\",\"value\":\"Input something...?\",\"id\":\"testInput\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"testSpinner\"}</item>

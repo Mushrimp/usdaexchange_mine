@@ -467,6 +467,44 @@ public class PageOperations {
             });
         }
 
+        //customer service
+        else if (action.equals("about")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_003_aboutus, null);
+                }
+            });
+        } else if (action.equals("contact")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_005_contactus, null);
+                }
+            });
+        } else if (action.equals("privacy")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_006_privacy, null);
+                }
+            });
+        } else if (action.equals("help")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_130_helpcenter, null);
+                }
+            });
+        } else if (action.equals("fmdir")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_fmdir, null);
+                }
+            });
+        }
+
         //post price
         else if (action.equals("newpost")) {
             bt.setOnClickListener(new View.OnClickListener() {
@@ -573,13 +611,13 @@ public class PageOperations {
                 }
             });
         } else if (action.equals("requestfriend")) {
-                        bt.setOnClickListener(new View.OnClickListener() {
-                              @Override
-                               public void onClick(View view) {
-                                  pushNewPage(R.array.page_406_searchfriend, null);
-                                    }
-                            });
-                    }else if (action.equals("request")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_406_searchfriend, null);
+                }
+            });
+        }else if (action.equals("request")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

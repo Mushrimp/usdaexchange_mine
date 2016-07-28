@@ -81,7 +81,7 @@ public class page_001_front extends PageOperations {
                     TextView pn = new TextView(context);
                     pn.setText(jpost.getString("productname"));
                     pn.setTextAppearance(context, R.style.Normal);
-                    pn.setTextSize(width / 40);
+                    pn.setTextSize(width / 45);
                     ll.addView(pn);
                     //Vendor
                     TextView vendor = new TextView(context);
