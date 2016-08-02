@@ -75,7 +75,7 @@ public class page_205_nameaddress extends PageOperations{
         String busname= ((EditText) hashelements.get("busnameInput")).getText().toString();
         String busstate=((SpinnerElement)((Spinner)hashelements.get("busstateSpinner")).getSelectedItem()).getValue();
         String busstreet=((EditText) hashelements.get("busaddressInput")).getText().toString();
-        String buscity=((EditText) hashelements.get("buscityInput")).getText().toString();
+        String buscity=((EditText) hashelements.get("buscityInp ut")).getText().toString();
         String buszip=((EditText) hashelements.get("buszipcodeInput")).getText().toString();
         TextView etv=((TextView)hashelements.get("erroraddressView"));
         boolean flag=true;

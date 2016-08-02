@@ -239,7 +239,35 @@
     </array>
     <array name="page_309_farmermarket">
         <item>{\"element\":\"Title\",\"value\":\"List of Farmers Market I Sell\",\"id\":\"farmermarketView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add a market\",\"id\":\"addmarketButton\", \"clickaction\":\"addmarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
+    </array>
+    <array name="page_311_addmarketform">
+        <item>{\"element\":\"Title\",\"value\":\"Add Market\",\"id\":\"addproductView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"Select a State\",\"id\":\"marketstateSpinner\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"Search Market Name\",\"id\":\"searchmarket\",\"clickaction\":\"searchmarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Can\'t find the market\",\"id\":\"cantfindmarketButton\", \"clickaction\":\"cantfindmarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"addmarketScroll\"}</item>
+    </array>
+    <array name="page_310_addnewmarket">
+        <item>{\"element\":\"Title\",\"value\":\"Add New Market\",\"id\":\"addnewmarketView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Market name:\",\"id\":\"newmarketnameView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. Farmers Market\",\"id\":\"marketnameInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Market contact email:\",\"id\":\"productnameView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. xxxxx@xxx.xxx\",\"id\":\"emailInput\",\"inputtype\":\"email\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Street:\",\"id\":\"streetView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. No.1 Main St.\",\"id\":\"streetInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"City:\",\"id\":\"cityView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. New York\",\"id\":\"cityInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"State:\",\"id\":\"stateView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"Select a State\",\"id\":\"newmarketstateSpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Zip code:\",\"id\":\"zipcodeView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"eg. 12345\",\"id\":\"zipcodeInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewmarketButton\", \"clickaction\":\"saveproduct\"}</item>
     </array>
     <array name="page_305_productsell">
         <item>{\"element\":\"Title\",\"value\":\"List of Products I Sold\",\"id\":\"productsellView\"}</item>
@@ -261,7 +289,6 @@
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"saveproductButton\", \"clickaction\":\"saveproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"producterrorView\"}</item>
-
     </array>
 
     <!--social network-->
@@ -307,6 +334,7 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"notificationScroll\"}</item>
     </array>
     <array name="page_408_sendmessage">
+        <item>{\"element\":\"Title\",\"value\":\"New Message\",\"id\":\"newmessageView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Recipient(s)\",\"id\":\"recipientView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"recipientname\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"recipientid\"}</item>
@@ -402,7 +430,6 @@
     </array>
     <array name="page_112_deleteaccount">
         <item>{\"element\":\"Title\",\"value\":\"Delete Account\",\"id\":\"deleteView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Delete account\",\"id\":\"deleteaccontView\"}</item>
     </array>
     <array name="page_101_signasvendor">
         <item>{\"element\":\"Title\",\"value\":\"Sign as a Vendor\",\"id\":\"signvendorView\"}</item>
@@ -411,21 +438,53 @@
     <!--Search Preference-->
     <array name="page_121_searchdistance">
         <item>{\"element\":\"Title\",\"value\":\"Search Distance\",\"id\":\"searchdistanceView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Search distance\",\"id\":\"searchdistenceView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Preferred search radius\",\"id\":\"searchdistenceView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"distanceSpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"distanceButton\", \"clickaction\":\"distance\"}</item>
     </array>
     <array name="page_122_preferproduct">
         <item>{\"element\":\"Title\",\"value\":\"Preferred Products\",\"id\":\"preferproductView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addpreproductButton\", \"clickaction\":\"addpreproduct\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"preferproductScroll\"}</item>
+    </array>
+    <array name="page_122_preferproduct_addnew">
+        <item>{\"element\":\"Title\",\"value\":\"Add Preferred Product\",\"id\":\"addnewproductView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"Select a category\",\"id\":\"categorySpinner\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"Search by category or product name\",\"id\":\"searchproducts\",\"clickaction\":\"searchproduct\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewproductButton\", \"clickaction\":\"addnewproduct\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productScroll\"}</item>
     </array>
     <array name="page_123_prefervendor">
         <item>{\"element\":\"Title\",\"value\":\"Preferred Vendors\",\"id\":\"prefervendorView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addprevendorButton\", \"clickaction\":\"addprevendor\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"prefervendorScroll\"}</item>
+    </array>
+    <array name="page_123_prefervendor_addnew">
+        <item>{\"element\":\"Title\",\"value\":\"Add Preferred Vendor\",\"id\":\"addnewvendorView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"Select a state\",\"id\":\"vendorstateSpinner\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"Search by vendor name or city\",\"id\":\"searchvendor\",\"clickaction\":\"searchvendor\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewvendorButton\", \"clickaction\":\"addnewvendor\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
     </array>
     <array name="page_124_prefermarket">
         <item>{\"element\":\"Title\",\"value\":\"Preferred Farmers Markets\",\"id\":\"prefermarketView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addpremarketButton\", \"clickaction\":\"addpremarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"prefermarketScroll\"}</item>
     </array>
-
+    <array name="page_124_prefermarket_addnew">
+        <item>{\"element\":\"Title\",\"value\":\"Add Preferred Market\",\"id\":\"addnewmarketView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"Select a state\",\"id\":\"marketstateSpinner\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"Search by market name or city\",\"id\":\"searchmarket\",\"clickaction\":\"searchmarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewmarketButton\", \"clickaction\":\"addnewmarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+    </array>
 
 
     <array name="page_199_scanqr">

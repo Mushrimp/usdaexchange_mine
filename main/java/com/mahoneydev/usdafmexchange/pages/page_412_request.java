@@ -2,14 +2,18 @@ package com.mahoneydev.usdafmexchange.pages;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.LoadImage;
 import com.mahoneydev.usdafmexchange.PageOperations;
+import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
 
 import org.json.JSONArray;
@@ -37,14 +41,45 @@ public class page_412_request extends PageOperations {
                 if (count == 0) {
                     Toast.makeText(context, "You have no requests.", Toast.LENGTH_SHORT).show();
                 } else {
-                    //Need to be finished
                     for (int i = 0; i < allrequests.length(); i++) {
                         JSONObject request = allrequests.getJSONObject(i);
                         TableRow lv = new TableRow(context);
                         lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height / 5));
 
+                        //Logo
+                        ImageView logo = new ImageView(context);
+                        String vendorlogohtml = request.getString("avatar");
+                        int urlstart = vendorlogohtml.indexOf("src=\"") + "src=\"".length();
+                        int urlend = urlstart;
+                        for (int j = urlstart; vendorlogohtml.charAt(j) != '\"'; j++) {
+                            urlend = j;
+                        }
+                        String vendorlogourl = vendorlogohtml.substring(urlstart, urlend + 1);
+                        LoadImage li = new LoadImage();
+                        li.img = logo;
+                        li.execute(vendorlogourl);
+                        logo.setLayoutParams(new TableRow.LayoutParams(0, height / 5, 0.3f));
+                        lv.addView(logo);
+
+                        LinearLayout ll_bl = new LinearLayout(context);
+                        ll_bl.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.04f));
+                        lv.addView(ll_bl);
+
+                        //Name
                         LinearLayout ll = new LinearLayout(context);
                         ll.setOrientation(LinearLayout.VERTICAL);
+
+                        TextView busname = new TextView(context);
+                        busname.setText(request.getString("businessname"));
+                        busname.setTextAppearance(context, R.style.Normal);
+                        busname.setTextSize(width/45);
+                        ll.addView(busname);
+
+                        TextView disname = new TextView(context);
+                        disname.setText("("+request.getString("displayname")+")");
+                        disname.setTextAppearance(context, R.style.Normal);
+                        disname.setTextSize(width/50);
+                        ll.addView(disname);
 
                         ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                         lv.addView(ll);

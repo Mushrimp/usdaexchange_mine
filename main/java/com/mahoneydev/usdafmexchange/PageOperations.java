@@ -1,5 +1,6 @@
 package com.mahoneydev.usdafmexchange;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.ActivityNotFoundException;
@@ -175,7 +176,6 @@ public class PageOperations {
 
                     }
                     else if (element.equals("Title")){
-                        Log.e("a","aa");
                         RelativeLayout toolbar = new RelativeLayout(context);
                         toolbar.removeAllViewsInLayout();
                         toolbar.setGravity(Gravity.CENTER);
@@ -483,11 +483,15 @@ public class PageOperations {
                 }
             });
         }
+        else if (action.equals("searchproduct")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_122_preferproduct_addnew.searchpreproduct((((EditText) hashelements.get("searchproductsInput")).getText()).toString());
+                }
+            });
+        }
     }
-
-
-
-
 
 
 
@@ -627,14 +631,35 @@ public class PageOperations {
                     pushNewPage(R.array.page_309_farmermarket, null);
                 }
             });
-        } else if (action.equals("productsell")) {
+        } else if (action.equals("addmarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_311_addmarketform, null);
+                }
+            });
+        }else if (action.equals("cantfindmarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_310_addnewmarket, null);
+                }
+            });
+        }else if (action.equals("productsell")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     pushNewPage(R.array.page_305_productsell, null);
                 }
             });
-        } else if (action.equals("savenameaddress")) {
+        } else if (action.equals("addproduct")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_306_addproductform, null);
+                }
+            });
+        }else if (action.equals("savenameaddress")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -783,6 +808,13 @@ public class PageOperations {
                     pushNewPage(R.array.page_122_preferproduct, null);
                 }
             });
+        }else if (action.equals("addpreproduct")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pushNewPage(R.array.page_122_preferproduct_addnew, null);
+                }
+            });
         } else if (action.equals("prefervendor")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -790,11 +822,25 @@ public class PageOperations {
                     pushNewPage(R.array.page_123_prefervendor, null);
                 }
             });
-        } else if (action.equals("prefermarket")) {
+        } else if (action.equals("addprevendor")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pushNewPage(R.array.page_123_prefervendor_addnew, null);
+                }
+            });
+        }else if (action.equals("prefermarket")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     pushNewPage(R.array.page_124_prefermarket, null);
+                }
+            });
+        }else if (action.equals("addpremarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pushNewPage(R.array.page_124_prefermarket_addnew, null);
                 }
             });
         }
@@ -818,13 +864,6 @@ public class PageOperations {
                 @Override
                 public void onClick(View view) {
                     page_777_test.testAction();
-                }
-            });
-        } else if (action.equals("addproduct")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pushNewPage(R.array.page_306_addproductform, null);
                 }
             });
         } else if (action.equals("publishpost")) {
@@ -903,10 +942,15 @@ public class PageOperations {
             page_330_postpublish.showpublished();
         } else if (code == R.array.page_122_preferproduct) {
             page_122_preferproduct.showPreferProduct();
+        } else if (code == R.array.page_122_preferproduct_addnew) {
+            page_122_preferproduct_addnew.searchpreproduct();
         } else if (code == R.array.page_123_prefervendor) {
             page_123_prefervendor.showPreferVendor();
         } else if (code == R.array.page_124_prefermarket) {
             page_124_prefermarket.showPreferMarket();
+        } else if (code == R.array.page_112_deleteaccount) {
+            String name = params.get("username");
+            page_112_deleteaccount.showdeletepage(name);
         } else
             setupUI(playout);
     }
