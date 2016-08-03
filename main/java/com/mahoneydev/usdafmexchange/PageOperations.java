@@ -1,5 +1,6 @@
 package com.mahoneydev.usdafmexchange;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -411,13 +412,15 @@ public class PageOperations {
                 }
             });
         }
+        else if (action.equals("searchproduct")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_122_preferproduct_addnew.searchpreproduct((((EditText) hashelements.get("searchproductsInput")).getText()).toString());
+                }
+            });
+        }
     }
-
-
-
-
-
-
 
     private static void setButtonAction(String action, final Button bt) {
         if (action.equals("loginSubmit")) {
@@ -555,12 +558,27 @@ public class PageOperations {
                     pushNewPage(R.array.page_309_farmermarket, new Hashtable<String, String>());
                 }
             });
-        } else if (action.equals("productsell")) {
+        }else if (action.equals("cantfindmarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pushNewPage(R.array.page_310_addnewmarket, null);
+                }
+            });
+        }else if (action.equals("productsell")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     bt.setClickable(false);
                     pushNewPage(R.array.page_305_productsell, new Hashtable<String, String>());
+                }
+            });
+        } else if (action.equals("addproduct")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_306_addproductform, null);
                 }
             });
         } else if (action.equals("savenameaddress")) {
@@ -701,6 +719,13 @@ public class PageOperations {
                     pushNewPage(R.array.page_122_preferproduct, new Hashtable<String, String>());
                 }
             });
+        }else if (action.equals("addpreproduct")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pushNewPage(R.array.page_122_preferproduct_addnew, null);
+                }
+            });
         } else if (action.equals("prefervendor")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -709,12 +734,26 @@ public class PageOperations {
                     pushNewPage(R.array.page_123_prefervendor, new Hashtable<String, String>());
                 }
             });
-        } else if (action.equals("prefermarket")) {
+        } else if (action.equals("addprevendor")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pushNewPage(R.array.page_123_prefervendor_addnew, null);
+                }
+            });
+        }else if (action.equals("prefermarket")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     bt.setClickable(false);
                     pushNewPage(R.array.page_124_prefermarket, new Hashtable<String, String>());
+                }
+            });
+        }else if (action.equals("addpremarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    pushNewPage(R.array.page_124_prefermarket_addnew, null);
                 }
             });
         }
@@ -810,10 +849,14 @@ public class PageOperations {
             page_330_postpublish.showpublished();
         } else if (code == R.array.page_122_preferproduct) {
             page_122_preferproduct.showPreferProduct();
+        } else if (code == R.array.page_122_preferproduct_addnew) {
+            page_122_preferproduct_addnew.searchpreproduct();
         } else if (code == R.array.page_123_prefervendor) {
             page_123_prefervendor.showPreferVendor();
         } else if (code == R.array.page_124_prefermarket) {
             page_124_prefermarket.showPreferMarket();
+        } else if (code == R.array.page_112_deleteaccount) {
+            page_112_deleteaccount.showdeletepage();
         } else
             setupUI(playout);
     }
