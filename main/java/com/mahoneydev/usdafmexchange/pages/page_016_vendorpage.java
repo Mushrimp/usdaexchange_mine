@@ -2,6 +2,7 @@ package com.mahoneydev.usdafmexchange.pages;
 
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,11 +10,14 @@ import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
+import com.mahoneydev.usdafmexchange.UserFileUtility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,9 +31,9 @@ import java.util.Hashtable;
  * Created by bichongg on 7/25/2016.
  */
 public class page_016_vendorpage extends PageOperations{
-    public static void showVendorpage(String name) {
+    public static void showVendorpage() {
         Hashtable<String, String> ht = new Hashtable<String, String>();
-        ht.put("vendorname", name);
+        ht.put("vendorname", getRecentPage().params.get("username"));
         new FetchTask() {
             @Override
             protected void executeSuccess(JSONObject result) throws JSONException {
@@ -153,6 +157,8 @@ public class page_016_vendorpage extends PageOperations{
                     rf.setTextSize(width / 55);
                     rf.setText("Request friend");
                     ll_bt.addView(rf);
+
+                    rf.setOnClickListener(new requestFriendListener(rf));
                     //Add to list
                     Button al = new Button(context);
                     RelativeLayout.LayoutParams alparams = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -179,5 +185,25 @@ public class page_016_vendorpage extends PageOperations{
 
             }
         }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_display_vendorprofile_bypost", ht));
+    }
+
+    public static class requestFriendListener extends ClickOnceListener {
+        public requestFriendListener(View button) {
+            super(button);
+        }
+        public void action(){
+            Hashtable<String,String> ht=new Hashtable<>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("fname", getRecentPage().params.get("username"));
+            new FetchTask(){
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    Toast toast = Toast.makeText(context, result.getString("results"), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }.execute(AppCodeResources.postUrl("usdafriendship", "friends_request_friendship", ht));
+        }
     }
 }

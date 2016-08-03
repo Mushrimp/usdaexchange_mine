@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.MatchAdapter;
 import com.mahoneydev.usdafmexchange.PageOperations;
@@ -206,86 +207,98 @@ public class page_322_newpost extends PageOperations {
         });
     }
 
-    public static void publishPostAction(){
-        String price_market_userindex_id = ((SpinnerElement) (((Spinner) hashelements.get("marketSpinner")).getSelectedItem())).getValue();
-        String price_product_userindex_id = ((SpinnerElement) (((Spinner) hashelements.get("productSpinner")).getSelectedItem())).getValue();
-        String price_productunit_name = ((AutoCompleteTextView) hashelements.get("unitInput")).getText().toString();
-        String price_price = ((EditText) hashelements.get("priceInput")).getText().toString();
-        String template = "";
-        final String regExp = "[1-9]+([.][0-9]{1,2})?";
-        if (((CheckBox) hashelements.get("postCheckbox")).isChecked())
-            template = "yes";
-        boolean flag = true;
-        TextView errortv = ((TextView) hashelements.get("newposterrorView"));
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-        if (price_market_userindex_id.equals("")) {
-            errortv.setText("Please Select a Market");
-            flag = false;
-        } else if (price_product_userindex_id.equals("")) {
-            errortv.setText("Please Select a Product");
-            flag = false;
-        } else if (price_price == null || price_price.equals("")) {
-            errortv.setText("Please Input Price");
-            flag = false;
-        } else if (price_productunit_name == null || price_productunit_name.equals("")) {
-            errortv.setText("Please Input Unit");
-            flag = false;
-        }
-        try {
-            float pricefloat = Float.parseFloat(price_price);
-            price_price = String.format("%.2f", pricefloat);
-        } catch (NumberFormatException e) {
-            errortv.setText("Please Input Price");
-            flag = false;
+    public static class savepostListener extends ClickOnceListener {
+        public savepostListener(View button) {
+            super(button);
         }
 
-        try {
-            Date date = dateFormatter.parse(((TextView) hashelements.get("marketDay")).getText().toString());
+        @Override
+        public void action() {
+            String price_market_userindex_id = ((SpinnerElement) (((Spinner) hashelements.get("marketSpinner")).getSelectedItem())).getValue();
+            String price_product_userindex_id = ((SpinnerElement) (((Spinner) hashelements.get("productSpinner")).getSelectedItem())).getValue();
+            String price_productunit_name = ((AutoCompleteTextView) hashelements.get("unitInput")).getText().toString();
+            String price_price = ((EditText) hashelements.get("priceInput")).getText().toString();
+            String template = "";
+            if (((CheckBox) hashelements.get("postCheckbox")).isChecked())
+                template = "yes";
+            boolean flag = true;
+            TextView errortv = ((TextView) hashelements.get("newposterrorView"));
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+            if (price_market_userindex_id.equals("")) {
+                errortv.setText("Please Select a Market");
+                flag = false;
+            } else if (price_product_userindex_id.equals("")) {
+                errortv.setText("Please Select a Product");
+                flag = false;
+            } else if (price_price == null || price_price.equals("")) {
+                errortv.setText("Please Input Price");
+                flag = false;
+            } else if (price_productunit_name == null || price_productunit_name.equals("")) {
+                errortv.setText("Please Input Unit");
+                flag = false;
+            }
+            try {
+                float pricefloat = Float.parseFloat(price_price);
+                price_price = String.format("%.2f", pricefloat);
+            } catch (NumberFormatException e) {
+                errortv.setText("Please Input Price");
+                flag = false;
+            }
 
-        } catch (ParseException e) {
-            errortv.setText("Please Select a Market Day");
-            flag = false;
-        }
-        try {
-            Date date = dateFormatter.parse(((TextView) hashelements.get("publishDay")).getText().toString());
+            try {
+                Date date1 = dateFormatter.parse(((TextView) hashelements.get("marketDay")).getText().toString());
 
-        } catch (ParseException e) {
-            errortv.setText("Please Select a Publish Day");
-            flag = false;
-        }
+            } catch (ParseException e) {
+                errortv.setText("Please Select a Market Day");
+                flag = false;
+            }
+            try {
+                Date date2 = dateFormatter.parse(((TextView) hashelements.get("publishDay")).getText().toString());
 
-        if (flag) {
-            //Build Post Data
-            Hashtable<String, String> postdataht = new Hashtable<String, String>();
-            postdataht.put("price_market_userindex_id", price_market_userindex_id);
-            postdataht.put("price_product_userindex_id", price_product_userindex_id);
-            postdataht.put("price_productunit_name", price_productunit_name);
-            postdataht.put("price_price", price_price);
-            postdataht.put("task", "add");
-            postdataht.put("price_template", template);
-            postdataht.put("price_market_date", ((TextView) hashelements.get("marketDay")).getText().toString());
-            postdataht.put("price_publish_date", ((TextView) hashelements.get("publishDay")).getText().toString());
-            postdataht.put("price_ad_desc", ((EditText) hashelements.get("descInput")).getText().toString());
-            postdataht.put("price_publish_date", ((TextView) hashelements.get("publishDay")).getText().toString());
-            String jsonpostdata = (new JSONObject(postdataht)).toString();
+            } catch (ParseException e) {
+                errortv.setText("Please Select a Publish Day");
+                flag = false;
+            }
 
-            Hashtable<String, String> ht = new Hashtable<String, String>();
-            String token_s = UserFileUtility.get_token();
-            ht.put("os", "Android");
-            ht.put("token", token_s);
-            ht.put("postdata", jsonpostdata);
-            ht.put("formargs", "2");
-            new FetchTask() {
-                @Override
-                protected void executeSuccess(JSONObject result) throws JSONException {
-                    ((TextView) hashelements.get("newposterrorView")).setText("Success!");
+            if (flag) {
+                //Build Post Data
+                Hashtable<String, String> postdataht = new Hashtable<String, String>();
+                postdataht.put("price_market_userindex_id", price_market_userindex_id);
+                postdataht.put("price_product_userindex_id", price_product_userindex_id);
+                postdataht.put("price_productunit_name", price_productunit_name);
+                postdataht.put("price_price", price_price);
+                postdataht.put("task", "add");
+                postdataht.put("price_template", template);
+                postdataht.put("price_market_date", ((TextView) hashelements.get("marketDay")).getText().toString());
+                postdataht.put("price_publish_date", ((TextView) hashelements.get("publishDay")).getText().toString());
+                postdataht.put("price_ad_desc", ((EditText) hashelements.get("descInput")).getText().toString());
+                postdataht.put("price_publish_date", ((TextView) hashelements.get("publishDay")).getText().toString());
+                String jsonpostdata = (new JSONObject(postdataht)).toString();
 
-                    removeRecentPage();
-                    Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+                Hashtable<String, String> ht = new Hashtable<String, String>();
+                String token_s = UserFileUtility.get_token();
+                ht.put("os", "Android");
+                ht.put("token", token_s);
+                ht.put("postdata", jsonpostdata);
+                ht.put("formargs", "2");
+                new FetchTask() {
+                    @Override
+                    protected void executeSuccess(JSONObject result) throws JSONException {
+                        ((TextView) hashelements.get("newposterrorView")).setText("Success!");
 
-            }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_save_postform", ht));
+                        removeRecentPage();
+                        Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                        toast.show();
+
+                    }
+                    @Override
+                    protected void executeFailed (JSONObject result) throws JSONException {
+                        enableButton();
+                    }
+                }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_save_postform", ht));
+            }
+            else
+                enableButton();
         }
     }
 }

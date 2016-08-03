@@ -1,5 +1,6 @@
 package com.mahoneydev.usdafmexchange.pages;
 
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.SpinnerElement;
@@ -42,47 +44,55 @@ public class page_206_phoneemail extends PageOperations{
         }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_read", ht));
     }
 
-    public static void saveContactAction(){
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        String token_s = UserFileUtility.get_token();
-        ht.put("os", "Android");
-        ht.put("token", token_s);
-        ht.put("post_type","user");
-        String busphone= ((EditText) hashelements.get("phoneInput")).getText().toString();
-        String busemail=((EditText) hashelements.get("emailInput")).getText().toString();
-        TextView etv=((TextView)hashelements.get("errorphoneView"));
-        boolean flag=true;
-        if (busphone.equals(""))
-        {
-            flag=false;
-            etv.setText("Business Phone Cannot be Empty!");
-        }
-        else if (!AppCodeResources.isEmailValid(busemail))
-        {
-            flag=false;
-            etv.setText("Email is Invalid!");
-        }
-        if (!flag)
-            return;
-        try {
-            JSONObject jo = new JSONObject();
-            jo.put("business_phone",busphone);
-            jo.put("business_email", busemail);
-            ht.put("postdata",jo.toString());
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            return;
+    public static class savecontactListener extends ClickOnceListener {
+        public savecontactListener(View button) {
+            super(button);
         }
 
-        new FetchTask() {
-            @Override
-            protected void executeSuccess(JSONObject result) throws JSONException {
-                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
-                toast.show();
-                removeRecentPage();
+        @Override
+        public void action() {
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("post_type", "user");
+            String busphone = ((EditText) hashelements.get("phoneInput")).getText().toString();
+            String busemail = ((EditText) hashelements.get("emailInput")).getText().toString();
+            TextView etv = ((TextView) hashelements.get("errorphoneView"));
+            boolean flag = true;
+            if (busphone.equals("")) {
+                flag = false;
+                etv.setText("Business Phone Cannot be Empty!");
+            } else if (!AppCodeResources.isEmailValid(busemail)) {
+                flag = false;
+                etv.setText("Email is Invalid!");
             }
-        }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+            if (!flag) {
+                enableButton();
+                return;
+            }
+            try {
+                JSONObject jo = new JSONObject();
+                jo.put("business_phone", busphone);
+                jo.put("business_email", busemail);
+                ht.put("postdata", jo.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                    toast.show();
+                    removeRecentPage();
+                }
+                @Override
+                protected void executeFailed (JSONObject result) throws JSONException {
+                    enableButton();
+                }
+            }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+        }
     }
 }

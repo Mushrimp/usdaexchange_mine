@@ -1,10 +1,12 @@
 package com.mahoneydev.usdafmexchange.pages;
 
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -46,40 +48,49 @@ public class page_207_website extends PageOperations {
         }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_read", ht));
     }
 
-    public static void saveWebAction(){
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        String token_s = UserFileUtility.get_token();
-        ht.put("os", "Android");
-        ht.put("token", token_s);
-        ht.put("post_type","user");
-        String website= ((EditText) hashelements.get("websiteInput")).getText().toString();
-        String facebook=((EditText) hashelements.get("facebookInput")).getText().toString();
-        String twitter= ((EditText) hashelements.get("twitterInput")).getText().toString();
-        String other1=((EditText) hashelements.get("other1Input")).getText().toString();
-        String other2=((EditText) hashelements.get("other2Input")).getText().toString();
-
-        try {
-            JSONObject jo = new JSONObject();
-            jo.put("business_website",website);
-            jo.put("business_facebook", facebook);
-            jo.put("business_twitter", twitter);
-            jo.put("business_othermedia1", other1);
-            jo.put("business_othermedia2", other2);
-            ht.put("postdata",jo.toString());
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            return;
+    public static class savewebListener extends ClickOnceListener {
+        public savewebListener(View button) {
+            super(button);
         }
 
-        new FetchTask() {
-            @Override
-            protected void executeSuccess(JSONObject result) throws JSONException {
-                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
-                toast.show();
-                removeRecentPage();
+        @Override
+        public void action() {
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("post_type", "user");
+            String website = ((EditText) hashelements.get("websiteInput")).getText().toString();
+            String facebook = ((EditText) hashelements.get("facebookInput")).getText().toString();
+            String twitter = ((EditText) hashelements.get("twitterInput")).getText().toString();
+            String other1 = ((EditText) hashelements.get("other1Input")).getText().toString();
+            String other2 = ((EditText) hashelements.get("other2Input")).getText().toString();
+
+            try {
+                JSONObject jo = new JSONObject();
+                jo.put("business_website", website);
+                jo.put("business_facebook", facebook);
+                jo.put("business_twitter", twitter);
+                jo.put("business_othermedia1", other1);
+                jo.put("business_othermedia2", other2);
+                ht.put("postdata", jo.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return;
             }
-        }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                    toast.show();
+                    removeRecentPage();
+                }
+                @Override
+                protected void executeFailed (JSONObject result) throws JSONException {
+                    enableButton();
+                }
+            }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+        }
     }
 }

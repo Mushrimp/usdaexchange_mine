@@ -44,7 +44,7 @@ public class page_402_message extends PageOperations {
                 } else {
                     for (int i = 0; i < allmessages.length(); i++) {
                         JSONObject message = allmessages.getJSONObject(i);
-                        TableRow lv = new TableRow(context);
+                        final TableRow lv = new TableRow(context);
                         lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height / 5));
 
                         LinearLayout ll = new LinearLayout(context);
@@ -117,6 +117,7 @@ public class page_402_message extends PageOperations {
                         lv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                lv.setClickable(false);
                                 Hashtable<String, String> pam = new Hashtable<String, String>();
                                 pam.put("id", id);
                                 pushNewPage(R.array.page_403_messageform, pam);
