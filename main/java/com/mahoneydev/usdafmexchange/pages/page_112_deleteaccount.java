@@ -12,7 +12,8 @@ import com.mahoneydev.usdafmexchange.R;
  * Created by xianan on 8/1/16.
  */
 public class page_112_deleteaccount extends PageOperations {
-    public static void showdeletepage(String name) {
+    public static void showdeletepage() {
+        String name=getRecentPage().params.get("username");
         LinearLayout ll = new LinearLayout(context);
 
         TextView title = new TextView(context);

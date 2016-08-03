@@ -856,8 +856,7 @@ public class PageOperations {
         } else if (code == R.array.page_124_prefermarket) {
             page_124_prefermarket.showPreferMarket();
         } else if (code == R.array.page_112_deleteaccount) {
-            String name = params.get("username");
-            page_112_deleteaccount.showdeletepage(name);
+            page_112_deleteaccount.showdeletepage();
         } else
             setupUI(playout);
     }
