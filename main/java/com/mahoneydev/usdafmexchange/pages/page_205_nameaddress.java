@@ -1,6 +1,7 @@
 package com.mahoneydev.usdafmexchange.pages;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.SpinnerElement;
@@ -66,68 +68,83 @@ public class page_205_nameaddress extends PageOperations{
         }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_read", ht));
     }
 
-    public static void saveNameAddressAction(){
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        String token_s = UserFileUtility.get_token();
-        ht.put("os", "Android");
-        ht.put("token", token_s);
-        ht.put("post_type","user");
-        String busname= ((EditText) hashelements.get("busnameInput")).getText().toString();
-        String busstate=((SpinnerElement)((Spinner)hashelements.get("busstateSpinner")).getSelectedItem()).getValue();
-        String busstreet=((EditText) hashelements.get("busaddressInput")).getText().toString();
-        String buscity=((EditText) hashelements.get("buscityInp ut")).getText().toString();
-        String buszip=((EditText) hashelements.get("buszipcodeInput")).getText().toString();
-        TextView etv=((TextView)hashelements.get("erroraddressView"));
-        boolean flag=true;
-        if (busname.equals(""))
-        {
-            flag=false;
-            etv.setText("Business Name Cannot be Empty!");
-        }
-        else if (busstate.equals(""))
-        {
-            flag=false;
-            etv.setText("State Cannot be Empty!");
-        }
-        else if (busstreet.equals(""))
-        {
-            flag=false;
-            etv.setText("Business Address Cannot be Empty!");
-        }
-        else if (buscity.equals(""))
-        {
-            flag=false;
-            etv.setText("City Cannot be Empty!");
-        }
-        else if (!AppCodeResources.isZipCodeValid(buszip))
-        {
-            flag=false;
-            etv.setText("Zip Code is Invalid!");
-        }
-        if (!flag)
-            return;
-        try {
-            JSONObject jo = new JSONObject();
-            jo.put("business_name",busname);
-            jo.put("business_state", busstate);
-            jo.put("business_street", busstreet);
-            jo.put("business_city",buscity);
-            jo.put("business_zip",buszip);
-            ht.put("postdata",jo.toString());
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            return;
+    public static class saveNameAddressListener extends ClickOnceListener
+    {
+        public saveNameAddressListener(View button) {
+            super(button);
         }
 
-        new FetchTask() {
-            @Override
-            protected void executeSuccess(JSONObject result) throws JSONException {
-                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
-                toast.show();
-                removeRecentPage();
+        @Override
+        public void action(){
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("post_type","user");
+            String busname= ((EditText) hashelements.get("busnameInput")).getText().toString();
+            String busstate=((SpinnerElement)((Spinner)hashelements.get("busstateSpinner")).getSelectedItem()).getValue();
+            String busstreet=((EditText) hashelements.get("busaddressInput")).getText().toString();
+            String buscity=((EditText) hashelements.get("buscityInput")).getText().toString();
+            String buszip=((EditText) hashelements.get("buszipcodeInput")).getText().toString();
+            TextView etv=((TextView)hashelements.get("erroraddressView"));
+            boolean flag=true;
+            if (busname.equals(""))
+            {
+                flag=false;
+                etv.setText("Business Name Cannot be Empty!");
             }
-        }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+            else if (busstate.equals(""))
+            {
+                flag=false;
+                etv.setText("State Cannot be Empty!");
+            }
+            else if (busstreet.equals(""))
+            {
+                flag=false;
+                etv.setText("Business Address Cannot be Empty!");
+            }
+            else if (buscity.equals(""))
+            {
+                flag=false;
+                etv.setText("City Cannot be Empty!");
+            }
+            else if (!AppCodeResources.isZipCodeValid(buszip))
+            {
+                flag=false;
+                etv.setText("Zip Code is Invalid!");
+            }
+            if (!flag) {
+                enableButton();
+                return;
+            }
+            try {
+                JSONObject jo = new JSONObject();
+                jo.put("business_name",busname);
+                jo.put("business_state", busstate);
+                jo.put("business_street", busstreet);
+                jo.put("business_city",buscity);
+                jo.put("business_zip",buszip);
+                ht.put("postdata",jo.toString());
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+                return;
+            }
+
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                    toast.show();
+                    removeRecentPage();
+                    enableButton();
+                }
+                @Override
+                protected void executeFailed (JSONObject result) throws JSONException {
+                    enableButton();
+                }
+            }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+        }
     }
 }

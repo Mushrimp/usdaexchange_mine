@@ -2,9 +2,6 @@ package com.mahoneydev.usdafmexchange;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -12,24 +9,18 @@ import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,27 +29,13 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.mahoneydev.usdafmexchange.pages.*;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by mahoneydev on 5/23/2016.
@@ -93,7 +70,7 @@ public class PageOperations {
             context.switchAvatar(exist);
     }
 
-    public static void generateTitled(int code, RelativeLayout toolbar) {
+    public static void generateTitle(int code, RelativeLayout toolbar) {
         toolbar.removeAllViewsInLayout();
         toolbar.setGravity(Gravity.CENTER);
         switch (code) {
@@ -128,7 +105,7 @@ public class PageOperations {
         hideKey(context.findViewById(R.id.appbar));
     }
 
-    public static void generateLayout(int code, LinearLayout layout, Hashtable<String, String> params) {
+    public static void generateLayout(int code, LinearLayout layout,RelativeLayout toolbar, Hashtable<String, String> params) {
         if ((res == null) || (context == null))
             return;
         TypedArray pageArray = res.obtainTypedArray(code);
@@ -163,7 +140,7 @@ public class PageOperations {
                             tv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    pushNewPage(R.array.page_103_retrievepin, null);
+                                    pushNewPage(R.array.page_103_retrievepin, new Hashtable<String, String>());
                                 }
                             });
                         }else if(jsonelements.getString("id").equals("newView")){
@@ -176,7 +153,7 @@ public class PageOperations {
 
                     }
                     else if (element.equals("Title")){
-                        RelativeLayout toolbar = new RelativeLayout(context);
+                        Log.e("a","aa");
                         toolbar.removeAllViewsInLayout();
                         toolbar.setGravity(Gravity.CENTER);
                         Log.e("a","bb");
@@ -184,11 +161,18 @@ public class PageOperations {
                         tb.setTextAppearance(context,R.style.Normal);
                         tb.setTextColor(Color.WHITE);
                         Log.e("a","cc");
-                        tb.setText(jsonelements.getString("value"));
-                        toolbar.addView(tb);
-                        Log.e("a","dd");
-                        hideKey(context.findViewById(R.id.toolbarLayout));
-                        Log.e("a","ee");
+                        String value=jsonelements.getString("value");
+                        if (value.equals("image"))
+                        {
+                            generateTitle(code, toolbar) ;
+                        }
+                        else {
+                            tb.setText(value);
+                            toolbar.addView(tb);
+                            Log.e("a", "dd");
+                            hideKey(context.findViewById(R.id.toolbarLayout));
+                            Log.e("a", "ee");
+                        }
 
                     }
                     else if (element.equals("EditText")) {
@@ -197,6 +181,7 @@ public class PageOperations {
                         et.setTextSize(width / 45);
                         et.setTextAppearance(context,R.style.Normal);
                         et.setSingleLine();
+                        boolean multiple=false;
                         if (jsonelements.has("inputtype")) {
                             String type = jsonelements.getString("inputtype");
                             if (type.equals("textPassword")) {
@@ -211,6 +196,10 @@ public class PageOperations {
                             }
                             else if (type.equals("email"))
                                 et.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                            else if (type.equals("multiple")) {
+                                et.setSingleLine(false);
+                                multiple=true;
+                            }
                         }
                         if (jsonelements.has("next")) {
                             final String thisid = jsonelements.getString("id");
@@ -235,31 +224,7 @@ public class PageOperations {
 
                                 }
                             });
-                        } else if (jsonelements.has("enter")) {
-                            final String action = jsonelements.getString("enter");
-                            final String thisid = jsonelements.getString("id");
-                            et.addTextChangedListener(new TextWatcher() {
-                                @Override
-                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                                }
-
-                                @Override
-                                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                    String m = s.toString();
-                                    if (m.indexOf("\n") != -1) {
-                                        ((EditText) hashelements.get(thisid)).setText(m.replace("\n", ""));
-                                        ((EditText) hashelements.get(thisid)).clearFocus();
-                                        hideSoftKeyboard(context);
-                                        executeAction(action);
-                                    }
-                                }
-
-                                @Override
-                                public void afterTextChanged(Editable s) {
-
-                                }
-                            });
-                        } else {
+                        } else if (multiple==false){
                             final String thisid = jsonelements.getString("id");
                             et.addTextChangedListener(new TextWatcher() {
                                 @Override
@@ -307,30 +272,6 @@ public class PageOperations {
                                         ((AutoCompleteTextView) hashelements.get(thisid)).setText(m.replace("\n", ""));
                                         ((AutoCompleteTextView) hashelements.get(thisid)).clearFocus();
                                         (hashelements.get(nextid)).requestFocus();
-                                    }
-                                }
-
-                                @Override
-                                public void afterTextChanged(Editable s) {
-
-                                }
-                            });
-                        } else if (jsonelements.has("enter")) {
-                            final String action = jsonelements.getString("enter");
-                            final String thisid = jsonelements.getString("id");
-                            et.addTextChangedListener(new TextWatcher() {
-                                @Override
-                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                                }
-
-                                @Override
-                                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                    String m = s.toString();
-                                    if (m.indexOf("\n") != -1) {
-                                        ((AutoCompleteTextView) hashelements.get(thisid)).setText(m.replace("\n", ""));
-                                        ((AutoCompleteTextView) hashelements.get(thisid)).clearFocus();
-                                        hideSoftKeyboard(context);
-                                        executeAction(action);
                                     }
                                 }
 
@@ -445,28 +386,16 @@ public class PageOperations {
                     }
                 }
             }
-            renderUI(code, params);
+            renderUI(code);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void executeAction(String action) {
-        if (action.equals("loginSubmit")) {
-            page_102_login.loginAction();
-        } else if (action.equals("registration")) {
-            page_100_registration.registrationAction();
-        }
-    }
 
     private static void setButtonAction(String action, ImageButton bt) {
         if (action.equals("searchPublicPost")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_001_front.showpublicposts((((EditText) hashelements.get("searchpublicpostsInput")).getText()).toString());
-                }
-            });
+            bt.setOnClickListener(new page_001_front.searchPostsListener(bt));
         } else if (action.equals("testSearch")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -493,37 +422,21 @@ public class PageOperations {
         }
     }
 
-
-
-    private static void setButtonAction(String action, Button bt) {
+    private static void setButtonAction(String action, final Button bt) {
         if (action.equals("loginSubmit")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_102_login.loginAction();
-                }
-            });
+            bt.setOnClickListener(new page_102_login.loginListener(bt));
         } else if (action.equals("registration")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_100_registration.registrationAction();
-                }
-            });
+            bt.setOnClickListener(new page_100_registration.registrationListener(bt));
         } else if (action.equals("signUp")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pushNewPage(R.array.page_100_registration, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_100_registration, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("selectImage")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_106_uploadlogo.startUploadImage();
-                }
-            });
+            bt.setOnClickListener(new page_106_uploadlogo.startUploadImageListener(bt));
         }
 
         //customer service
@@ -531,35 +444,40 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_003_aboutus, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_003_aboutus, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("contact")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_005_contactus, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_005_contactus, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("privacy")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_006_privacy, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_006_privacy, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("help")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_130_helpcenter, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_130_helpcenter, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("fmdir")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_fmdir, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_fmdir, new Hashtable<String, String>());
                 }
             });
         }
@@ -569,28 +487,32 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_322_newpost, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_322_newpost, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("posttemplate")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_324_posttemplate, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_324_posttemplate, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("postschedule")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_328_postschedule, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_328_postschedule, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("postpublish")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_330_postpublish, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_330_postpublish, new Hashtable<String, String>());
                 }
             });
         }
@@ -600,42 +522,40 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_205_nameaddress, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_205_nameaddress, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("phoneemail")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_206_phoneemail, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_206_phoneemail, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("website")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_207_website, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_207_website, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("certified")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_209_certified, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_209_certified, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("farmermarket")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_309_farmermarket, null);
-                }
-            });
-        } else if (action.equals("addmarket")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    pushNewPage(R.array.page_311_addmarketform, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_309_farmermarket, new Hashtable<String, String>());
                 }
             });
         }else if (action.equals("cantfindmarket")) {
@@ -649,37 +569,24 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_305_productsell, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_305_productsell, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("addproduct")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    bt.setClickable(false);
                     pushNewPage(R.array.page_306_addproductform, null);
                 }
             });
-        }else if (action.equals("savenameaddress")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_205_nameaddress.saveNameAddressAction();
-                }
-            });
+        } else if (action.equals("savenameaddress")) {
+            bt.setOnClickListener(new page_205_nameaddress.saveNameAddressListener(bt));
         } else if (action.equals("savephoneemail")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_206_phoneemail.saveContactAction();
-                }
-            });
+            bt.setOnClickListener(new page_206_phoneemail.savecontactListener(bt));
         } else if (action.equals("savemedia")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_207_website.saveWebAction();
-                }
-            });
+            bt.setOnClickListener(new page_207_website.savewebListener(bt));
         }
 
         //social network
@@ -687,35 +594,40 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_401_friendship, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_401_friendship, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("requestfriend")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_406_searchfriend, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_406_searchfriend, new Hashtable<String, String>());
                 }
             });
         }else if (action.equals("request")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_412_request, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_412_request, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("message")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_402_message, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_402_message, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("notification")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_404_notification, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_404_notification, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("sendmessageAction")) {
@@ -732,65 +644,62 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_105_accountinfo, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_105_accountinfo, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("uploadlogo")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_106_uploadlogo, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_106_uploadlogo, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("qrcode")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_109_qrcode, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_109_qrcode, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("searchpreference")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_111_searchpreference, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_111_searchpreference, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("setnotification")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_107_setnotification, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_107_setnotification, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("socialnetwork")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_108_socialnetwork, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_108_socialnetwork, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("deleteaccount")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_112_deleteaccount, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_112_deleteaccount, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("savenotificationsettings")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_107_setnotification.savenotificationsettings();
-                }
-            });
+            bt.setOnClickListener(new page_107_setnotification.savenotificationsettingsListener(bt));
         } else if (action.equals("savesocialsettings")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_108_socialnetwork.savesocialsettings();
-                }
-            });
+            bt.setOnClickListener(new page_108_socialnetwork.savesocialListener(bt));
         }
 
         //Account and Settings
@@ -798,14 +707,16 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pushNewPage(R.array.page_121_searchdistance, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_121_searchdistance, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("preferproduct")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pushNewPage(R.array.page_122_preferproduct, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_122_preferproduct, new Hashtable<String, String>());
                 }
             });
         }else if (action.equals("addpreproduct")) {
@@ -819,7 +730,8 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pushNewPage(R.array.page_123_prefervendor, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_123_prefervendor, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("addprevendor")) {
@@ -833,7 +745,8 @@ public class PageOperations {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pushNewPage(R.array.page_124_prefermarket, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_124_prefermarket, new Hashtable<String, String>());
                 }
             });
         }else if (action.equals("addpremarket")) {
@@ -866,37 +779,32 @@ public class PageOperations {
                     page_777_test.testAction();
                 }
             });
+        } else if (action.equals("addproduct")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_306_addproductform, new Hashtable<String, String>());
+                }
+            });
         } else if (action.equals("publishpost")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_322_newpost.publishPostAction();
-                }
-            });
+            bt.setOnClickListener(new page_322_newpost.savepostListener(bt));
         } else if (action.equals("saveproduct")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    page_306_addproductform.saveProductAction();
-                }
-            });
+            bt.setOnClickListener(new page_306_addproductform.saveproductListener(bt));
         }
     }
 
-    private static void renderUI(int code, Hashtable<String, String> params) {
+    private static void renderUI(int code) {
         if (code == R.array.page_001_front) {
             page_001_front.showpublicposts("");
         } else if (code == R.array.page_020_viewpost) {
-            String idvalue = params.get("postid");
-            page_020_viewpost.showpostView(idvalue);
+            page_020_viewpost.showpostView();
             /*((TextView)hashelements.get("postView")).setText("This is post "+params.get("postid"));
             setupUI(playout);*/
         } else if (code == R.array.page_016_vendorpage) {
-            String name = params.get("username");
-            page_016_vendorpage.showVendorpage(name);
+            page_016_vendorpage.showVendorpage();
         } else if (code == R.array.page_017_marketpage) {
-            String id = params.get("marketid");
-            page_017_marketpage.showMarketpage(id);
+            page_017_marketpage.showMarketpage();
         } else if (code == R.array.page_106_uploadlogo) {
             page_106_uploadlogo.loadavatar();
         } else if (code == R.array.page_105_accountinfo) {
@@ -924,10 +832,9 @@ public class PageOperations {
         } else if (code == R.array.page_402_message) {
             page_402_message.showmessages();
         } else if (code == R.array.page_403_messageform) {
-            String id = params.get("id");
-            page_403_messageform.showmessageform(id);}
+            page_403_messageform.showmessageform();}
         else if (code == R.array.page_408_sendmessage) {
-            page_408_sendmessage.preparemessage(params);
+            page_408_sendmessage.preparemessage();
         } else if (code == R.array.page_404_notification) {
             page_404_notification.shownotifications();
         } else if (code == R.array.page_309_farmermarket) {

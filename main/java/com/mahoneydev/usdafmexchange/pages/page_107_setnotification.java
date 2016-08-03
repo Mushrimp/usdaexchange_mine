@@ -1,9 +1,11 @@
 package com.mahoneydev.usdafmexchange.pages;
 
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -48,50 +50,60 @@ public class page_107_setnotification extends PageOperations {
             }
         }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_read", ht));
     }
-
-    public static void savenotificationsettings(){
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        String token_s = UserFileUtility.get_token();
-        ht.put("os", "Android");
-        ht.put("token", token_s);
-        ht.put("post_type","user");
-        String emailpremarket="";
-        String premarket="";
-        String appupdate="";
-        String friend="";
-        String message="";
-        if  (((CheckBox) hashelements.get("emailpremarketCheckbox")).isChecked())
-            emailpremarket="on";
-        if  (((CheckBox) hashelements.get("premarketCheckbox")).isChecked())
-            premarket="on";
-        if  (((CheckBox) hashelements.get("appupdateCheckbox")).isChecked())
-            appupdate="on";
-        if  (((CheckBox) hashelements.get("friendCheckbox")).isChecked())
-            friend="on";
-        if  (((CheckBox) hashelements.get("messageCheckbox")).isChecked())
-            message="on";
-        try {
-            JSONObject jo = new JSONObject();
-            jo.put("usernoti_vendor_premarketreminder_email",emailpremarket);
-            jo.put("usernoti_vendor_premarketreminder_app", premarket);
-            jo.put("usernoti_addfeaturesandupdate", appupdate);
-            jo.put("usernoti_addremovefriendrequest", friend);
-            jo.put("usernoti_friendmessage", message);
-            ht.put("postdata",jo.toString());
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            return;
+    public static class savenotificationsettingsListener extends ClickOnceListener {
+        public savenotificationsettingsListener(View button) {
+            super(button);
         }
 
-        new FetchTask() {
-            @Override
-            protected void executeSuccess(JSONObject result) throws JSONException {
-                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
-                toast.show();
-                removeRecentPage();
+        @Override
+        public void action() {
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("post_type","user");
+            String emailpremarket="";
+            String premarket="";
+            String appupdate="";
+            String friend="";
+            String message="";
+            if  (((CheckBox) hashelements.get("emailpremarketCheckbox")).isChecked())
+                emailpremarket="on";
+            if  (((CheckBox) hashelements.get("premarketCheckbox")).isChecked())
+                premarket="on";
+            if  (((CheckBox) hashelements.get("appupdateCheckbox")).isChecked())
+                appupdate="on";
+            if  (((CheckBox) hashelements.get("friendCheckbox")).isChecked())
+                friend="on";
+            if  (((CheckBox) hashelements.get("messageCheckbox")).isChecked())
+                message="on";
+            try {
+                JSONObject jo = new JSONObject();
+                jo.put("usernoti_vendor_premarketreminder_email",emailpremarket);
+                jo.put("usernoti_vendor_premarketreminder_app", premarket);
+                jo.put("usernoti_addfeaturesandupdate", appupdate);
+                jo.put("usernoti_addremovefriendrequest", friend);
+                jo.put("usernoti_friendmessage", message);
+                ht.put("postdata",jo.toString());
             }
-        }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+                return;
+            }
+
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                    toast.show();
+                    removeRecentPage();
+                }
+                @Override
+                protected void executeFailed(JSONObject result) throws JSONException{
+                    enableButton();
+                }
+            }.execute(AppCodeResources.postUrl("usdamobile", "usda_form_save_from_mobile", ht));
+        }
     }
 }

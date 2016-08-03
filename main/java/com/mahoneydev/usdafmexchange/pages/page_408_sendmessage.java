@@ -23,7 +23,8 @@ import java.util.Hashtable;
  * Created by bichongg on 7/28/2016.
  */
 public class page_408_sendmessage extends PageOperations {
-    public static void preparemessage(Hashtable<String,String> params){
+    public static void preparemessage(){
+        Hashtable<String,String> params=getRecentPage().params;
         if (params.containsKey("recipientsid"))
         {
             ((TextView)hashelements.get("recipientname")).setText(params.get("recipientsname"));

@@ -26,10 +26,10 @@ import java.util.Hashtable;
 public class page_403_messageform  extends PageOperations {
 
 
-    public static void showmessageform(String id) {
+    public static void showmessageform() {
         String token_s = UserFileUtility.get_token();
         Hashtable<String, String> ht = new Hashtable<String, String>();
-        ht.put("thread_id", id);
+        ht.put("thread_id",getRecentPage().params.get("id"));
         ht.put("os", "Android");
         ht.put("token", token_s);
         new FetchTask() {

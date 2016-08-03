@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.MatchAdapter;
 import com.mahoneydev.usdafmexchange.PageOperations;
@@ -107,60 +108,74 @@ public class page_306_addproductform extends PageOperations{
                             actv.setThreshold(2);
                             setupUI(playout);
                 }
-
             }.execute(AppCodeResources.postUrl("usdatestyue", "autocomplete_getproductunit", ht));
         }
 
     }.execute(AppCodeResources.postUrl("usdatestyue", "get_product_category", ht));
 }
-    public static void saveProductAction(){
-        String productcategoryid = ((SpinnerElement) (((Spinner) hashelements.get("categorySpinner")).getSelectedItem())).getValue();
-        String productname = ((AutoCompleteTextView) hashelements.get("productnameInput")).getText().toString();
-        String unit = ((AutoCompleteTextView) hashelements.get("unitInput")).getText().toString();
-        String organic = "";
-        if (((CheckBox) hashelements.get("organicCheckbox")).isChecked())
-            organic = "yes";
-        String other = "";
-        if (((CheckBox) hashelements.get("otherCheckbox")).isChecked())
-            other = "yes";
-        String otherdesc = ((EditText) hashelements.get("otherorganicInput")).getText().toString();
-        boolean flag = true;
-        TextView errortv = ((TextView) hashelements.get("producterrorView"));
-        if (productcategoryid.equals("0")) {
-            errortv.setText("Please Select a Product Category");
-            flag = false;
-        } else if (productname == null || productname.equals("")) {
-            errortv.setText("Please Input Product Name");
-            flag = false;
-        } else if (unit == null || unit.equals("")) {
-            errortv.setText("Please Input Unit");
-            flag = false;
+    
+    public static class saveproductListener extends ClickOnceListener {
+        public saveproductListener(View button) {
+            super(button);
         }
-        if (flag) {
-            //Build Post Data
-            Hashtable<String, String> postdataht = new Hashtable<String, String>();
-            postdataht.put("Prd_Category1", productcategoryid);
-            postdataht.put("Prd_Name", productname);
-            postdataht.put("Prd_Unit", unit);
-            postdataht.put("Prd_organic_usda", organic);
-            postdataht.put("Prd_organic_other", other);
-            postdataht.put("Prd_organic_other_desc", otherdesc);
-            String jsonpostdata = (new JSONObject(postdataht)).toString();
 
-            Hashtable<String, String> ht = new Hashtable<String, String>();
-            String token_s = UserFileUtility.get_token();
-            ht.put("os", "Android");
-            ht.put("token", token_s);
-            ht.put("postdata", jsonpostdata);
-            ht.put("formargs", "2");
-            new FetchTask() {
-                @Override
-                protected void executeSuccess(JSONObject result) throws JSONException {
-                    ((TextView) hashelements.get("producterrorView")).setText("Success!");
-                    removeRecentPage();
-                }
+        @Override
+        public void action() {
+            String productcategoryid = ((SpinnerElement) (((Spinner) hashelements.get("categorySpinner")).getSelectedItem())).getValue();
+            String productname = ((AutoCompleteTextView) hashelements.get("productnameInput")).getText().toString();
+            String unit = ((AutoCompleteTextView) hashelements.get("unitInput")).getText().toString();
+            String organic = "";
+            if (((CheckBox) hashelements.get("organicCheckbox")).isChecked())
+                organic = "yes";
+            String other = "";
+            if (((CheckBox) hashelements.get("otherCheckbox")).isChecked())
+                other = "yes";
+            String otherdesc = ((EditText) hashelements.get("otherorganicInput")).getText().toString();
+            boolean flag = true;
+            TextView errortv = ((TextView) hashelements.get("producterrorView"));
+            if (productcategoryid.equals("0")) {
+                errortv.setText("Please Select a Product Category");
+                flag = false;
+            } else if (productname == null || productname.equals("")) {
+                errortv.setText("Please Input Product Name");
+                flag = false;
+            } else if (unit == null || unit.equals("")) {
+                errortv.setText("Please Input Unit");
+                flag = false;
+            }
+            if (flag) {
+                //Build Post Data
+                Hashtable<String, String> postdataht = new Hashtable<String, String>();
+                postdataht.put("Prd_Category1", productcategoryid);
+                postdataht.put("Prd_Name", productname);
+                postdataht.put("Prd_Unit", unit);
+                postdataht.put("Prd_organic_usda", organic);
+                postdataht.put("Prd_organic_other", other);
+                postdataht.put("Prd_organic_other_desc", otherdesc);
+                String jsonpostdata = (new JSONObject(postdataht)).toString();
 
-            }.execute(AppCodeResources.postUrl("usdatestyue", "vendorprofile_product_addto_list", ht));
+                Hashtable<String, String> ht = new Hashtable<String, String>();
+                String token_s = UserFileUtility.get_token();
+                ht.put("os", "Android");
+                ht.put("token", token_s);
+                ht.put("postdata", jsonpostdata);
+                ht.put("formargs", "2");
+                new FetchTask() {
+                    @Override
+                    protected void executeSuccess(JSONObject result) throws JSONException {
+                        ((TextView) hashelements.get("producterrorView")).setText("Success!");
+                        removeRecentPage();
+                    }
+                    @Override
+                    protected void executeFailed (JSONObject result) throws JSONException {
+                        enableButton();
+                    }
+                }.execute(AppCodeResources.postUrl("usdatestyue", "vendorprofile_product_addto_list", ht));
+            }
+            else
+            {
+                enableButton();
+            }
         }
     }
 }

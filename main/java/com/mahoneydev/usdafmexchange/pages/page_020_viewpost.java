@@ -9,6 +9,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
@@ -22,11 +23,11 @@ import java.util.Hashtable;
  * Created by bichongg on 7/25/2016.
  */
 public class page_020_viewpost extends PageOperations {
-    public static void showpostView(String idvalue) {
+    public static void showpostView() {
         Hashtable<String, String> ht = new Hashtable<String, String>();
         ht.put("tablename", "usdafmexchange_publish.usda_price_post_public");
         ht.put("idname", "ID");
-        ht.put("idvalue", idvalue);
+        ht.put("idvalue", getRecentPage().params.get("postid"));
         new FetchTask() {
             @Override
             protected void executeSuccess(JSONObject result) throws JSONException {
@@ -203,15 +204,8 @@ public class page_020_viewpost extends PageOperations {
                 tr5.addView(vd);
                 tl_in.addView(tr5);
 
-                final String username = postView.getString("price_vendorusername");
-                vd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Hashtable<String, String> para = new Hashtable<String, String>();
-                        para.put("username", username);
-                        pushNewPage(R.array.page_016_vendorpage, para);
-                    }
-                });
+                String username = postView.getString("price_vendorusername");
+                vd.setOnClickListener(new showVendorListener(vd,username));
 
                 //Market name
                 TableRow tr6 = new TableRow(context);
@@ -242,14 +236,7 @@ public class page_020_viewpost extends PageOperations {
                 tl_in.addView(tr7);
 
                 final String marketid = postView.getString("price_fmid");
-                md.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Hashtable<String, String> para = new Hashtable<String, String>();
-                        para.put("marketid", marketid);
-                        pushNewPage(R.array.page_017_marketpage, para);
-                    }
-                });
+                md.setOnClickListener(new showMarketListener(md,marketid));
 
                 //Location
                 TableRow tr8 = new TableRow(context);
@@ -275,5 +262,34 @@ public class page_020_viewpost extends PageOperations {
                 setupUI(playout);
             }
         }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_search_table_by_id", ht));
+    }
+    public static class showVendorListener extends ClickOnceListener {
+        private String username;
+        public showVendorListener(View button, String iusername) {
+            super(button);
+            username=iusername;
+        }
+
+        @Override
+        public void action() {
+            Hashtable<String, String> para = new Hashtable<String, String>();
+            para.put("username", username);
+            pushNewPage(R.array.page_016_vendorpage, para);
+        }
+    }
+
+    public static class showMarketListener extends ClickOnceListener {
+        private String marketid;
+        public showMarketListener(View button, String imarketid) {
+            super(button);
+            marketid=imarketid;
+        }
+
+        @Override
+        public void action() {
+            Hashtable<String, String> para = new Hashtable<String, String>();
+            para.put("marketid", marketid);
+            pushNewPage(R.array.page_016_vendorpage, para);
+        }
     }
 }

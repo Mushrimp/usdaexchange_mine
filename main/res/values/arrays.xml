@@ -58,6 +58,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"registrationErrorView\"}</item>
     </array>
     <array name="page_001_front">
+        <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"titleView\"}</item>
         <item>{\"element\":\"SearchView\",\"value\":\"Search Posts...\",\"id\":\"searchpublicposts\",\"clickaction\":\"searchPublicPost\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postsScroll\"}</item>
     </array>
@@ -339,7 +340,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"recipientname\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"recipientid\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Subject\",\"id\":\"subjectView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"subjectInput\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"subjectInput\",\"next\":\"contentInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"Content\",\"id\":\"contentView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"contentInput\",\"inputtype\":\"multiple\"}</item>

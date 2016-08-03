@@ -21,9 +21,9 @@ import java.util.Hashtable;
  * Created by bichongg on 7/25/2016.
  */
 public class  page_017_marketpage extends PageOperations{
-    public static void showMarketpage(String id) {
+    public static void showMarketpage() {
         Hashtable<String, String> ht = new Hashtable<String, String>();
-        ht.put("fmid", id);
+        ht.put("fmid", getRecentPage().params.get("marketid"));
         new FetchTask() {
             @Override
             protected void executeSuccess(JSONObject result) throws JSONException {
