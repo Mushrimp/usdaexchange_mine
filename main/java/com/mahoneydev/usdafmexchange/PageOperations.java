@@ -1,6 +1,5 @@
 package com.mahoneydev.usdafmexchange;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -420,6 +419,30 @@ public class PageOperations {
                 }
             });
         }
+        else if (action.equals("searchvendor")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_123_prefervendor_addnew.searchvendor((((EditText) hashelements.get("searchvendorInput")).getText()).toString());
+                }
+            });
+        }
+        else if (action.equals("searchpremarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_124_prefermarket_addnew.searchpremarket((((EditText) hashelements.get("searchpremarketInput")).getText()).toString());
+                }
+            });
+        }
+        else if (action.equals("searchmarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    page_311_addmarketform.searchmarket((((EditText) hashelements.get("searchmarketInput")).getText()).toString());
+                }
+            });
+        }
     }
 
     private static void setButtonAction(String action, final Button bt) {
@@ -558,11 +581,20 @@ public class PageOperations {
                     pushNewPage(R.array.page_309_farmermarket, new Hashtable<String, String>());
                 }
             });
+        }else if (action.equals("addmarket")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_311_addmarketform, new Hashtable<String, String>());
+                }
+            });
         }else if (action.equals("cantfindmarket")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    pushNewPage(R.array.page_310_addnewmarket, null);
+                    bt.setClickable(false);
+                    pushNewPage(R.array.page_310_addnewmarket, new Hashtable<String, String>());
                 }
             });
         }else if (action.equals("productsell")) {
@@ -578,7 +610,7 @@ public class PageOperations {
                 @Override
                 public void onClick(View view) {
                     bt.setClickable(false);
-                    pushNewPage(R.array.page_306_addproductform, null);
+                    pushNewPage(R.array.page_306_addproductform, new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("savenameaddress")) {
@@ -587,6 +619,10 @@ public class PageOperations {
             bt.setOnClickListener(new page_206_phoneemail.savecontactListener(bt));
         } else if (action.equals("savemedia")) {
             bt.setOnClickListener(new page_207_website.savewebListener(bt));
+        } else if (action.equals("saveproduct")) {
+            bt.setOnClickListener(new page_306_addproductform.saveproductListener(bt));
+        } else if (action.equals("savenewmarket")) {
+            bt.setOnClickListener(new page_310_addnewmarket.savenewmarketListener(bt));
         }
 
         //social network
@@ -779,18 +815,8 @@ public class PageOperations {
                     page_777_test.testAction();
                 }
             });
-        } else if (action.equals("addproduct")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    bt.setClickable(false);
-                    pushNewPage(R.array.page_306_addproductform, new Hashtable<String, String>());
-                }
-            });
         } else if (action.equals("publishpost")) {
             bt.setOnClickListener(new page_322_newpost.savepostListener(bt));
-        } else if (action.equals("saveproduct")) {
-            bt.setOnClickListener(new page_306_addproductform.saveproductListener(bt));
         }
     }
 
@@ -823,6 +849,8 @@ public class PageOperations {
             page_322_newpost.preparepostform();
         } else if (code == R.array.page_306_addproductform) {
             page_306_addproductform.prepareproductform();
+        } else if (code == R.array.page_310_addnewmarket) {
+            page_310_addnewmarket.preparemarketform();
         } else if (code == R.array.page_777_test) {
             page_777_test.preparetest();
         } else if (code == R.array.page_401_friendship) {
@@ -839,6 +867,8 @@ public class PageOperations {
             page_404_notification.shownotifications();
         } else if (code == R.array.page_309_farmermarket) {
             page_309_farmermarket.showmarkets();
+        } else if (code == R.array.page_311_addmarketform) {
+            page_311_addmarketform.searchmarket();
         } else if (code == R.array.page_305_productsell) {
             page_305_productsell.showproducts();
         } else if (code == R.array.page_324_posttemplate) {
@@ -853,8 +883,12 @@ public class PageOperations {
             page_122_preferproduct_addnew.searchpreproduct();
         } else if (code == R.array.page_123_prefervendor) {
             page_123_prefervendor.showPreferVendor();
+        } else if (code == R.array.page_123_prefervendor_addnew) {
+            page_123_prefervendor_addnew.searchprevendor();
         } else if (code == R.array.page_124_prefermarket) {
             page_124_prefermarket.showPreferMarket();
+        } else if (code == R.array.page_124_prefermarket_addnew) {
+            page_124_prefermarket_addnew.searchpremarket();
         } else if (code == R.array.page_112_deleteaccount) {
             page_112_deleteaccount.showdeletepage();
         } else
