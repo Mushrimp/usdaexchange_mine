@@ -6,10 +6,10 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/home"
-            android:title="Home" />
+            android:title="@string/l_Default_Menu_0" />
         <item
             android:id="@+id/nav_Login"
-            android:title="Sign In" />
+            android:title="@string/l_Default_Menu_1" />
         <item
             android:id="@+id/service"
             android:title="Customer Service" />
@@ -20,29 +20,20 @@
         android:visible="false">
         <item
             android:id="@+id/home_vendor"
-            android:title="Home" />
+            android:title="@string/l_Vendor_Menu_0" />
 
         <item
             android:id="@+id/post_price"
-            android:title="Post Price" />
+            android:title="@string/l_Vendor_Menu_1" />
         <item
             android:id="@+id/vendor_profile"
-            android:title="Vendor Profile" />
+            android:title="@string/l_Vendor_Menu_2" />
         <item
             android:id="@+id/social_network_vendor"
-            android:title="Social Network" />
+            android:title="@string/l_Vendor_Menu_3" />
         <item
             android:id="@+id/account_vendor"
-            android:title="Account and Settings" />
-        <item
-            android:id="@+id/logo"
-            android:title="LOGO" />
-        <item
-            android:id="@+id/scan_qr"
-            android:title="Scan QR" />
-        <item
-            android:id="@+id/testpage"
-            android:title="Test Page" />
+            android:title="@string/l_Vendor_Menu_4" />
         <item
             android:id="@+id/sign_out_vendor"
             android:title="Sign Out" />

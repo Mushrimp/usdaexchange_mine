@@ -14,6 +14,7 @@ import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.MatchAdapter;
 import com.mahoneydev.usdafmexchange.PageOperations;
+import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.SpinnerElement;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
 
@@ -79,7 +80,7 @@ public class page_306_addproductform extends PageOperations{
         protected void executeSuccess(JSONObject result) throws JSONException {
             JSONArray ja = result.getJSONArray("results");
             SpinnerElement[] arraySpinner = new SpinnerElement[ja.length() + 1];
-            arraySpinner[0] = new SpinnerElement("Select a Category", "0");
+            arraySpinner[0] = new SpinnerElement(res.getString(R.string.l_306_AddProduct_Category_PlaceHolder_0), "0");
             for (int i = 0; i < ja.length(); i++) {
                 JSONObject jsonobject = ja.getJSONObject(i);
                 arraySpinner[i + 1] = new SpinnerElement(jsonobject.getString("Prd_Category1"), jsonobject.getString("Prd_Cat_ID1"));

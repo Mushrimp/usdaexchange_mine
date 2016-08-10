@@ -136,37 +136,37 @@
         <item>{\"element\":\"Button\",\"value\":\"Published Post\",\"id\":\"postpriceView4\", \"clickaction\":\"postpublish\"}</item>
     </array>
     <array name="page_322_newpost">
-        <item>{\"element\":\"Title\",\"value\":\"New Post\",\"id\":\"newpostView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Product:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_322_NewPost_Title_0\",\"id\":\"newpostView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_Product_Label_0\",\"id\":\"marketView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"productSpinner\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Unit:\",\"id\":\"marketView\"}</item>
-        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"Selling Unit\",\"id\":\"unitInput\",\"next\":\"priceInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Price:\",\"id\":\"priceView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Selling price\",\"id\":\"priceInput\",\"inputtype\":\"number\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Market:\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_Unit_Label_0\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_322_NewPost_Unit_PlaceHolder_0\",\"id\":\"unitInput\",\"next\":\"priceInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_Price_Label_0\",\"id\":\"priceView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_322_NewPost_Price_PlaceHolder_0\",\"id\":\"priceInput\",\"inputtype\":\"number\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_FarmersMarket_Label_0\",\"id\":\"marketView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"marketSpinner\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Market date:\",\"id\":\"marketView\"}</item>
-        <item>{\"element\":\"DatePicker\",\"value\":\"Maximum 6 weeks\",\"id\":\"marketDay\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Promotional message:\",\"id\":\"marketView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"if necessaty (max 200 characters)\",\"id\":\"descInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Publish date:\",\"id\":\"marketView\"}</item>
-        <item>{\"element\":\"DatePicker\",\"value\":\"Maximum 3 days before market date\",\"id\":\"publishDay\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_MarketDay_Label_0\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"DatePicker\",\"value\":\"l_322_NewPost_MarketDay_PlaceHolder_0\",\"id\":\"marketDay\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_PromotionMessage_Label_0\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_322_NewPost_PromotionMessage_PlaceHolder_0\",\"id\":\"descInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_PublishDate_Label_0\",\"id\":\"marketView\"}</item>
+        <item>{\"element\":\"DatePicker\",\"value\":\"l_322_NewPost_PublishDate_PlaceHolder_0\",\"id\":\"publishDay\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"This from (with product and market information) can be used to enter multiple posts?\",\"id\":\"postCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_322_NewPost_SaveForm_Text_0\",\"id\":\"postCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Publish\",\"id\":\"publishButton\", \"clickaction\":\"publishpost\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"newposterrorView\"}</item>
     </array>
     <array name="page_324_posttemplate">
-        <item>{\"element\":\"Title\",\"value\":\"Post from Template\",\"id\":\"posttemplateView\"}</item>
+        <item>{\"element\":\"Title\",\"l_324_PostTemplate_Title_0\":\"Post from Template\",\"id\":\"posttemplateView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"posttemplateScroll\"}</item>
     </array>
     <array name="page_328_postschedule">
-        <item>{\"element\":\"Title\",\"value\":\"Scheduled Posts\",\"id\":\"postscheduleView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_328_ScheduledPost_Title_0\",\"id\":\"postscheduleView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postscheduleScroll\"}</item>
     </array>
     <array name="page_330_postpublish">
-        <item>{\"element\":\"Title\",\"value\":\"Published Posts\",\"id\":\"postpublishView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_330_PublishedPost_Title_0\",\"id\":\"postpublishView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postpublishScroll\"}</item>
     </array>
 
@@ -189,58 +189,58 @@
         <item>{\"element\":\"Button\",\"value\":\"List of products I sell\",\"id\":\"profilevendorView6\", \"clickaction\":\"productsell\"}</item>
     </array>
     <array name="page_205_nameaddress">
-        <item>{\"element\":\"Title\",\"value\":\"Business Name &#38; Address\",\"id\":\"nameadressView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Business name:\",\"id\":\"busnameView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. Farmers Market Exchange\",\"id\":\"busnameInput\",\"next\":\"busaddressInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Address:\",\"id\":\"busaddressView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. No.1 Main St.\",\"id\":\"busaddressInput\",\"next\":\"buscityInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"City:\",\"id\":\"buscityView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. New York\",\"id\":\"buscityInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"State:\",\"id\":\"busstateView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_205_BusinessNameAddress_Title_0\",\"id\":\"nameadressView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_205_BusinessNameAddress_Business_Label_0\",\"id\":\"busnameView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_205_BusinessNameAddress_Business_PlaceHolder_0\",\"id\":\"busnameInput\",\"next\":\"busaddressInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_205_BusinessNameAddress_Street_Label_0\",\"id\":\"busaddressView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_205_BusinessNameAddress_Street_PlaceHolder_0\",\"id\":\"busaddressInput\",\"next\":\"buscityInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_205_BusinessNameAddress_City_Label_0\",\"id\":\"buscityView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_205_BusinessNameAddress_City_PlaceHolder_0\",\"id\":\"buscityInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_205_BusinessNameAddress_State_Label_0\",\"id\":\"busstateView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"busstateSpinner\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Zip code:\",\"id\":\"buszipcodeView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. 12345\",\"id\":\"buszipcodeInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_205_BusinessNameAddress_Zipcode_Label_0\",\"id\":\"buszipcodeView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_205_BusinessNameAddress_Zipcode_PlaceHolder_0\",\"id\":\"buszipcodeInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"nameadsressView\", \"clickaction\":\"savenameaddress\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"erroraddressView\"}</item>
     </array>
     <array name="page_206_phoneemail">
-        <item>{\"element\":\"Title\",\"value\":\"Phone &#38; Email\",\"id\":\"phoneemailView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Phon number:\",\"id\":\"phoneView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. 1234567890\",\"id\":\"phoneInput\",\"inputtype\":\"number\",\"next\":\"emailInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Email:\",\"id\":\"emailView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. xxxxx@xxx.xxx\",\"id\":\"emailInput\",\"inputtype\":\"email\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_206_ContactInfo_Title_0\",\"id\":\"phoneemailView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_206_ContactInfo_Phone_Title_0\",\"id\":\"phoneView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_206_ContactInfo_Phone_PlaceHolder_0\",\"id\":\"phoneInput\",\"inputtype\":\"number\",\"next\":\"emailInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_206_ContactInfo_Email_Title_0\",\"id\":\"emailView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_206_ContactInfo_Email_PlaceHolder_0\",\"id\":\"emailInput\",\"inputtype\":\"email\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"phoneemailView\", \"clickaction\":\"savephoneemail\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errorphoneView\"}</item>
     </array>
     <array name="page_207_website">
-        <item>{\"element\":\"Title\",\"value\":\"Website &#38; Social Media\",\"id\":\"websitesocialView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Website:\",\"id\":\"websiteView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"websiteInput\",\"next\":\"facebookInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Facebook:\",\"id\":\"facebookView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"facebookInput\",\"next\":\"twitterInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Twitter:\",\"id\":\"twitterView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"twitterInput\",\"next\":\"other1Input\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Other social media 1:\",\"id\":\"other1View\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"other1Input\",\"next\":\"other2Input\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Other social media 2:\",\"id\":\"other2View\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. www.xxxxx.com\",\"id\":\"other2Input\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_207_WebsiteSocial_Title_0\",\"id\":\"websitesocialView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_Website_Label_0\",\"id\":\"websiteView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_Website_PlaceHolder_0\",\"id\":\"websiteInput\",\"next\":\"facebookInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_Facebook_Label_0\",\"id\":\"facebookView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_Facebook_PlaceHolder_0\",\"id\":\"facebookInput\",\"next\":\"twitterInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_Twitter_Label_0\",\"id\":\"twitterView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_Twitter_PlaceHolder_0\",\"id\":\"twitterInput\",\"next\":\"other1Input\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_OtherMedia1_Label_0\",\"id\":\"other1View\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_OtherMedia1_PlaceHolder_0\",\"id\":\"other1Input\",\"next\":\"other2Input\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_OtherMedia2_Label_0:\",\"id\":\"other2View\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_OtherMedia2_PlaceHolder_0\",\"id\":\"other2Input\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"mediaView\", \"clickaction\":\"savemedia\"}</item>
     </array>
     <array name="page_209_certified">
         <item>{\"element\":\"Title\",\"value\":\"USDA Organic Certificate\",\"id\":\"certificationView\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Are you a USDA Organic Certified Producer?\",\"id\":\"certifiedCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_209_USDAOrgainc_Title_0\",\"id\":\"certifiedCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"USDA Organic Certificate number:\",\"id\":\"certifiedView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"eg. 1234567890\",\"id\":\"certifiedInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_209_USDAOrgainc_Number_Label_0\",\"id\":\"certifiedView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_209_USDAOrgainc_Number_PlaceHolder_0\",\"id\":\"certifiedInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"certifiedView\", \"clickaction\":\"savecertified\"}</item>
     </array>
     <array name="page_309_farmermarket">
-        <item>{\"element\":\"Title\",\"value\":\"List of Farmers Market I Sell\",\"id\":\"farmermarketView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add a market\",\"id\":\"addmarketButton\", \"clickaction\":\"addmarket\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_309_MarketSellAt_Title_0\",\"id\":\"farmermarketView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_309_MarketSellAt_AddButton_Label_0\",\"id\":\"addmarketButton\", \"clickaction\":\"addmarket\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
     </array>
@@ -272,22 +272,22 @@
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errorView\"}</item>
     </array>
     <array name="page_305_productsell">
-        <item>{\"element\":\"Title\",\"value\":\"List of Products I Sold\",\"id\":\"productsellView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add product to sell\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_305_ProductSellAt_Title_0\",\"id\":\"productsellView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_305_ProductSellAt_AddProductButton_0\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productsellScroll\"}</item>
     </array>
     <array name="page_306_addproductform">
-        <item>{\"element\":\"Title\",\"value\":\"Add Product\",\"id\":\"addproductView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Category\",\"id\":\"categoryView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_306_AddNewProduct_Title_0\",\"id\":\"addproductView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddNewProduct_Category_Label_0\",\"id\":\"categoryView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"categorySpinner\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Product Name\",\"id\":\"productnameView\"}</item>
-        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"\",\"id\":\"productnameInput\",\"next\":\"unitInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Unit (e.g., lb, each, etc)\",\"id\":\"unitView\"}</item>
-        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"\",\"id\":\"unitInput\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"USDA Organic Certified Product\",\"id\":\"organicCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Organic, other practice\",\"id\":\"otherCheckbox\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"Enter other organic practices here\",\"id\":\"otherorganicInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddNewProduct_ProductName_Label_0\",\"id\":\"productnameView\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_306_AddNewProduct_ProductName_PlaceHolder_0\",\"id\":\"productnameInput\",\"next\":\"unitInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddNewProduct_Unit_Label_0\",\"id\":\"unitView\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_306_AddNewProduct_Unit_PlaceHolder_0\",\"id\":\"unitInput\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_306_AddNewProduct_USDAOrganic_Label_0\",\"id\":\"organicCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_306_AddNewProduct_OrganicOther_Label_0\",\"id\":\"otherCheckbox\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_306_AddNewProduct_OrganicPractices_PlaceHolder_0\",\"id\":\"otherorganicInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"saveproductButton\", \"clickaction\":\"saveproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"producterrorView\"}</item>
@@ -308,13 +308,13 @@
         <item>{\"element\":\"Button\",\"value\":\"Notifications\",\"id\":\"socialnetworkView4\", \"clickaction\":\"notification\"}</item>
     </array>
     <array name="page_401_friendship">
-        <item>{\"element\":\"Title\",\"value\":\"Friends\",\"id\":\"friendsView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Request a friendship\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_401_Friends_Title_0\",\"id\":\"friendsView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_401_Friends_RequestFriendshipButton_Label_0\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"friendshipScroll\"}</item>
     </array>
     <array name="page_406_searchfriend">
-        <item>{\"element\":\"Title\",\"value\":\"Request New Friend\",\"id\":\"searchfriendView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_406_AddFriendship_Title_0\",\"id\":\"searchfriendView\"}</item>
         <item>{\"element\":\"SearchView\",\"value\":\"Search and request friend...\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"searchuserScroll\"}</item>
 
@@ -329,7 +329,7 @@
     </array>
     <array name="page_403_messageform">
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageformScroll\"}</item>
-
+        <item>{\"element\":\"Button\",\"value\":\"Reply\",\"id\":\"replyButton\", \"clickaction\":\"replymessageaction\"}</item>
     </array>
     <array name="page_404_notification">
         <item>{\"element\":\"Title\",\"value\":\"Notifications\",\"id\":\"notificationView\"}</item>

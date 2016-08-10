@@ -78,7 +78,7 @@ public class page_401_friendship extends PageOperations {
                     RelativeLayout.LayoutParams btprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                     btprams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                     message_bt.setLayoutParams(btprams);
-                    message_bt.setText("Message");
+                    message_bt.setText(res.getString(R.string.l_401_Friends_MessageButton_Label_0));
                     message_bt.setTextAppearance(context, R.style.Normal);
                     message_bt.setTextSize(width / 55);
                     message_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
