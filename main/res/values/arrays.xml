@@ -268,7 +268,8 @@
         <item>{\"element\":\"TextView\",\"value\":\"Zip code:\",\"id\":\"zipcodeView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"eg. 12345\",\"id\":\"zipcodeInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewmarketButton\", \"clickaction\":\"saveproduct\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewmarketButton\", \"clickaction\":\"savenewmarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errorView\"}</item>
     </array>
     <array name="page_305_productsell">
         <item>{\"element\":\"Title\",\"value\":\"l_305_ProductSellAt_Title_0\",\"id\":\"productsellView\"}</item>
@@ -469,8 +470,7 @@
         <item>{\"element\":\"Spinner\",\"value\":\"Select a state\",\"id\":\"vendorstateSpinner\"}</item>
         <item>{\"element\":\"SearchView\",\"value\":\"Search by vendor name or city\",\"id\":\"searchvendor\",\"clickaction\":\"searchvendor\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewvendorButton\", \"clickaction\":\"addnewvendor\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"vendorScroll\"}</item>
     </array>
     <array name="page_124_prefermarket">
         <item>{\"element\":\"Title\",\"value\":\"Preferred Farmers Markets\",\"id\":\"prefermarketView\"}</item>
@@ -481,10 +481,9 @@
     <array name="page_124_prefermarket_addnew">
         <item>{\"element\":\"Title\",\"value\":\"Add Preferred Market\",\"id\":\"addnewmarketView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"Select a state\",\"id\":\"marketstateSpinner\"}</item>
-        <item>{\"element\":\"SearchView\",\"value\":\"Search by market name or city\",\"id\":\"searchmarket\",\"clickaction\":\"searchmarket\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"Search by market name or city\",\"id\":\"searchpremarket\",\"clickaction\":\"searchpremarket\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewmarketButton\", \"clickaction\":\"addnewmarket\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"marketScroll\"}</item>
     </array>
 
 
