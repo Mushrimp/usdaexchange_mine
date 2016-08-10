@@ -1,6 +1,9 @@
 package com.mahoneydev.usdafmexchange;
 
+import android.content.res.Resources;
+
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -126,5 +129,14 @@ public class AppCodeResources {
             isValid = true;
         }
         return isValid;
+    }
+
+    public static String getStringbyName(Resources res, String packagename, String name)
+    {
+        int id=res.getIdentifier(name, "string", packagename);
+        if (id!=0)
+            return res.getString(id);
+        else
+            return name;
     }
 }

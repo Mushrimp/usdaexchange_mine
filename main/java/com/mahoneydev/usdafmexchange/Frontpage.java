@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -57,8 +58,6 @@ public class Frontpage extends AppCompatActivity
             String action=intent.getAction();
             if (action.equals(QuickstartPreferences.REGISTRATION_COMPLETE))
             {
-
-
                 //switchContent(R.id.content);
             }
             else if (action.equals(QuickstartPreferences.SET_USERNAME))
@@ -74,11 +73,7 @@ public class Frontpage extends AppCompatActivity
                     PageOperations.squashNewPage(content_id, null);
                 }
                 else {
-                    if (PageOperations.historyEmpty()) {
-                        PageOperations.pushNewPage(content_id, null);
-                    } else {
-                        PageOperations.showRecentPage();
-                    }
+
                     Log.d("ddd","image");
                     String username=UserFileUtility.get_username();
                     if ((username==null)||(username.equals("")))
@@ -87,9 +82,36 @@ public class Frontpage extends AppCompatActivity
                     }
                     else
                         switchAvatar(true);
+                    Intent i=getIntent();
+                    if (i.getStringExtra("type")!=null) {
+                        Log.e(i.getStringExtra("id"), i.getStringExtra("type"));
+                        String type=i.getStringExtra("type");
+                        String id=i.getStringExtra("id");
+                        PageOperations.squashNewPageHold(R.array.page_001_front,new Hashtable<String, String>());
+                        if (type.equals("friendship_request"))
+                        {
+                            PageOperations.pushNewPageHold(R.array.page_400_socialnetwork,new Hashtable<String, String>());
+                            PageOperations.pushNewPage(R.array.page_412_request,new Hashtable<String, String>());
+                        }
+                        else if (type.equals("friendship_accepted"))
+                        {
+                            PageOperations.pushNewPageHold(R.array.page_400_socialnetwork,new Hashtable<String, String>());
+                            PageOperations.pushNewPage(R.array.page_401_friendship,new Hashtable<String, String>());
+                        }
+                        else if (type.equals("new_message"))
+                        {
+                            PageOperations.pushNewPageHold(R.array.page_400_socialnetwork,new Hashtable<String, String>());
+                            PageOperations.pushNewPage(R.array.page_402_message,new Hashtable<String, String>());
+                        }
+                    }
+                    else if (PageOperations.historyEmpty()) {
+                        PageOperations.pushNewPage( R.array.page_001_front, new Hashtable<String, String>());
+                    } else {
+                        PageOperations.showRecentPage();
+                    }
 
                 }
-                Intent i=getIntent();
+
             }
             else if (action.equals(QuickstartPreferences.SWITCH_MENU))
             {
@@ -151,6 +173,8 @@ public class Frontpage extends AppCompatActivity
     }
     @Override
     public void onBackPressed() {
+        if (PageOperations.loading)
+            return;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -232,17 +256,17 @@ public class Frontpage extends AppCompatActivity
         {
             PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
         }
-        else if (id== R.id.logo)
-        {
-            PageOperations.squashNewPage(R.array.page_106_uploadlogo,null);
-        }
-        else if (id== R.id.scan_qr)
-        {
-            PageOperations.squashNewPage(R.array.page_199_scanqr,null);
-        }else if (id== R.id.testpage)
-        {
-            PageOperations.squashNewPage(R.array.page_777_test,null);
-        }
+//        else if (id== R.id.logo)
+//        {
+//            PageOperations.squashNewPage(R.array.page_106_uploadlogo,null);
+//        }
+//        else if (id== R.id.scan_qr)
+//        {
+//            PageOperations.squashNewPage(R.array.page_199_scanqr,null);
+//        }else if (id== R.id.testpage)
+//        {
+//            PageOperations.squashNewPage(R.array.page_777_test,null);
+//        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

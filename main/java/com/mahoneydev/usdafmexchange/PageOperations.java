@@ -33,6 +33,8 @@ import android.widget.TextView;
 import com.mahoneydev.usdafmexchange.pages.*;
 
 import org.json.JSONObject;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -43,12 +45,14 @@ import java.util.List;
 public class PageOperations {
     public static Frontpage context = null;
     public static Resources res = null;
+    public static String packagename=null;
     protected static View playout = null;
     protected static Hashtable<String, View> hashelements;
     public static Hashtable<String, String> hashvalues;
     private static List<PageNode> pageHistory = new ArrayList<PageNode>();
     public static int height = 0;
     public static int width = 0;
+    public static boolean loading=false;
 
     public static void setPage(int page_id, Hashtable<String, String> ht) {
         if (context != null)
@@ -106,8 +110,10 @@ public class PageOperations {
     }
 
     public static void generateLayout(int code, LinearLayout layout,RelativeLayout toolbar, Hashtable<String, String> params) {
-        if ((res == null) || (context == null))
+        if ((res == null) || (context == null)||(toolbar==null))
             return;
+        loading=true;
+        packagename=context.getPackageName();
         TypedArray pageArray = res.obtainTypedArray(code);
         layout.removeAllViewsInLayout();
         Log.e("remove", "21134124");
@@ -128,7 +134,7 @@ public class PageOperations {
                         TextView tv = new TextView(context);
                         tv.setTextAppearance(context, R.style.Bold);
                         tv.setTextSize(width / 45);
-                        tv.setText(jsonelements.getString("value"));
+                        tv.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         if (jsonelements.has("inputtype")) {
                         }
                         hashelements.put(jsonelements.getString("id"), tv);
@@ -162,12 +168,12 @@ public class PageOperations {
                         tb.setTextColor(Color.WHITE);
                         Log.e("a","cc");
                         String value=jsonelements.getString("value");
-                        if (value.equals("image"))
+                        if (value.equals("image")||value.equals("special"))
                         {
                             generateTitle(code, toolbar) ;
                         }
                         else {
-                            tb.setText(value);
+                            tb.setText(AppCodeResources.getStringbyName(res,packagename,value));
                             toolbar.addView(tb);
                             Log.e("a", "dd");
                             hideKey(context.findViewById(R.id.toolbarLayout));
@@ -177,7 +183,7 @@ public class PageOperations {
                     }
                     else if (element.equals("EditText")) {
                         EditText et = new EditText(context);
-                        et.setHint(jsonelements.getString("value"));
+                        et.setHint(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         et.setTextSize(width / 45);
                         et.setTextAppearance(context,R.style.Normal);
                         et.setSingleLine();
@@ -253,7 +259,7 @@ public class PageOperations {
                         layout.addView(et);
                     } else if (element.equals("AutoCompleteTextView")) {
                         AutoCompleteTextView et = new AutoCompleteTextView(context);
-                        et.setHint(jsonelements.getString("value"));
+                        et.setHint(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         if (jsonelements.has("inputtype")) {
                             et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         }
@@ -309,7 +315,7 @@ public class PageOperations {
                         layout.addView(et);
                     } else if (element.equals("Button")) {
                         Button bt = new Button(context);
-                        bt.setText(jsonelements.getString("value"));
+                        bt.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
 
                         hashelements.put(jsonelements.getString("id"), bt);
                         setButtonAction(jsonelements.getString("clickaction"), bt);
@@ -338,7 +344,7 @@ public class PageOperations {
                         ll.setOrientation(LinearLayout.HORIZONTAL);
                         ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                         EditText et = new EditText(context);
-                        et.setHint(jsonelements.getString("value"));
+                        et.setHint(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         hashelements.put(jsonelements.getString("id") + "Input", et);
                         et.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.8f));
 
@@ -371,7 +377,7 @@ public class PageOperations {
                     } else if (element.equals("CheckBox")) {
                         CheckBox cb = new CheckBox(context);
                         cb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                        cb.setText(jsonelements.getString("value"));
+                        cb.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         cb.setVisibility(View.INVISIBLE);
                         hashelements.put(jsonelements.getString("id"), cb);
                         layout.addView(cb);
@@ -631,12 +637,9 @@ public class PageOperations {
                 }
             });
         } else if (action.equals("sendmessageAction")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    page_408_sendmessage.sendmessage();
-                }
-            });
+            bt.setOnClickListener(new page_408_sendmessage.sendmessageListener(bt));
+        }  else if (action.equals("replymessageaction")) {
+            bt.setOnClickListener(new page_403_messageform.replymessageListener(bt));
         }
 
         //account and setting
@@ -888,6 +891,7 @@ public class PageOperations {
             }
         }
         ((ProgressBar) hashelements.get("Loading")).setVisibility(View.GONE);
+        loading=false;
     }
 
     private static void setupUIinner(View view) {
@@ -993,12 +997,20 @@ public class PageOperations {
         pageHistory.add(0, new PageNode(pageId,params));
         setPage(pageId,params);
     }
-
+    public static void pushNewPageHold(int pageId, Hashtable<String,String> params)
+    {
+        if (pageHistory == null)
+            pageHistory = new ArrayList<>();
+        pageHistory.add(0, new PageNode(pageId,params));
+    }
     public static void squashNewPage(int pageId, Hashtable<String,String> params){
         cleanPageHistory();
         pushNewPage(pageId,params);
     }
-
+    public static void squashNewPageHold(int pageId, Hashtable<String,String> params){
+        cleanPageHistory();
+        pushNewPageHold(pageId,params);
+    }
     public static boolean historyEmpty() {
         if (pageHistory == null)
             pageHistory = new ArrayList<>();

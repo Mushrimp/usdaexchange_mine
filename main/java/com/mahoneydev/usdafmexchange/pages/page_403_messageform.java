@@ -9,6 +9,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
@@ -120,5 +121,18 @@ public class page_403_messageform  extends PageOperations {
                 setupUI(playout);
             }
         }.execute(AppCodeResources.postUrl("usdafriendship", "messages_check_and_get_thread_messages", ht));
+    }
+    public static class replymessageListener extends ClickOnceListener {
+        public replymessageListener(View button) {
+            super(button);
+        }
+
+        @Override
+        public void action() {
+            Hashtable<String,String> ht=new Hashtable<>();
+            ht.put("threadid",getRecentPage().params.get("id"));
+            ht.put("subject",getRecentPage().params.get("subject"));
+            pushNewPage(R.array.page_408_sendmessage,ht);
+        }
     }
 }

@@ -289,7 +289,7 @@ public class page_020_viewpost extends PageOperations {
         public void action() {
             Hashtable<String, String> para = new Hashtable<String, String>();
             para.put("marketid", marketid);
-            pushNewPage(R.array.page_016_vendorpage, para);
+            pushNewPage(R.array.page_017_marketpage, para);
         }
     }
 }

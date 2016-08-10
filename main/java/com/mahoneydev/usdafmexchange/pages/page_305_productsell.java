@@ -48,7 +48,7 @@ public class page_305_productsell extends PageOperations {
                     TextView category1 = new TextView(context);
                     category1.setTextAppearance(context, R.style.Title);
                     category1.setTextSize(width / 50);
-                    String categoryt = "Category:";
+                    String categoryt = res.getString(R.string.l_305_ProductList_Category_Label_0);
                     category1.setText(categoryt);
                     ll.addView(category1);
                     TextView category = new TextView(context);
@@ -61,7 +61,7 @@ public class page_305_productsell extends PageOperations {
                     TextView pn1 = new TextView(context);
                     pn1.setTextAppearance(context, R.style.Title);
                     pn1.setTextSize(width / 50);
-                    String productt = "Product:";
+                    String productt = res.getString(R.string.l_305_ProductList_Product_Label_0);
                     pn1.setText(productt);
                     ll.addView(pn1);
                     TextView pn = new TextView(context);
@@ -77,7 +77,7 @@ public class page_305_productsell extends PageOperations {
                     TextView unit1 = new TextView(context);
                     unit1.setTextAppearance(context, R.style.Title);
                     unit1.setTextSize(width / 50);
-                    String unitt = "Unit:          ";
+                    String unitt = res.getString(R.string.l_305_ProductList_Unit_Label_0)+"          ";
                     unit1.setText(unitt);
                     ll_in1.addView(unit1);
                     TextView unit = new TextView(context);
@@ -94,7 +94,7 @@ public class page_305_productsell extends PageOperations {
                     TextView organic1 = new TextView(context);
                     organic1.setTextAppearance(context, R.style.Title);
                     organic1.setTextSize(width / 50);
-                    String organict = "Organic:    ";
+                    String organict = res.getString(R.string.l_305_ProductList_Organic_Label_0)+"    ";
                     organic1.setText(organict);
                     ll_in2.addView(organic1);
                     ImageView organic = new ImageView(context);

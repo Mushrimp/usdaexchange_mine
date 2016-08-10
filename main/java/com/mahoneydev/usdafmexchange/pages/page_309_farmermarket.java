@@ -47,7 +47,7 @@ public class page_309_farmermarket extends PageOperations {
                     TextView marketnamet = new TextView(context);
                     marketnamet.setTextAppearance(context, R.style.Title);
                     marketnamet.setTextSize(width / 50);
-                    marketnamet.setText("Market Name:");
+                    marketnamet.setText(res.getString(R.string.l_309_MarketLocation_MarketName_Label_0));
                     ll.addView(marketnamet);
                     TextView marketname = new TextView(context);
                     marketname.setTextAppearance(context, R.style.Bold);
@@ -58,7 +58,7 @@ public class page_309_farmermarket extends PageOperations {
                     TextView marketlocationt = new TextView(context);
                     marketlocationt.setTextAppearance(context, R.style.Title);
                     marketlocationt.setTextSize(width / 50);
-                    marketlocationt.setText("Address:");
+                    marketlocationt.setText(res.getString(R.string.l_309_MarketLocation_Address_Label_0));
                     ll.addView(marketlocationt);
                     TextView marketlocation = new TextView(context);
                     marketlocation.setTextAppearance(context, R.style.Body);

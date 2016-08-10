@@ -114,12 +114,14 @@ public class page_402_message extends PageOperations {
                         lv.addView(ll);
 
                         final String id = message.getString("ID");
+                        final String subjectstring = message.getString("subject");
                         lv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 lv.setClickable(false);
                                 Hashtable<String, String> pam = new Hashtable<String, String>();
                                 pam.put("id", id);
+                                pam.put("subject",subjectstring);
                                 pushNewPage(R.array.page_403_messageform, pam);
                             }
                         });
