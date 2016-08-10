@@ -97,11 +97,10 @@ public class PageOperations {
                 break;
             }
             default:{
-                TextView tv = new TextView(context);
-                tv.setTextAppearance(context,R.style.Normal);
-                tv.setTextColor(Color.WHITE);
-                tv.setText("Title");
-                toolbar.addView(tv);
+                ImageView iv = new ImageView(context);
+                iv.setImageResource(R.drawable.fme_header_white);
+                iv.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+                toolbar.addView(iv);
                 break;
             }
         }

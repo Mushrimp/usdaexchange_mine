@@ -124,7 +124,6 @@
     <!--post price-->
     <array name="page_320_postprice">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"postView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Post Price\",\"id\":\"postpriceView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"postpriceView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"New Post\",\"id\":\"postpriceView1\", \"clickaction\":\"newpost\"}</item>
@@ -158,7 +157,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"newposterrorView\"}</item>
     </array>
     <array name="page_324_posttemplate">
-        <item>{\"element\":\"Title\",\"l_324_PostTemplate_Title_0\":\"Post from Template\",\"id\":\"posttemplateView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_324_PostTemplate_Title_0\",\"id\":\"posttemplateView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"posttemplateScroll\"}</item>
     </array>
     <array name="page_328_postschedule">
@@ -173,7 +172,6 @@
     <!--vendor profile-->
     <array name="page_203_profilevendor">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"profileView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Profile\",\"id\":\"profilevendorView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"profilevendorView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Business name and address\",\"id\":\"profilevendorView1\", \"clickaction\":\"nameaddress\"}</item>
@@ -224,7 +222,7 @@
         <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_Twitter_PlaceHolder_0\",\"id\":\"twitterInput\",\"next\":\"other1Input\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_OtherMedia1_Label_0\",\"id\":\"other1View\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_OtherMedia1_PlaceHolder_0\",\"id\":\"other1Input\",\"next\":\"other2Input\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_OtherMedia2_Label_0:\",\"id\":\"other2View\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_OtherMedia2_Label_0\",\"id\":\"other2View\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_OtherMedia2_PlaceHolder_0\",\"id\":\"other2Input\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"mediaView\", \"clickaction\":\"savemedia\"}</item>
@@ -239,8 +237,8 @@
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"certifiedView\", \"clickaction\":\"savecertified\"}</item>
     </array>
     <array name="page_309_farmermarket">
-        <item>{\"element\":\"Title\",\"value\":\"l_309_MarketSellAt_Title_0\",\"id\":\"farmermarketView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_309_MarketSellAt_AddButton_Label_0\",\"id\":\"addmarketButton\", \"clickaction\":\"addmarket\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_309_MarketLocation_Title_0\",\"id\":\"farmermarketView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_309_MarketLocation_AddMarket_Button_0\",\"id\":\"addmarketButton\", \"clickaction\":\"addmarket\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
     </array>
@@ -272,31 +270,30 @@
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errorView\"}</item>
     </array>
     <array name="page_305_productsell">
-        <item>{\"element\":\"Title\",\"value\":\"l_305_ProductSellAt_Title_0\",\"id\":\"productsellView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_305_ProductSellAt_AddProductButton_0\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_305_ProductList_Title_0\",\"id\":\"productsellView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_305_ProductList_AddProduct_Button_0\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productsellScroll\"}</item>
     </array>
     <array name="page_306_addproductform">
-        <item>{\"element\":\"Title\",\"value\":\"l_306_AddNewProduct_Title_0\",\"id\":\"addproductView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddNewProduct_Category_Label_0\",\"id\":\"categoryView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_306_AddProduct_Title_0\",\"id\":\"addproductView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddProduct_Category_Label_0\",\"id\":\"categoryView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"categorySpinner\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddNewProduct_ProductName_Label_0\",\"id\":\"productnameView\"}</item>
-        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_306_AddNewProduct_ProductName_PlaceHolder_0\",\"id\":\"productnameInput\",\"next\":\"unitInput\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddNewProduct_Unit_Label_0\",\"id\":\"unitView\"}</item>
-        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_306_AddNewProduct_Unit_PlaceHolder_0\",\"id\":\"unitInput\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"l_306_AddNewProduct_USDAOrganic_Label_0\",\"id\":\"organicCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"l_306_AddNewProduct_OrganicOther_Label_0\",\"id\":\"otherCheckbox\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"l_306_AddNewProduct_OrganicPractices_PlaceHolder_0\",\"id\":\"otherorganicInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddProduct_ProductName_Label_0\",\"id\":\"productnameView\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_306_AddProduct_ProductName_PlaceHolder_0\",\"id\":\"productnameInput\",\"next\":\"unitInput\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_306_AddProduct_Unit_Label_0\",\"id\":\"unitView\"}</item>
+        <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_306_AddProduct_Unit_PlaceHolder_0\",\"id\":\"unitInput\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_306_AddProduct_USDACertified_CheckBox_0\",\"id\":\"organicCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_306_AddProduct_Organic_CheckBox_0\",\"id\":\"otherCheckbox\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_306_AddProduct_OtherPractices_PlaceHolder_0\",\"id\":\"otherorganicInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"saveproductButton\", \"clickaction\":\"saveproduct\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_306_AddProduct_Add_Button_0\",\"id\":\"saveproductButton\", \"clickaction\":\"saveproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"producterrorView\"}</item>
     </array>
 
     <!--social network-->
     <array name="page_400_socialnetwork">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"socialnetView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Social Network\",\"id\":\"socialnetworkView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"socialnetworkView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Friendship\",\"id\":\"socialnetworkView1\", \"clickaction\":\"friendship\"}</item>
@@ -353,7 +350,6 @@
     <!--account settings-->
     <array name="page_110_accountsettings">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"accountView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Account and Settings\",\"id\":\"accountsettingsView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"accountsettingView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
@@ -399,7 +395,6 @@
     </array>
     <array name="page_111_searchpreference">
         <item>{\"element\":\"Title\",\"value\":\"Search Preference\",\"id\":\"preferView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Search preference\",\"id\":\"searchpreferenceView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"accountsettingView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
