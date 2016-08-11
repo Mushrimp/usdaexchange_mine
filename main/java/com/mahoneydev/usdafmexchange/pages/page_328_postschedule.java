@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
+import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -97,7 +99,7 @@ public class page_328_postschedule extends PageOperations {
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableRow.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
                     tl.addView(lv);
-
+                    lv.setOnLongClickListener(new removepostListener(context,"Delete a post","Do you want to remove this post?",lv,tl,schedule.getString("ID")));
                     TableRow lk = new TableRow(context);
                     lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                     View ldivider = new LinearLayout(context);
@@ -114,5 +116,32 @@ public class page_328_postschedule extends PageOperations {
             }
         }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_byuser", ht));
 
+    }
+    public static class removepostListener extends LongPressDeleteDialogListener {
+        private TableRow deletetablerow;
+        private TableLayout fromtablelayout;
+        private String postid;
+        public removepostListener(Frontpage contexti, String titlei, String messagei, TableRow tr, TableLayout tl, String postidi)
+        {
+            super(contexti, titlei, messagei);
+            deletetablerow=tr;
+            fromtablelayout=tl;
+            postid=postidi;
+        }
+        @Override
+        public void deleteaction(){
+            String token_s = UserFileUtility.get_token();
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("post_id", postid);
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    fromtablelayout.removeView(deletetablerow);
+                }
+            }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_remove", ht));
+
+        }
     }
 }

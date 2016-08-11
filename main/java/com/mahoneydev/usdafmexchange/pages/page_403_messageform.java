@@ -131,6 +131,7 @@ public class page_403_messageform  extends PageOperations {
         public void action() {
             Hashtable<String,String> ht=new Hashtable<>();
             ht.put("threadid",getRecentPage().params.get("id"));
+            ht.put("recipientsname",getRecentPage().params.get("displayname"));
             ht.put("subject",getRecentPage().params.get("subject"));
             pushNewPage(R.array.page_408_sendmessage,ht);
         }

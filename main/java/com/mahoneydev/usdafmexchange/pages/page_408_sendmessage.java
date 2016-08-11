@@ -26,7 +26,7 @@ import java.util.Hashtable;
 public class page_408_sendmessage extends PageOperations {
     public static void preparemessage(){
         Hashtable<String,String> params=getRecentPage().params;
-        if (params.containsKey("recipientsid"))
+        if (params.containsKey("recipientsname"))
         {
             ((TextView)hashelements.get("recipientname")).setText(params.get("recipientsname"));
         }
