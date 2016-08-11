@@ -54,7 +54,7 @@ public class page_406_searchfriend extends PageOperations {
                     ll.setOrientation(LinearLayout.VERTICAL);
                     //Name
                     TextView un = new TextView(context);
-                    un.setText(friends.getString("username"));
+                    un.setText(friends.getString("display_name"));
                     un.setTextAppearance(context, R.style.Bold);
                     un.setTextSize(width / 40);
                     ll.addView(un);

@@ -56,10 +56,9 @@ public class page_408_sendmessage extends PageOperations {
             Hashtable<String, String> params = getRecentPage().params;
             if (params.containsKey("recipientsid"))
                 ht.put("recipients", params.get("recipientsid"));
-            else
-                return;
-            if (params.containsKey("threadid"))
+            else if (params.containsKey("threadid"))
                 ht.put("thread_id", params.get("threadid"));
+            else return;
             String subject = ((EditText) hashelements.get("subjectInput")).getText().toString();
             if (subject.equals("")) {
                 etv.setText("Subject Cannot be Empty!");

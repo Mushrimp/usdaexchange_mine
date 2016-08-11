@@ -1,5 +1,7 @@
 package com.mahoneydev.usdafmexchange.pages;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +14,9 @@ import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
 import com.mahoneydev.usdafmexchange.LoadImage;
+import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -83,15 +87,15 @@ public class page_401_friendship extends PageOperations {
                     message_bt.setTextSize(width / 55);
                     message_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
                     rl_in.addView(message_bt);
-                    final String id=friend.getString("ID");
-                    final String displayname=friend.getString("displayname");
+                    final String id = friend.getString("username");
+                    final String displayname = friend.getString("displayname");
                     message_bt.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Hashtable<String,String> params=new Hashtable<String, String>();
-                            params.put("recipientsid",id);
-                            params.put("recipientsname",displayname);
-                            pushNewPage(R.array.page_408_sendmessage,params);
+                            Hashtable<String, String> params = new Hashtable<String, String>();
+                            params.put("recipientsid", id);
+                            params.put("recipientsname", displayname);
+                            pushNewPage(R.array.page_408_sendmessage, params);
                         }
                     });
                     ll.addView(rl_in);
@@ -107,6 +111,7 @@ public class page_401_friendship extends PageOperations {
                     lv.addView(ll);
                     tl.addView(lv);
 
+                    lv.setOnLongClickListener(new removefriendListener(context,"Delete a friend","Do you want to remove "+displayname+" from the list?",lv,tl,friend.getString("username")));
                     TableRow lk = new TableRow(context);
                     lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                     View ldivider = new LinearLayout(context);
@@ -122,5 +127,33 @@ public class page_401_friendship extends PageOperations {
                 setupUI(playout);
             }
         }.execute(AppCodeResources.postUrl("usdafriendship", "friends_list_all_byuser", ht));
+    }
+
+    public static class removefriendListener extends LongPressDeleteDialogListener{
+        private TableRow deletetablerow;
+        private TableLayout fromtablelayout;
+        private String friend_name;
+        public removefriendListener(Frontpage contexti, String titlei, String messagei,TableRow tr, TableLayout tl,String friendnamei)
+        {
+            super(contexti, titlei, messagei);
+            deletetablerow=tr;
+            fromtablelayout=tl;
+            friend_name=friendnamei;
+        }
+        @Override
+        public void deleteaction(){
+            String token_s = UserFileUtility.get_token();
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("fname", friend_name);
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    fromtablelayout.removeView(deletetablerow);
+                }
+            }.execute(AppCodeResources.postUrl("usdafriendship", "friends_remove_fromlist", ht));
+
+        }
     }
 }
