@@ -2,8 +2,10 @@ package com.mahoneydev.usdafmexchange.pages;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -80,6 +82,31 @@ public class page_412_request extends PageOperations {
                         disname.setTextAppearance(context, R.style.Normal);
                         disname.setTextSize(width/50);
                         ll.addView(disname);
+
+                        TextView bl = new TextView(context);
+                        ll.addView(bl);
+
+                        RelativeLayout rl_in = new RelativeLayout(context);
+                        rl_in.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, width / 10));
+                        Button reject_bt = new Button(context);
+                        RelativeLayout.LayoutParams btprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        btprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT|RelativeLayout.CENTER_VERTICAL);
+                        reject_bt.setLayoutParams(btprams);
+                        reject_bt.setText(res.getString(R.string.l_412_Requests_RejectButton_Label_0));
+                        reject_bt.setTextAppearance(context, R.style.Normal);
+                        reject_bt.setTextSize(width / 55);
+                        reject_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
+                        rl_in.addView(reject_bt);
+                        Button accept_bt = new Button(context);
+                        RelativeLayout.LayoutParams btprams1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        btprams1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                        accept_bt.setLayoutParams(btprams1);
+                        accept_bt.setText(res.getString(R.string.l_412_Requests_AcceptButton_Label_0));
+                        accept_bt.setTextAppearance(context, R.style.Normal);
+                        accept_bt.setTextSize(width / 55);
+                        accept_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
+                        rl_in.addView(accept_bt);
+                        ll.addView(rl_in);
 
                         ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                         lv.addView(ll);
