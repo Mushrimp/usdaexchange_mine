@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
+import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -75,7 +77,7 @@ public class page_122_preferproduct extends PageOperations {
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
                     tl.addView(lv);
-
+                    lv.setOnLongClickListener(new removepreferproductListener(context,"Delete a product","Do you want to remove "+preproduct.getString("product_name")+" from the list?",lv,tl,preproduct.getString("ID")));
                     TableRow lk = new TableRow(context);
                     lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
                     View ldivider = new LinearLayout(context);
@@ -91,5 +93,32 @@ public class page_122_preferproduct extends PageOperations {
                 setupUI(playout);
             }
         }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_product_list_getlist", ht));
+    }
+    public static class removepreferproductListener extends LongPressDeleteDialogListener {
+        private TableRow deletetablerow;
+        private TableLayout fromtablelayout;
+        private String productid;
+        public removepreferproductListener(Frontpage contexti, String titlei, String messagei, TableRow tr, TableLayout tl, String productidi)
+        {
+            super(contexti, titlei, messagei);
+            deletetablerow=tr;
+            fromtablelayout=tl;
+            productid=productidi;
+        }
+        @Override
+        public void deleteaction(){
+            String token_s = UserFileUtility.get_token();
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("indexid", productid);
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    fromtablelayout.removeView(deletetablerow);
+                }
+            }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_product_list_remove_from", ht));
+
+        }
     }
 }

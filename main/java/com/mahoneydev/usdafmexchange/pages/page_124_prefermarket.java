@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
+import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -75,6 +77,7 @@ public class page_124_prefermarket extends PageOperations {
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
                     tl.addView(lv);
+                    lv.setOnLongClickListener(new removeprefermarketListener(context,"Delete a market","Do you want to remove "+premarket.getString("displayname")+" from the list?",lv,tl,premarket.getString("ID")));
 
                     TableRow lk = new TableRow(context);
                     lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
@@ -93,7 +96,33 @@ public class page_124_prefermarket extends PageOperations {
         }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_getlist", ht));
     }
 
+    public static class removeprefermarketListener extends LongPressDeleteDialogListener {
+        private TableRow deletetablerow;
+        private TableLayout fromtablelayout;
+        private String marketid;
+        public removeprefermarketListener(Frontpage contexti, String titlei, String messagei, TableRow tr, TableLayout tl, String marketidi)
+        {
+            super(contexti, titlei, messagei);
+            deletetablerow=tr;
+            fromtablelayout=tl;
+            marketid=marketidi;
+        }
+        @Override
+        public void deleteaction(){
+            String token_s = UserFileUtility.get_token();
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("indexid", marketid);
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    fromtablelayout.removeView(deletetablerow);
+                }
+            }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_remove_from", ht));
 
+        }
+    }
 
 
 

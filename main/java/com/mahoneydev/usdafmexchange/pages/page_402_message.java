@@ -75,13 +75,16 @@ public class page_402_message extends PageOperations {
                         //name
                         TextView name = new TextView(context);
                         String name1 = message.getString("from");
+                        final String displayname;
                         if (name1.contains("&")&& name1.contains(";")) {
                             String[] namesplit1, namesplit2;
                             namesplit1 = name1.split("&");
                             namesplit2 = name1.split(";");
                             name.setText(namesplit1[0] + namesplit2[1]);
+                            displayname=namesplit1[0];
                         }else{
                             name.setText(name1);
+                            displayname=name1;
                         }
                         name.setTextAppearance(context, R.style.Bold);
                         name.setTextSize(width / 45);
@@ -122,6 +125,7 @@ public class page_402_message extends PageOperations {
                                 Hashtable<String, String> pam = new Hashtable<String, String>();
                                 pam.put("id", id);
                                 pam.put("subject",subjectstring);
+                                pam.put("displayname",displayname);
                                 pushNewPage(R.array.page_403_messageform, pam);
                             }
                         });

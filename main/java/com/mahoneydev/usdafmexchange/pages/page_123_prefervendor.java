@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
+import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -76,6 +78,7 @@ public class page_123_prefervendor extends PageOperations {
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
                     tl.addView(lv);
+                    lv.setOnLongClickListener(new removeprefervendorListener(context,"Delete a vendor","Do you want to remove "+prevendor.getString("displayname")+" from the list?",lv,tl,prevendor.getString("ID")));
 
                     TableRow lk = new TableRow(context);
                     lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
@@ -92,5 +95,33 @@ public class page_123_prefervendor extends PageOperations {
                 setupUI(playout);
             }
         }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_vendor_list_getlist", ht));
+    }
+
+    public static class removeprefervendorListener extends LongPressDeleteDialogListener {
+        private TableRow deletetablerow;
+        private TableLayout fromtablelayout;
+        private String vendorid;
+        public removeprefervendorListener(Frontpage contexti, String titlei, String messagei, TableRow tr, TableLayout tl, String vendoridi)
+        {
+            super(contexti, titlei, messagei);
+            deletetablerow=tr;
+            fromtablelayout=tl;
+            vendorid=vendoridi;
+        }
+        @Override
+        public void deleteaction(){
+            String token_s = UserFileUtility.get_token();
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("indexid", vendorid);
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    fromtablelayout.removeView(deletetablerow);
+                }
+            }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_vendor_list_remove_from", ht));
+
+        }
     }
 }
