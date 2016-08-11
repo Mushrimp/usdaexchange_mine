@@ -308,6 +308,8 @@
         <item>{\"element\":\"Title\",\"value\":\"l_401_Friends_Title_0\",\"id\":\"friendsView\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_401_Friends_RequestFriendshipButton_Label_0\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_401_Friends_SendMessageALLButton_Label_0\",\"id\":\"friendshipView2\", \"clickaction\":\"sendmessageall\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"friendshipScroll\"}</item>
     </array>
     <array name="page_406_searchfriend">
