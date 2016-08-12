@@ -3,10 +3,13 @@ package com.mahoneydev.usdafmexchange.pages;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -33,6 +36,18 @@ import java.util.Hashtable;
 public class page_001_front extends PageOperations {
     public static void showpublicposts(String search) {
         //SEARCH AND SHOW FUNTION FOR FRONT PAGE
+        final ScrollView sv = (ScrollView) hashelements.get("postsScroll");
+
+        sv.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction()==MotionEvent.ACTION_UP)
+                {
+                    Log.e("y=",""+sv.getScrollY());
+                }
+                return true;
+            }
+        });
         final String token_s = UserFileUtility.get_token();
         Hashtable<String, String> ht = new Hashtable<String, String>();
         ht.put("liststart", "0");
@@ -40,6 +55,7 @@ public class page_001_front extends PageOperations {
         ht.put("os", "Android");
         ht.put("search", search);
         ht.put("token", token_s);
+
         new FetchTask() {
             @Override
             protected void executeSuccess(JSONObject result) throws JSONException {

@@ -113,6 +113,7 @@ public class PageOperations {
         loading=true;
         packagename=context.getPackageName();
         TypedArray pageArray = res.obtainTypedArray(code);
+        //layout.setLayoutParams(new ScrollView.LayoutParams(ScrollView.LayoutParams.MATCH_PARENT,height));
         layout.removeAllViewsInLayout();
         Log.e("remove", "21134124");
         ProgressBar pb = new ProgressBar(context);
@@ -358,7 +359,8 @@ public class PageOperations {
                     } else if (element.equals("ScrollView")) {
                         ScrollView sv = new ScrollView(context);
                         hashelements.put(jsonelements.getString("id"), sv);
-                        sv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                        LinearLayout.LayoutParams layoutparams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                        sv.setLayoutParams(layoutparams);
                         sv.setVisibility(View.INVISIBLE);
                         TableLayout tl = new TableLayout(context);
                         hashelements.put(jsonelements.getString("id") + "Table", tl);

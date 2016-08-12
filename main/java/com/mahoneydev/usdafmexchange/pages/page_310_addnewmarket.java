@@ -1,6 +1,7 @@
 package com.mahoneydev.usdafmexchange.pages;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -58,13 +59,19 @@ public class page_310_addnewmarket extends PageOperations {
             String token_s = UserFileUtility.get_token();
             ht.put("os", "Android");
             ht.put("token", token_s);
-            ht.put("formargs", "");
+            ht.put("formargs", "2");
             String name = ((EditText) hashelements.get("marketnameInput")).getText().toString();
             String email = ((EditText) hashelements.get("emailInput")).getText().toString();
             String street = ((EditText) hashelements.get("streetInput")).getText().toString();
             String city = ((EditText) hashelements.get("cityInput")).getText().toString();
             String state = ((SpinnerElement) ((Spinner) hashelements.get("newmarketstateSpinner")).getSelectedItem()).getValue();
             String zip = ((EditText) hashelements.get("zipcodeInput")).getText().toString();
+            Log.e("aaa",name);
+            Log.e("aaa",email);
+            Log.e("aaa",state);
+            Log.e("aaa",street);
+            Log.e("aaa",city);
+            Log.e("aaa",zip);
             TextView etv = ((TextView) hashelements.get("errorView"));
             boolean flag = true;
             if (name.equals("")) {
@@ -93,12 +100,13 @@ public class page_310_addnewmarket extends PageOperations {
             }
             try {
                 JSONObject jo = new JSONObject();
-                jo.put("MarketName", name);
-                jo.put("marketemail", email);
+                jo.put("marketname", name);
+                jo.put("location_marketemail", email);
                 jo.put("location_state", state);
-                jo.put("location_street", street);
+                jo.put("location_st", street);
                 jo.put("location_city", city);
                 jo.put("location_zip", zip);
+                jo.put("location_desc","");
                 ht.put("postdata", jo.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -110,7 +118,8 @@ public class page_310_addnewmarket extends PageOperations {
                 protected void executeSuccess(JSONObject result) throws JSONException {
                     Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
                     toast.show();
-                    removeRecentPage();
+                    //removeRecentPage();
+                    pushNewPage(R.array.page_309_farmermarket,null);
                     enableButton();
                 }
 
