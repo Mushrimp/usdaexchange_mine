@@ -119,7 +119,7 @@ public class page_401_friendship extends PageOperations {
                     ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
                     ldivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.3f));
                     View rdivider = new LinearLayout(context);
-                    ldivider.setBackgroundColor(Color.parseColor("#A2D25A"));
+                    rdivider.setBackgroundColor(Color.parseColor("#A2D25A"));
                     rdivider.setLayoutParams(new TableRow.LayoutParams(0, 2, 0.7f));
                     lk.addView(ldivider);
                     lk.addView(rdivider);

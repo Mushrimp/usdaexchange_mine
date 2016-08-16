@@ -323,7 +323,7 @@ public class PageOperations {
                         bt.setPadding(15, 0, 0, 0);
                         bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                         bt.setTextSize(width / 50);
-                        bt.setTextAppearance(context, R.style.QText);
+                        bt.setTextAppearance(context, R.style.Normal);
                         bt.setTransformationMethod(null);
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
