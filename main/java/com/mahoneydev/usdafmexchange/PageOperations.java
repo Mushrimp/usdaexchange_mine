@@ -641,7 +641,9 @@ public class PageOperations {
                     pushNewPage(R.array.page_401_friendship, new Hashtable<String, String>());
                 }
             });
-        } else if (action.equals("requestfriend")) {
+        } else if (action.equals("sendmessageall")) {
+            bt.setOnClickListener(new page_401_friendship.sendmessageallListener(bt));
+        }else if (action.equals("requestfriend")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
