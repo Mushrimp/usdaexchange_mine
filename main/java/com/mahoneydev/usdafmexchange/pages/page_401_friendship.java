@@ -13,6 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.Frontpage;
 import com.mahoneydev.usdafmexchange.LoadImage;
@@ -154,6 +155,20 @@ public class page_401_friendship extends PageOperations {
                 }
             }.execute(AppCodeResources.postUrl("usdafriendship", "friends_remove_fromlist", ht));
 
+        }
+    }
+
+    public static class sendmessageallListener extends ClickOnceListener{
+        public sendmessageallListener(Button bt)
+        {
+            super(bt);
+        }
+        @Override
+        public void action(){
+                    Hashtable<String,String> ht=new Hashtable<String, String>();
+                    ht.put("recipientsname","All Friends");
+            ht.put("recipientsid","-1");
+                    pushNewPage(R.array.page_408_sendmessage,ht);
         }
     }
 }
