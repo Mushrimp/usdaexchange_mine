@@ -323,7 +323,7 @@ public class PageOperations {
                         bt.setPadding(15, 0, 0, 0);
                         bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                         bt.setTextSize(width / 50);
-                        bt.setTextAppearance(context, R.style.QText);
+                        bt.setTextAppearance(context, R.style.Normal);
                         bt.setTransformationMethod(null);
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
@@ -467,6 +467,28 @@ public class PageOperations {
             });
         } else if (action.equals("selectImage")) {
             bt.setOnClickListener(new page_106_uploadlogo.startUploadImageListener(bt));
+        }
+        //View Post
+        else if (action.equals("productlist")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bt.setClickable(false);
+                    Hashtable<String,String> ht=new Hashtable<String, String>();
+                    ht.put("username",getRecentPage().params.get("username"));
+                    pushNewPage(R.array.page_015_productlist_byvendor,ht);
+                }
+            });
+        }else if (action.equals("marketsell")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bt.setClickable(false);
+                    Hashtable<String,String> ht=new Hashtable<String, String>();
+                    ht.put("username",getRecentPage().params.get("username"));
+                    pushNewPage(R.array.page_010_marketlist_byvendor,ht);
+                }
+            });
         }
 
         //customer service
@@ -833,7 +855,11 @@ public class PageOperations {
             page_020_viewpost.showpostView();
             /*((TextView)hashelements.get("postView")).setText("This is post "+params.get("postid"));
             setupUI(playout);*/
-        } else if (code == R.array.page_016_vendorpage) {
+        }else if (code==R.array.page_010_marketlist_byvendor) {
+           page_010_marketlist_byvendor.showmarkets();
+        }else if (code == R.array.page_015_productlist_byvendor) {
+            page_015_productlist_byvendor.showproducts();
+        }else if (code == R.array.page_016_vendorpage) {
             page_016_vendorpage.showVendorpage();
         } else if (code == R.array.page_017_marketpage) {
             page_017_marketpage.showMarketpage();
