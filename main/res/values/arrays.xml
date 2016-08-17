@@ -60,18 +60,16 @@
         <item>{\"element\":\"Button\",\"value\":\"l_016_VendorMainpage_Market_Label_0\",\"id\":\"vendorpageView2\", \"clickaction\":\"marketsell\"}</item>
     </array>
 
+    <array name="page_015_productlist">
+        <item>{\"element\":\"Title\",\"value\":\"l_015_ProductList_Title_0\",\"id\":\"vendorpageView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productlistScroll\"}</item>
+    </array>
+
     <array name="page_017_marketpage">
         <item>{\"element\":\"Title\",\"value\":\"l_017_MarketMainpage_Title_0\",\"id\":\"marketpageView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"marketpageScroll\"}</item>
     </array>
-    <array name="page_010_marketlist_byvendor">
-        <item>{\"element\":\"Title\",\"value\":\"l_010_MarketLocationList_Title_0\",\"id\":\"marketlistView\"}</item>
-        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"marketpageScroll\"}</item>
-    </array>
-    <array name="page_015_productlist_byvendor">
-        <item>{\"element\":\"Title\",\"value\":\"l_015_ProductList_Title_0\",\"id\":\"productpageView\"}</item>
-        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productpageScroll\"}</item>
-    </array>
+
     <array name="page_000_welcome">
         <item>{\"element\":\"TextView\",\"value\":\"Welcome!\",\"id\":\"welcomeView\"}</item>
     </array>
