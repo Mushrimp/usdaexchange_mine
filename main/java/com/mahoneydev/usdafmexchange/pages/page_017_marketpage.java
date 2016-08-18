@@ -43,7 +43,7 @@ public class  page_017_marketpage extends PageOperations{
                 //Market Name
                 TextView mn = new TextView(context);
                 mn.setTextAppearance(context, R.style.Bold);
-                mn.setTextSize(width / 40);
+                mn.setTextSize(width / 33);
                 mn.setText(marketprofile.getString("price_market_name"));
                 mn.setGravity(Gravity.CENTER);
                 ll.addView(mn);
@@ -55,10 +55,11 @@ public class  page_017_marketpage extends PageOperations{
                 //Address
                 TextView address1 = new TextView(context);
                 address1.setTextAppearance(context, R.style.Title);
-                address1.setTextSize(width / 50);
+                address1.setTextSize(width / 48);
                 address1.setText(res.getString(R.string.l_017_MarketMainpage_Address_Label_0));
                 ll.addView(address1);
                 TextView address = new TextView(context);
+                address.setPadding(0,10,0,0);
                 address.setTextAppearance(context, R.style.Normal);
                 address.setTextSize(width / 45);
                 address.setText(marketprofile.getString("price_street") + ", " + marketprofile.getString("price_city") + ", "
@@ -73,23 +74,28 @@ public class  page_017_marketpage extends PageOperations{
                 ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                 lv.addView(ll);
                 tl.addView(lv);
+
+                //Products
                 TextView product1 = new TextView(context);
                 product1.setTextAppearance(context, R.style.Title);
-                product1.setTextSize(width / 50);
+                product1.setTextSize(width / 48);
                 product1.setText(res.getString(R.string.l_017_MarketMainpage_Products_Label_0));
                 ll.addView(product1);
-
                 TextView product = new TextView(context);
+                product.setPadding(0,10,0,0);
                 product.setTextAppearance(context, R.style.Normal);
                 product.setTextSize(width / 45);
                 product.setText(result.getString("productlist"));
                 ll.addView(product);
+
                 TextView br4 = new TextView(context);
                 br4.setText("");
                 ll.addView(br4);
+
+                //Vendors
                 TextView vendor1 = new TextView(context);
                 vendor1.setTextAppearance(context, R.style.Title);
-                vendor1.setTextSize(width / 50);
+                vendor1.setTextSize(width / 48);
                 vendor1.setText(res.getString(R.string.l_017_MarketMainpage_VendorPostPrice_Label_0));
                 ll.addView(vendor1);
 
@@ -101,7 +107,7 @@ public class  page_017_marketpage extends PageOperations{
                     TableRow tr=new TableRow(context);
                     TextView vendorinfo=new TextView(context);
                     vendorinfo.setTextAppearance(context, R.style.Normal);
-                    vendorinfo.setTextSize(width / 50);
+                    vendorinfo.setTextSize(width / 45);
                     JSONObject vendor=vendorarray.getJSONObject(i);
                     vendorinfo.setText(vendor.getString("vendorbusinessname")+" ("+vendor.getString("vendorcity")+", "+vendor.getString("vendorstate")+")");
                     tr.addView(vendorinfo);

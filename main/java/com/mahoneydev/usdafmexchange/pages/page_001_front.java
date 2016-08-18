@@ -82,7 +82,9 @@ public class page_001_front extends PageOperations {
                     li.img = logo;
                     li.execute(vendorlogourl);
 
-                    logo.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.3f));
+                    TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.3f);
+                    layoutParams.gravity = Gravity.CENTER_VERTICAL;
+                    logo.setLayoutParams(layoutParams);
                     lv.addView(logo);
 
                     LinearLayout ll_bl = new LinearLayout(context);
@@ -218,7 +220,9 @@ public class page_001_front extends PageOperations {
                         li.img = logo;
                         li.execute(vendorlogourl);
 
-                        logo.setLayoutParams(new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0.3f));
+                        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.MATCH_PARENT, 0.3f);
+                        layoutParams.gravity = Gravity.CENTER_VERTICAL;
+                        logo.setLayoutParams(layoutParams);
                         lv.addView(logo);
 
                         LinearLayout ll_bl = new LinearLayout(context);

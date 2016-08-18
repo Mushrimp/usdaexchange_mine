@@ -75,7 +75,7 @@
     <string name="l_017_MarketMainpage_Address_Label_0">Address:</string>
     <string name="l_017_MarketMainpage_Schedule_Label_0">Schedule:</string>
     <string name="l_017_MarketMainpage_Products_Label_0">Products available at this market:</string>
-    <string name="l_017_MarketMainpage_VendorPostPrice_Label_0">Vendors posting of this market:</string>
+    <string name="l_017_MarketMainpage_VendorPostPrice_Label_0">Vendors posting at this market:</string>
     <string name="l_017_MarketMainpage_AddtoPreferlist_Button_0">Add to my prefer market list</string>
     <string name="l_020_FullPost_Product_Label_0">Product:</string>
     <string name="l_020_FullPost_Price_Label_0">Price:</string>

@@ -42,14 +42,14 @@ public class page_020_viewpost extends PageOperations {
                 //Product Name
                 TextView pn = new TextView(context);
                 pn.setTextAppearance(context, R.style.Bold);
-                pn.setTextSize(width / 50);
+                pn.setTextSize(width / 33);
                 pn.setText(postView.getString("price_product_name"));
                 ll.addView(pn);
                 //Vendorname
                 LinearLayout ll1 = new LinearLayout(context);
                 ll1.setOrientation(TableLayout.HORIZONTAL);
                 TextView vn1 = new TextView(context);
-                vn1.setTextAppearance(context, R.style.Bold);
+                vn1.setTextAppearance(context, R.style.ItalicBold);
                 vn1.setTextSize(width / 50);
                 vn1.setText("By  ");
                 ll1.addView(vn1);
@@ -57,6 +57,7 @@ public class page_020_viewpost extends PageOperations {
                 vn.setTextAppearance(context, R.style.Normal);
                 vn.setTextSize(width / 50);
                 vn.setText(postView.getString("price_vendorname"));
+                ll1.setPadding(0,20,0,0);
                 ll1.addView(vn);
                 ll.addView(ll1);
 
@@ -77,6 +78,7 @@ public class page_020_viewpost extends PageOperations {
                 price.setTextAppearance(context, R.style.Price);
                 price.setTextSize(width / 40);
                 price.setText("$" + postView.getString("price_price"));
+                ll2.setPadding(0,20,0,0);
                 ll2.addView(price);
                 ll.addView(ll2);
 
@@ -92,6 +94,7 @@ public class page_020_viewpost extends PageOperations {
                 unit.setTextAppearance(context, R.style.Normal);
                 unit.setTextSize(width / 45);
                 unit.setText(postView.getString("price_productunit_name"));
+                ll3.setPadding(0,10,0,0);
                 ll3.addView(unit);
                 ll.addView(ll3);
 
@@ -100,13 +103,14 @@ public class page_020_viewpost extends PageOperations {
                 ll4.setOrientation(TableLayout.HORIZONTAL);
                 TextView date1 = new TextView(context);
                 date1.setTextAppearance(context, R.style.Normal);
-                date1.setTextSize(width / 50);
+                date1.setTextSize(width / 48);
                 date1.setText("Market Date:     ");
                 ll4.addView(date1);
                 TextView date = new TextView(context);
                 date.setTextAppearance(context, R.style.Normal);
-                date.setTextSize(width / 50);
+                date.setTextSize(width / 48);
                 date.setText(postView.getString("price_market_date"));
+                ll4.setPadding(0,10,0,0);
                 ll4.addView(date);
                 ll.addView(ll4);
 
@@ -124,6 +128,7 @@ public class page_020_viewpost extends PageOperations {
 
                 //TableLayout
                 TableLayout tl_in = new TableLayout(context);
+                tl_in.setPadding(0,20,0,0);
                 //Category
                 TableRow tr1 = new TableRow(context);
                 TextView category1 = new TextView(context);
@@ -141,6 +146,7 @@ public class page_020_viewpost extends PageOperations {
                 tl_in.addView(tr1);
                 //Organic
                 TableRow tr2 = new TableRow(context);
+                tr2.setPadding(0,10,0,0);
                 TextView org1 = new TextView(context);
                 org1.setLayoutParams(new TableRow.LayoutParams((int) (width * 3 / 10), TableRow.LayoutParams.WRAP_CONTENT));
                 org1.setTextAppearance(context, R.style.Bold);
@@ -162,6 +168,7 @@ public class page_020_viewpost extends PageOperations {
                 tl_in.addView(tr2);
                 //Description
                 TableRow tr3 = new TableRow(context);
+                tr3.setPadding(0,10,0,0);
                 TextView des1 = new TextView(context);
                 //des1.setLayoutParams(new TableRow.LayoutParams((int)(width*0.35), TableRow.LayoutParams.WRAP_CONTENT));
                 des1.setTextAppearance(context, R.style.Bold);
@@ -177,6 +184,7 @@ public class page_020_viewpost extends PageOperations {
                 tl_in.addView(tr3);
                 //Vendor
                 TableRow tr4 = new TableRow(context);
+                tr4.setPadding(0,10,0,0);
                 TextView vendor1 = new TextView(context);
                 //vendor1.setLayoutParams(new TableRow.LayoutParams((int)(width*0.35), TableRow.LayoutParams.WRAP_CONTENT));
                 vendor1.setTextAppearance(context, R.style.Bold);
@@ -192,6 +200,7 @@ public class page_020_viewpost extends PageOperations {
                 tl_in.addView(tr4);
                 //Vendor detail
                 TableRow tr5 = new TableRow(context);
+                //tr5.setPadding(0,10,0,0);
                 TableRow.LayoutParams params = new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT);
                 TextView bl = new TextView(context);
                 tr5.addView(bl);
@@ -209,6 +218,7 @@ public class page_020_viewpost extends PageOperations {
 
                 //Market name
                 TableRow tr6 = new TableRow(context);
+                tr6.setPadding(0,10,0,0);
                 TextView mn1 = new TextView(context);
                 mn1.setTextAppearance(context, R.style.Bold);
                 mn1.setTextSize(width / 45);
@@ -224,6 +234,7 @@ public class page_020_viewpost extends PageOperations {
                 tl_in.addView(tr6);
                 //Market detail
                 TableRow tr7 = new TableRow(context);
+                //tr7.setPadding(0,10,0,0);
                 TextView bl2 = new TextView(context);
                 tr7.addView(bl2);
                 TextView md = new TextView(context);
@@ -240,6 +251,7 @@ public class page_020_viewpost extends PageOperations {
 
                 //Location
                 TableRow tr8 = new TableRow(context);
+                tr8.setPadding(0,10,0,0);
                 TextView location1 = new TextView(context);
                 location1.setTextAppearance(context, R.style.Bold);
                 location1.setTextSize(width / 45);
