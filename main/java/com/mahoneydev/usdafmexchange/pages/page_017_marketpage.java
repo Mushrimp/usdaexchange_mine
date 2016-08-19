@@ -1,5 +1,7 @@
 package com.mahoneydev.usdafmexchange.pages;
 
+import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -54,8 +56,8 @@ public class  page_017_marketpage extends PageOperations{
 
                 //Address
                 TextView address1 = new TextView(context);
-                address1.setTextAppearance(context, R.style.Title);
-                address1.setTextSize(width / 48);
+                address1.setTextAppearance(context, R.style.Bold);
+                address1.setTextSize(width / 42);
                 address1.setText(res.getString(R.string.l_017_MarketMainpage_Address_Label_0));
                 ll.addView(address1);
                 TextView address = new TextView(context);
@@ -77,8 +79,8 @@ public class  page_017_marketpage extends PageOperations{
 
                 //Products
                 TextView product1 = new TextView(context);
-                product1.setTextAppearance(context, R.style.Title);
-                product1.setTextSize(width / 48);
+                product1.setTextAppearance(context, R.style.Bold);
+                product1.setTextSize(width / 42);
                 product1.setText(res.getString(R.string.l_017_MarketMainpage_Products_Label_0));
                 ll.addView(product1);
                 TextView product = new TextView(context);
@@ -94,9 +96,10 @@ public class  page_017_marketpage extends PageOperations{
 
                 //Vendors
                 TextView vendor1 = new TextView(context);
-                vendor1.setTextAppearance(context, R.style.Title);
-                vendor1.setTextSize(width / 48);
+                vendor1.setTextAppearance(context, R.style.Bold);
+                vendor1.setTextSize(width / 42);
                 vendor1.setText(res.getString(R.string.l_017_MarketMainpage_VendorPostPrice_Label_0));
+                vendor1.setPadding(0,0,0,10);
                 ll.addView(vendor1);
 
                 ScrollView vendorscroll=new ScrollView(context);
@@ -105,14 +108,28 @@ public class  page_017_marketpage extends PageOperations{
                 for (int i=0;i<vendorarray.length();i++)
                 {
                     TableRow tr=new TableRow(context);
+                    tr.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9),TableLayout.LayoutParams.WRAP_CONTENT));
                     TextView vendorinfo=new TextView(context);
+                    vendorinfo.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9),TableLayout.LayoutParams.WRAP_CONTENT));
                     vendorinfo.setTextAppearance(context, R.style.Normal);
                     vendorinfo.setTextSize(width / 45);
+                    vendorinfo.setPadding(0,20,0,20);
                     JSONObject vendor=vendorarray.getJSONObject(i);
+                    vendorinfo.setMaxLines(1);
+                    vendorinfo.setEllipsize(TextUtils.TruncateAt.END);
+                    vendorinfo.setHorizontallyScrolling(true);
                     vendorinfo.setText(vendor.getString("vendorbusinessname")+" ("+vendor.getString("vendorcity")+", "+vendor.getString("vendorstate")+")");
                     tr.addView(vendorinfo);
+
                     tr.setOnClickListener(new checkvendorListener(tr,vendor.getString("vendorusername")));
                     vendorlinear.addView(tr);
+
+                    TableRow tr_line = new TableRow(context);
+                    View line = new View(context);
+                    line.setLayoutParams(new TableRow.LayoutParams(0,2,1f));
+                    line.setBackgroundColor(Color.parseColor("#C2C2C2"));
+                    tr_line.addView(line);
+                    vendorlinear.addView(tr_line);
                 }
                 vendorscroll.addView(vendorlinear);
 

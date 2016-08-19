@@ -131,12 +131,18 @@
         <item>{\"element\":\"Title\",\"value\":\"l_322_NewPost_Title_0\",\"id\":\"newpostView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_Product_Label_0\",\"id\":\"marketView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"productSpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_322_NewPost_Product_AddButton_0\",\"id\":\"addproduct322\", \"clickaction\":\"productsell\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_Unit_Label_0\",\"id\":\"marketView\"}</item>
         <item>{\"element\":\"AutoCompleteTextView\",\"value\":\"l_322_NewPost_Unit_PlaceHolder_0\",\"id\":\"unitInput\",\"next\":\"priceInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_Price_Label_0\",\"id\":\"priceView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_322_NewPost_Price_PlaceHolder_0\",\"id\":\"priceInput\",\"inputtype\":\"number\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_FarmersMarket_Label_0\",\"id\":\"marketView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"marketSpinner\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_322_NewPost_FarmersMarket_AddButton_0\",\"id\":\"addmarket322\", \"clickaction\":\"farmermarket\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_MarketDay_Label_0\",\"id\":\"marketView\"}</item>
         <item>{\"element\":\"DatePicker\",\"value\":\"l_322_NewPost_MarketDay_PlaceHolder_0\",\"id\":\"marketDay\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_PromotionMessage_Label_0\",\"id\":\"marketView\"}</item>
@@ -320,6 +326,7 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageScroll\"}</item>
     </array>
     <array name="page_403_messageform">
+        <item>{\"element\":\"Title\",\"value\":\"l_403_MessageDetail_Title_0\",\"id\":\"messageView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageformScroll\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Reply\",\"id\":\"replyButton\", \"clickaction\":\"replymessageaction\"}</item>
     </array>

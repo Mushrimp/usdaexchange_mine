@@ -39,42 +39,41 @@ public class page_015_productlist_byvendor extends PageOperations{
                     JSONObject productitem=products.getJSONObject(i);
                     TableRow lv=new TableRow(context);
                     LinearLayout tr=new LinearLayout(context);
-                    LinearLayout ll1=new LinearLayout(context);
-                    ll1.setOrientation(LinearLayout.HORIZONTAL);
+                    tr.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9),TableRow.LayoutParams.WRAP_CONTENT ));
+                    tr.setOrientation(LinearLayout.VERTICAL);
                     TextView categorytitle=new TextView(context);
-                    categorytitle.setTextAppearance(context, R.style.Bold);
-                    categorytitle.setTextSize(width / 45);
+                    categorytitle.setTextAppearance(context, R.style.Title);
+                    categorytitle.setPadding(0,10,0,0);
+                    categorytitle.setTextSize(width / 50);
                     TextView categoryname=new TextView(context);
-                    categoryname.setTextAppearance(context,R.style.Normal);
-                    categoryname.setTextSize(width / 45);
-                    categorytitle.setText(res.getString(R.string.l_015_ProductList_Title_1));
+                    categoryname.setTextAppearance(context,R.style.Bold);
+                    categoryname.setTextSize(width / 40);
+                    categorytitle.setText(res.getString(R.string.l_015_ProductList_Category_Label_0));
                     categoryname.setText(productitem.getString("price_Prd_Category1"));
-                    ll1.addView(categorytitle);
-                    ll1.addView(categoryname);
+                    tr.addView(categorytitle);
+                    tr.addView(categoryname);
                     if (productitem.getString("price_usdaorganic").equals("yes"))
                     {
                         ImageView org = new ImageView(context);
+                        org.setPadding(0,10,0,0);
                         org.setLayoutParams(new LinearLayout.LayoutParams(50,50));
                         org.setImageResource(R.drawable.usda_organic);
-                        ll1.addView(org);
+                        tr.addView(org);
                     }
 
-                    LinearLayout ll2=new LinearLayout(context);
-                    ll2.setOrientation(LinearLayout.HORIZONTAL);
                     TextView producttitle=new TextView(context);
-                    producttitle.setTextAppearance(context, R.style.Bold);
-                    producttitle.setTextSize(width / 45);
+                    producttitle.setTextAppearance(context, R.style.Title);
+                    producttitle.setPadding(0,10,0,0);
+                    producttitle.setTextSize(width / 50);
                     TextView productname=new TextView(context);
-                    productname.setTextAppearance(context,R.style.Normal);
-                    productname.setTextSize(width / 45);
-                    producttitle.setText(res.getString(R.string.l_015_ProductList_Title_2));
+                    productname.setTextAppearance(context,R.style.Body);
+                    productname.setPadding(0,10,0,10);
+                    productname.setTextSize(width / 40);
+                    producttitle.setText(res.getString(R.string.l_015_ProductList_Productname_Label_0));
                     productname.setText(productitem.getString("price_product_name"));
-                    ll2.addView(producttitle);
-                    ll2.addView(productname);
+                    tr.addView(producttitle);
+                    tr.addView(productname);
 
-                    tr.setOrientation(LinearLayout.VERTICAL);
-                    tr.addView(ll1);
-                    tr.addView(ll2);
                     lv.addView(tr);
                     tl.addView(lv);
                     TableRow lk=new TableRow(context);
