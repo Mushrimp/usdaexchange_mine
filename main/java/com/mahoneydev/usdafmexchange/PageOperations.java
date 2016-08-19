@@ -44,6 +44,7 @@ import java.util.List;
 public class PageOperations {
     public static Frontpage context = null;
     public static Resources res = null;
+    public static ScrollView sc=null;
     public static String packagename=null;
     protected static View playout = null;
     protected static Hashtable<String, View> hashelements;
@@ -74,6 +75,7 @@ public class PageOperations {
     }
 
     public static void generateTitle(int code, RelativeLayout toolbar) {
+
         toolbar.removeAllViewsInLayout();
         toolbar.setGravity(Gravity.CENTER);
         switch (code) {
@@ -88,14 +90,6 @@ public class PageOperations {
                 Log.e("iv height", "" + iv.getHeight());
                 break;
             }
-            case (R.array.page_102_login): {
-                TextView tv = new TextView(context);
-                tv.setTextAppearance(context,R.style.Normal);
-                tv.setTextColor(Color.WHITE);
-                tv.setText("Sign In");
-                toolbar.addView(tv);
-                break;
-            }
             default:{
                 ImageView iv = new ImageView(context);
                 iv.setImageResource(R.drawable.fme_header_white);
@@ -106,10 +100,31 @@ public class PageOperations {
         }
         hideKey(context.findViewById(R.id.appbar));
     }
-
+    public static void setupperrightbutton(int code, ImageButton qbutton)
+    {
+        switch (code) {
+            case (R.array.page_001_front):{
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_199_scanqr,new Hashtable<String, String>());
+                    }
+                });
+                break;
+            }
+            default:{
+                qbutton.setVisibility(View.INVISIBLE);
+                qbutton.setOnClickListener(null);
+                break;
+            }
+        }
+    }
     public static void generateLayout(int code, LinearLayout layout,RelativeLayout toolbar, Hashtable<String, String> params) {
         if ((res == null) || (context == null)||(toolbar==null))
             return;
+        sc=(ScrollView)context.findViewById(R.id.scroll);
+        sc.setOnTouchListener(null);
         loading=true;
         packagename=context.getPackageName();
         TypedArray pageArray = res.obtainTypedArray(code);
@@ -158,15 +173,17 @@ public class PageOperations {
 
                     }
                     else if (element.equals("Title")){
-                        Log.e("a","aa");
+                        ImageButton qbutton=(ImageButton)context.findViewById(R.id.camerabutton);
+//                        Log.e("a","aa");
                         toolbar.removeAllViewsInLayout();
                         toolbar.setGravity(Gravity.CENTER);
-                        Log.e("a","bb");
+                       // Log.e("a","bb");
                         TextView tb = new TextView(context);
                         tb.setTextAppearance(context,R.style.Normal);
                         tb.setTextColor(Color.WHITE);
-                        Log.e("a","cc");
+                        //Log.e("a","cc");
                         String value=jsonelements.getString("value");
+                        setupperrightbutton(code,qbutton);
                         if (value.equals("image")||value.equals("special"))
                         {
                             generateTitle(code, toolbar) ;
@@ -174,9 +191,9 @@ public class PageOperations {
                         else {
                             tb.setText(AppCodeResources.getStringbyName(res,packagename,value));
                             toolbar.addView(tb);
-                            Log.e("a", "dd");
+                            //Log.e("a", "dd");
                             hideKey(context.findViewById(R.id.toolbarLayout));
-                            Log.e("a", "ee");
+                            //Log.e("a", "ee");
                         }
 
                     }
