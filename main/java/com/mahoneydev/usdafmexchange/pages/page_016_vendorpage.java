@@ -1,6 +1,7 @@
 package com.mahoneydev.usdafmexchange.pages;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -51,11 +52,57 @@ public class page_016_vendorpage extends PageOperations{
 
                     //Business Name
                     TextView pn = new TextView(context);
-                    pn.setTextAppearance(context, R.style.Bold);
-                    pn.setTextSize(width / 33);
+                    pn.setTextAppearance(context, R.style.Green);
+                    pn.setTextSize(width / 30);
                     pn.setText(vendorprofile.getString("business_name"));
-                    pn.setGravity(Gravity.CENTER);
+                    pn.setGravity(Gravity.LEFT);
                     ll.addView(pn);
+
+//                    //
+//                    TextView br2 = new TextView(context);
+//                    br2.setText("");
+//                    ll.addView(br2);
+
+                    //Buttons
+                    LinearLayout ll_bt = new LinearLayout(context);
+                    ll_bt.setPadding(0,20,0,0);
+                    ll_bt.setOrientation(LinearLayout.HORIZONTAL);
+//                    RelativeLayout ll_bt = new RelativeLayout(context);
+//                    RelativeLayout.LayoutParams lparam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (int) (width / 10));
+//                    ll_bt.setLayoutParams(lparam);
+                    //Request Friend
+                    Button rf = new Button(context);
+                    rf.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3),(int)(height/18)));
+//                    RelativeLayout.LayoutParams rfparams = new RelativeLayout.LayoutParams((int) (width / 3),(int)(height/10));
+//                    rfparams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+//                    rfparams.addRule(RelativeLayout.CENTER_VERTICAL);
+//                    rf.setLayoutParams(rfparams);
+                    rf.setBackgroundResource(R.drawable.button_style);
+                    //rf.setBackgroundColor(Color.parseColor("#1C8A3B"));
+                    rf.setTextAppearance(context, R.style.White);
+                    rf.setTextSize(width / 50);
+                    rf.setText("Request friend");
+                    rf.setTransformationMethod(null);
+                    ll_bt.addView(rf);
+
+                    rf.setOnClickListener(new requestFriendListener(rf));
+                    //Add to list
+                    Button al = new Button(context);
+                    al.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3),(int)(height/18)));
+//                    RelativeLayout.LayoutParams alparams = new RelativeLayout.LayoutParams((int) (width / 3),(int)(height/10));
+//                    alparams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//                    alparams.addRule(RelativeLayout.CENTER_VERTICAL);
+//                    al.setLayoutParams(alparams);
+                    al.setBackgroundResource(R.drawable.button_style);
+                    //al.setBackgroundColor(Color.parseColor("#1C8A3B"));
+                    al.setTextAppearance(context, R.style.White);
+                    al.setTextSize(width / 50);
+                    al.setText("Add to list");
+                    al.setTransformationMethod(null);
+                    ll_bt.addView(al);
+
+                    ll.addView(ll_bt);
+
                     //
                     TextView br1 = new TextView(context);
                     br1.setText("");
@@ -186,41 +233,6 @@ public class page_016_vendorpage extends PageOperations{
                     tl_in.addView(tr6);
 
                     ll.addView(tl_in);
-
-                    //
-                    TextView br2 = new TextView(context);
-                    br2.setText("");
-                    ll.addView(br2);
-
-                    RelativeLayout ll_bt = new RelativeLayout(context);
-                    RelativeLayout.LayoutParams lparam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, (int) (width / 10));
-                    ll_bt.setLayoutParams(lparam);
-                    //Request Friend
-                    Button rf = new Button(context);
-                    RelativeLayout.LayoutParams rfparams = new RelativeLayout.LayoutParams((int) (width / 3),RelativeLayout.LayoutParams.MATCH_PARENT);
-                    rfparams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                    rf.setLayoutParams(rfparams);
-                    rf.setBackgroundColor(Color.parseColor("#A2D25A"));
-                    rf.setTextAppearance(context, R.style.White);
-                    rf.setTextSize(width / 50);
-                    rf.setText("Request friend");
-                    rf.setTransformationMethod(null);
-                    ll_bt.addView(rf);
-
-                    rf.setOnClickListener(new requestFriendListener(rf));
-                    //Add to list
-                    Button al = new Button(context);
-                    RelativeLayout.LayoutParams alparams = new RelativeLayout.LayoutParams((int) (width / 3),RelativeLayout.LayoutParams.MATCH_PARENT);
-                    alparams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                    al.setLayoutParams(alparams);
-                    al.setBackgroundColor(Color.parseColor("#A2D25A"));
-                    al.setTextAppearance(context, R.style.White);
-                    al.setTextSize(width / 50);
-                    al.setText("Add to list");
-                    al.setTransformationMethod(null);
-                    ll_bt.addView(al);
-
-                    ll.addView(ll_bt);
 
                     //
                     TextView br3 = new TextView(context);
