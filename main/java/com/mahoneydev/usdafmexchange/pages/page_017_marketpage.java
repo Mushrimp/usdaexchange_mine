@@ -13,12 +13,14 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
+import com.mahoneydev.usdafmexchange.UserFileUtility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,6 +71,26 @@ public class  page_017_marketpage extends PageOperations{
                 al.setGravity(Gravity.CENTER);
                 al.setText("Add to list");
                 al.setTransformationMethod(null);
+
+                al.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Hashtable<String, String> ht = new Hashtable<String, String>();
+                        String token_s = UserFileUtility.get_token();
+                        ht.put("token", token_s);
+                        ht.put("os", "Android");
+                        ht.put("fmid", getRecentPage().params.get("marketid"));
+                        new FetchTask() {
+                            @Override
+                            protected void executeSuccess(JSONObject result) throws JSONException {
+                                removeRecentPage();
+                                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_add_to", ht));
+                    }
+                });
+
                 ll.addView(al);
 
                 //Address

@@ -98,6 +98,8 @@ public class page_016_vendorpage extends PageOperations{
                     al.setTransformationMethod(null);
                     ll_bt.addView(al);
 
+                    al.setOnClickListener(new addVendorListener(al));
+
                     ll.addView(ll_bt);
 
                     //
@@ -350,4 +352,24 @@ public class page_016_vendorpage extends PageOperations{
         }
     }
 
+    public static class addVendorListener extends ClickOnceListener {
+        public addVendorListener(View button) {
+            super(button);
+        }
+        public void action(){
+            Hashtable<String,String> ht=new Hashtable<>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("vendorusername",getRecentPage().params.get("username"));
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    removeRecentPage();
+                    Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_vendor_list_add_to", ht));
+        }
+    }
 }
