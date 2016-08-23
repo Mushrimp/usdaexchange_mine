@@ -4,7 +4,11 @@ import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -41,29 +45,43 @@ public class  page_017_marketpage extends PageOperations{
                 lv.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, height / 5));
                 LinearLayout ll = new LinearLayout(context);
                 ll.setOrientation(LinearLayout.VERTICAL);
+                ll.setPadding(0,0,0,80);
 
                 //Market Name
                 TextView mn = new TextView(context);
-                mn.setTextAppearance(context, R.style.Bold);
-                mn.setTextSize(width / 33);
+                mn.setTextAppearance(context, R.style.Green);
+                mn.setTextSize(width / 30);
                 mn.setText(marketprofile.getString("price_market_name"));
-                mn.setGravity(Gravity.CENTER);
+                mn.setGravity(Gravity.START);
                 ll.addView(mn);
                 //
                 TextView br1 = new TextView(context);
                 br1.setText("");
                 ll.addView(br1);
 
+                //Button
+                Button al = new Button(context);
+                al.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3), (int)(height/18)));
+                al.setBackgroundResource(R.drawable.button_style);
+                al.setTextAppearance(context, R.style.White);
+                al.setPadding(0,10,0,10);
+                al.setTextSize(width / 50);
+                al.setGravity(Gravity.CENTER);
+                al.setText("Add to list");
+                al.setTransformationMethod(null);
+                ll.addView(al);
+
                 //Address
                 TextView address1 = new TextView(context);
-                address1.setTextAppearance(context, R.style.Bold);
-                address1.setTextSize(width / 42);
+                address1.setPadding(0,30,0,0);
+                address1.setTextAppearance(context, R.style.Body);
+                address1.setTextSize(width / 40);
                 address1.setText(res.getString(R.string.l_017_MarketMainpage_Address_Label_0));
                 ll.addView(address1);
                 TextView address = new TextView(context);
-                address.setPadding(0,10,0,0);
+                address.setPadding(40,10,0,0);
                 address.setTextAppearance(context, R.style.Normal);
-                address.setTextSize(width / 45);
+                address.setTextSize(width / 40);
                 address.setText(marketprofile.getString("price_street") + ", " + marketprofile.getString("price_city") + ", "
                         + marketprofile.getString("price_state") + ", " + marketprofile.getString("price_zipcode"));
                 ll.addView(address);
@@ -79,14 +97,14 @@ public class  page_017_marketpage extends PageOperations{
 
                 //Products
                 TextView product1 = new TextView(context);
-                product1.setTextAppearance(context, R.style.Bold);
-                product1.setTextSize(width / 42);
+                product1.setTextAppearance(context, R.style.Body);
+                product1.setTextSize(width / 40);
                 product1.setText(res.getString(R.string.l_017_MarketMainpage_Products_Label_0));
                 ll.addView(product1);
                 TextView product = new TextView(context);
-                product.setPadding(0,10,0,0);
+                product.setPadding(40,10,0,0);
                 product.setTextAppearance(context, R.style.Normal);
-                product.setTextSize(width / 45);
+                product.setTextSize(width / 40);
                 product.setText(result.getString("productlist"));
                 ll.addView(product);
 
@@ -96,10 +114,10 @@ public class  page_017_marketpage extends PageOperations{
 
                 //Vendors
                 TextView vendor1 = new TextView(context);
-                vendor1.setTextAppearance(context, R.style.Bold);
-                vendor1.setTextSize(width / 42);
+                vendor1.setTextAppearance(context, R.style.Green);
+                vendor1.setTextSize(width / 35);
                 vendor1.setText(res.getString(R.string.l_017_MarketMainpage_VendorPostPrice_Label_0));
-                vendor1.setPadding(0,0,0,10);
+                vendor1.setPadding(0,10,0,10);
                 ll.addView(vendor1);
 
                 ScrollView vendorscroll=new ScrollView(context);
@@ -108,28 +126,42 @@ public class  page_017_marketpage extends PageOperations{
                 for (int i=0;i<vendorarray.length();i++)
                 {
                     TableRow tr=new TableRow(context);
-                    tr.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9),TableLayout.LayoutParams.WRAP_CONTENT));
+                    tr.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), ViewGroup.LayoutParams.WRAP_CONTENT));
+                    tr.setBackgroundResource(R.drawable.row_border);
+                    RelativeLayout ll_arrow = new RelativeLayout(context);
+                    ll_arrow.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), ViewGroup.LayoutParams.WRAP_CONTENT));
                     TextView vendorinfo=new TextView(context);
-                    vendorinfo.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9),TableLayout.LayoutParams.WRAP_CONTENT));
-                    vendorinfo.setTextAppearance(context, R.style.Normal);
-                    vendorinfo.setTextSize(width / 45);
-                    vendorinfo.setPadding(0,20,0,20);
+                    RelativeLayout.LayoutParams parms2 = new RelativeLayout.LayoutParams((int)(width*0.8),TableRow.LayoutParams.WRAP_CONTENT);
+                    parms2.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                    vendorinfo.setLayoutParams(parms2);
+                    vendorinfo.setTextAppearance(context, R.style.DarkBule);
+                    vendorinfo.setTextSize(width / 40);
+                    vendorinfo.setPadding(30,20,0,20);
                     JSONObject vendor=vendorarray.getJSONObject(i);
                     vendorinfo.setMaxLines(1);
                     vendorinfo.setEllipsize(TextUtils.TruncateAt.END);
-                    vendorinfo.setHorizontallyScrolling(true);
                     vendorinfo.setText(vendor.getString("vendorbusinessname")+" ("+vendor.getString("vendorcity")+", "+vendor.getString("vendorstate")+")");
-                    tr.addView(vendorinfo);
+                    ll_arrow.addView(vendorinfo);
+                    ImageView i1= new ImageView(context);
+                    i1.setImageResource(R.drawable.next_item);
+                    i1.setPadding(0,0,10,0);
+                    RelativeLayout.LayoutParams parms1 = new RelativeLayout.LayoutParams(50, 50);
+                    parms1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    parms1.addRule(RelativeLayout.CENTER_VERTICAL);
+                    i1.setLayoutParams(parms1);
+                    ll_arrow.addView(i1);
+
+                    tr.addView(ll_arrow);
 
                     tr.setOnClickListener(new checkvendorListener(tr,vendor.getString("vendorusername")));
                     vendorlinear.addView(tr);
 
-                    TableRow tr_line = new TableRow(context);
-                    View line = new View(context);
-                    line.setLayoutParams(new TableRow.LayoutParams(0,2,1f));
-                    line.setBackgroundColor(Color.parseColor("#C2C2C2"));
-                    tr_line.addView(line);
-                    vendorlinear.addView(tr_line);
+//                    TableRow tr_line = new TableRow(context);
+//                    View line = new View(context);
+//                    line.setLayoutParams(new TableRow.LayoutParams(0,2,1f));
+//                    line.setBackgroundColor(Color.parseColor("#C2C2C2"));
+//                    tr_line.addView(line);
+//                    vendorlinear.addView(tr_line);
                 }
                 vendorscroll.addView(vendorlinear);
 

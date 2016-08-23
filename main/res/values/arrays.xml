@@ -15,7 +15,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"loginErrorView\"}</item>
     </array>
     <array name="page_103_retrievepin">
-        <item>{\"element\":\"Title\",\"value\":\"Forgot password\",\"id\":\"retrievepinView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_103_ResetPass_Title_0\",\"id\":\"retrievepinView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_103_ResetPass_Label_0\",\"id\":\"resetView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_103_ResetPass_Email_PlaceHolder_0\",\"id\":\"reemailInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
@@ -55,9 +55,9 @@
     <array name="page_016_vendorpage">
         <item>{\"element\":\"Title\",\"value\":\"l_016_VendorMainpage_Title_0\",\"id\":\"vendorpageView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"vendorpageScroll\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_016_VendorMainpage_ProductsPost_Label_0\",\"id\":\"vendorpageView1\", \"clickaction\":\"productlist\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_016_VendorMainpage_Market_Label_0\",\"id\":\"vendorpageView2\", \"clickaction\":\"marketsell\"}</item>
+        <!--<item>{\"element\":\"Button\",\"value\":\"l_016_VendorMainpage_ProductsPost_Label_0\",\"id\":\"vendorpageView1\", \"clickaction\":\"productlist\"}</item>-->
+        <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
+        <!--<item>{\"element\":\"Button\",\"value\":\"l_016_VendorMainpage_Market_Label_0\",\"id\":\"vendorpageView2\", \"clickaction\":\"marketsell\"}</item>-->
     </array>
 
    <array name="page_010_marketlist_byvendor">
@@ -251,7 +251,7 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"addmarketScroll\"}</item>
     </array>
     <array name="page_310_addnewmarket">
-        <item>{\"element\":\"Title\",\"value\":\"Add New Market\",\"id\":\"addnewmarketView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_310_AddMarketForm_Title_0\",\"id\":\"addnewmarketView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_310_AddMarketForm_MarketName_Label_0\",\"id\":\"newmarketnameView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_310_AddMarketForm_MarketName_PlaceHolder_0\",\"id\":\"marketnameInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_310_AddMarketForm_Email_Label_0\",\"id\":\"productnameView\"}</item>
@@ -313,37 +313,37 @@
     </array>
     <array name="page_406_searchfriend">
         <item>{\"element\":\"Title\",\"value\":\"l_406_AddFriendship_Title_0\",\"id\":\"searchfriendView\"}</item>
-        <item>{\"element\":\"SearchView\",\"value\":\"Search and request friend...\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"l_406_AddFriendship_Search_PlaceHolder_0\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"searchuserScroll\"}</item>
 
     </array>
     <array name="page_412_request">
-        <item>{\"element\":\"Title\",\"value\":\"Requests\",\"id\":\"requestView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_412_Requests_Label_0\",\"id\":\"requestView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"requestScroll\"}</item>
     </array>
     <array name="page_402_message">
-        <item>{\"element\":\"Title\",\"value\":\"Messages\",\"id\":\"messageView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_402_MessageList_Title_0\",\"id\":\"messageView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageScroll\"}</item>
     </array>
     <array name="page_403_messageform">
         <item>{\"element\":\"Title\",\"value\":\"l_403_MessageDetail_Title_0\",\"id\":\"messageView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageformScroll\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Reply\",\"id\":\"replyButton\", \"clickaction\":\"replymessageaction\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_403_MessageDetail_ReplayButton_Label_0\",\"id\":\"replyButton\", \"clickaction\":\"replymessageaction\"}</item>
     </array>
     <array name="page_404_notification">
-        <item>{\"element\":\"Title\",\"value\":\"Notifications\",\"id\":\"notificationView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_404_Notification_Title_0\",\"id\":\"notificationView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"notificationScroll\"}</item>
     </array>
     <array name="page_408_sendmessage">
         <item>{\"element\":\"Title\",\"value\":\"New Message\",\"id\":\"newmessageView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Recipient(s)\",\"id\":\"recipientView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_408_NewMessage_Recipients_Label_0\",\"id\":\"recipientView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"recipientname\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"recipientid\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Subject\",\"id\":\"subjectView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_408_NewMessage_Subject_Label_0\",\"id\":\"subjectView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"subjectInput\",\"next\":\"contentInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Content\",\"id\":\"contentView\"}</item>
-        <item>{\"element\":\"EditText\",\"value\":\"\",\"id\":\"contentInput\",\"inputtype\":\"multiple\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_408_NewMessage_Message_Label_0\",\"id\":\"contentView\"}</item>
+        <item>{\"element\":\"EditText\",\"value\":\"l_408_NewMessage_Message_PlaceHolder_0\",\"id\":\"contentInput\",\"inputtype\":\"multiple\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Send\",\"id\":\"sendButton\", \"clickaction\":\"sendmessageAction\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errormessageView\"}</item>
@@ -387,12 +387,16 @@
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"accountErrorView\"}</item>
     </array>
     <array name="page_106_uploadlogo">
-        <item>{\"element\":\"Title\",\"value\":\"Upload Logo\",\"id\":\"uploadlogoView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_106_UserLogo_Title_0\",\"id\":\"uploadlogoView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Upload logo\",\"id\":\"selectimagebutton\", \"clickaction\":\"selectImage\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_106_UserLogo_TakePhotoButton_Label_0\",\"id\":\"takepicturebutton\", \"clickaction\":\"takePicture\"}</item>
+        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_106_UserLogo_SelectPhotoButton_Label_0\",\"id\":\"chooseimagebutton\", \"clickaction\":\"chooseImage\"}</item>
+        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_106_UserLogo_UploadButton_Label_0\",\"id\":\"selectimagebutton\", \"clickaction\":\"selectImage\"}</item>
     </array>
     <array name="page_109_qrcode">
-        <item>{\"element\":\"Title\",\"value\":\"My QR code\",\"id\":\"qrcodeView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_109_UserQRcode_Title_0\",\"id\":\"qrcodeView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"QR code\",\"id\":\"qrcodeView\"}</item>
     </array>
     <array name="page_111_searchpreference">
@@ -408,21 +412,21 @@
         <item>{\"element\":\"Button\",\"value\":\"l_111_SearchPreferences_PreferMarkets_Button_0\",\"id\":\"searchpreferenceView4\", \"clickaction\":\"prefermarket\"}</item>
     </array>
     <array name="page_107_setnotification">
-        <item>{\"element\":\"Title\",\"value\":\"Notification Settings\",\"id\":\"setnotificationView\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Email reminder before market days\",\"id\":\"emailpremarketCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Reminder before market day\",\"id\":\"premarketCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"App features and updates\",\"id\":\"appupdateCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"\\\"Friend me\\\" requests\",\"id\":\"friendCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"New messages from friends\",\"id\":\"messageCheckbox\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_107_Notification_Title_0\",\"id\":\"setnotificationView\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_EmailReminder_Label_0\",\"id\":\"emailpremarketCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_ReminderBefore_Label_0\",\"id\":\"premarketCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_AppFeatures_Label_0\",\"id\":\"appupdateCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_FriendMe_Label_0\" requests\",\"id\":\"friendCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_NewMessage_Label_0\",\"id\":\"messageCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"voidView\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"savenotificationsettingsButton\", \"clickaction\":\"savenotificationsettings\"}</item>
     </array>
     <array name="page_108_socialnetwork">
-        <item>{\"element\":\"Title\",\"value\":\"Social Network Settings\",\"id\":\"socialnetworkView\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Do not \\\"friend me\\\"\",\"id\":\"nofriendCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Do not receive private messages\",\"id\":\"nomessageCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Notifications for \\\"friend me\\\" requests\",\"id\":\"friendCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"Notifications for new messages\",\"id\":\"messageCheckbox\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_108_SocialSetting_Title_0\",\"id\":\"socialnetworkView\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_DontFriend_Label_0\",\"id\":\"nofriendCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_DontReceive_Label_0\",\"id\":\"nomessageCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_NotificationFriend_Label_0\" requests\",\"id\":\"friendCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_NotificationNewMessage_Label_0\",\"id\":\"messageCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"voidView\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"savesocialsettingsButton\", \"clickaction\":\"savesocialsettings\"}</item>
     </array>
@@ -430,25 +434,26 @@
         <item>{\"element\":\"Title\",\"value\":\"Delete Account\",\"id\":\"deleteView\"}</item>
     </array>
     <array name="page_101_signasvendor">
-        <item>{\"element\":\"Title\",\"value\":\"Sign as a Vendor\",\"id\":\"signvendorView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Sign up as a vendor\",\"id\":\"signasvendorView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_101_RoleOption_Title_0\",\"id\":\"signvendorView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_101_RoleOption_Instruction_0\",\"id\":\"signasvendorView\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_101_RoleOption_CheckBox_0\",\"id\":\"signupvendorCheckbox\"}</item>
     </array>
     <!--Search Preference-->
     <array name="page_121_searchdistance">
-        <item>{\"element\":\"Title\",\"value\":\"Search Distance\",\"id\":\"searchdistanceView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"Preferred search radius\",\"id\":\"searchdistenceView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_121_SearchDistance_Title_0\",\"id\":\"searchdistanceView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"l_121_SearchDistance_Select_Label_0\",\"id\":\"searchdistenceView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"distanceSpinner\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"distanceButton\", \"clickaction\":\"distance\"}</item>
     </array>
     <array name="page_122_preferproduct">
-        <item>{\"element\":\"Title\",\"value\":\"Preferred Products\",\"id\":\"preferproductView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_122_PreferredProduct_Title_0\",\"id\":\"preferproductView\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addpreproductButton\", \"clickaction\":\"addpreproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"preferproductScroll\"}</item>
     </array>
     <array name="page_122_preferproduct_addnew">
-        <item>{\"element\":\"Title\",\"value\":\"Add Preferred Product\",\"id\":\"addnewproductView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_122_AddPreferredProduct_Title_0\",\"id\":\"addnewproductView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"Select a category\",\"id\":\"categorySpinner\"}</item>
         <item>{\"element\":\"SearchView\",\"value\":\"Search by category or product name\",\"id\":\"searchproducts\",\"clickaction\":\"searchproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
@@ -456,28 +461,28 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productScroll\"}</item>
     </array>
     <array name="page_123_prefervendor">
-        <item>{\"element\":\"Title\",\"value\":\"Preferred Vendors\",\"id\":\"prefervendorView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_123_PreferredVendor_Title_0\",\"id\":\"prefervendorView\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addprevendorButton\", \"clickaction\":\"addprevendor\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"prefervendorScroll\"}</item>
     </array>
     <array name="page_123_prefervendor_addnew">
-        <item>{\"element\":\"Title\",\"value\":\"Add Preferred Vendor\",\"id\":\"addnewvendorView\"}</item>
-        <item>{\"element\":\"Spinner\",\"value\":\"Select a state\",\"id\":\"vendorstateSpinner\"}</item>
-        <item>{\"element\":\"SearchView\",\"value\":\"Search by vendor name or city\",\"id\":\"searchvendor\",\"clickaction\":\"searchvendor\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_123_AddPreferredVendor_Title_0\",\"id\":\"addnewvendorView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"l_123_AddPreferredVendor_SelectState_Label_0\",\"id\":\"vendorstateSpinner\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"l_123_AddPreferredVendor_Search_PlaceHolder_0\",\"id\":\"searchvendor\",\"clickaction\":\"searchvendor\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"vendorScroll\"}</item>
     </array>
     <array name="page_124_prefermarket">
-        <item>{\"element\":\"Title\",\"value\":\"Preferred Farmers Markets\",\"id\":\"prefermarketView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addpremarketButton\", \"clickaction\":\"addpremarket\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_124_PreferredMarket_Title_0\",\"id\":\"prefermarketView\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_124_PreferredMarket_AddButton_Label_0\",\"id\":\"addpremarketButton\", \"clickaction\":\"addpremarket\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"prefermarketScroll\"}</item>
     </array>
     <array name="page_124_prefermarket_addnew">
-        <item>{\"element\":\"Title\",\"value\":\"Add Preferred Market\",\"id\":\"addnewmarketView\"}</item>
-        <item>{\"element\":\"Spinner\",\"value\":\"Select a state\",\"id\":\"marketstateSpinner\"}</item>
-        <item>{\"element\":\"SearchView\",\"value\":\"Search by market name or city\",\"id\":\"searchpremarket\",\"clickaction\":\"searchpremarket\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_124_AddPreferredMarket_Title_0\",\"id\":\"addnewmarketView\"}</item>
+        <item>{\"element\":\"Spinner\",\"value\":\"l_124_AddPreferredMarket_SelectState_Label_0\",\"id\":\"marketstateSpinner\"}</item>
+        <item>{\"element\":\"SearchView\",\"value\":\"l_124_AddPreferredMarket_Search_PlaceHolder_0\",\"id\":\"searchpremarket\",\"clickaction\":\"searchpremarket\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"marketScroll\"}</item>
     </array>

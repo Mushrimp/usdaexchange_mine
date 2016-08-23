@@ -488,7 +488,7 @@ public class PageOperations {
         } else if (action.equals("selectImage")) {
             bt.setOnClickListener(new page_106_uploadlogo.startUploadImageListener(bt));
         }
-//View Post
+        //View Post
         else if (action.equals("productlist")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override

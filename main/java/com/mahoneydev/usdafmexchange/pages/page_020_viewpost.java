@@ -149,7 +149,7 @@ public class page_020_viewpost extends PageOperations {
 
                 //TableLayout
                 TableLayout tl_in = new TableLayout(context);
-                tl_in.setPadding(0,20,0,0);
+                tl_in.setPadding(0,20,0,80);
                 //Category
                 TableRow tr1 = new TableRow(context);
                 tr1.setPadding(0,10,0,10);
@@ -179,7 +179,7 @@ public class page_020_viewpost extends PageOperations {
                 tr2.addView(org1);
                 LinearLayout ll_in = new LinearLayout(context);
                 ImageView org = new ImageView(context);
-                org.setPadding(30,0,0,20);
+                org.setPadding(30,0,0,10);
                 //org.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
                 String organic = postView.getString("price_usdaorganic");
                 if (organic.equals("yes")) {
@@ -208,10 +208,29 @@ public class page_020_viewpost extends PageOperations {
                 desc.setText(postView.getString("price_ad_desc"));
                 tr3.addView(desc);
                 tl_in.addView(tr3);
+                //Location
+                TableRow tr8 = new TableRow(context);
+                tr8.setPadding(0,10,0,10);
+                TextView location1 = new TextView(context);
+                location1.setGravity(Gravity.RIGHT);
+                location1.setTextAppearance(context, R.style.Body);
+                location1.setTextSize(width / 40);
+                location1.setText("Location:");
+                tr8.addView(location1);
+                TextView location = new TextView(context);
+                location.setPadding(30,0,0,0);
+                location.setLayoutParams(new TableRow.LayoutParams((int) (width * 0.6), TableLayout.LayoutParams.WRAP_CONTENT));
+                location.setTextAppearance(context, R.style.Normal);
+                location.setTextSize(width / 40);
+                location.setText(postView.getString("price_street") + "," + postView.getString("price_city") + ","
+                        + postView.getString("price_state") + "," + postView.getString("price_zipcode"));
+                tr8.addView(location);
+                tl_in.addView(tr8);
+
                 //Vendor
                 TableRow tr4 = new TableRow(context);
                 tr4.setBackgroundResource(R.drawable.row_border);
-                tr4.setPadding(0,10,0,10);
+                tr4.setPadding(0,20,0,20);
                 TextView vendor1 = new TextView(context);
                 vendor1.setGravity(Gravity.RIGHT);
                 //vendor1.setLayoutParams(new TableRow.LayoutParams((int)(width*0.35), TableRow.LayoutParams.WRAP_CONTENT));
@@ -225,7 +244,7 @@ public class page_020_viewpost extends PageOperations {
                 vendor.setEllipsize(TextUtils.TruncateAt.END);
                 vendor.setHorizontallyScrolling(true);
                 vendor.setPadding(30,0,0,0);
-                vendor.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
+                vendor.setLayoutParams(new TableRow.LayoutParams((int) (width * 5 / 10), TableRow.LayoutParams.WRAP_CONTENT));
                 vendor.setTextAppearance(context, R.style.DarkBule);
                 vendor.setTextSize(width / 40);
                 vendor.setText(postView.getString("price_vendorname"));
@@ -259,14 +278,14 @@ public class page_020_viewpost extends PageOperations {
                 //Market name
                 TableRow tr6 = new TableRow(context);
                 tr6.setBackgroundResource(R.drawable.row_border);
-                tr6.setPadding(0,10,0,10);
+                tr6.setPadding(0,20,0,20);
                 TextView mn1 = new TextView(context);
                 mn1.setGravity(Gravity.RIGHT);
                 mn1.setTextAppearance(context, R.style.Body);
                 mn1.setTextSize(width / 40);
                 mn1.setText("Market:");
                 tr6.addView(mn1);
-                TableRow.LayoutParams tparams = new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT);
+                TableRow.LayoutParams tparams = new TableRow.LayoutParams((int) (width * 5 / 10), TableRow.LayoutParams.WRAP_CONTENT);
                 RelativeLayout ll_arrow2 = new RelativeLayout(context);
                 TextView mn = new TextView(context);
                 mn.setMaxLines(1);
@@ -303,25 +322,6 @@ public class page_020_viewpost extends PageOperations {
                 final String marketid = postView.getString("price_fmid");
                 tr6.setOnClickListener(new showMarketListener(tr6,marketid));
 
-                //Location
-                TableRow tr8 = new TableRow(context);
-                tr8.setPadding(0,10,0,10);
-                TextView location1 = new TextView(context);
-                location1.setGravity(Gravity.RIGHT);
-                location1.setTextAppearance(context, R.style.Body);
-                location1.setTextSize(width / 40);
-                location1.setText("Location:");
-                tr8.addView(location1);
-                TextView location = new TextView(context);
-                location.setPadding(30,0,0,0);
-                location.setLayoutParams(new TableRow.LayoutParams((int) (width * 0.6), TableLayout.LayoutParams.WRAP_CONTENT));
-                location.setTextAppearance(context, R.style.Normal);
-                location.setTextSize(width / 40);
-                location.setText(postView.getString("price_street") + "," + postView.getString("price_city") + ","
-                        + postView.getString("price_state") + "," + postView.getString("price_zipcode"));
-                tr8.addView(location);
-                tl_in.addView(tr8);
-
                 ll.addView(tl_in);
 
                 ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
@@ -331,6 +331,7 @@ public class page_020_viewpost extends PageOperations {
             }
         }.execute(AppCodeResources.postUrl("usdatestchongguang", "public_search_table_by_id", ht));
     }
+
     public static class showVendorListener extends ClickOnceListener {
         private String username;
         public showVendorListener(View button, String iusername) {
