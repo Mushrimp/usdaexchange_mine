@@ -8,10 +8,10 @@
         <item>{\"element\":\"EditText\",\"value\":\"\",\"inputtype\":\"textPassword\",\"id\":\"passwordInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void1View\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_102_SignIn_FogotPassword_Button_0\",\"id\":\"forgotView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_102_SignIn_SignIn_Button_0\",\"id\":\"loginsubmitbutton\",\"clickaction\":\"loginSubmit\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"l_102_SignIn_SignIn_Button_0\",\"id\":\"loginsubmitbutton\",\"clickaction\":\"loginSubmit\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_102_SignIn_SignUp_Label_0\",\"id\":\"newView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_102_SignIn_SignUp_Button_0\",\"id\":\"signupbutton\",\"clickaction\":\"signUp\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"l_102_SignIn_SignUp_Button_0\",\"id\":\"signupbutton\",\"clickaction\":\"signUp\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"loginErrorView\"}</item>
     </array>
     <array name="page_103_retrievepin">
@@ -19,7 +19,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_103_ResetPass_Label_0\",\"id\":\"resetView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_103_ResetPass_Email_PlaceHolder_0\",\"id\":\"reemailInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Send\",\"id\":\"resendbutton\",\"clickaction\":\"sendemail\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Send\",\"id\":\"resendbutton\",\"clickaction\":\"sendemail\"}</item>
     </array>
     <array name="page_104_logout">
         <item>{\"element\":\"TextView\",\"value\":\"Log out!\",\"id\":\"logoutView\"}</item>
@@ -38,7 +38,7 @@
         <item>{\"element\":\"EditText\",\"value\":\"l_100_Registration_DisplayName_PlaceHolder_0\",\"id\":\"displayInput\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_100_Registration_SignUpVendor_CheckBox_0\",\"id\":\"registerCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_100_Registration_CreateAccount_Button_0\",\"id\":\"signupbutton\",\"clickaction\":\"registration\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"l_100_Registration_CreateAccount_Button_0\",\"id\":\"signupbutton\",\"clickaction\":\"registration\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"registrationErrorView\"}</item>
     </array>
     <array name="page_001_front">
@@ -55,9 +55,6 @@
     <array name="page_016_vendorpage">
         <item>{\"element\":\"Title\",\"value\":\"l_016_VendorMainpage_Title_0\",\"id\":\"vendorpageView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"vendorpageScroll\"}</item>
-        <!--<item>{\"element\":\"Button\",\"value\":\"l_016_VendorMainpage_ProductsPost_Label_0\",\"id\":\"vendorpageView1\", \"clickaction\":\"productlist\"}</item>-->
-        <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
-        <!--<item>{\"element\":\"Button\",\"value\":\"l_016_VendorMainpage_Market_Label_0\",\"id\":\"vendorpageView2\", \"clickaction\":\"marketsell\"}</item>-->
     </array>
 
    <array name="page_010_marketlist_byvendor">
@@ -84,17 +81,19 @@
     <!--Customer Service-->
     <array name="page_non_service">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"serviceView\"}</item>
-        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"postpriceView\"}</item>
+        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"custserviceView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_CustomerService_0\",\"id\":\"serviceView1\", \"clickaction\":\"about\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_CustomerService_1\",\"id\":\"serviceView2\", \"clickaction\":\"contact\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_CustomerService_2\",\"id\":\"serviceView3\", \"clickaction\":\"privacy\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_CustomerService_3\",\"id\":\"serviceView4\", \"clickaction\":\"help\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_CustomerService_4\",\"id\":\"serviceView4\", \"clickaction\":\"fmdir\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_003_aboutus">
         <item>{\"element\":\"Title\",\"value\":\"l_003_About_Title_0\",\"id\":\"aboutView\"}</item>
@@ -119,13 +118,15 @@
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"postView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"postpriceView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_0\",\"id\":\"postpriceView1\", \"clickaction\":\"newpost\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_1\",\"id\":\"postpriceView2\", \"clickaction\":\"posttemplate\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_2\",\"id\":\"postpriceView3\", \"clickaction\":\"postschedule\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_3\",\"id\":\"postpriceView4\", \"clickaction\":\"postpublish\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_322_newpost">
         <item>{\"element\":\"Title\",\"value\":\"l_322_NewPost_Title_0\",\"id\":\"newpostView\"}</item>
@@ -152,7 +153,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_322_NewPost_SaveForm_Text_0\",\"id\":\"postCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Publish\",\"id\":\"publishButton\", \"clickaction\":\"publishpost\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Publish\",\"id\":\"publishButton\", \"clickaction\":\"publishpost\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"newposterrorView\"}</item>
     </array>
     <array name="page_324_posttemplate">
@@ -173,17 +174,19 @@
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"profileView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"profilevendorView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_VendorProfile_0\",\"id\":\"profilevendorView1\", \"clickaction\":\"nameaddress\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_VendorProfile_1\",\"id\":\"profilevendorView2\", \"clickaction\":\"phoneemail\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_VendorProfile_2\",\"id\":\"profilevendorView3\", \"clickaction\":\"website\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_VendorProfile_3\",\"id\":\"profilevendorView4\", \"clickaction\":\"certified\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_VendorProfile_4\",\"id\":\"profilevendorView5\", \"clickaction\":\"farmermarket\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_VendorProfile_5\",\"id\":\"profilevendorView6\", \"clickaction\":\"productsell\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_205_nameaddress">
         <item>{\"element\":\"Title\",\"value\":\"l_205_BusinessNameAddress_Title_0\",\"id\":\"nameadressView\"}</item>
@@ -198,7 +201,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_205_BusinessNameAddress_Zipcode_Label_0\",\"id\":\"buszipcodeView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_205_BusinessNameAddress_Zipcode_PlaceHolder_0\",\"id\":\"buszipcodeInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"nameadsressView\", \"clickaction\":\"savenameaddress\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"nameadsressView\", \"clickaction\":\"savenameaddress\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"erroraddressView\"}</item>
     </array>
     <array name="page_206_phoneemail">
@@ -208,7 +211,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_206_ContactInfo_Email_Title_0\",\"id\":\"emailView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_206_ContactInfo_Email_PlaceHolder_0\",\"id\":\"emailInput\",\"inputtype\":\"email\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"phoneemailView\", \"clickaction\":\"savephoneemail\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"phoneemailView\", \"clickaction\":\"savephoneemail\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errorphoneView\"}</item>
     </array>
     <array name="page_207_website">
@@ -224,7 +227,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_207_WebsiteSocial_OtherMedia2_Label_0\",\"id\":\"other2View\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_207_WebsiteSocial_OtherMedia2_PlaceHolder_0\",\"id\":\"other2Input\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"mediaView\", \"clickaction\":\"savemedia\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"mediaView\", \"clickaction\":\"savemedia\"}</item>
     </array>
     <array name="page_209_certified">
         <item>{\"element\":\"Title\",\"value\":\"USDA Organic Certificate\",\"id\":\"certificationView\"}</item>
@@ -233,7 +236,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_209_USDAOrgainc_Number_Label_0\",\"id\":\"certifiedView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_209_USDAOrgainc_Number_PlaceHolder_0\",\"id\":\"certifiedInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"certifiedView\", \"clickaction\":\"savecertified\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"certifiedView\", \"clickaction\":\"savecertified\"}</item>
     </array>
     <array name="page_309_farmermarket">
         <item>{\"element\":\"Title\",\"value\":\"l_309_MarketLocation_Title_0\",\"id\":\"farmermarketView\"}</item>
@@ -265,7 +268,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_310_AddMarketForm_ZipCode_Label_0\",\"id\":\"zipcodeView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_310_AddMarketForm_ZipCode_PlaceHolder_0\",\"id\":\"zipcodeInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_310_AddMarketForm_Add_Button_0\",\"id\":\"addnewmarketButton\", \"clickaction\":\"savenewmarket\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"l_310_AddMarketForm_Add_Button_0\",\"id\":\"addnewmarketButton\", \"clickaction\":\"savenewmarket\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errorView\"}</item>
     </array>
     <array name="page_305_productsell">
@@ -286,7 +289,7 @@
         <item>{\"element\":\"CheckBox\",\"value\":\"l_306_AddProduct_Organic_CheckBox_0\",\"id\":\"otherCheckbox\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_306_AddProduct_OtherPractices_PlaceHolder_0\",\"id\":\"otherorganicInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_306_AddProduct_Add_Button_0\",\"id\":\"saveproductButton\", \"clickaction\":\"saveproduct\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"l_306_AddProduct_Add_Button_0\",\"id\":\"saveproductButton\", \"clickaction\":\"saveproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"producterrorView\"}</item>
     </array>
 
@@ -295,13 +298,15 @@
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"socialnetView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"socialnetworkView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_0\",\"id\":\"socialnetworkView1\", \"clickaction\":\"friendship\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_1\",\"id\":\"socialnetworkView2\", \"clickaction\":\"request\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_2\",\"id\":\"socialnetworkView3\", \"clickaction\":\"message\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_3\",\"id\":\"socialnetworkView4\", \"clickaction\":\"notification\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_401_friendship">
         <item>{\"element\":\"Title\",\"value\":\"l_401_Friends_Title_0\",\"id\":\"friendsView\"}</item>
@@ -345,30 +350,30 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_408_NewMessage_Message_Label_0\",\"id\":\"contentView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_408_NewMessage_Message_PlaceHolder_0\",\"id\":\"contentInput\",\"inputtype\":\"multiple\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Send\",\"id\":\"sendButton\", \"clickaction\":\"sendmessageAction\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Send\",\"id\":\"sendButton\", \"clickaction\":\"sendmessageAction\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"errormessageView\"}</item>
     </array>
 
     <!--account settings-->
     <array name="page_110_accountsettings">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"accountView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"accountsettingView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_0\",\"id\":\"accountsettingsView1\", \"clickaction\":\"accountinfo\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_1\",\"id\":\"accountsettingsView2\", \"clickaction\":\"uploadlogo"\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_2\",\"id\":\"accountsettingsView3\", \"clickaction\":\"qrcode\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_3\",\"id\":\"accountsettingsView4\", \"clickaction\":\"searchpreference\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_5\",\"id\":\"accountsettingsView5\", \"clickaction\":\"socialnetwork\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_4\",\"id\":\"accountsettingsView6\", \"clickaction\":\"setnotification\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_6\",\"id\":\"accountsettingsView7\", \"clickaction\":\"deleteaccount\"}</item>
-
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_105_accountinfo">
         <item>{\"element\":\"Title\",\"value\":\"l_105_AccountSetting_Title_0\",\"id\":\"infoView\"}</item>
@@ -383,17 +388,20 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_105_AccountSetting_DisplayName_Label_0\",\"id\":\"displaynameView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_105_AccountSetting_DisplayName_PlaceHolder_0\",\"id\":\"displaynameInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"saveView\", \"clickaction\":\"saveinfo\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"saveView\", \"clickaction\":\"saveinfo\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"accountErrorView\"}</item>
     </array>
     <array name="page_106_uploadlogo">
         <item>{\"element\":\"Title\",\"value\":\"l_106_UserLogo_Title_0\",\"id\":\"uploadlogoView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\"\",\"id\":\"View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_106_UserLogo_TakePhotoButton_Label_0\",\"id\":\"takepicturebutton\", \"clickaction\":\"takePicture\"}</item>
-        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\"\",\"id\":\"View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_106_UserLogo_SelectPhotoButton_Label_0\",\"id\":\"chooseimagebutton\", \"clickaction\":\"chooseImage\"}</item>
-        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"logoView\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\"\",\"id\":\"View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_106_UserLogo_UploadButton_Label_0\",\"id\":\"selectimagebutton\", \"clickaction\":\"selectImage\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\"\",\"id\":\"View\"}</item>
     </array>
     <array name="page_109_qrcode">
         <item>{\"element\":\"Title\",\"value\":\"l_109_UserQRcode_Title_0\",\"id\":\"qrcodeView\"}</item>
@@ -401,34 +409,36 @@
     </array>
     <array name="page_111_searchpreference">
         <item>{\"element\":\"Title\",\"value\":\"l_111_SearchPreferences_Title_0\",\"id\":\"preferView\"}</item>
-        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"accountsettingView\"}</item>
+        <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"searchprefView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_111_SearchPreferences_Distance_Button_0\",\"id\":\"searchpreferenceView1\", \"clickaction\":\"searchdistance\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_111_SearchPreferences_PreferProducts_Button_0\",\"id\":\"searchpreferenceView2\", \"clickaction\":\"preferproduct"\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_111_SearchPreferences_PreferVendors_Button_0\",\"id\":\"searchpreferenceView3\", \"clickaction\":\"prefervendor\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_111_SearchPreferences_PreferMarkets_Button_0\",\"id\":\"searchpreferenceView4\", \"clickaction\":\"prefermarket\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_107_setnotification">
         <item>{\"element\":\"Title\",\"value\":\"l_107_Notification_Title_0\",\"id\":\"setnotificationView\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_EmailReminder_Label_0\",\"id\":\"emailpremarketCheckbox\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_ReminderBefore_Label_0\",\"id\":\"premarketCheckbox\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_AppFeatures_Label_0\",\"id\":\"appupdateCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_FriendMe_Label_0\" requests\",\"id\":\"friendCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_FriendMe_Label_0\",\"id\":\"friendCheckbox\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_107_Notification_NewMessage_Label_0\",\"id\":\"messageCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"voidView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"savenotificationsettingsButton\", \"clickaction\":\"savenotificationsettings\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"savenotificationsettingsButton\", \"clickaction\":\"savenotificationsettings\"}</item>
     </array>
     <array name="page_108_socialnetwork">
         <item>{\"element\":\"Title\",\"value\":\"l_108_SocialSetting_Title_0\",\"id\":\"socialnetworkView\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_DontFriend_Label_0\",\"id\":\"nofriendCheckbox\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_DontReceive_Label_0\",\"id\":\"nomessageCheckbox\"}</item>
-        <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_NotificationFriend_Label_0\" requests\",\"id\":\"friendCheckbox\"}</item>
+        <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_NotificationFriend_Label_0\",\"id\":\"friendCheckbox\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_108_SocialSetting_NotificationNewMessage_Label_0\",\"id\":\"messageCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"voidView\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"savesocialsettingsButton\", \"clickaction\":\"savesocialsettings\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"savesocialsettingsButton\", \"clickaction\":\"savesocialsettings\"}</item>
     </array>
     <array name="page_112_deleteaccount">
         <item>{\"element\":\"Title\",\"value\":\"Delete Account\",\"id\":\"deleteView\"}</item>
@@ -444,7 +454,7 @@
         <item>{\"element\":\"TextView\",\"value\":\"l_121_SearchDistance_Select_Label_0\",\"id\":\"searchdistenceView\"}</item>
         <item>{\"element\":\"Spinner\",\"value\":\"\",\"id\":\"distanceSpinner\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Save\",\"id\":\"distanceButton\", \"clickaction\":\"distance\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"distanceButton\", \"clickaction\":\"distance\"}</item>
     </array>
     <array name="page_122_preferproduct">
         <item>{\"element\":\"Title\",\"value\":\"l_122_PreferredProduct_Title_0\",\"id\":\"preferproductView\"}</item>
@@ -457,7 +467,6 @@
         <item>{\"element\":\"Spinner\",\"value\":\"Select a category\",\"id\":\"categorySpinner\"}</item>
         <item>{\"element\":\"SearchView\",\"value\":\"Search by category or product name\",\"id\":\"searchproducts\",\"clickaction\":\"searchproduct\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"Add\",\"id\":\"addnewproductButton\", \"clickaction\":\"addnewproduct\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productScroll\"}</item>
     </array>
     <array name="page_123_prefervendor">

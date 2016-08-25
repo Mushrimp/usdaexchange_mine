@@ -5,6 +5,8 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -332,19 +334,47 @@ public class PageOperations {
                     } else if (element.equals("Button")) {
                         Button bt = new Button(context);
                         bt.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
-
                         hashelements.put(jsonelements.getString("id"), bt);
                         setButtonAction(jsonelements.getString("clickaction"), bt);
-                        bt.setBackgroundResource(R.drawable.button_600x50);
+                        bt.setBackgroundResource(R.drawable.button_menu);
+                        Drawable img = context.getResources().getDrawable(R.drawable.next_item);
+                        img.setBounds( 0, 0, 40, 40);
+                        bt.setCompoundDrawables(null, null, img, null );
+                        bt.setStateListAnimator(null);
                         bt.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
                         bt.setPadding(15, 0, 0, 0);
-                        bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                        bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)(height/10)));
                         bt.setTextSize(width / 50);
+                        bt.setPadding(20,0,10,0);
                         bt.setTextAppearance(context, R.style.Normal);
                         bt.setTransformationMethod(null);
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
-                    } else if (element.equals("ImageView")) {
+                    } else if (element.equals("InsideButton")){
+                        LinearLayout ll = new LinearLayout(context);
+                        ll.setGravity(Gravity.CENTER);
+                        Button inbt = new Button(context);
+                        inbt.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
+                        hashelements.put(jsonelements.getString("id"), inbt);
+                        setButtonAction(jsonelements.getString("clickaction"), inbt);
+                        inbt.setBackgroundResource(R.drawable.button_style);
+                        inbt.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.7), (int)(height/15)));
+                        inbt.setStateListAnimator(null);
+                        inbt.setPadding(0, 0, 0, 1);
+                        inbt.setTextSize(width / 50);
+                        inbt.setTextAppearance(context, R.style.White);
+                        inbt.setTransformationMethod(null);
+                        inbt.setVisibility(View.INVISIBLE);
+                        ll.addView(inbt);
+                        layout.addView(ll);
+                    }
+                    else if (element.equals("LineView")) {
+                        View line = new View(context);
+                        line.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
+                        line.setBackgroundColor(Color.parseColor("#A2D25A"));
+                        layout.addView(line);
+                    }
+                    else if (element.equals("ImageView")) {
                         ImageView iv = new ImageView(context);
                         iv.setVisibility(View.INVISIBLE);
                         hashelements.put(jsonelements.getString("id"), iv);
@@ -353,7 +383,21 @@ public class PageOperations {
                         LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(width, height);
                         parms.gravity = Gravity.CENTER;
                         iv.setLayoutParams(parms);
-                        iv.setImageResource(R.drawable.blank_profile);
+                        if (jsonelements.getString("id").equals("postpriceView")){
+                            iv.setImageResource(R.drawable.post_price);
+                        }else if (jsonelements.getString("id").equals("custserviceView")){
+                            iv.setImageResource(R.drawable.customer_service);
+                        }else if (jsonelements.getString("id").equals("profilevendorView")){
+                            iv.setImageResource(R.drawable.vendor_circle);
+                        }else if (jsonelements.getString("id").equals("socialnetworkView")){
+                            iv.setImageResource(R.drawable.social_network);
+                        }else if (jsonelements.getString("id").equals("accountsettingView")){
+                            iv.setImageResource(R.drawable.setting_circle);
+                        }else if (jsonelements.getString("id").equals("searchprefView")){
+                            iv.setImageResource(R.drawable.search_pref);
+                        }else {
+                            iv.setImageResource(R.drawable.blank_profile);
+                        }
                         layout.addView(iv);
                     } else if (element.equals("SearchView")) {
                         LinearLayout ll = new LinearLayout(context);
@@ -381,6 +425,7 @@ public class PageOperations {
                         hashelements.put(jsonelements.getString("id"), sv);
                         LinearLayout.LayoutParams layoutparams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         sv.setLayoutParams(layoutparams);
+                        sv.setBackgroundResource(R.color.colorWhite);
                         sv.setVisibility(View.INVISIBLE);
                         TableLayout tl = new TableLayout(context);
                         hashelements.put(jsonelements.getString("id") + "Table", tl);

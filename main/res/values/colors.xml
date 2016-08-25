@@ -6,4 +6,7 @@
     <color name="colorGray">#BCBCBC</color>
     <color name="colorGreen">#1C8A3B</color>
     <color name="colorDarkblue">#1C366F</color>
+    <color name="colorBackground">#DAF0AB</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorButton">#DDE0E1</color>
 </resources>
