@@ -63,6 +63,7 @@ public class page_306_addproductform extends PageOperations{
                 } else {
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
                             android.R.layout.simple_spinner_item, new String[0]);
+                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
                     AutoCompleteTextView actv = ((AutoCompleteTextView) hashelements.get("productnameInput"));
                     actv.setAdapter(adapter);
                     actv.setThreshold(2);
@@ -87,7 +88,8 @@ public class page_306_addproductform extends PageOperations{
             }
 
             ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                    android.R.layout.simple_spinner_item, arraySpinner);
+                    R.layout.simple_spinner_item, arraySpinner);
+            adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
             ((Spinner) hashelements.get("categorySpinner")).setAdapter(adapter);
             Hashtable<String, String> ht = new Hashtable<String, String>();
                     String token_s = UserFileUtility.get_token();

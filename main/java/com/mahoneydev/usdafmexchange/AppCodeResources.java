@@ -22,7 +22,7 @@ public class AppCodeResources {
     public static final int SCAN_QR=56;
     public static final String FRIEND_URL_PRE="http://52.207.244.89/usdafmexchange/407-friendship-request-action/?fname=";
     public static final ArrayList<SpinnerElement> state_list=new ArrayList<SpinnerElement>(){{
-        add(new SpinnerElement("select a state",""));
+        add(new SpinnerElement("Select a state",""));
         add(new SpinnerElement("Alabama","01"));
         add(new SpinnerElement("Alaska","02"));
         add(new SpinnerElement("Arizona","04"));

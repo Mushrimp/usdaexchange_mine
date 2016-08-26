@@ -51,7 +51,7 @@ public class page_122_preferproduct_addnew extends PageOperations {
                     arraySpinner[i + 1] = new SpinnerElement(jsonobject.getString("Prd_Category1"), jsonobject.getString("Prd_Cat_ID1"));
                 }
                 ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                        android.R.layout.simple_spinner_item, arraySpinner);
+                        R.layout.simple_spinner_item, arraySpinner);
                 ((Spinner) hashelements.get("categorySpinner")).setAdapter(adapter);
 
                 Hashtable<String, String> ht1 = new Hashtable<String, String>();

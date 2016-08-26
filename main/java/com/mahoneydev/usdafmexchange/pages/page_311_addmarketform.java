@@ -50,7 +50,8 @@ public class page_311_addmarketform extends PageOperations {
                     arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
                 }
                 ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                        android.R.layout.simple_spinner_item, arraySpinner);
+                        R.layout.simple_spinner_item, arraySpinner);
+                adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
                 ((Spinner) hashelements.get("marketstateSpinner")).setAdapter(adapter);
                 JSONArray allmarkets = result.getJSONArray("results");
                 TableLayout tl = (TableLayout) hashelements.get("addmarketScrollTable");

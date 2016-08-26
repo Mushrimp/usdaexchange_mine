@@ -46,7 +46,7 @@ public class page_123_prefervendor_addnew extends PageOperations {
                     arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
                 }
                 ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                        android.R.layout.simple_spinner_item, arraySpinner);
+                        R.layout.simple_spinner_item, arraySpinner);
                 ((Spinner) hashelements.get("vendorstateSpinner")).setAdapter(adapter);
 
                 setupUI(playout);

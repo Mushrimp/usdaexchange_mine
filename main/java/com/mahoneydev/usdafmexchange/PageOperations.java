@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -147,18 +148,25 @@ public class PageOperations {
                 if (jsonelements.has("element")) {
                     String element = jsonelements.getString("element");
                     if (element.equals("TextView")) {
+                        RelativeLayout rl = new RelativeLayout(context);
+                        //rl.setLayoutParams(new RelativeLayout.LayoutParams((int)(width*0.9), RelativeLayout.LayoutParams.WRAP_CONTENT));
                         TextView tv = new TextView(context);
-                        tv.setTextAppearance(context, R.style.Bold);
-                        tv.setTextSize(width / 45);
+                        RelativeLayout.LayoutParams parms1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        parms1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                        parms1.addRule(RelativeLayout.CENTER_VERTICAL);
+                        tv.setLayoutParams(parms1);
                         tv.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
-                        if (jsonelements.has("inputtype")) {
-                        }
                         hashelements.put(jsonelements.getString("id"), tv);
                         tv.setVisibility(View.INVISIBLE);
                         if (jsonelements.getString("id").equals("forgotView")){
-                            tv.setGravity(Gravity.RIGHT);
+                            RelativeLayout.LayoutParams parms3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                            parms3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                            parms3.addRule(RelativeLayout.CENTER_VERTICAL);
+                            tv.setLayoutParams(parms3);
+                           // tv.setGravity(Gravity.RIGHT);
                             tv.setTextAppearance(context,R.style.Date);
-                            tv.setTextSize(width/55);
+                            tv.setTextSize(width/45);
+                            tv.setPadding(0,0,0,20);
                             tv.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -167,23 +175,65 @@ public class PageOperations {
                             });
                         }else if(jsonelements.getString("id").equals("newView")){
                             tv.setTextAppearance(context,R.style.Normal);
-                            tv.setTextSize(width/55);
+                            tv.setTextSize(width/45);
+                            tv.setPadding(0,0,0,20);
                         }else if(jsonelements.getString("id").equals("resetView")){
                             tv.setTextAppearance(context,R.style.Normal);
+                        }else if(jsonelements.getString("id").equals("recipientname")){
+                            tv.setTextAppearance(context,R.style.Normal);
+                            tv.setTextSize(width/35);
+                            tv.setPadding(0,20,0,0);
+                        }else {
+                            tv.setTextAppearance(context, R.style.Bold);
+                            tv.setTextSize(width / 45);
+                            tv.setPadding(0,30,0,0);
                         }
-                        layout.addView(tv);
+                        rl.addView(tv);
+                        if (jsonelements.getString("id").equals("marketView1")) {
+                            Button addpro = new Button(context);
+                            addpro.setText(R.string.l_322_NewPost_Product_AddButton_0);
+                            hashelements.put("addproduct322", addpro);
+                            setButtonAction("productsell", addpro);
+                            addpro.setBackgroundResource(R.drawable.button_style);
+                            addpro.setStateListAnimator(null);
+                            addpro.setPadding(0, 0, 0, 2);
+                            addpro.setTextAppearance(context, R.style.White);
+                            addpro.setTextSize(width / 50);
+                            RelativeLayout.LayoutParams parms2 = new RelativeLayout.LayoutParams((int)(width*0.3), (int)(height*0.04));
+                            parms2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                            parms2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                            addpro.setLayoutParams(parms2);
+                            addpro.setTransformationMethod(null);
+                            addpro.setVisibility(View.INVISIBLE);
+                            rl.addView(addpro);
+                        } else if (jsonelements.getString("id").equals("marketView3")){
+                            Button addmar = new Button(context);
+                            addmar.setText(R.string.l_322_NewPost_FarmersMarket_AddButton_0);
+                            hashelements.put("addmarket322", addmar);
+                            setButtonAction("farmermarket", addmar);
+                            addmar.setBackgroundResource(R.drawable.button_style);
+                            addmar.setStateListAnimator(null);
+                            addmar.setPadding(0, 0, 0, 2);
+                            addmar.setTextAppearance(context, R.style.White);
+                            addmar.setTextSize(width / 50);
+                            RelativeLayout.LayoutParams parms2 = new RelativeLayout.LayoutParams((int)(width*0.3), (int)(height*0.04));
+                            parms2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                            parms2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                            addmar.setLayoutParams(parms2);
+                            addmar.setTransformationMethod(null);
+                            addmar.setVisibility(View.INVISIBLE);
+                            rl.addView(addmar);
+                        }
+                        layout.addView(rl);
 
                     }
                     else if (element.equals("Title")){
                         ImageButton qbutton=(ImageButton)context.findViewById(R.id.camerabutton);
-//                        Log.e("a","aa");
                         toolbar.removeAllViewsInLayout();
                         toolbar.setGravity(Gravity.CENTER);
-                       // Log.e("a","bb");
                         TextView tb = new TextView(context);
                         tb.setTextAppearance(context,R.style.Normal);
                         tb.setTextColor(Color.WHITE);
-                        //Log.e("a","cc");
                         String value=jsonelements.getString("value");
                         setupperrightbutton(code,qbutton);
                         if (value.equals("image")||value.equals("special"))
@@ -193,17 +243,17 @@ public class PageOperations {
                         else {
                             tb.setText(AppCodeResources.getStringbyName(res,packagename,value));
                             toolbar.addView(tb);
-                            //Log.e("a", "dd");
                             hideKey(context.findViewById(R.id.toolbarLayout));
-                            //Log.e("a", "ee");
                         }
 
                     }
                     else if (element.equals("EditText")) {
                         EditText et = new EditText(context);
                         et.setHint(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
-                        et.setTextSize(width / 45);
-                        et.setTextAppearance(context,R.style.Normal);
+                        et.setPadding(0,20,0,8);
+                        et.setTextAppearance(context,R.style.EditText);
+                        et.setHintTextColor(context.getResources().getColor(R.color.colorGray));
+                        et.setTextSize(width / 35);
                         et.setSingleLine();
                         boolean multiple=false;
                         if (jsonelements.has("inputtype")) {
@@ -278,6 +328,10 @@ public class PageOperations {
                     } else if (element.equals("AutoCompleteTextView")) {
                         AutoCompleteTextView et = new AutoCompleteTextView(context);
                         et.setHint(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
+                        et.setPadding(0,20,0,8);
+                        et.setTextAppearance(context,R.style.EditText);
+                        et.setHintTextColor(context.getResources().getColor(R.color.colorGray));
+                        et.setTextSize(width / 35);
                         if (jsonelements.has("inputtype")) {
                             et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         }
@@ -367,6 +421,25 @@ public class PageOperations {
                         inbt.setVisibility(View.INVISIBLE);
                         ll.addView(inbt);
                         layout.addView(ll);
+                    } else if (element.equals("NextButton")){
+                        Button bt = new Button(context);
+                        bt.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
+                        hashelements.put(jsonelements.getString("id"), bt);
+                        setButtonAction(jsonelements.getString("clickaction"), bt);
+                        bt.setBackgroundResource(R.drawable.button_next);
+                        Drawable img = context.getResources().getDrawable(R.drawable.next_item);
+                        img.setBounds( 0, 0, 40, 40);
+                        bt.setCompoundDrawables(null, null, img, null );
+                        bt.setStateListAnimator(null);
+                        bt.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                        bt.setPadding(15, 0, 0, 0);
+                        bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)(height/10)));
+                        bt.setTextSize(width / 50);
+                        bt.setPadding(20,0,10,0);
+                        bt.setTextAppearance(context, R.style.Normal);
+                        bt.setTransformationMethod(null);
+                        bt.setVisibility(View.INVISIBLE);
+                        layout.addView(bt);
                     }
                     else if (element.equals("LineView")) {
                         View line = new View(context);
@@ -406,6 +479,10 @@ public class PageOperations {
                         EditText et = new EditText(context);
                         if(jsonelements.getString("id").equals("searchpublicposts")){
                             et.setTextSize(width/60);
+                        }else if(jsonelements.getString("id").equals("searchproducts")){
+                            et.setTextSize(width/50);
+                        }else if(jsonelements.getString("id").equals("searchfriends")){
+                            et.setTextSize(width/50);
                         }
                         et.setHint(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         hashelements.put(jsonelements.getString("id") + "Input", et);
@@ -422,6 +499,7 @@ public class PageOperations {
                         layout.addView(ll);
                     } else if (element.equals("ScrollView")) {
                         ScrollView sv = new ScrollView(context);
+                        sv.setPadding(0,20,0,40);
                         hashelements.put(jsonelements.getString("id"), sv);
                         LinearLayout.LayoutParams layoutparams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         sv.setLayoutParams(layoutparams);
@@ -435,13 +513,16 @@ public class PageOperations {
                         layout.addView(sv);
                     } else if (element.equals("Spinner")) {
                         Spinner sp = new Spinner(context);
-                        sp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                        sp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)(height*0.08)));
+                       // sp.setPadding(0,15,0,0);
                         sp.setVisibility(View.INVISIBLE);
                         hashelements.put(jsonelements.getString("id"), sp);
                         layout.addView(sp);
                     } else if (element.equals("CheckBox")) {
                         CheckBox cb = new CheckBox(context);
                         cb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                        cb.setTextSize(width/40);
+                        cb.setGravity(Gravity.TOP);
                         cb.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         cb.setVisibility(View.INVISIBLE);
                         hashelements.put(jsonelements.getString("id"), cb);
@@ -452,6 +533,7 @@ public class PageOperations {
                         dp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                         dp.setVisibility(View.INVISIBLE);
                         dp.setText("Select the Date");
+                        dp.setTextSize(width/40);
                         hashelements.put(jsonelements.getString("id"), dp);
                         layout.addView(dp);
                     }

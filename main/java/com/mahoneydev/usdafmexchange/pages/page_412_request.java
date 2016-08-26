@@ -86,25 +86,33 @@ public class page_412_request extends PageOperations {
                         TextView bl = new TextView(context);
                         ll.addView(bl);
 
+                        //Button
                         RelativeLayout rl_in = new RelativeLayout(context);
                         rl_in.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, width / 10));
                         Button reject_bt = new Button(context);
-                        RelativeLayout.LayoutParams btprams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        RelativeLayout.LayoutParams btprams = new RelativeLayout.LayoutParams((int)(width*0.25), (int)(height*0.05));
                         btprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT|RelativeLayout.CENTER_VERTICAL);
                         reject_bt.setLayoutParams(btprams);
                         reject_bt.setText(res.getString(R.string.l_412_Requests_RejectButton_Label_0));
-                        reject_bt.setTextAppearance(context, R.style.Normal);
+                        reject_bt.setTextAppearance(context, R.style.White);
                         reject_bt.setTextSize(width / 55);
-                        reject_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
+                        reject_bt.setPadding(0,0,0,1);
+                        reject_bt.setBackgroundResource(R.drawable.button_style);
+                        reject_bt.setStateListAnimator(null);
+                        reject_bt.setTransformationMethod(null);
                         rl_in.addView(reject_bt);
                         Button accept_bt = new Button(context);
-                        RelativeLayout.LayoutParams btprams1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        RelativeLayout.LayoutParams btprams1 = new RelativeLayout.LayoutParams((int)(width*0.25), (int)(height*0.05));
                         btprams1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                        btprams1.addRule(RelativeLayout.CENTER_VERTICAL);
                         accept_bt.setLayoutParams(btprams1);
                         accept_bt.setText(res.getString(R.string.l_412_Requests_AcceptButton_Label_0));
-                        accept_bt.setTextAppearance(context, R.style.Normal);
+                        accept_bt.setTextAppearance(context, R.style.White);
                         accept_bt.setTextSize(width / 55);
-                        accept_bt.setBackgroundColor(Color.parseColor("#A2D25A"));
+                        accept_bt.setPadding(0,0,0,1);
+                        accept_bt.setBackgroundResource(R.drawable.button_style);
+                        accept_bt.setStateListAnimator(null);
+                        accept_bt.setTransformationMethod(null);
                         rl_in.addView(accept_bt);
                         ll.addView(rl_in);
 

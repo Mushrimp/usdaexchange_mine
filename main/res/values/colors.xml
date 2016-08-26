@@ -9,4 +9,5 @@
     <color name="colorBackground">#DAF0AB</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorButton">#DDE0E1</color>
+    <color name="colorEdittext">#5E5E5E</color>
 </resources>

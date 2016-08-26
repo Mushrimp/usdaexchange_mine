@@ -57,18 +57,6 @@
         <item name="android:textStyle">normal</item>
         <item name="android:typeface">normal</item>
     </style>
-    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
-        <item name="android:textColor">#000000</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:typeface">normal</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
-        <item name="android:textColor">#000000</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:typeface">normal</item>
-        <item name="android:textSize">20sp</item>
-    </style>
     <style name="ItalicBold" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textStyle">bold|italic</item>
@@ -88,5 +76,37 @@
         <item name="android:textColor">#1C366F</item>
         <item name="android:textStyle">normal</item>
         <item name="android:typeface">normal</item>
+    </style>
+    <style name="EditText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">#5E5E5E</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:typeface">normal</item>
+    </style>
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textColor">#5E5E5E</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:typeface">normal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/spinner_style</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:popupBackground">#DFFFFFFF</item>
+    </style>
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">#5E5E5E</item>
+        <item name="android:background">@drawable/spinner_style</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:typeface">normal</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>
