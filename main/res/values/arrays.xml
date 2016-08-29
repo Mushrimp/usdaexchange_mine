@@ -46,7 +46,6 @@
         <item>{\"element\":\"SearchView\",\"value\":\"l_001_FrontPage_Search_PlaceHolder_0\",\"id\":\"searchpublicposts\",\"clickaction\":\"searchPublicPost\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"postsScroll\"}</item>
     </array>
-
     <array name="page_020_viewpost">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"viewpostView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"viewpostScroll\"}</item>
@@ -150,7 +149,7 @@
         <item>{\"element\":\"EditText\",\"value\":\"l_322_NewPost_PromotionMessage_PlaceHolder_0\",\"id\":\"descInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_322_NewPost_PublishDate_Label_0\",\"id\":\"marketView6\"}</item>
         <item>{\"element\":\"DatePicker\",\"value\":\"l_322_NewPost_PublishDate_PlaceHolder_0\",\"id\":\"publishDay\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <!--<item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>-->
         <item>{\"element\":\"CheckBox\",\"value\":\"l_322_NewPost_SaveForm_Text_0\",\"id\":\"postCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
         <item>{\"element\":\"InsideButton\",\"value\":\"Publish\",\"id\":\"publishButton\", \"clickaction\":\"publishpost\"}</item>
@@ -443,11 +442,15 @@
     </array>
     <array name="page_112_deleteaccount">
         <item>{\"element\":\"Title\",\"value\":\"Delete Account\",\"id\":\"deleteView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"deleteScroll\"}</item>
+        <!--<item>{\"element\":\"InsideButton\",\"value\":\"l_112_DeleteAccount_DeleteButton_Label_0\",\"id\":\"deleteaccountButton\", \"clickaction\":\"delaccount\"}</item>-->
     </array>
     <array name="page_101_signasvendor">
         <item>{\"element\":\"Title\",\"value\":\"l_101_RoleOption_Title_0\",\"id\":\"signvendorView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_101_RoleOption_Instruction_0\",\"id\":\"signasvendorView\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_101_RoleOption_CheckBox_0\",\"id\":\"signupvendorCheckbox\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"Save\",\"id\":\"signvendorButton\", \"clickaction\":\"signvendor\"}</item>
     </array>
     <!--Search Preference-->
     <array name="page_121_searchdistance">
@@ -465,7 +468,7 @@
     </array>
     <array name="page_122_preferproduct_addnew">
         <item>{\"element\":\"Title\",\"value\":\"l_122_AddPreferredProduct_Title_0\",\"id\":\"addnewproductView\"}</item>
-        <item>{\"element\":\"Spinner\",\"value\":\"Select a category\",\"id\":\"categorySpinner\"}</item>
+        <!--<item>{\"element\":\"Spinner\",\"value\":\"Select a category\",\"id\":\"categorySpinner\"}</item>-->
         <item>{\"element\":\"SearchView\",\"value\":\"Search by category or product name\",\"id\":\"searchproducts\",\"clickaction\":\"searchproduct\"}</item>
         <!--<item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>-->
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productScroll\"}</item>

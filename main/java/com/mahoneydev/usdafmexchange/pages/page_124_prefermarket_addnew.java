@@ -43,7 +43,7 @@ public class page_124_prefermarket_addnew extends PageOperations {
             protected void executeSuccess(JSONObject result) throws JSONException {
                 int length= AppCodeResources.state_list.size();
                 SpinnerElement[] arraySpinner = new SpinnerElement[length];
-                arraySpinner[0] = new SpinnerElement("Select a State", "0");
+                arraySpinner[0] = new SpinnerElement("Select a state", "0");
                 for(int i=0;i<length;i++)
                 {
                     arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());

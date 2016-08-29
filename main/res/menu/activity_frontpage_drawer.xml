@@ -12,7 +12,7 @@
             android:title="@string/l_Default_Menu_1" />
         <item
             android:id="@+id/service"
-            android:title="Customer Service" />
+            android:title="@string/l_Default_Menu_2" />
     </group>
     <group
         android:id="@+id/login_vendor"
@@ -35,8 +35,33 @@
             android:id="@+id/account_vendor"
             android:title="@string/l_Vendor_Menu_4" />
         <item
+            android:id="@+id/service_vendor"
+            android:title="@string/l_Vendor_Menu_5" />
+        <item
             android:id="@+id/sign_out_vendor"
-            android:title="Sign Out" />
-
+            android:title="@string/l_Vendor_Menu_6" />
+    </group>
+    <group
+        android:id="@+id/login_customer"
+        android:checkableBehavior="single"
+        android:visible="false">
+        <item
+            android:id="@+id/home_customer"
+            android:title="@string/l_Customer_Menu_0" />
+        <item
+            android:id="@+id/social_network_customer"
+            android:title="@string/l_Customer_Menu_1" />
+        <item
+            android:id="@+id/account_customer"
+            android:title="@string/l_Customer_Menu_2" />
+        <item
+            android:id="@+id/signup_vendor_customer"
+            android:title="@string/l_Customer_Menu_3" />
+        <item
+            android:id="@+id/service_customer"
+            android:title="@string/l_Customer_Menu_4" />
+        <item
+            android:id="@+id/sign_out_customer"
+            android:title="@string/l_Customer_Menu_5" />
     </group>
 </menu>

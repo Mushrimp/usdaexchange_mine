@@ -34,61 +34,60 @@ import java.util.Hashtable;
  * Created by xianan on 8/1/16.
  */
 public class page_122_preferproduct_addnew extends PageOperations {
-    public static void searchpreproduct() {
-
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        String token_s = UserFileUtility.get_token();
-        ht.put("os", "Android");
-        ht.put("token", token_s);
-        new FetchTask() {
-            @Override
-            protected void executeSuccess(JSONObject result) throws JSONException {
-                JSONArray ja = result.getJSONArray("results");
-                SpinnerElement[] arraySpinner = new SpinnerElement[ja.length() + 1];
-                arraySpinner[0] = new SpinnerElement("Select a Category", "0");
-                for (int i = 0; i < ja.length(); i++) {
-                    JSONObject jsonobject = ja.getJSONObject(i);
-                    arraySpinner[i + 1] = new SpinnerElement(jsonobject.getString("Prd_Category1"), jsonobject.getString("Prd_Cat_ID1"));
-                }
-                ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                        R.layout.simple_spinner_item, arraySpinner);
-                ((Spinner) hashelements.get("categorySpinner")).setAdapter(adapter);
-
-                Hashtable<String, String> ht1 = new Hashtable<String, String>();
-                ht1.put("catetoryid", "");
-                ht1.put("term", "");
-               searchpreproduct("");
-                setupUI(playout);
-
-            }
-
-        }.execute(AppCodeResources.postUrl("usdatestyue", "get_product_category", ht));
-
-        ((Spinner) hashelements.get("categorySpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
-                    searchpreproduct("");
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
-    }
+//    public static void searchpreproduct() {
+//
+//        Hashtable<String, String> ht = new Hashtable<String, String>();
+//        String token_s = UserFileUtility.get_token();
+//        ht.put("os", "Android");
+//        ht.put("token", token_s);
+//        ht.put("catetoryid", "");
+//        ht.put("term", "");
+//        new FetchTask() {
+//            @Override
+//            protected void executeSuccess(JSONObject result) throws JSONException {
+//                JSONArray ja = result.getJSONArray("results");
+//                SpinnerElement[] arraySpinner = new SpinnerElement[ja.length() + 1];
+//                arraySpinner[0] = new SpinnerElement("Select a category", "0");
+//                for (int i = 0; i < ja.length(); i++) {
+//                    JSONObject jsonobject = ja.getJSONObject(i);
+//                    arraySpinner[i + 1] = new SpinnerElement(jsonobject.getString("Prd_Category1"), jsonobject.getString("Prd_Cat_ID1"));
+//                }
+//                ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+//                        R.layout.simple_spinner_item, arraySpinner);
+//                ((Spinner) hashelements.get("categorySpinner")).setAdapter(adapter);
+//
+//                setupUI(playout);
+//
+//            }
+//
+//        }.execute(AppCodeResources.postUrl("usdatestyue", "get_product_category", ht));
+//
+//        ((Spinner) hashelements.get("categorySpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                if (i != 0) {
+//                    searchpreproduct("");
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//            }
+//        });
+//
+//
+//    }
 
 
     public static void searchpreproduct(String name) {
         final String pn = name;
 
-        final String selecteditem = ((SpinnerElement) (((Spinner) hashelements.get("categorySpinner")).getSelectedItem())).getValue();
+//        final String selecteditem = ((SpinnerElement) (((Spinner) hashelements.get("categorySpinner")).getSelectedItem())).getValue();
                     Hashtable<String, String> ht = new Hashtable<String, String>();
                     ht.put("term", pn);
-                    ht.put("catetoryid", selecteditem);
+                    ht.put("catetoryid", "");
+//                    ht.put("catetoryid", selecteditem);
                     new FetchTask() {
                         @Override
                         protected void executeSuccess(JSONObject result) throws JSONException {
@@ -118,7 +117,8 @@ public class page_122_preferproduct_addnew extends PageOperations {
                                 lv.addView(ll);
 
                                 final String proname = products.getString("label");
-                                final String catg = selecteditem;
+                                final String catg = "";
+//                                final String catg = selecteditem;
                                 lv.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {

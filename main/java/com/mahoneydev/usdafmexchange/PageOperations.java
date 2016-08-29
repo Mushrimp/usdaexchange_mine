@@ -415,8 +415,8 @@ public class PageOperations {
                         inbt.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.7), (int)(height/15)));
                         inbt.setStateListAnimator(null);
                         inbt.setPadding(0, 0, 0, 1);
-                        inbt.setTextSize(width / 50);
                         inbt.setTextAppearance(context, R.style.White);
+                        inbt.setTextSize(width / 40);
                         inbt.setTransformationMethod(null);
                         inbt.setVisibility(View.INVISIBLE);
                         ll.addView(inbt);
@@ -432,11 +432,10 @@ public class PageOperations {
                         bt.setCompoundDrawables(null, null, img, null );
                         bt.setStateListAnimator(null);
                         bt.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        bt.setPadding(15, 0, 0, 0);
                         bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)(height/10)));
-                        bt.setTextSize(width / 50);
                         bt.setPadding(20,0,10,0);
                         bt.setTextAppearance(context, R.style.Normal);
+                        bt.setTextSize(width / 40);
                         bt.setTransformationMethod(null);
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
@@ -519,21 +518,28 @@ public class PageOperations {
                         hashelements.put(jsonelements.getString("id"), sp);
                         layout.addView(sp);
                     } else if (element.equals("CheckBox")) {
+                        LinearLayout ll_cb = new LinearLayout(context);
+                        ll_cb.setPadding(0,30,0,0);
                         CheckBox cb = new CheckBox(context);
                         cb.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                        cb.setTextAppearance(context, R.style.Normal);
                         cb.setTextSize(width/40);
                         cb.setGravity(Gravity.TOP);
                         cb.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         cb.setVisibility(View.INVISIBLE);
                         hashelements.put(jsonelements.getString("id"), cb);
-                        layout.addView(cb);
+                        ll_cb.addView(cb);
+                        layout.addView(ll_cb);
                     } else if (element.equals("DatePicker")) {
                         Log.e("DatePicker", "1");
                         TextView dp = new TextView(context);
                         dp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                         dp.setVisibility(View.INVISIBLE);
+                        dp.setPadding(0,20,0,8);
                         dp.setText("Select the Date");
-                        dp.setTextSize(width/40);
+                        dp.setTextAppearance(context, R.style.EditText);
+                        dp.setBackgroundResource(R.drawable.spinner_style);
+                        dp.setTextSize(width/35);
                         hashelements.put(jsonelements.getString("id"), dp);
                         layout.addView(dp);
                     }
@@ -999,8 +1005,8 @@ public class PageOperations {
             page_001_front.showpublicposts("");
         } else if (code == R.array.page_020_viewpost) {
             page_020_viewpost.showpostView();
-            /*((TextView)hashelements.get("postView")).setText("This is post "+params.get("postid"));
-            setupUI(playout);*/
+//            ((TextView)hashelements.get("postView")).setText("This is post "+params.get("postid"));
+//            setupUI(playout);
  }else if (code==R.array.page_010_marketlist_byvendor) {
            page_010_marketlist_byvendor.showmarkets();
         }else if (code == R.array.page_015_productlist_byvendor) {
@@ -1057,9 +1063,11 @@ public class PageOperations {
             page_330_postpublish.showpublished();
         } else if (code == R.array.page_122_preferproduct) {
             page_122_preferproduct.showPreferProduct();
-        } else if (code == R.array.page_122_preferproduct_addnew) {
-            page_122_preferproduct_addnew.searchpreproduct();
-        } else if (code == R.array.page_123_prefervendor) {
+        }
+//        else if (code == R.array.page_122_preferproduct_addnew) {
+//            page_122_preferproduct_addnew.searchpreproduct();
+//        }
+        else if (code == R.array.page_123_prefervendor) {
             page_123_prefervendor.showPreferVendor();
         } else if (code == R.array.page_123_prefervendor_addnew) {
             page_123_prefervendor_addnew.searchprevendor();
@@ -1067,9 +1075,13 @@ public class PageOperations {
             page_124_prefermarket.showPreferMarket();
         } else if (code == R.array.page_124_prefermarket_addnew) {
             page_124_prefermarket_addnew.searchpremarket();
-        } else if (code == R.array.page_112_deleteaccount) {
-            page_112_deleteaccount.showdeletepage();
-        } else
+        }
+        else if (code == R.array.page_112_deleteaccount) {
+            String name = UserFileUtility.get_username();
+//            String name = getRecentPage().params.get("username");
+            page_112_deleteaccount.showdeletepage(name);
+        }
+        else
             setupUI(playout);
     }
 

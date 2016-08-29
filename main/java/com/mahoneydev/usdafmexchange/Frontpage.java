@@ -221,7 +221,7 @@ public class Frontpage extends AppCompatActivity
         } else if (id == R.id.home) {
             PageOperations.squashNewPage(R.array.page_001_front,null);
         }
-        else if (id == R.id.sign_out_vendor)
+        else if (id == R.id.sign_out_vendor || id == R.id.sign_out_customer)
         {
             PageOperations.squashNewPage(R.array.page_001_front,null);
             UserFileUtility.clean_userinfo();
@@ -232,7 +232,7 @@ public class Frontpage extends AppCompatActivity
             switchMenu(R.id.nologin);
             switchAvatar(false);
         }
-        else if (id== R.id.service)
+        else if (id== R.id.service || id== R.id.service_vendor || id== R.id.service_customer)
         {
             PageOperations.squashNewPage(R.array.page_non_service,null);
         }
@@ -240,7 +240,7 @@ public class Frontpage extends AppCompatActivity
         {
             PageOperations.squashNewPage(R.array.page_320_postprice,null);
         }
-        else if (id == R.id.home_vendor)
+        else if (id == R.id.home_vendor || id == R.id.home_customer)
         {
             PageOperations.squashNewPage(R.array.page_001_front,null);
         }
@@ -248,13 +248,17 @@ public class Frontpage extends AppCompatActivity
         {
             PageOperations.squashNewPage(R.array.page_203_profilevendor,null);
         }
-        else if (id== R.id.social_network_vendor)
+        else if (id== R.id.social_network_vendor || id == R.id.social_network_customer)
         {
             PageOperations.squashNewPage(R.array.page_400_socialnetwork,null);
         }
-        else if (id== R.id.account_vendor)
+        else if (id== R.id.account_vendor || id == R.id.account_customer)
         {
             PageOperations.squashNewPage(R.array.page_110_accountsettings,null);
+        }
+        else if (id== R.id.signup_vendor_customer)
+        {
+            PageOperations.squashNewPage(R.array.page_101_signasvendor,null);
         }
 //        else if (id== R.id.logo)
 //        {
@@ -305,6 +309,7 @@ public class Frontpage extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.getMenu().setGroupVisible(R.id.nologin, false);
         navigationView.getMenu().setGroupVisible(R.id.login_vendor, false);
+        navigationView.getMenu().setGroupVisible(R.id.login_customer, false);
         navigationView.getMenu().setGroupVisible(menu_id, true);
     }
     public void switchMenuChecked(int checked_id)
