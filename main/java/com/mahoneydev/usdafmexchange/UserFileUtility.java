@@ -68,7 +68,7 @@ public class UserFileUtility {
             }
             // Convert the InputStream into a string
             String contentAsString = result.toString();
-            Log.d("string", contentAsString);
+            Log.d("string1", contentAsString);
             JSONObject j = new JSONObject(contentAsString);
             username=j.getString("username");
             password=j.getString("password");

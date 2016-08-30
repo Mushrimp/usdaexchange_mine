@@ -1,5 +1,6 @@
 package com.mahoneydev.usdafmexchange.pages;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -8,7 +9,9 @@ import android.widget.TextView;
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
 import com.mahoneydev.usdafmexchange.PageOperations;
+import com.mahoneydev.usdafmexchange.QuickstartPreferences;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
 
@@ -52,7 +55,7 @@ public class page_102_login extends PageOperations {
                     String role=result.getString("usda_role");
                     if (role.equals("vendor")) {
                         setMenu(R.id.login_vendor);
-                    } else if (role.equals("customer")){
+                    } else if (role.equals("customer")) {
                         setMenu(R.id.login_customer);
                     }
                     setAvatar(true);
@@ -60,6 +63,11 @@ public class page_102_login extends PageOperations {
 
                 @Override
                 protected void executeFailed(JSONObject result) throws JSONException {
+                if (!result.getString("error").equals("-9")) {
+                    ((TextView) hashelements.get("loginErrorView")).setText(result.getString("error"));
+                } else if (result.getString("error").equals("-10")){
+                    ((TextView) hashelements.get("loginErrorView")).setText("Network Error!");
+                }
                 }
 
             }.execute(AppCodeResources.postUrl("usdamobile", "mobile_login", ht));

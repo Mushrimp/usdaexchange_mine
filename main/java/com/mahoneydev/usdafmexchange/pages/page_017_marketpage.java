@@ -69,7 +69,7 @@ public class  page_017_marketpage extends PageOperations{
                 al.setPadding(0,10,0,10);
                 al.setTextSize(width / 50);
                 al.setGravity(Gravity.CENTER);
-                al.setText("Add to list");
+                al.setText(R.string.l_017_MarketMainpage_AddtoPreferlist_Button_0);
                 al.setTransformationMethod(null);
 
                 al.setOnClickListener(new View.OnClickListener() {

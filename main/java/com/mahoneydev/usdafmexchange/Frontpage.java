@@ -73,19 +73,20 @@ public class Frontpage extends AppCompatActivity
                     PageOperations.squashNewPage(content_id, null);
                 }
                 else {
-
                     Log.d("ddd","image");
                     String username=UserFileUtility.get_username();
                     if ((username==null)||(username.equals("")))
                     {
                         switchAvatar(false);
                     }
-                    else
+                    else {
                         switchAvatar(true);
+                    }
                     Intent i=getIntent();
                     if (i.getStringExtra("type")!=null) {
                         Log.e(i.getStringExtra("id"), i.getStringExtra("type"));
                         String type=i.getStringExtra("type");
+                        Log.e("iiiii",type);
                         String id=i.getStringExtra("id");
                         PageOperations.squashNewPageHold(R.array.page_001_front,new Hashtable<String, String>());
                         if (type.equals("friendship_request"))
@@ -115,6 +116,7 @@ public class Frontpage extends AppCompatActivity
             }
             else if (action.equals(QuickstartPreferences.SWITCH_MENU))
             {
+
                 int menu_id=intent.getIntExtra("menu", R.id.nologin);
                 switchMenu(menu_id);
             }

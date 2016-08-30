@@ -173,17 +173,28 @@ public class PageOperations {
                                     pushNewPage(R.array.page_103_retrievepin, new Hashtable<String, String>());
                                 }
                             });
-                        }else if(jsonelements.getString("id").equals("newView")){
+                        } else if(jsonelements.getString("id").equals("newView")){
                             tv.setTextAppearance(context,R.style.Normal);
                             tv.setTextSize(width/45);
                             tv.setPadding(0,0,0,20);
-                        }else if(jsonelements.getString("id").equals("resetView")){
+                        } else if(jsonelements.getString("id").equals("resetView")){
                             tv.setTextAppearance(context,R.style.Normal);
-                        }else if(jsonelements.getString("id").equals("recipientname")){
+                        } else if(jsonelements.getString("id").equals("recipientname")){
                             tv.setTextAppearance(context,R.style.Normal);
                             tv.setTextSize(width/35);
                             tv.setPadding(0,20,0,0);
-                        }else {
+                        } else if (jsonelements.getString("id").equals("nameView")){
+                            tv.setTextAppearance(context,R.style.EditText);
+                            tv.setTextSize(width/40);
+                        } else if (jsonelements.getString("id").equals("instructionView")){
+                            tv.setTextAppearance(context,R.style.EditText);
+                            tv.setTextSize(width/45);
+                            tv.setPadding(0,20,0,30);
+                        } else if (jsonelements.getString("id").equals("addmarketinstrView")){
+                            tv.setTextAppearance(context,R.style.EditText);
+                            tv.setTextSize(width/45);
+                            tv.setPadding(0,10,0,10);
+                        } else {
                             tv.setTextAppearance(context, R.style.Bold);
                             tv.setTextSize(width / 45);
                             tv.setPadding(0,30,0,0);
@@ -396,11 +407,10 @@ public class PageOperations {
                         bt.setCompoundDrawables(null, null, img, null );
                         bt.setStateListAnimator(null);
                         bt.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-                        bt.setPadding(15, 0, 0, 0);
                         bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int)(height/10)));
-                        bt.setTextSize(width / 50);
                         bt.setPadding(20,0,10,0);
                         bt.setTextAppearance(context, R.style.Normal);
+                        bt.setTextSize(width / 40);
                         bt.setTransformationMethod(null);
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
@@ -481,6 +491,8 @@ public class PageOperations {
                         }else if(jsonelements.getString("id").equals("searchproducts")){
                             et.setTextSize(width/50);
                         }else if(jsonelements.getString("id").equals("searchfriends")){
+                            et.setTextSize(width/50);
+                        }else if(jsonelements.getString("id").equals("searchmarket")){
                             et.setTextSize(width/50);
                         }
                         et.setHint(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));

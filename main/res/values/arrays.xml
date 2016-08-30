@@ -152,7 +152,7 @@
         <!--<item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>-->
         <item>{\"element\":\"CheckBox\",\"value\":\"l_322_NewPost_SaveForm_Text_0\",\"id\":\"postCheckbox\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>
-        <item>{\"element\":\"InsideButton\",\"value\":\"Publish\",\"id\":\"publishButton\", \"clickaction\":\"publishpost\"}</item>
+        <item>{\"element\":\"InsideButton\",\"value\":\"l_322_NewPost_PublishDate_Save_button_0\",\"id\":\"publishButton\", \"clickaction\":\"publishpost\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"newposterrorView\"}</item>
     </array>
     <array name="page_324_posttemplate">
@@ -172,7 +172,9 @@
     <array name="page_203_profilevendor">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"profileView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"profilevendorView\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
+        <item>{\"element\":\"TextView\",\"value\":\"Information listed in this section will be displayed on this site and on USDA’s website.\",\"id\":\"instructionView\"}</item>
+        <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_VendorProfile_0\",\"id\":\"profilevendorView1\", \"clickaction\":\"nameaddress\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
@@ -231,7 +233,7 @@
     <array name="page_209_certified">
         <item>{\"element\":\"Title\",\"value\":\"USDA Organic Certificate\",\"id\":\"certificationView\"}</item>
         <item>{\"element\":\"CheckBox\",\"value\":\"l_209_USDAOrgainc_Title_0\",\"id\":\"certifiedCheckbox\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
         <item>{\"element\":\"TextView\",\"value\":\"l_209_USDAOrgainc_Number_Label_0\",\"id\":\"certifiedView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_209_USDAOrgainc_Number_PlaceHolder_0\",\"id\":\"certifiedInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
@@ -254,6 +256,8 @@
     </array>
     <array name="page_310_addnewmarket">
         <item>{\"element\":\"Title\",\"value\":\"l_310_AddMarketForm_Title_0\",\"id\":\"addnewmarketView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"If you are unable to find the market listed on USDA Farmers Market Directory, please list it here.
+            The farmers market name, contact email and addresses are required to fill this form.\",\"id\":\"addmarketinstrView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_310_AddMarketForm_MarketName_Label_0\",\"id\":\"newmarketnameView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_310_AddMarketForm_MarketName_PlaceHolder_0\",\"id\":\"marketnameInput\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_310_AddMarketForm_Email_Label_0\",\"id\":\"productnameView\"}</item>
@@ -300,11 +304,13 @@
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_0\",\"id\":\"socialnetworkView1\", \"clickaction\":\"friendship\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_1\",\"id\":\"socialnetworkView2\", \"clickaction\":\"request\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_1\",\"id\":\"accountsettingsView3\", \"clickaction\":\"qrcode\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_2\",\"id\":\"socialnetworkView3\", \"clickaction\":\"message\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_2\",\"id\":\"socialnetworkView2\", \"clickaction\":\"request\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_3\",\"id\":\"socialnetworkView4\", \"clickaction\":\"notification\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_3\",\"id\":\"socialnetworkView3\", \"clickaction\":\"message\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_4\",\"id\":\"socialnetworkView4\", \"clickaction\":\"notification\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_401_friendship">
@@ -364,19 +370,18 @@
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_1\",\"id\":\"accountsettingsView2\", \"clickaction\":\"uploadlogo"\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_2\",\"id\":\"accountsettingsView3\", \"clickaction\":\"qrcode\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_2\",\"id\":\"accountsettingsView4\", \"clickaction\":\"searchpreference\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_3\",\"id\":\"accountsettingsView4\", \"clickaction\":\"searchpreference\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_4\",\"id\":\"accountsettingsView5\", \"clickaction\":\"socialnetwork\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_5\",\"id\":\"accountsettingsView5\", \"clickaction\":\"socialnetwork\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_3\",\"id\":\"accountsettingsView6\", \"clickaction\":\"setnotification\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_4\",\"id\":\"accountsettingsView6\", \"clickaction\":\"setnotification\"}</item>
-        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_6\",\"id\":\"accountsettingsView7\", \"clickaction\":\"deleteaccount\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_AccountandSetting_5\",\"id\":\"accountsettingsView7\", \"clickaction\":\"deleteaccount\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_105_accountinfo">
         <item>{\"element\":\"Title\",\"value\":\"l_105_AccountSetting_Title_0\",\"id\":\"infoView\"}</item>
+        <item>{\"element\":\"TextView\",\"value\":\"Username:\",\"id\":\"nameView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_105_AccountSetting_CurrentPassword_Label_0\",\"id\":\"currentpassView\"}</item>
         <item>{\"element\":\"EditText\",\"value\":\"l_105_AccountSetting_CurrentPassword_PlaceHolder_0\",\"id\":\"currentpassInput\",\"next\":\"newpassInput\",\"inputtype\":\"textPassword\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_105_AccountSetting_NewPassword_Label_0\",\"id\":\"newpassView\"}</item>

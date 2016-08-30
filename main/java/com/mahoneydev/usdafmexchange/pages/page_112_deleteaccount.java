@@ -56,10 +56,7 @@ public class page_112_deleteaccount extends PageOperations {
         ll.addView(warn);
 
         TextView content = new TextView(context);
-        String con = "If you delete your account, your posts and other correspondence will also be permanently deleted. " +
-                "The information you have contributed to this website (e.g., price posts) will not be deleted, " +
-                "however, it won’t be linked to you (even if you recreate your account in the future).";
-        content.setText(con);
+        content.setText(R.string.l_112_DeleteAccount_Instruction_Vendor_0);
         content.setTextAppearance(context, R.style.Normal);
         content.setTextSize(width / 45);
         content.setPadding(0,10,0,10);
@@ -82,7 +79,7 @@ public class page_112_deleteaccount extends PageOperations {
         del.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.85), (int)(height/15)));
         del.setPadding(0, 0, 0, 1);
         del.setText(R.string.l_112_DeleteAccount_DeleteButton_Label_0);
-        del.setTransformationMethod(null);
+       // del.setTransformationMethod(null);
         del.setTextAppearance(context, R.style.White);
         del.setTextSize(width / 40);
         ll_in.addView(del);

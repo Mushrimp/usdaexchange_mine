@@ -66,7 +66,7 @@ public class page_311_addmarketform extends PageOperations {
                     ll.setLayoutParams(new TableRow.LayoutParams((int) (width * 0.9), TableRow.LayoutParams.WRAP_CONTENT));
                     //Name
                     TextView name1 = new TextView(context);
-                    name1.setText("Market name:");
+                    name1.setText(R.string.l_311_MatketList_MarketName_Label_0);
                     name1.setTextAppearance(context, R.style.Title);
                     name1.setTextSize(width / 50);
                     ll.addView(name1);
@@ -79,7 +79,7 @@ public class page_311_addmarketform extends PageOperations {
 
                     //Address
                     TextView address1 = new TextView(context);
-                    address1.setText("Address:");
+                    address1.setText(R.string.l_311_MatketList_Address_Label_0);
                     address1.setTextAppearance(context, R.style.Title);
                     address1.setTextSize(width / 50);
                     ll.addView(address1);

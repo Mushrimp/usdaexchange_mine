@@ -76,7 +76,7 @@ public class page_016_vendorpage extends PageOperations{
                     //rf.setBackgroundColor(Color.parseColor("#1C8A3B"));
                     rf.setTextAppearance(context, R.style.White);
                     rf.setTextSize(width / 50);
-                    rf.setText("Request friend");
+                    rf.setText(R.string.l_016_VendorMainpage_RequestFriend_Button_0);
                     rf.setTransformationMethod(null);
                     ll_bt.addView(rf);
 
@@ -94,7 +94,7 @@ public class page_016_vendorpage extends PageOperations{
                     al.setPadding(0,10,0,10);
                     al.setTextAppearance(context, R.style.White);
                     al.setTextSize(width / 50);
-                    al.setText("Add to list");
+                    al.setText(R.string.l_016_VendorMainpage_AddtoPreferlist_Button_0);
                     al.setTransformationMethod(null);
                     ll_bt.addView(al);
 
@@ -117,7 +117,7 @@ public class page_016_vendorpage extends PageOperations{
                     email1.setPadding(0,0,50,0);
                     email1.setTextAppearance(context, R.style.Body);
                     email1.setTextSize(width / 40);
-                    email1.setText("Email:");
+                    email1.setText(R.string.l_016_VendorMainpage_Email_Label_0);
                     tr1.addView(email1);
                     TextView email = new TextView(context);
                     email.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
@@ -137,7 +137,7 @@ public class page_016_vendorpage extends PageOperations{
                     phone1.setPadding(0,0,50,0);
                     phone1.setTextAppearance(context, R.style.Body);
                     phone1.setTextSize(width / 40);
-                    phone1.setText("Phone:");
+                    phone1.setText(R.string.l_016_VendorMainpage_Phone_Label_0);
                     tr2.addView(phone1);
                     TextView phone = new TextView(context);
                     phone.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
@@ -156,7 +156,7 @@ public class page_016_vendorpage extends PageOperations{
                     address1.setPadding(0,0,50,0);
                     address1.setTextAppearance(context, R.style.Body);
                     address1.setTextSize(width / 40);
-                    address1.setText("Address:");
+                    address1.setText(R.string.l_016_VendorMainpage_Address_Label_0);
                     tr3.addView(address1);
                     TextView address = new TextView(context);
                     address.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));

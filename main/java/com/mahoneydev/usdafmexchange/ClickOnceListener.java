@@ -1,5 +1,6 @@
 package com.mahoneydev.usdafmexchange;
 
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,9 +13,16 @@ public abstract class ClickOnceListener implements View.OnClickListener {
     {
         clickbutton=button;
     }
+    private long mLastClickTime = 0;
     public void onClick(View v)
     {
-        clickbutton.setClickable(false);
+        //mis-clicking prevention, using threshold of 3000 ms
+        if (SystemClock.elapsedRealtime() - mLastClickTime < 3000){
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
+        //clickbutton.setClickable(false);
         action();
     }
     public void enableButton()
@@ -22,4 +30,5 @@ public abstract class ClickOnceListener implements View.OnClickListener {
         clickbutton.setClickable(true);
     }
     public abstract void action();
+
 }

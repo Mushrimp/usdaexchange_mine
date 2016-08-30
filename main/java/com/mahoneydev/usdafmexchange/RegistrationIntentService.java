@@ -99,20 +99,25 @@ public class RegistrationIntentService extends IntentService {
         new FetchTask(){
                 @Override
                 protected void executeSuccess(JSONObject result) throws JSONException {
-                        UserFileUtility.save_userinfo();
-                        Intent usernameset = new Intent();
-                        usernameset.setAction(QuickstartPreferences.SET_USERNAME);
-                        usernameset.putExtra("username", UserFileUtility.get_username());
-                        sendBroadcast(usernameset);
-                        Intent menuchange = new Intent();
-                        menuchange.setAction(QuickstartPreferences.SWITCH_MENU);
+                    UserFileUtility.save_userinfo();
+                    Intent usernameset = new Intent();
+                    usernameset.setAction(QuickstartPreferences.SET_USERNAME);
+                    usernameset.putExtra("username", UserFileUtility.get_username());
+                    sendBroadcast(usernameset);
+                    Intent menuchange = new Intent();
+                    menuchange.setAction(QuickstartPreferences.SWITCH_MENU);
+                    String role = result.getString("usda_role");
+                    if (role.equals("vendor")){
                         menuchange.putExtra("menu", R.id.login_vendor);
-                        sendBroadcast(menuchange);
-                        Intent registrationComplete = new Intent();
-                        registrationComplete.setAction(QuickstartPreferences.SWITCH_CONTENT);
-                        registrationComplete.putExtra("content", R.array.page_001_front);
-                        sendBroadcast(registrationComplete);
+                    } else if (role.equals("customer")) {
+                        menuchange.putExtra("menu", R.id.login_customer);
                     }
+                    sendBroadcast(menuchange);
+                    Intent registrationComplete = new Intent();
+                    registrationComplete.setAction(QuickstartPreferences.SWITCH_CONTENT);
+                    registrationComplete.putExtra("content", R.array.page_001_front);
+                    sendBroadcast(registrationComplete);
+                }
 //                    else if (error.equals("-10"))
 //                    {
 //                        Intent nologin = new Intent();

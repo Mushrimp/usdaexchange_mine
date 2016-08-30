@@ -19,6 +19,9 @@ import java.util.Hashtable;
  */
 public class page_105_accountinfo extends PageOperations {
     public static void prepareaccountinfoform() {
+        String name = UserFileUtility.get_username();
+        ((TextView)hashelements.get("nameView")).setText("Username:  "+name);
+
         Hashtable<String, String> ht = new Hashtable<String, String>();
         String token_s = UserFileUtility.get_token();
         ht.put("os", "Android");
