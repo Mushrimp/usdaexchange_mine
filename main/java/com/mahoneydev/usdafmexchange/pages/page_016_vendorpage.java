@@ -162,8 +162,8 @@ public class page_016_vendorpage extends PageOperations{
                     address.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
                     address.setTextAppearance(context, R.style.Normal);
                     address.setTextSize(width / 40);
-                    address.setText(vendorprofile.getString("business_street") + vendorprofile.getString("business_street") + ", "
-                            + vendorprofile.getString("business_city") + ", " + vendorprofile.getString("business_state") + ", " + vendorprofile.getString("business_zip"));
+                    address.setText(vendorprofile.getString("business_street") + ", " + vendorprofile.getString("business_city") + ", "
+                            + vendorprofile.getString("business_state") + ", " + vendorprofile.getString("business_zip"));
                     tr3.addView(address);
                     tl_in.addView(tr3);
                     //Website

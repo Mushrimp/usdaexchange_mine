@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -29,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -107,6 +110,7 @@ public class PageOperations {
     {
         switch (code) {
             case (R.array.page_001_front):{
+                qbutton.setImageResource(R.drawable.qr);
                 qbutton.setVisibility(View.VISIBLE);
                 qbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -116,6 +120,18 @@ public class PageOperations {
                 });
                 break;
             }
+//            case (R.array.page_401_friendship):{
+//                qbutton.setImageResource(android.R.drawable.ic_menu_add);
+//                qbutton.setColorFilter(Color.WHITE);
+//                qbutton.setVisibility(View.VISIBLE);
+//                qbutton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        pushNewPage(R.array.page_406_searchfriend,new Hashtable<String, String>());
+//                    }
+//                });
+//                break;
+//            }
             default:{
                 qbutton.setVisibility(View.INVISIBLE);
                 qbutton.setOnClickListener(null);
@@ -239,7 +255,7 @@ public class PageOperations {
 
                     }
                     else if (element.equals("Title")){
-                        ImageButton qbutton=(ImageButton)context.findViewById(R.id.camerabutton);
+                        ImageButton qbutton =(ImageButton)context.findViewById(R.id.camerabutton);
                         toolbar.removeAllViewsInLayout();
                         toolbar.setGravity(Gravity.CENTER);
                         TextView tb = new TextView(context);
@@ -450,6 +466,13 @@ public class PageOperations {
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
                     }
+//                    else if (element.equals("FloatingButton")){
+//                        FloatingActionButton fab = (FloatingActionButton)context.findViewById(R.id.icon_only);
+//                       // hashelements.put(jsonelements.getString("id"), fab);
+//                        setButtonAction(jsonelements.getString("clickaction"), fab);
+////                        fab.setVisibility(View.INVISIBLE);
+//                        layout.addView(fab);
+//                    }
                     else if (element.equals("LineView")) {
                         View line = new View(context);
                         line.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
@@ -482,6 +505,9 @@ public class PageOperations {
                         }
                         layout.addView(iv);
                     } else if (element.equals("SearchView")) {
+//                        SearchView sv = new SearchView(context);
+//                        layout.addView(sv);
+
                         LinearLayout ll = new LinearLayout(context);
                         ll.setOrientation(LinearLayout.HORIZONTAL);
                         ll.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -501,10 +527,11 @@ public class PageOperations {
 
                         ll.addView(et);
                         ImageButton bt = new ImageButton(context);
-                        bt.setImageResource(R.drawable.ic_menu_manage);
+                        bt.setImageResource(R.drawable.ic_menu_search);
+                        bt.setBackgroundResource(R.drawable.button_style);
                         hashelements.put(jsonelements.getString("id") + "Button", bt);
                         setButtonAction(jsonelements.getString("clickaction"), bt);
-                        bt.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.2f));
+                        bt.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.15), (int)(height*0.05)));
                         ll.addView(bt);
                         ll.setVisibility(View.INVISIBLE);
                         layout.addView(ll);
@@ -1056,10 +1083,12 @@ public class PageOperations {
         } else if (code == R.array.page_402_message) {
             page_402_message.showmessages();
         } else if (code == R.array.page_403_messageform) {
-            page_403_messageform.showmessageform();}
-        else if (code == R.array.page_408_sendmessage) {
+            page_403_messageform.showmessageform();
+        } else if (code == R.array.page_408_sendmessage) {
             page_408_sendmessage.preparemessage();
-        } else if (code == R.array.page_404_notification) {
+        } else if (code == R.array.page_407_userprofile) {
+            page_407_userprofile.showUserpage();
+        }else if (code == R.array.page_404_notification) {
             page_404_notification.shownotifications();
         } else if (code == R.array.page_309_farmermarket) {
             page_309_farmermarket.showmarkets();

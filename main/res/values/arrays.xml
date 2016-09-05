@@ -315,6 +315,7 @@
     </array>
     <array name="page_401_friendship">
         <item>{\"element\":\"Title\",\"value\":\"l_401_Friends_Title_0\",\"id\":\"friendsView\"}</item>
+        <item>{\"element\":\"FloatingButton\",\"value\":\"\",\"id\":\"friendshipView1\", \"clickaction\":\"requestfriend\"}</item>
         <item>{\"element\":\"NextButton\",\"value\":\"l_401_Friends_RequestFriendshipButton_Label_0\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
         <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
         <item>{\"element\":\"NextButton\",\"value\":\"l_401_Friends_SendMessageALLButton_Label_0\",\"id\":\"friendshipView2\", \"clickaction\":\"sendmessageall\"}</item>
@@ -325,7 +326,10 @@
         <item>{\"element\":\"Title\",\"value\":\"l_406_AddFriendship_Title_0\",\"id\":\"searchfriendView\"}</item>
         <item>{\"element\":\"SearchView\",\"value\":\"l_406_AddFriendship_Search_PlaceHolder_0\",\"id\":\"searchfriends\",\"clickaction\":\"searchfriend\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"searchuserScroll\"}</item>
-
+    </array>
+    <array name="page_407_userprofile">
+        <item>{\"element\":\"Title\",\"value\":\"l_407_FriendshipProfile_Title_Label_0\",\"id\":\"suserprofileView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"userprofileScroll\"}</item>
     </array>
     <array name="page_412_request">
         <item>{\"element\":\"Title\",\"value\":\"l_412_Requests_Label_0\",\"id\":\"requestView\"}</item>
@@ -345,7 +349,7 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"notificationScroll\"}</item>
     </array>
     <array name="page_408_sendmessage">
-        <item>{\"element\":\"Title\",\"value\":\"New Message\",\"id\":\"newmessageView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"l_408_NewMessage_Title_0\",\"id\":\"newmessageView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_408_NewMessage_Recipients_Label_0\",\"id\":\"recipientView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"recipientname\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\"\",\"id\":\"recipientid\"}</item>

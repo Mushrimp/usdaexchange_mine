@@ -72,7 +72,7 @@ public class page_324_posttemplate extends PageOperations {
                     TextView desc1 = new TextView(context);
                     desc1.setTextAppearance(context, R.style.Title);
                     desc1.setTextSize(width / 50);
-                    String desct = "Description:";
+                    String desct = "Promotional Message:";
                     desc1.setText(desct);
                     ll.addView(desc1);
                     TextView desc = new TextView(context);
@@ -90,6 +90,14 @@ public class page_324_posttemplate extends PageOperations {
                     lv.addView(ll);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removetemplateListener(context,"Delete a template","Do you want to remove this template?",lv,tl,template.getString("ID")));
+
+                    final String id = template.getString("ID");
+                    lv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            page_322_newpost.preparepostform();
+                        }
+                    });
 
                     TableRow lk = new TableRow(context);
                     lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));

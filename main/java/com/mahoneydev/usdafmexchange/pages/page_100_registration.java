@@ -78,7 +78,12 @@ public class page_100_registration extends PageOperations {
                                         UserFileUtility.save_userinfo();
                                         squashNewPage(R.array.page_001_front, null);
                                         ((TextView) context.findViewById(R.id.username_menu_display)).setText(UserFileUtility.get_username());
-                                        setMenu(R.id.login_vendor);
+                                        String role=result.getString("usda_role");
+                                        if (role.equals("vendor")) {
+                                            setMenu(R.id.login_vendor);
+                                        } else if (role.equals("customer")) {
+                                            setMenu(R.id.login_customer);
+                                        }
                                         setAvatar(true);
                                     }
 

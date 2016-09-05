@@ -57,14 +57,15 @@ public class page_406_searchfriend extends PageOperations {
                     un.setText(friends.getString("display_name"));
                     un.setTextAppearance(context, R.style.Bold);
                     un.setTextSize(width / 40);
-                    ll.addView(un);
+
                     //business name
                     TextView bn = new TextView(context);
                     bn.setText(friends.getString("business_name"));
                     bn.setTextAppearance(context, R.style.Body);
                     bn.setTextSize(width / 45);
-                    ll.addView(bn);
 
+                    ll.addView(un);
+                    ll.addView(bn);
                     //
                     TextView br = new TextView(context);
                     ll.addView(br);
@@ -77,7 +78,7 @@ public class page_406_searchfriend extends PageOperations {
                         public void onClick(View v) {
                             Hashtable<String, String> pam = new Hashtable<String, String>();
                             pam.put("username", username);
-                            pushNewPage(R.array.page_016_vendorpage, pam);
+                            pushNewPage(R.array.page_407_userprofile, pam);
                         }
                     });
 

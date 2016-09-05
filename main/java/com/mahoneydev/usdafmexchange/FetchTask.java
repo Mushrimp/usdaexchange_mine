@@ -109,8 +109,9 @@ public abstract class FetchTask extends AsyncTask<String, Void, JSONObject> {
     protected void onPostExecute(JSONObject result)
     {
         try {
-            Log.d("Error", result.getString("error"));
-            String error=result.getString("error");
+            if (result.has("error")){
+                Log.d("Error", result.getString("error"));
+                String error=result.getString("error");
             if (error.equals("-9"))
             {
                 executeSuccess(result);
@@ -121,6 +122,9 @@ public abstract class FetchTask extends AsyncTask<String, Void, JSONObject> {
             else
             {
                 executeFailed(result);
+            }
+            } else if (result.has("nonce")){
+                executeSuccess(result);
             }
         }
         catch (JSONException e)

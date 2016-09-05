@@ -9,9 +9,9 @@
     <string name="l_Default_Menu_1">Sign In</string>
     <string name="l_Default_Menu_2">Customer Service</string>
     <string name="l_Vendor_Menu_0">Home</string>
-    <string name="l_Vendor_Menu_1">Post Product &#38; Price</string>
+    <string name="l_Vendor_Menu_1">Add a Post</string>
     <string name="l_Vendor_Menu_2">Vendor Profile</string>
-    <string name="l_Vendor_Menu_3">Social Network</string>
+    <string name="l_Vendor_Menu_3">Friends &#38; Messages</string>
     <string name="l_Vendor_Menu_4">Accout Settings</string>
     <string name="l_Vendor_Menu_5">Customer Service</string>
     <string name="l_Vendor_Menu_6">Sign Out</string>
@@ -45,7 +45,7 @@
     <string name="l_Menu_AccountandSetting_1">Logo</string>
     <string name="l_Menu_AccountandSetting_2">Search Preferences</string>
     <string name="l_Menu_AccountandSetting_3">Notification Settings</string>
-    <string name="l_Menu_AccountandSetting_4">Social Network Settings</string>
+    <string name="l_Menu_AccountandSetting_4">Friends &#38; Messages Settings</string>
     <string name="l_Menu_AccountandSetting_5">Delete My Account</string>
     <string name="l_001_FrontPage_Search_PlaceHolder_0">Search for products, vendors, farmers markets</string>
     <string name="l_003_About_Title_0">About Us</string>
@@ -137,7 +137,7 @@
     <string name="l_106_UserLogo_TakePhotoButton_Label_0">Take a picture</string>
     <string name="l_106_UserLogo_SelectPhotoButton_Label_0">Browse</string>
     <string name="l_106_UserLogo_UploadButton_Label_0">Upload</string>
-    <string name="l_107_Notification_Title_0">Notification Settings</string>
+    <string name="l_107_Notification_Title_0">Friends &#38; Messages Settings</string>
     <string name="l_107_Notification_EmailReminder_Label_0">Email reminder for posting</string>
     <string name="l_107_Notification_ReminderBefore_Label_0">Notification reminder for posting</string>
     <string name="l_107_Notification_AppFeatures_Label_0">App features and updates</string>
@@ -284,14 +284,14 @@
     <string name="l_322_NewPost_Title_0">Add a New Post</string>
     <string name="l_322_NewPost_Product_Label_0">Product:</string>
     <string name="l_322_NewPost_Product_PlaceHolder_0">Select a registered product</string>
-    <string name="l_322_NewPost_Product_AddButton_0">Add a Product</string>
+    <string name="l_322_NewPost_Product_AddButton_0">Not found?</string>
     <string name="l_322_NewPost_Unit_Label_0">Unit: (e.g.,each,lb,etc.)</string>
     <string name="l_322_NewPost_Unit_PlaceHolder_0">Selling unit (number only)</string>
     <string name="l_322_NewPost_Price_Label_0">Price:</string>
     <string name="l_322_NewPost_Price_PlaceHolder_0">Selling price</string>
     <string name="l_322_NewPost_FarmersMarket_Label_0">Market:</string>
     <string name="l_322_NewPost_FarmersMarket_PlaceHolder_0">Select a registered market</string>
-    <string name="l_322_NewPost_FarmersMarket_AddButton_0">Add a Market</string>
+    <string name="l_322_NewPost_FarmersMarket_AddButton_0">Not found?</string>
     <string name="l_322_NewPost_MarketDay_Label_0">Market date:</string>
     <string name="l_322_NewPost_MarketDay_PlaceHolder_0">Max 4 weeks before market date</string>
     <string name="l_322_NewPost_PromotionMessage_Label_0">Promotional message:</string>
@@ -316,8 +316,8 @@
     <string name="l_330_PublishedPost_Title_0">Published Posts</string>
     <string name="l_330_PublishedPost_CloneButton_0">Copy</string>
     <string name="l_401_Friends_Title_0">Friends</string>
-    <string name="l_401_Friends_RequestFriendshipButton_Label_0">Request a friendship</string>
-    <string name="l_401_Friends_SendMessageALLButton_Label_0">Send message to all friends</string>
+    <string name="l_401_Friends_RequestFriendshipButton_Label_0">Request a Friendship</string>
+    <string name="l_401_Friends_SendMessageALLButton_Label_0">Send Message to All Friends</string>
     <string name="l_401_Friends_MessageButton_Label_0">Message</string>
     <string name="l_401_Friends_UnfriendButton_Label_0">Unfriend</string>
     <string name="l_402_MessageList_Title_0">Messages</string>
@@ -344,7 +344,13 @@
     <string name="l_408_NewMessage_Message_Label_0">Message:</string>
     <string name="l_408_NewMessage_Message_PlaceHolder_0">Type here...</string>
     <string name="l_408_NewMessage_Send_Error_0">Subject cannot be empty.</string>
-    <string name="l_412_Requests_Label_0">Request for “Friend Me”</string>
+    <string name="l_412_Requests_Label_0">Requests for “Friend Me”</string>
     <string name="l_412_Requests_AcceptButton_Label_0">Accept</string>
     <string name="l_412_Requests_RejectButton_Label_0">Reject</string>
+    <string name="l_407_FriendshipProfile_Title_Label_0">User Profile</string>
+    <string name="l_407_FriendshipProfile_Address_Label_0">Address:</string>
+    <string name="l_407_FriendshipProfile_Phone_Label_0">Phone:</string>
+    <string name="l_407_FriendshipProfile_Email_Label_0">Email:</string>
+    <string name="l_407_FriendshipProfile_Website_Label_0">Website:</string>
+    <string name="l_407_FriendshipProfile_RequestButton_Label_0">Request Friend</string>
 </resources>
