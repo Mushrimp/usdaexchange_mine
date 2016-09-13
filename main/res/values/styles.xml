@@ -109,4 +109,11 @@
         <item name="android:paddingBottom">5dp</item>
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="SearchViewStyleMyApp" parent="Widget.AppCompat.SearchView">
+        <!-- Background for the search query section (e.g. EditText) -->
+         <item name="queryBackground">@drawable/searchview_style</item>
+        ...
+        <!-- note that this is how you stye your hint icon -->
+        <item name="searchHintIcon">@drawable/ic_menu_search</item>
+    </style>
 </resources>

@@ -95,6 +95,7 @@ public class page_311_addmarketform extends PageOperations {
                     ll.addView(br);
 
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
 
                     final String mid = markets.getString("id");
                     lv.setOnClickListener(new View.OnClickListener() {
@@ -185,6 +186,7 @@ public class page_311_addmarketform extends PageOperations {
                                 ll.addView(br);
 
                                 lv.addView(ll);
+                                lv.setBackgroundResource(R.drawable.tablerow_style);
 
                                 final String mid = markets.getString("id");
                                 lv.setOnClickListener(new View.OnClickListener() {

@@ -250,9 +250,13 @@ public class Frontpage extends AppCompatActivity
         {
             PageOperations.squashNewPage(R.array.page_203_profilevendor,null);
         }
-        else if (id== R.id.social_network_vendor || id == R.id.social_network_customer)
+        else if (id== R.id.social_network_vendor)
         {
             PageOperations.squashNewPage(R.array.page_400_socialnetwork,null);
+        }
+        else if (id == R.id.social_network_customer)
+        {
+            PageOperations.squashNewPage(R.array.page_400_socialnetwork_customer,null);
         }
         else if (id== R.id.account_vendor || id == R.id.account_customer)
         {

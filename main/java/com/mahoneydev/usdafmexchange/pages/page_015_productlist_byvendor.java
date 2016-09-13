@@ -52,15 +52,10 @@ public class page_015_productlist_byvendor extends PageOperations{
                     categoryname.setText(productitem.getString("price_Prd_Category1"));
                     tr.addView(categorytitle);
                     tr.addView(categoryname);
-                    if (productitem.getString("price_usdaorganic").equals("yes"))
-                    {
-                        ImageView org = new ImageView(context);
-                        org.setPadding(0,10,0,0);
-                        org.setLayoutParams(new LinearLayout.LayoutParams(50,50));
-                        org.setImageResource(R.drawable.usda_organic);
-                        tr.addView(org);
-                    }
 
+
+                    LinearLayout ll_in = new LinearLayout(context);
+                    ll_in.setOrientation(LinearLayout.HORIZONTAL);
                     TextView producttitle=new TextView(context);
                     producttitle.setTextAppearance(context, R.style.Title);
                     producttitle.setPadding(0,10,0,0);
@@ -71,7 +66,16 @@ public class page_015_productlist_byvendor extends PageOperations{
                     productname.setTextSize(width / 40);
                     producttitle.setText(res.getString(R.string.l_015_ProductList_Productname_Label_0));
                     productname.setText(productitem.getString("price_product_name"));
-                    tr.addView(producttitle);
+                    ll_in.addView(producttitle);
+                    if (productitem.getString("price_usdaorganic").equals("yes"))
+                    {
+                        ImageView org = new ImageView(context);
+                        org.setPadding(20,10,0,0);
+                        org.setLayoutParams(new LinearLayout.LayoutParams(50,50));
+                        org.setImageResource(R.drawable.usda_organic);
+                        ll_in.addView(org);
+                    }
+                    tr.addView(ll_in);
                     tr.addView(productname);
 
                     lv.addView(tr);

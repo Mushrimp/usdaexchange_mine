@@ -61,38 +61,6 @@ public class  page_017_marketpage extends PageOperations{
                 br1.setText("");
                 ll.addView(br1);
 
-                //Button
-                Button al = new Button(context);
-                al.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3), (int)(height/18)));
-                al.setBackgroundResource(R.drawable.button_style);
-                al.setTextAppearance(context, R.style.White);
-                al.setPadding(0,10,0,10);
-                al.setTextSize(width / 50);
-                al.setGravity(Gravity.CENTER);
-                al.setText(R.string.l_017_MarketMainpage_AddtoPreferlist_Button_0);
-                al.setTransformationMethod(null);
-
-                al.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Hashtable<String, String> ht = new Hashtable<String, String>();
-                        String token_s = UserFileUtility.get_token();
-                        ht.put("token", token_s);
-                        ht.put("os", "Android");
-                        ht.put("fmid", getRecentPage().params.get("marketid"));
-                        new FetchTask() {
-                            @Override
-                            protected void executeSuccess(JSONObject result) throws JSONException {
-                                removeRecentPage();
-                                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
-                                toast.show();
-                            }
-                        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_add_to", ht));
-                    }
-                });
-
-                ll.addView(al);
-
                 //Address
                 TextView address1 = new TextView(context);
                 address1.setPadding(0,30,0,0);
@@ -133,6 +101,43 @@ public class  page_017_marketpage extends PageOperations{
                 TextView br4 = new TextView(context);
                 br4.setText("");
                 ll.addView(br4);
+
+                //Button
+                LinearLayout ll_bt = new LinearLayout(context);
+                ll_bt.setGravity(Gravity.END);
+                Button al = new Button(context);
+                al.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3), (int)(height/21)));
+                al.setBackgroundResource(R.drawable.button_style);
+                al.setTextAppearance(context, R.style.White);
+                al.setPadding(0,10,0,10);
+                al.setStateListAnimator(null);
+                al.setTextSize(width / 50);
+                al.setGravity(Gravity.CENTER);
+                al.setText(R.string.l_017_MarketMainpage_AddtoPreferlist_Button_0);
+                al.setTransformationMethod(null);
+
+                al.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Hashtable<String, String> ht = new Hashtable<String, String>();
+                        String token_s = UserFileUtility.get_token();
+                        ht.put("token", token_s);
+                        ht.put("os", "Android");
+                        ht.put("fmid", getRecentPage().params.get("marketid"));
+                        new FetchTask() {
+                            @Override
+                            protected void executeSuccess(JSONObject result) throws JSONException {
+                                removeRecentPage();
+                                Toast toast = Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_add_to", ht));
+                    }
+                });
+
+                ll_bt.addView(al);
+                ll.addView(ll_bt);
+
 
                 //Vendors
                 TextView vendor1 = new TextView(context);

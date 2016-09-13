@@ -184,6 +184,7 @@ public class page_001_front extends PageOperations {
             ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 0.66f));
 
             lv.addView(ll);
+            lv.setBackgroundResource(R.drawable.tablerow_style);
 
             final String postid = jpost.getString("postid");
             lv.setOnClickListener(new View.OnClickListener() {

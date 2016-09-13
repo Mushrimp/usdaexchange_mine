@@ -10,7 +10,8 @@
     tools:context="com.mahoneydev.usdafmexchange.Frontpage"
     tools:showIn="@layout/app_bar_frontpage"
     >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content"
@@ -25,11 +26,12 @@
     tools:context="com.mahoneydev.usdafmexchange.Frontpage"
     tools:showIn="@layout/app_bar_frontpage">
 
-    <TextView
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:id="@+id/helloworld"/>
 
-</LinearLayout>
+    </LinearLayout>
+
 </ScrollView>

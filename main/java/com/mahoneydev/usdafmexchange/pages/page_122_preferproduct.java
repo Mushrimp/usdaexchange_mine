@@ -76,6 +76,7 @@ public class page_122_preferproduct extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removepreferproductListener(context,"Delete a product","Do you want to remove "+preproduct.getString("product_name")+" from the list?",lv,tl,preproduct.getString("ID")));
                     TableRow lk = new TableRow(context);

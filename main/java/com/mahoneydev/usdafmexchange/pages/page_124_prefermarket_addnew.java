@@ -134,6 +134,7 @@ public class page_124_prefermarket_addnew extends PageOperations {
                                 ll.addView(br);
 
                                 lv.addView(ll);
+                                lv.setBackgroundResource(R.drawable.tablerow_style);
 
                                 final String fmid = markets.getString("fmid");
                                 lv.setOnClickListener(new View.OnClickListener() {

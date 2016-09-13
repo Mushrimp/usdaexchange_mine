@@ -77,6 +77,7 @@ public class page_123_prefervendor extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removeprefervendorListener(context,"Delete a vendor","Do you want to remove "+prevendor.getString("displayname")+" from the list?",lv,tl,prevendor.getString("ID")));
 

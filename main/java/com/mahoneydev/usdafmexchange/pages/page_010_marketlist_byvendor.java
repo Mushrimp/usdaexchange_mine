@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -40,16 +41,27 @@ public class page_010_marketlist_byvendor extends PageOperations {
                     final TableRow lv=new TableRow(context);
                     LinearLayout tr=new LinearLayout(context);
                     tr.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9),TableRow.LayoutParams.WRAP_CONTENT ));
+
+                    RelativeLayout rl_in = new RelativeLayout(context);
+                    rl_in.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9),TableRow.LayoutParams.WRAP_CONTENT ));
                     TextView markettitle=new TextView(context);
                     markettitle.setTextAppearance(context, R.style.Title);
                     markettitle.setTextSize(width / 50);
+                    markettitle.setText(res.getString(R.string.l_010_MarketLocationList_Name_Label_0));
+                    rl_in.addView(markettitle);
+                    ImageView arrow= new ImageView(context);
+                    arrow.setImageResource(R.drawable.next_item);
+                    RelativeLayout.LayoutParams parms2 = new RelativeLayout.LayoutParams(35, 35);
+                    parms2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    arrow.setLayoutParams(parms2);
+                    rl_in.addView(arrow);
+                    tr.addView(rl_in);
+
                     TextView marketname=new TextView(context);
                     marketname.setPadding(0,10,0,0);
                     marketname.setTextAppearance(context,R.style.Bold);
                     marketname.setTextSize(width / 40);
-                    markettitle.setText(res.getString(R.string.l_010_MarketLocationList_Name_Label_0));
                     marketname.setText(marketitem.getString("price_market_name"));
-                    tr.addView(markettitle);
                     tr.addView(marketname);
 
                     TextView addresstitle=new TextView(context);
@@ -67,6 +79,7 @@ public class page_010_marketlist_byvendor extends PageOperations {
 
                     tr.setOrientation(LinearLayout.VERTICAL);
                     lv.addView(tr);
+                    tr.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     final String id=marketitem.getString("price_fmid");
                     lv.setOnClickListener(new View.OnClickListener() {

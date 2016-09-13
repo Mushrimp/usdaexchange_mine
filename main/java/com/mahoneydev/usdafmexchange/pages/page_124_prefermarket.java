@@ -76,6 +76,7 @@ public class page_124_prefermarket extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removeprefermarketListener(context,"Delete a market","Do you want to remove "+premarket.getString("displayname")+" from the list?",lv,tl,premarket.getString("ID")));
 

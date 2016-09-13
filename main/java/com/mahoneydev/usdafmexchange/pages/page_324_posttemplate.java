@@ -88,16 +88,17 @@ public class page_324_posttemplate extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableRow.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removetemplateListener(context,"Delete a template","Do you want to remove this template?",lv,tl,template.getString("ID")));
 
-                    final String id = template.getString("ID");
-                    lv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            page_322_newpost.preparepostform();
-                        }
-                    });
+//                    final String id = template.getString("ID");
+//                    lv.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            page_322_newpost.preparepostform(id);
+//                        }
+//                    });
 
                     TableRow lk = new TableRow(context);
                     lk.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));

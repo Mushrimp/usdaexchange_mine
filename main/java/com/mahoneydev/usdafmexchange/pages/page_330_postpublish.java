@@ -96,6 +96,7 @@ public class page_330_postpublish extends PageOperations{
 
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableLayout.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
 
                     TableRow lk = new TableRow(context);

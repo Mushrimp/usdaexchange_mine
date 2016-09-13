@@ -71,6 +71,7 @@ public class page_404_notification extends PageOperations {
 
                         ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                         lv.addView(ll);
+                        lv.setBackgroundResource(R.drawable.tablerow_style);
                         tl.addView(lv);
 
                         TableRow lk = new TableRow(context);

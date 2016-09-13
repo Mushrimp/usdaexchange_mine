@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
+import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -115,6 +117,7 @@ public class page_402_message extends PageOperations {
 
                         ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                         lv.addView(ll);
+                        lv.setBackgroundResource(R.drawable.tablerow_style);
 
                         final String id = message.getString("ID");
                         final String subjectstring = message.getString("subject");
@@ -129,6 +132,8 @@ public class page_402_message extends PageOperations {
                                 pushNewPage(R.array.page_403_messageform, pam);
                             }
                         });
+                        lv.setOnLongClickListener(new removemessageListener(context,"Delete a message","Do you want to remove this message from the list?",lv,tl, message.getString("ID")));
+
 
                         tl.addView(lv);
 
@@ -148,5 +153,35 @@ public class page_402_message extends PageOperations {
                 setupUI(playout);
             }
         }.execute(AppCodeResources.postUrl("usdafriendship", "messages_list_all_byuser", ht));
+    }
+    public static class removemessageListener extends LongPressDeleteDialogListener {
+        private TableRow deletetablerow;
+        private TableLayout fromtablelayout;
+        private String user_name;
+        private String threadid;
+        public removemessageListener(Frontpage contexti, String titlei, String messagei, TableRow tr, TableLayout tl, String id)
+        {
+            super(contexti, titlei, messagei);
+            deletetablerow=tr;
+            fromtablelayout=tl;
+           // user_name=username;
+            threadid = id;
+        }
+        @Override
+        public void deleteaction(){
+            String token_s = UserFileUtility.get_token();
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            //ht.put("username", user_name);
+            ht.put("threadid",threadid);
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    fromtablelayout.removeView(deletetablerow);
+                }
+            }.execute(AppCodeResources.postUrl("usdafriendship", "messages_remove_thread", ht));
+
+        }
     }
 }

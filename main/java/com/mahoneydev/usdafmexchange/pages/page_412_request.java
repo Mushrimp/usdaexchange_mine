@@ -74,34 +74,51 @@ public class page_412_request extends PageOperations {
                         TextView busname = new TextView(context);
                         busname.setText(request.getString("businessname"));
                         busname.setTextAppearance(context, R.style.Normal);
-                        busname.setTextSize(width/45);
+                        busname.setTextSize(width / 45);
                         ll.addView(busname);
 
                         TextView disname = new TextView(context);
-                        disname.setText("("+request.getString("displayname")+")");
+                        disname.setText("(" + request.getString("displayname") + ")");
                         disname.setTextAppearance(context, R.style.Normal);
-                        disname.setTextSize(width/50);
+                        disname.setTextSize(width / 50);
                         ll.addView(disname);
 
                         TextView bl = new TextView(context);
                         ll.addView(bl);
-
+                        final String friendusername=request.getString("username");
                         //Button
                         RelativeLayout rl_in = new RelativeLayout(context);
                         rl_in.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, width / 10));
-                        Button reject_bt = new Button(context);
+                        final Button reject_bt = new Button(context);
                         RelativeLayout.LayoutParams btprams = new RelativeLayout.LayoutParams((int)(width*0.25), (int)(height*0.05));
                         btprams.addRule(RelativeLayout.ALIGN_PARENT_LEFT|RelativeLayout.CENTER_VERTICAL);
                         reject_bt.setLayoutParams(btprams);
                         reject_bt.setText(res.getString(R.string.l_412_Requests_RejectButton_Label_0));
                         reject_bt.setTextAppearance(context, R.style.White);
                         reject_bt.setTextSize(width / 55);
-                        reject_bt.setPadding(0,0,0,1);
+                        reject_bt.setPadding(0, 0, 0, 1);
                         reject_bt.setBackgroundResource(R.drawable.button_style);
                         reject_bt.setStateListAnimator(null);
                         reject_bt.setTransformationMethod(null);
+                        reject_bt.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                reject_bt.setClickable(false);
+                                String token_s = UserFileUtility.get_token();
+                                Hashtable<String, String> htt = new Hashtable<String, String>();
+                                htt.put("os", "Android");
+                                htt.put("token", token_s);
+                                htt.put("fname",friendusername);
+                                new FetchTask(){
+                                    @Override
+                                    protected void executeSuccess(JSONObject result) throws JSONException {
+                                        showrequests();
+                                    }
+                                }.execute(AppCodeResources.postUrl("usdafriendship","friends_reject_friendship_request",htt));
+                            }
+                        });
                         rl_in.addView(reject_bt);
-                        Button accept_bt = new Button(context);
+                        final Button accept_bt = new Button(context);
                         RelativeLayout.LayoutParams btprams1 = new RelativeLayout.LayoutParams((int)(width*0.25), (int)(height*0.05));
                         btprams1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
                         btprams1.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -109,10 +126,29 @@ public class page_412_request extends PageOperations {
                         accept_bt.setText(res.getString(R.string.l_412_Requests_AcceptButton_Label_0));
                         accept_bt.setTextAppearance(context, R.style.White);
                         accept_bt.setTextSize(width / 55);
-                        accept_bt.setPadding(0,0,0,1);
+                        accept_bt.setPadding(0, 0, 0, 1);
                         accept_bt.setBackgroundResource(R.drawable.button_style);
                         accept_bt.setStateListAnimator(null);
                         accept_bt.setTransformationMethod(null);
+
+                        accept_bt.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                accept_bt.setClickable(false);
+                                String token_s = UserFileUtility.get_token();
+                                Hashtable<String, String> htt = new Hashtable<String, String>();
+                                htt.put("os", "Android");
+                                htt.put("token", token_s);
+                                htt.put("fname", friendusername);
+                                new FetchTask() {
+                                    @Override
+                                    protected void executeSuccess(JSONObject result) throws JSONException {
+                                        showrequests();
+                                    }
+                                }.execute(AppCodeResources.postUrl("usdafriendship", "friends_accept_friendship_request", htt));
+                            }
+                        });
+
                         rl_in.addView(accept_bt);
                         ll.addView(rl_in);
 

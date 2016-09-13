@@ -115,6 +115,7 @@ public class page_122_preferproduct_addnew extends PageOperations {
                                 ll.addView(br);
 
                                 lv.addView(ll);
+                                lv.setBackgroundResource(R.drawable.tablerow_style);
 
                                 final String proname = products.getString("label");
                                 final String catg = "";

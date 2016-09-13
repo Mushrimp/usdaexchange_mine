@@ -124,7 +124,9 @@
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_2\",\"id\":\"postpriceView3\", \"clickaction\":\"postschedule\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_3\",\"id\":\"postpriceView4\", \"clickaction\":\"postpublish\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_3\",\"id\":\"postpriceView5\", \"clickaction\":\"postschedule\"}</item>
+        <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"l_Menu_PostPrice_4\",\"id\":\"postpriceView4\", \"clickaction\":\"postpublish\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
     </array>
     <array name="page_322_newpost">
@@ -241,7 +243,7 @@
     </array>
     <array name="page_309_farmermarket">
         <item>{\"element\":\"Title\",\"value\":\"l_309_MarketLocation_Title_0\",\"id\":\"farmermarketView\"}</item>
-        <item>{\"element\":\"NextButton\",\"value\":\"l_309_MarketLocation_AddMarket_Button_0\",\"id\":\"addmarketButton\", \"clickaction\":\"addmarket\"}</item>
+        <!--<item>{\"element\":\"NextButton\",\"value\":\"l_309_MarketLocation_AddMarket_Button_0\",\"id\":\"addmarketButton\", \"clickaction\":\"addmarket\"}</item>-->
         <!--<item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"voidView1\"}</item>-->
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"farmermarketScroll\"}</item>
     </array>
@@ -276,7 +278,7 @@
     </array>
     <array name="page_305_productsell">
         <item>{\"element\":\"Title\",\"value\":\"l_305_ProductList_Title_0\",\"id\":\"productsellView\"}</item>
-        <item>{\"element\":\"NextButton\",\"value\":\"l_305_ProductList_AddProduct_Button_0\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>
+        <!--<item>{\"element\":\"NextButton\",\"value\":\"l_305_ProductList_AddProduct_Button_0\",\"id\":\"addproductButton\", \"clickaction\":\"addproduct\"}</item>-->
         <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"productsellScroll\"}</item>
     </array>
@@ -298,13 +300,29 @@
 
     <!--social network-->
     <array name="page_400_socialnetwork">
+    <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"socialnetView\"}</item>
+    <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"socialnetworkView\"}</item>
+    <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+    <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+    <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_0\",\"id\":\"socialnetworkView1\", \"clickaction\":\"friendship\"}</item>
+    <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+    <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_1\",\"id\":\"accountsettingsView3\", \"clickaction\":\"qrcode\"}</item>
+    <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+    <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_2\",\"id\":\"socialnetworkView2\", \"clickaction\":\"request\"}</item>
+    <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+    <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_3\",\"id\":\"socialnetworkView3\", \"clickaction\":\"message\"}</item>
+    <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+    <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_4\",\"id\":\"socialnetworkView4\", \"clickaction\":\"notification\"}</item>
+    <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
+</array>
+    <array name="page_400_socialnetwork_customer">
         <item>{\"element\":\"Title\",\"value\":\"image\",\"id\":\"socialnetView\"}</item>
         <item>{\"element\":\"ImageView\",\"value\":\"\",\"id\":\"socialnetworkView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_0\",\"id\":\"socialnetworkView1\", \"clickaction\":\"friendship\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
-        <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_1\",\"id\":\"accountsettingsView3\", \"clickaction\":\"qrcode\"}</item>
+        <item>{\"element\":\"Button\",\"value\":\"Scan QR Code\",\"id\":\"accountsettingsView3\", \"clickaction\":\"scanQR\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
         <item>{\"element\":\"Button\",\"value\":\"l_Menu_SocialNetwork_2\",\"id\":\"socialnetworkView2\", \"clickaction\":\"request\"}</item>
         <item>{\"element\":\"LineView\",\"value\":\" \",\"id\":\"void2View\"}</item>
@@ -315,10 +333,10 @@
     </array>
     <array name="page_401_friendship">
         <item>{\"element\":\"Title\",\"value\":\"l_401_Friends_Title_0\",\"id\":\"friendsView\"}</item>
-        <item>{\"element\":\"FloatingButton\",\"value\":\"\",\"id\":\"friendshipView1\", \"clickaction\":\"requestfriend\"}</item>
-        <item>{\"element\":\"NextButton\",\"value\":\"l_401_Friends_RequestFriendshipButton_Label_0\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>
+        <item>{\"element\":\"ImageButton\",\"value\":\"\",\"id\":\"friendshipView1\", \"clickaction\":\"requestfriend\"}</item>
+        <!--<item>{\"element\":\"NextButton\",\"value\":\"l_401_Friends_RequestFriendshipButton_Label_0\",\"id\":\"friendshipView\", \"clickaction\":\"requestfriend\"}</item>-->
         <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
-        <item>{\"element\":\"NextButton\",\"value\":\"l_401_Friends_SendMessageALLButton_Label_0\",\"id\":\"friendshipView2\", \"clickaction\":\"sendmessageall\"}</item>
+        <!--<item>{\"element\":\"NextButton\",\"value\":\"l_401_Friends_SendMessageALLButton_Label_0\",\"id\":\"friendshipView2\", \"clickaction\":\"sendmessageall\"}</item>-->
         <!--<item>{\"element\":\"TextView\",\"value\":\" \",\"id\":\"void2View\"}</item>-->
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"friendshipScroll\"}</item>
     </array>
@@ -337,10 +355,11 @@
     </array>
     <array name="page_402_message">
         <item>{\"element\":\"Title\",\"value\":\"l_402_MessageList_Title_0\",\"id\":\"messageView\"}</item>
+        <item>{\"element\":\"ImageButton\",\"value\":\"\",\"id\":\"messageView1\", \"clickaction\":\"message\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageScroll\"}</item>
     </array>
     <array name="page_403_messageform">
-        <item>{\"element\":\"Title\",\"value\":\"l_403_MessageDetail_Title_0\",\"id\":\"messageView\"}</item>
+        <item>{\"element\":\"Title\",\"value\":\"special\",\"id\":\"messageView\"}</item>
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"messageformScroll\"}</item>
         <item>{\"element\":\"NextButton\",\"value\":\"l_403_MessageDetail_ReplayButton_Label_0\",\"id\":\"replyButton\", \"clickaction\":\"replymessageaction\"}</item>
     </array>
@@ -454,6 +473,11 @@
         <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"deleteScroll\"}</item>
         <!--<item>{\"element\":\"InsideButton\",\"value\":\"l_112_DeleteAccount_DeleteButton_Label_0\",\"id\":\"deleteaccountButton\", \"clickaction\":\"delaccount\"}</item>-->
     </array>
+    <array name="page_112_deleteaccount_customer">
+        <item>{\"element\":\"Title\",\"value\":\"Delete Account\",\"id\":\"deleteView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"deletecustomerScroll\"}</item>
+        <!--<item>{\"element\":\"InsideButton\",\"value\":\"l_112_DeleteAccount_DeleteButton_Label_0\",\"id\":\"deleteaccountButton\", \"clickaction\":\"delaccount\"}</item>-->
+    </array>
     <array name="page_101_signasvendor">
         <item>{\"element\":\"Title\",\"value\":\"l_101_RoleOption_Title_0\",\"id\":\"signvendorView\"}</item>
         <item>{\"element\":\"TextView\",\"value\":\"l_101_RoleOption_Instruction_0\",\"id\":\"signasvendorView\"}</item>
@@ -512,8 +536,8 @@
 
     <array name="page_199_scanqr">
         <item>{\"element\":\"Title\",\"value\":\"My QR code\",\"id\":\"qrcodeView\"}</item>
-        <item>{\"element\":\"NextButton\",\"value\":\"Scan QR\",\"id\":\"scanqrbutton\", \"clickaction\":\"scanQR\"}</item>
-        <item>{\"element\":\"TextView\",\"value\":\"\",\"id\":\"scanView\"}</item>
+        <item>{\"element\":\"ScrollView\",\"value\":\"\",\"id\":\"scanqrScroll\"}</item>
+        <!--<item>{\"element\":\"ImageButton\",\"value\":\"Scan QR\",\"id\":\"scanqrbutton\", \"clickaction\":\"scanQR\"}</item>-->
     </array>
 
     <array name="page_777_test">

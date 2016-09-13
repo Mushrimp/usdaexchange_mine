@@ -7,7 +7,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.media.Image;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputType;
@@ -35,6 +37,8 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.mahoneydev.usdafmexchange.pages.*;
 
 import org.json.JSONObject;
@@ -96,6 +100,16 @@ public class PageOperations {
                 Log.e("iv height", "" + iv.getHeight());
                 break;
             }
+            case (R.array.page_403_messageform): {
+                TextView tv = new TextView(context);
+                tv.setText(getRecentPage().params.get("subject"));
+                tv.setTextAppearance(context,R.style.Normal);
+                tv.setTextColor(Color.WHITE);
+                tv.setGravity(Gravity.CENTER);
+                tv.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+                toolbar.addView(tv);
+                break;
+            }
             default:{
                 ImageView iv = new ImageView(context);
                 iv.setImageResource(R.drawable.fme_header_white);
@@ -106,7 +120,7 @@ public class PageOperations {
         }
         hideKey(context.findViewById(R.id.appbar));
     }
-    public static void setupperrightbutton(int code, ImageButton qbutton)
+    public static void setupperrightbutton(int code, final ImageButton qbutton)
     {
         switch (code) {
             case (R.array.page_001_front):{
@@ -115,7 +129,7 @@ public class PageOperations {
                 qbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        pushNewPage(R.array.page_199_scanqr,new Hashtable<String, String>());
+                        setupperrightbuttonaction();
                     }
                 });
                 break;
@@ -132,6 +146,20 @@ public class PageOperations {
 //                });
 //                break;
 //            }
+            case (R.array.page_199_scanqr):{
+                qbutton.setImageResource(R.drawable.camera_white);
+                //qbutton.setImageResource(android.R.drawable.ic_menu_camera);
+                //qbutton.setImageResource(android.R.drawable.ic_menu_camera);
+//                qbutton.setColorFilter(Color.WHITE);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        page_199_scanqr.startScanQR();
+                    }
+                });
+                break;
+            }
             default:{
                 qbutton.setVisibility(View.INVISIBLE);
                 qbutton.setOnClickListener(null);
@@ -139,6 +167,94 @@ public class PageOperations {
             }
         }
     }
+    public static void setupperrightbuttonaction(){
+        String role = UserFileUtility.get_role();
+        Log.e("role222",role);
+        if (role.equals("vendor")){
+            pushNewPage(R.array.page_199_scanqr,new Hashtable<String, String>());
+        } else if (role.equals("customer")){
+            page_199_scanqr.startScanQR();
+        } else {
+            Toast.makeText(context,"You need to login first.",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void addImageButton(int code,ImageButton bt1, TextView bl, ImageButton bt2)
+    {
+        switch (code) {
+            case (R.array.page_401_friendship):{
+                bt1.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                bt1.setImageResource(R.drawable.send_all_white);
+                bt1.setBackgroundResource(R.drawable.button_style);
+//                hashelements.put(jsonelements.getString("id") + "Button", bt1);
+                bt1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Hashtable<String,String> ht=new Hashtable<String, String>();
+                        ht.put("recipientsname","All Friends");
+                        ht.put("recipientsid","-1");
+                        pushNewPage(R.array.page_408_sendmessage,ht);
+                    }
+                });
+                bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+
+                bl.setPadding(20,0,20,0);
+
+                bt2.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                bt2.setImageResource(R.drawable.add_friend_white);
+                bt2.setBackgroundResource(R.drawable.button_style);
+//                hashelements.put(jsonelements.getString("id") + "Button", bt2);
+                bt2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        pushNewPage(R.array.page_406_searchfriend, new Hashtable<String, String>());
+                    }
+                });
+                bt2.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+                break;
+            }
+
+            case (R.array.page_402_message):{
+                bt1.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                bt1.setImageResource(R.drawable.delete_all_white);
+                bt1.setBackgroundResource(R.drawable.button_style);
+//                hashelements.put(jsonelements.getString("id") + "Button", bt1);
+                bt1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Hashtable<String,String> ht=new Hashtable<String, String>();
+                        ht.put("recipientsname","All Friends");
+                        ht.put("recipientsid","-1");
+                        pushNewPage(R.array.page_408_sendmessage,ht);
+                    }
+                });
+                bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+
+                bl.setPadding(20,0,20,0);
+
+                bt2.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                bt2.setImageResource(R.drawable.compose_white);
+                bt2.setBackgroundResource(R.drawable.button_style);
+//                hashelements.put(jsonelements.getString("id") + "Button", bt2);
+                bt2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        pushNewPage(R.array.page_401_friendship, new Hashtable<String, String>());
+                    }
+                });
+                bt2.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+                break;
+            }
+            default:{
+                bt1.setVisibility(View.INVISIBLE);
+                bt2.setVisibility(View.INVISIBLE);
+                bt1.setOnClickListener(null);
+                bt2.setOnClickListener(null);
+                break;
+            }
+        }
+    }
+
     public static void generateLayout(int code, LinearLayout layout,RelativeLayout toolbar, Hashtable<String, String> params) {
         if ((res == null) || (context == null)||(toolbar==null))
             return;
@@ -466,13 +582,22 @@ public class PageOperations {
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
                     }
-//                    else if (element.equals("FloatingButton")){
-//                        FloatingActionButton fab = (FloatingActionButton)context.findViewById(R.id.icon_only);
-//                       // hashelements.put(jsonelements.getString("id"), fab);
-//                        setButtonAction(jsonelements.getString("clickaction"), fab);
-////                        fab.setVisibility(View.INVISIBLE);
-//                        layout.addView(fab);
-//                    }
+                    else if (element.equals("ImageButton")){
+                        LinearLayout ll = new LinearLayout(context);
+                        ll.setOrientation(LinearLayout.HORIZONTAL);
+                        ll.setGravity(Gravity.END);
+                        ImageButton bt1 = new ImageButton(context);
+                        ImageButton bt2 = new ImageButton(context);
+                        TextView bl = new TextView(context);
+                        addImageButton(code,bt1,bl,bt2);
+                        ll.addView(bt1);
+                        ll.addView(bl);
+                        ll.addView(bt2);
+                        layout.addView(ll);
+
+
+
+                    }
                     else if (element.equals("LineView")) {
                         View line = new View(context);
                         line.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
@@ -506,6 +631,7 @@ public class PageOperations {
                         layout.addView(iv);
                     } else if (element.equals("SearchView")) {
 //                        SearchView sv = new SearchView(context);
+//                        sv.setBackgroundResource((R.drawable.searchview_style));
 //                        layout.addView(sv);
 
                         LinearLayout ll = new LinearLayout(context);
@@ -527,7 +653,11 @@ public class PageOperations {
 
                         ll.addView(et);
                         ImageButton bt = new ImageButton(context);
-                        bt.setImageResource(R.drawable.ic_menu_search);
+                        bt.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                        bt.setPadding(10,5,10,5);
+                        bt.setImageResource(R.drawable.search_white);
+                       // bt.setImageResource(R.drawable.ic_menu_search);
+                       // bt.setColorFilter(Color.WHITE);
                         bt.setBackgroundResource(R.drawable.button_style);
                         hashelements.put(jsonelements.getString("id") + "Button", bt);
                         setButtonAction(jsonelements.getString("clickaction"), bt);
@@ -916,7 +1046,7 @@ public class PageOperations {
                 @Override
                 public void onClick(View view) {
                     bt.setClickable(false);
-                    pushNewPage(R.array.page_109_qrcode, new Hashtable<String, String>());
+                    pushNewPage(R.array.page_199_scanqr,new Hashtable<String, String>());
                 }
             });
         } else if (action.equals("searchpreference")) {
@@ -948,7 +1078,11 @@ public class PageOperations {
                 @Override
                 public void onClick(View view) {
                     bt.setClickable(false);
-                    pushNewPage(R.array.page_112_deleteaccount, new Hashtable<String, String>());
+                    if (UserFileUtility.get_role().equals("vendor")) {
+                        pushNewPage(R.array.page_112_deleteaccount, new Hashtable<String, String>());
+                    } else if (UserFileUtility.get_role().equals("customer")){
+                        pushNewPage(R.array.page_112_deleteaccount_customer, new Hashtable<String, String>());
+                    }
                 }
             });
         } else if (action.equals("savenotificationsettings")) {
@@ -1062,6 +1196,8 @@ public class PageOperations {
             page_107_setnotification.preparenotifications();
         } else if (code == R.array.page_108_socialnetwork) {
             page_108_socialnetwork.preparesocial();
+        }else if (code==R.array.page_199_scanqr){
+            page_199_scanqr.showQRcode();
         } else if (code == R.array.page_205_nameaddress) {
             page_205_nameaddress.preparevendorprofileform();
         } else if (code == R.array.page_206_phoneemail) {
@@ -1069,7 +1205,8 @@ public class PageOperations {
         } else if (code == R.array.page_207_website) {
             page_207_website.preparevendorwebform();
         } else if (code == R.array.page_322_newpost) {
-            page_322_newpost.preparepostform();
+            String id = "";
+            page_322_newpost.preparepostform(id);
         } else if (code == R.array.page_306_addproductform) {
             page_306_addproductform.prepareproductform();
         } else if (code == R.array.page_310_addnewmarket) {
@@ -1121,6 +1258,10 @@ public class PageOperations {
             String name = UserFileUtility.get_username();
 //            String name = getRecentPage().params.get("username");
             page_112_deleteaccount.showdeletepage(name);
+        }else if (code == R.array.page_112_deleteaccount_customer) {
+            String name = UserFileUtility.get_username();
+//            String name = getRecentPage().params.get("username");
+            page_112_deleteaccount_customer.showdeletepage_customer(name);
         }
         else
             setupUI(playout);

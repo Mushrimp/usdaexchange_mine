@@ -1,7 +1,9 @@
 package com.mahoneydev.usdafmexchange.pages;
 
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -45,6 +47,25 @@ public class page_309_farmermarket extends PageOperations {
 
                     LinearLayout ll = new LinearLayout(context);
                     ll.setOrientation(LinearLayout.VERTICAL);
+
+                    //Add
+                    LinearLayout ll_in = new LinearLayout(context);
+                    ll_in.setGravity(Gravity.END);
+                    ImageButton bt1 = new ImageButton(context);
+                    //bt1.setImageResource(R.drawable.send_all_white);
+                    bt1.setImageResource(android.R.drawable.ic_menu_add);
+                    //bt1.setColorFilter(Color.WHITE);
+                    bt1.setBackgroundResource(R.drawable.button_style);
+                    bt1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            pushNewPage(R.array.page_311_addmarketform, new Hashtable<String, String>());
+                        }
+                    });
+                    bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+                    ll_in.addView(bt1);
+                    ll.addView(ll_in);
+
                     //Market Name
                     TextView marketnamet = new TextView(context);
                     marketnamet.setTextAppearance(context, R.style.Title);
@@ -75,6 +96,7 @@ public class page_309_farmermarket extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removemarketListener(context,"Delete a product","Do you want to remove "+market.getString("MarketName")+" from the list?",lv,tl,market.getString("id")));
 

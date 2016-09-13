@@ -127,6 +127,7 @@ public class page_123_prefervendor_addnew extends PageOperations {
                     ll.addView(br);
 
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     final String vendorusername=vendors.getString("vendorusername");
                     lv.setOnClickListener(new View.OnClickListener() {
                         @Override

@@ -211,9 +211,9 @@ public class page_020_viewpost extends PageOperations {
                 ll_in.addView(org);
                 tr2.addView(ll_in);
                 tl_in.addView(tr2);
-                //Description
+                //Message
                 TableRow tr3 = new TableRow(context);
-                tr3.setPadding(30,10,0,20);
+                tr3.setPadding(30,10,0,30);
                 TextView des1 = new TextView(context);
                 des1.setGravity(Gravity.RIGHT);
                 des1.setTextAppearance(context, R.style.Body);

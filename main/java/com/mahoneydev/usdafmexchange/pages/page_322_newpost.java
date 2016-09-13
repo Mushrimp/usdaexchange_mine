@@ -37,10 +37,216 @@ import java.util.Locale;
  * Created by bichongg on 7/25/2016.
  */
 public class page_322_newpost extends PageOperations {
-    public static void preparepostform() {
-//        if (id != null){
-//
-//        }else {
+    public static void preparepostform(String id) {
+        if (id != null){
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            String token_s = UserFileUtility.get_token();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("post_id",id);
+            JSONArray ja=new JSONArray();
+            ja.put("price_product_name");
+            ja.put("price_productunit_name");
+            ja.put("price_market_name");
+            ja.put("price_street");
+            ja.put("price_city");
+            ja.put("price_state");
+            ja.put("price_zipcode");
+            ht.put("form_args",ja.toString());
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    JSONObject jo=new JSONObject(result.getString("results"));
+                    ((EditText)hashelements.get("unitInput")).setText(jo.getString("price_productunit_name"));
+//                    ((EditText)hashelements.get("busaddressInput")).setText(jo.getString("business_street"));
+//                    ((EditText)hashelements.get("buscityInput")).setText(jo.getString("business_city"));
+//                    ((EditText)hashelements.get("buszipcodeInput")).setText(jo.getString("business_zip"));
+                    int length=AppCodeResources.state_list.size();
+                    SpinnerElement[] arraySpinner = new SpinnerElement[length];
+                    int selected=0;
+                    String exstate=jo.getString("business_state");
+                    for(int i=0;i<length;i++)
+                    {
+                        arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
+                        if (exstate.equals(AppCodeResources.state_list.get(i).getValue()))
+                        {
+                            selected=i;
+                        }
+                    }
+                    ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+                            R.layout.simple_spinner_item, arraySpinner);
+                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                    ((Spinner) hashelements.get("busstateSpinner")).setAdapter(adapter);
+                    ((Spinner) hashelements.get("busstateSpinner")).setSelection(selected);
+                    setupUI(playout);
+                }
+            }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_populate_postform", ht));
+            ((Spinner) hashelements.get("productSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        SpinnerElement selecteditem = (SpinnerElement) adapterView.getItemAtPosition(i);
+                        String id = selecteditem.getValue();
+                        ((AutoCompleteTextView) hashelements.get("unitInput")).setText(hashvalues.get(id));
+                    } else {
+                        ((AutoCompleteTextView) hashelements.get("unitInput")).setText("");
+                    }
+                    ((AutoCompleteTextView) hashelements.get("unitInput")).clearFocus();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    JSONObject ja = result.getJSONObject("results");
+                    SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
+                    Iterator<?> keys = ja.keys();
+                    int i = 0;
+                    while (keys.hasNext()) {
+                        String key = (String) keys.next();
+                        arraySpinner[i] = new SpinnerElement(ja.getString(key), key);
+                        i++;
+                    }
+
+                    ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+                            R.layout.simple_spinner_item, arraySpinner);
+                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                    ((Spinner) hashelements.get("productSpinner")).setAdapter(adapter);
+                    hashvalues = new Hashtable<String, String>();
+                    JSONArray results = result.getJSONArray("result");
+                    for (i = 0; i < results.length(); i++) {
+                        JSONObject unititem = results.getJSONObject(i);
+                        hashvalues.put(unititem.getString("id"), unititem.getString("productunit_name"));
+                    }
+                    Hashtable<String, String> ht = new Hashtable<String, String>();
+                    String token_s = UserFileUtility.get_token();
+                    ht.put("os", "Android");
+                    ht.put("token", token_s);
+                    new FetchTask() {
+                        @Override
+                        protected void executeSuccess(JSONObject result) throws JSONException {
+                            JSONObject ja = result.getJSONObject("results");
+                            SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
+                            Iterator<?> keys = ja.keys();
+                            int i = 0;
+                            while (keys.hasNext()) {
+                                String key = (String) keys.next();
+                                arraySpinner[i] = new SpinnerElement(ja.getString(key), key);
+                                i++;
+                            }
+
+                            ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+                                    R.layout.simple_spinner_item, arraySpinner);
+                            adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                            ((Spinner) hashelements.get("marketSpinner")).setAdapter(adapter);
+                            Hashtable<String, String> ht = new Hashtable<String, String>();
+                            String token_s = UserFileUtility.get_token();
+                            ht.put("os", "Android");
+                            ht.put("token", token_s);
+                            new FetchTask() {
+                                @Override
+                                protected void executeSuccess(JSONObject result) throws JSONException {
+                                    JSONArray ja = result.getJSONArray("results");
+                                    String[] arrayString = new String[ja.length()];
+                                    for (int i = 0; i < ja.length(); i++) {
+                                        JSONObject jsonobject = ja.getJSONObject(i);
+                                        arrayString[i] = jsonobject.getString("label");
+                                    }
+                                    MatchAdapter adapter = new MatchAdapter(context,
+                                            android.R.layout.simple_spinner_item, arrayString);
+                                    AutoCompleteTextView actv = ((AutoCompleteTextView) hashelements.get("unitInput"));
+                                    actv.setAdapter(adapter);
+                                    actv.setThreshold(2);
+                                    setupUI(playout);
+                                }
+
+                            }.execute(AppCodeResources.postUrl("usdatestyue", "autocomplete_getproductunit", ht));
+
+                        }
+
+                    }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_marketlist", ht));
+                }
+
+            }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_productlist", ht));
+            ((TextView) hashelements.get("marketDay")).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                    Date date;
+                    Calendar newCalendar = Calendar.getInstance();
+                    try {
+                        date = dateFormatter.parse(((TextView) hashelements.get("marketDay")).getText().toString());
+                        newCalendar.setTime(date);
+                    } catch (ParseException e) {
+
+                    }
+                    Calendar currentday = Calendar.getInstance();
+                    DatePickerDialog fromDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            Calendar newDate = Calendar.getInstance();
+                            newDate.set(year, monthOfYear, dayOfMonth);
+                            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                            ((TextView) hashelements.get("marketDay")).setText(dateFormatter.format(newDate.getTime()));
+                            Calendar currentday = Calendar.getInstance();
+                            Calendar publishday = Calendar.getInstance();
+                            publishday.set(year, monthOfYear, dayOfMonth - 2);
+                            if (currentday.getTimeInMillis() > publishday.getTimeInMillis())
+                                ((TextView) hashelements.get("publishDay")).setText(dateFormatter.format(currentday.getTime()));
+                            else
+                                ((TextView) hashelements.get("publishDay")).setText(dateFormatter.format(publishday.getTime()));
+                        }
+                    }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+                    fromDatePickerDialog.getDatePicker().setMinDate(currentday.getTimeInMillis());
+                    newCalendar.set(currentday.get(Calendar.YEAR), currentday.get(Calendar.MONTH), currentday.get(Calendar.DAY_OF_MONTH) + 42);
+                    fromDatePickerDialog.getDatePicker().setMaxDate(newCalendar.getTimeInMillis());
+                    fromDatePickerDialog.show();
+                }
+            });
+            ((TextView) hashelements.get("publishDay")).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Calendar newCalendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                    Date date;
+                    try {
+                        date = dateFormatter.parse(((TextView) hashelements.get("publishDay")).getText().toString());
+                    } catch (ParseException e) {
+                        return;
+                    }
+                    newCalendar.setTime(date);
+                    DatePickerDialog fromDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                            Calendar newDate = Calendar.getInstance();
+                            newDate.set(year, monthOfYear, dayOfMonth);
+                            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
+                            ((TextView) hashelements.get("publishDay")).setText(dateFormatter.format(newDate.getTime()));
+                        }
+                    }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+                    Calendar currentday = Calendar.getInstance();
+                    Calendar marketday = Calendar.getInstance();
+                    try {
+                        date = dateFormatter.parse(((TextView) hashelements.get("marketDay")).getText().toString());
+                    } catch (ParseException e) {
+                        return;
+                    }
+                    marketday.setTime(date);
+                    fromDatePickerDialog.getDatePicker().setMaxDate(marketday.getTimeInMillis());
+                    Calendar publishday = Calendar.getInstance();
+                    publishday.set(newCalendar.get(marketday.YEAR), marketday.get(Calendar.MONTH), marketday.get(Calendar.DAY_OF_MONTH) - 2);
+                    if (currentday.getTimeInMillis() > publishday.getTimeInMillis())
+                        fromDatePickerDialog.getDatePicker().setMinDate(currentday.getTimeInMillis());
+                    else
+                        fromDatePickerDialog.getDatePicker().setMinDate(publishday.getTimeInMillis());
+
+                    fromDatePickerDialog.show();
+                }
+            });
+
+        }else {
             Hashtable<String, String> ht = new Hashtable<String, String>();
             String token_s = UserFileUtility.get_token();
             ht.put("os", "Android");
@@ -209,7 +415,7 @@ public class page_322_newpost extends PageOperations {
                     fromDatePickerDialog.show();
                 }
             });
-//        }
+        }
     }
 
     public static class savepostListener extends ClickOnceListener {

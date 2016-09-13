@@ -65,43 +65,6 @@ public class page_016_vendorpage extends PageOperations{
 //                    br2.setText("");
 //                    ll.addView(br2);
 
-                    //Buttons
-                    LinearLayout ll_bt = new LinearLayout(context);
-                    ll_bt.setPadding(0,20,0,0);
-                    ll_bt.setOrientation(LinearLayout.HORIZONTAL);
-                    Button rf = new Button(context);
-                    rf.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3),(int)(height/18)));
-                    rf.setBackgroundResource(R.drawable.button_style);
-                    rf.setPadding(0,10,0,10);
-                    //rf.setBackgroundColor(Color.parseColor("#1C8A3B"));
-                    rf.setTextAppearance(context, R.style.White);
-                    rf.setTextSize(width / 50);
-                    rf.setText(R.string.l_016_VendorMainpage_RequestFriend_Button_0);
-                    rf.setTransformationMethod(null);
-                    ll_bt.addView(rf);
-
-                    rf.setOnClickListener(new requestFriendListener(rf));
-
-                    //
-                    TextView bl = new TextView(context);
-                    bl.setPadding(20,0,20,0);
-                    ll_bt.addView(bl);
-
-                    //Add to list
-                    Button al = new Button(context);
-                    al.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3),(int)(height/18)));
-                    al.setBackgroundResource(R.drawable.button_style);
-                    al.setPadding(0,10,0,10);
-                    al.setTextAppearance(context, R.style.White);
-                    al.setTextSize(width / 50);
-                    al.setText(R.string.l_016_VendorMainpage_AddtoPreferlist_Button_0);
-                    al.setTransformationMethod(null);
-                    ll_bt.addView(al);
-
-                    al.setOnClickListener(new addVendorListener(al));
-
-                    ll.addView(ll_bt);
-
                     //
                     TextView br1 = new TextView(context);
                     br1.setText("");
@@ -109,6 +72,45 @@ public class page_016_vendorpage extends PageOperations{
 
                     //TableLayout
                     TableLayout tl_in = new TableLayout(context);
+                    //Address
+                    TableRow tr3 = new TableRow(context);
+                    tr3.setPadding(0,10,0,0);
+                    TextView address1 = new TextView(context);
+                    address1.setGravity(Gravity.END);
+                    address1.setPadding(0,0,50,0);
+                    address1.setTextAppearance(context, R.style.Body);
+                    address1.setTextSize(width / 40);
+                    address1.setText(R.string.l_016_VendorMainpage_Address_Label_0);
+                    tr3.addView(address1);
+                    TextView address = new TextView(context);
+                    address.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
+                    address.setTextAppearance(context, R.style.Normal);
+                    address.setTextSize(width / 40);
+                    address.setText(vendorprofile.getString("business_street") + ", " + vendorprofile.getString("business_city") + ", "
+                            + vendorprofile.getString("business_state") + ", " + vendorprofile.getString("business_zip"));
+                    tr3.addView(address);
+                    tl_in.addView(tr3);
+
+                    //Phone
+                    TableRow tr2 = new TableRow(context);
+                    tr2.setPadding(0,10,0,0);
+                    TextView phone1 = new TextView(context);
+                    phone1.setGravity(Gravity.END);
+                    phone1.setPadding(0,0,50,0);
+                    phone1.setTextAppearance(context, R.style.Body);
+                    phone1.setTextSize(width / 40);
+                    phone1.setText(R.string.l_016_VendorMainpage_Phone_Label_0);
+                    tr2.addView(phone1);
+                    TextView phone = new TextView(context);
+                    phone.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
+                    phone.setTextAppearance(context, R.style.Normal);
+                    phone.setTextSize(width / 40);
+                    if (vendorprofile.has("business_phone")){
+                        phone.setText(vendorprofile.getString("business_phone"));
+                    }
+                    tr2.addView(phone);
+                    tl_in.addView(tr2);
+
                     //Email
                     TableRow tr1 = new TableRow(context);
                     tr1.setPadding(0,10,0,0);
@@ -129,43 +131,7 @@ public class page_016_vendorpage extends PageOperations{
 
                     tr1.addView(email);
                     tl_in.addView(tr1);
-                    //Phone
-                    TableRow tr2 = new TableRow(context);
-                    tr2.setPadding(0,10,0,0);
-                    TextView phone1 = new TextView(context);
-                    phone1.setGravity(Gravity.END);
-                    phone1.setPadding(0,0,50,0);
-                    phone1.setTextAppearance(context, R.style.Body);
-                    phone1.setTextSize(width / 40);
-                    phone1.setText(R.string.l_016_VendorMainpage_Phone_Label_0);
-                    tr2.addView(phone1);
-                    TextView phone = new TextView(context);
-                    phone.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
-                    phone.setTextAppearance(context, R.style.Normal);
-                    phone.setTextSize(width / 40);
-                    if (vendorprofile.has("business_phone")){
-                        phone.setText(vendorprofile.getString("business_phone"));
-                    }
-                    tr2.addView(phone);
-                    tl_in.addView(tr2);
-                    //Address
-                    TableRow tr3 = new TableRow(context);
-                    tr3.setPadding(0,10,0,0);
-                    TextView address1 = new TextView(context);
-                    address1.setGravity(Gravity.END);
-                    address1.setPadding(0,0,50,0);
-                    address1.setTextAppearance(context, R.style.Body);
-                    address1.setTextSize(width / 40);
-                    address1.setText(R.string.l_016_VendorMainpage_Address_Label_0);
-                    tr3.addView(address1);
-                    TextView address = new TextView(context);
-                    address.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
-                    address.setTextAppearance(context, R.style.Normal);
-                    address.setTextSize(width / 40);
-                    address.setText(vendorprofile.getString("business_street") + ", " + vendorprofile.getString("business_city") + ", "
-                            + vendorprofile.getString("business_state") + ", " + vendorprofile.getString("business_zip"));
-                    tr3.addView(address);
-                    tl_in.addView(tr3);
+
                     //Website
                     TableRow tr4 = new TableRow(context);
                     tr4.setPadding(0,10,0,0);
@@ -246,6 +212,54 @@ public class page_016_vendorpage extends PageOperations{
                     tl_in.addView(tr6);
 
                     ll.addView(tl_in);
+
+                    //Buttons
+//                    LinearLayout ll_bt = new LinearLayout(context);
+                    RelativeLayout ll_bt = new RelativeLayout(context);
+                    ll_bt.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, width / 10));
+                    ll_bt.setPadding(0,20,0,0);
+                    Button rf = new Button(context);
+                    RelativeLayout.LayoutParams prams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    prams.addRule(RelativeLayout.ALIGN_PARENT_LEFT | RelativeLayout.CENTER_VERTICAL);
+                    rf.setLayoutParams(prams);
+                    rf.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3),(int)(height/21)));
+                    rf.setBackgroundResource(R.drawable.button_style);
+//                    rf.setStateListAnimator(null);
+                    rf.setPadding(0,0,0,1);
+                    //rf.setBackgroundColor(Color.parseColor("#1C8A3B"));
+                    rf.setTextAppearance(context, R.style.White);
+                    rf.setTextSize(width / 50);
+                    rf.setText(R.string.l_016_VendorMainpage_RequestFriend_Button_0);
+                    rf.setTransformationMethod(null);
+                    ll_bt.addView(rf);
+
+                    rf.setOnClickListener(new requestFriendListener(rf));
+
+                    //
+                    TextView bl = new TextView(context);
+                    bl.setPadding(20,0,20,0);
+                    ll_bt.addView(bl);
+
+                    //Add to list
+                    Button al = new Button(context);
+//                    RelativeLayout.LayoutParams prams2 = new RelativeLayout.LayoutParams((int)(width / 3),(int)(height/21));
+                    RelativeLayout.LayoutParams prams2 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    prams2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                    //prams2.addRule(RelativeLayout.CENTER_VERTICAL);
+                    al.setLayoutParams(prams2);
+//                    al.setLayoutParams(new LinearLayout.LayoutParams((int)(width / 3),(int)(height/21)));
+                    al.setBackgroundResource(R.drawable.button_style);
+                    al.setPadding(10,0,10,1);
+                    al.setTextAppearance(context, R.style.White);
+//                    al.setStateListAnimator(null);
+                    al.setTextSize(width / 50);
+                    al.setText(R.string.l_016_VendorMainpage_AddtoPreferlist_Button_0);
+                    al.setTransformationMethod(null);
+                    ll_bt.addView(al);
+
+                    al.setOnClickListener(new addVendorListener(al));
+
+                    ll.addView(ll_bt);
 
                     //
                     TextView br3 = new TextView(context);

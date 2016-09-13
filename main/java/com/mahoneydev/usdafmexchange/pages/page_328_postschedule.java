@@ -98,6 +98,7 @@ public class page_328_postschedule extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams((int)(width*0.9), TableRow.LayoutParams.WRAP_CONTENT));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removepostListener(context,"Delete a post","Do you want to remove this post?",lv,tl,schedule.getString("ID")));
                     TableRow lk = new TableRow(context);

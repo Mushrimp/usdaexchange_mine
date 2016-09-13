@@ -71,6 +71,7 @@ public class page_406_searchfriend extends PageOperations {
                     ll.addView(br);
 
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
 
                     final String username = friends.getString("username");
                     lv.setOnClickListener(new View.OnClickListener() {

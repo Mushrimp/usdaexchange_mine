@@ -18,6 +18,7 @@ public class UserFileUtility {
     private static String username="";
     private static String password="";
     private static String token="";
+    private static String role="";
     private static Context context=null;
     public static void set_context(Context app_context){
         context=app_context;
@@ -43,9 +44,19 @@ public class UserFileUtility {
         }
         return token;
     }
+    public static String get_role(){
+        if (role.equals(""))
+        {
+            get_userinfo();
+            Log.e("role",role);
+        }
+        return role;
+
+    }
     public static void clean_userinfo(){
         username="";
         password="";
+        role="";
     }
     public static void set_userlogininfo(String username_set, String password_set){
         username=username_set;
@@ -54,6 +65,10 @@ public class UserFileUtility {
     public static void set_token(String token_set)
     {
         token=token_set;
+    }
+    public static void set_role(String role_set)
+    {
+        role=role_set;
     }
     private static void get_userinfo(){
         if (context==null)
@@ -73,6 +88,8 @@ public class UserFileUtility {
             username=j.getString("username");
             password=j.getString("password");
             token=j.getString("token");
+            role=j.getString("role");
+            Log.e("role111",role);
         }
         catch (Exception e)
         {
@@ -89,6 +106,8 @@ public class UserFileUtility {
             ht.put("username",username);
             ht.put("password", password);
             ht.put("token", token);
+            ht.put("role",role);
+            Log.e("role1",role);
             JSONObject j = new JSONObject(ht);
             outputStream.write(j.toString().getBytes());
             outputStream.flush();

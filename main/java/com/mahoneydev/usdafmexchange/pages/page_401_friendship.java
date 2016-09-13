@@ -50,15 +50,20 @@ public class page_401_friendship extends PageOperations {
                     //Logo
                     ImageView logo = new ImageView(context);
                     String vendorlogohtml = friend.getString("avatar");
-                    int urlstart = vendorlogohtml.indexOf("src=\"") + "src=\"".length();
-                    int urlend = urlstart;
-                    for (int j = urlstart; vendorlogohtml.charAt(j) != '\"'; j++) {
-                        urlend = j;
+                    if (vendorlogohtml == null){
+                        logo.setImageResource(R.drawable.blank_profile);
+                    }else {
+                        int urlstart = vendorlogohtml.indexOf("src=\"") + "src=\"".length();
+                        int urlend = urlstart;
+                        for (int j = urlstart; vendorlogohtml.charAt(j) != '\"'; j++) {
+                            urlend = j;
+                        }
+                        String vendorlogourl = vendorlogohtml.substring(urlstart, urlend + 1);
+                        LoadImage li = new LoadImage();
+                        li.img = logo;
+                        li.execute(vendorlogourl);
                     }
-                    String vendorlogourl = vendorlogohtml.substring(urlstart, urlend + 1);
-                    LoadImage li = new LoadImage();
-                    li.img = logo;
-                    li.execute(vendorlogourl);
+
                     logo.setLayoutParams(new TableRow.LayoutParams(0, height / 5, 0.3f));
                     lv.addView(logo);
 
@@ -114,6 +119,7 @@ public class page_401_friendship extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams(0, height / 5, 0.7f));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
 
                     lv.setOnLongClickListener(new removefriendListener(context,"Delete a friend","Do you want to remove "+displayname+" from the list?",lv,tl,friend.getString("username")));

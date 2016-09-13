@@ -3,6 +3,7 @@ package com.mahoneydev.usdafmexchange.pages;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -46,6 +47,25 @@ public class page_305_productsell extends PageOperations {
                     //Product content
                     LinearLayout ll = new LinearLayout(context);
                     ll.setOrientation(LinearLayout.VERTICAL);
+
+                    //Add
+                    LinearLayout ll_in = new LinearLayout(context);
+                    ll_in.setGravity(Gravity.END);
+                    ImageButton bt1 = new ImageButton(context);
+                    //bt1.setImageResource(R.drawable.send_all_white);
+                    bt1.setImageResource(android.R.drawable.ic_menu_add);
+                    //bt1.setColorFilter(Color.WHITE);
+                    bt1.setBackgroundResource(R.drawable.button_style);
+                    bt1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            pushNewPage(R.array.page_306_addproductform, new Hashtable<String, String>());
+                        }
+                    });
+                    bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+                    ll_in.addView(bt1);
+                    ll.addView(ll_in);
+
                     //Category
                     TextView category1 = new TextView(context);
                     category1.setTextAppearance(context, R.style.Title);
@@ -119,6 +139,7 @@ public class page_305_productsell extends PageOperations {
 
                     ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                     lv.addView(ll);
+                    lv.setBackgroundResource(R.drawable.tablerow_style);
                     tl.addView(lv);
                     lv.setOnLongClickListener(new removeproductListener(context,"Delete a product","Do you want to remove "+product.getString("product_name")+" from the list?",lv,tl,product.getString("id")));
 
