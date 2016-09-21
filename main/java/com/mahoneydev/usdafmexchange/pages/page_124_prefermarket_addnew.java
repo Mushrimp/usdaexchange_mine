@@ -28,58 +28,58 @@ import java.util.Hashtable;
  * Created by xianan on 8/4/16.
  */
 public class page_124_prefermarket_addnew extends PageOperations {
-    public static void searchpremarket() {
-
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        String token_s = UserFileUtility.get_token();
-        ht.put("os", "Android");
-        ht.put("token", token_s);
-        ht.put("list_start", "");
-        ht.put("perpage", "");
-        ht.put("search", "");
-
-        new FetchTask() {
-            @Override
-            protected void executeSuccess(JSONObject result) throws JSONException {
-                int length= AppCodeResources.state_list.size();
-                SpinnerElement[] arraySpinner = new SpinnerElement[length];
-                arraySpinner[0] = new SpinnerElement("Select a state", "0");
-                for(int i=0;i<length;i++)
-                {
-                    arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
-                }
-                ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                        R.layout.simple_spinner_item, arraySpinner);
-                ((Spinner) hashelements.get("marketstateSpinner")).setAdapter(adapter);
-
-                setupUI(playout);
-
-            }
-
-        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_search_allusdamarkets", ht));
-
-
-        ((Spinner) hashelements.get("marketstateSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
-                    searchpremarket("");
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
-    }
+//    public static void searchpremarket() {
+//
+//        Hashtable<String, String> ht = new Hashtable<String, String>();
+//        String token_s = UserFileUtility.get_token();
+//        ht.put("os", "Android");
+//        ht.put("token", token_s);
+//        ht.put("list_start", "");
+//        ht.put("perpage", "");
+//        ht.put("search", "");
+//
+//        new FetchTask() {
+//            @Override
+//            protected void executeSuccess(JSONObject result) throws JSONException {
+//                int length= AppCodeResources.state_list.size();
+//                SpinnerElement[] arraySpinner = new SpinnerElement[length];
+//                arraySpinner[0] = new SpinnerElement("Select a state", "0");
+//                for(int i=0;i<length;i++)
+//                {
+//                    arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
+//                }
+//                ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+//                        R.layout.simple_spinner_item, arraySpinner);
+//                ((Spinner) hashelements.get("marketstateSpinner")).setAdapter(adapter);
+//
+//                setupUI(playout);
+//
+//            }
+//
+//        }.execute(AppCodeResources.postUrl("usdatestyue", "userpreference_market_list_search_allusdamarkets", ht));
+//
+//
+//        ((Spinner) hashelements.get("marketstateSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                if (i != 0) {
+//                    searchpremarket("");
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//            }
+//        });
+//
+//
+//    }
 
 
     public static void searchpremarket(final String name) {
 
-        final String selecteditem = ((SpinnerElement) (((Spinner) hashelements.get("marketstateSpinner")).getSelectedItem())).getName();
+//        final String selecteditem = ((SpinnerElement) (((Spinner) hashelements.get("marketstateSpinner")).getSelectedItem())).getName();
 
                     Hashtable<String, String> ht = new Hashtable<String, String>();
                     String token_s = UserFileUtility.get_token();
@@ -88,7 +88,7 @@ public class page_124_prefermarket_addnew extends PageOperations {
                     ht.put("list_start", "");
                     ht.put("perpage", "");
                     ht.put("search", name);
-                    ht.put("lstate", selecteditem);
+//                    ht.put("lstate", selecteditem);
                     new FetchTask() {
                         @Override
                         protected void executeSuccess(JSONObject result) throws JSONException {

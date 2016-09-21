@@ -41,6 +41,21 @@
                     android:visibility="invisible"
                     android:src="@drawable/qr"/>
 
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:paddingRight="0dp"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:layout_toLeftOf="@id/camerabutton"
+                    android:layout_centerVertical="true"
+
+                    android:id="@+id/camerabutton2"
+                    android:background="@null"
+                    android:visibility="gone"
+                    android:src="@drawable/qr"/>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

@@ -3,6 +3,7 @@ package com.mahoneydev.usdafmexchange.pages;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -196,18 +197,20 @@ public class page_016_vendorpage extends PageOperations{
                     LinearLayout ll_in = new LinearLayout(context);
                     ImageView org = new ImageView(context);
                     org.setLayoutParams(new TableRow.LayoutParams((int) (width * 6 / 10), TableRow.LayoutParams.WRAP_CONTENT));
-                    String data = "business_usdaorganic";
-                    Object json = new JSONTokener(data).nextValue();
-                    if(json instanceof JSONArray){
-                        JSONArray organic = vendorprofile.getJSONArray("business_usdaorganic");
-                        if (organic.getString(0).equals("yes")) {
+//                    String data = "business_usdaorganic";
+//                    Object json = new JSONTokener(data).nextValue();
+//                    if(json instanceof JSONArray){
+//                        JSONArray organic = vendorprofile.getJSONArray("business_usdaorganic");
+                        String organic = vendorprofile.getString("business_usdaorganic");
+                        Log.e("o",organic);
+                        if (organic.equals("yes")) {
                             org.setImageResource(R.drawable.usda_organic);
                             LinearLayout.LayoutParams parms = new LinearLayout.LayoutParams(50, 50);
                             parms.gravity = Gravity.START;
                             org.setLayoutParams(parms);
                         }
                         ll_in.addView(org);
-                    }
+//                    }
                     tr6.addView(ll_in);
                     tl_in.addView(tr6);
 

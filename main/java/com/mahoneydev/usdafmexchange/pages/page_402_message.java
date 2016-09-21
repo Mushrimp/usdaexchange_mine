@@ -1,7 +1,10 @@
 package com.mahoneydev.usdafmexchange.pages;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
@@ -10,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
 import com.mahoneydev.usdafmexchange.Frontpage;
 import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
@@ -183,5 +187,41 @@ public class page_402_message extends PageOperations {
             }.execute(AppCodeResources.postUrl("usdafriendship", "messages_remove_thread", ht));
 
         }
+    }
+    public static void removeAllmessage(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+        alert.setTitle("Delete all the messages");
+        alert.setMessage("DO you want to DELETE all the messages?");
+        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do your work here
+                String token_s = UserFileUtility.get_token();
+                Hashtable<String, String> ht = new Hashtable<String, String>();
+                ht.put("os", "Android");
+                ht.put("token", token_s);
+                //ht.put("username", user_name);
+                ht.put("threadid","-1");
+                new FetchTask() {
+                    @Override
+                    protected void executeSuccess(JSONObject result) throws JSONException {
+                        showmessages();
+                    }
+                }.execute(AppCodeResources.postUrl("usdafriendship", "messages_remove_thread", ht));
+                dialog.dismiss();
+
+            }
+        });
+        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
+
     }
 }

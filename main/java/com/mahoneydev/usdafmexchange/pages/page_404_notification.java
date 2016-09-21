@@ -2,6 +2,7 @@ package com.mahoneydev.usdafmexchange.pages;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -9,7 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mahoneydev.usdafmexchange.AppCodeResources;
+import com.mahoneydev.usdafmexchange.ClickOnceListener;
 import com.mahoneydev.usdafmexchange.FetchTask;
+import com.mahoneydev.usdafmexchange.Frontpage;
+import com.mahoneydev.usdafmexchange.LongPressDeleteDialogListener;
 import com.mahoneydev.usdafmexchange.PageOperations;
 import com.mahoneydev.usdafmexchange.R;
 import com.mahoneydev.usdafmexchange.UserFileUtility;
@@ -72,6 +76,7 @@ public class page_404_notification extends PageOperations {
                         ll.setLayoutParams(new TableRow.LayoutParams(0, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                         lv.addView(ll);
                         lv.setBackgroundResource(R.drawable.tablerow_style);
+                        lv.setOnLongClickListener(new marknotificationListener(context,"Delete a notification","Do you want to remove this notification from the list?",lv,tl, notification.getString("ID")));
                         tl.addView(lv);
 
                         TableRow lk = new TableRow(context);
@@ -91,4 +96,45 @@ public class page_404_notification extends PageOperations {
             }
         }.execute(AppCodeResources.postUrl("usdafriendship", "notifications_list_all_byuser", ht));
     }
+    public static class marknotificationListener extends LongPressDeleteDialogListener {
+        private TableRow deletetablerow;
+        private TableLayout fromtablelayout;
+        private String nid;
+        public marknotificationListener(Frontpage contexti, String titlei, String messagei, TableRow tr, TableLayout tl, String id)
+        {
+            super(contexti, titlei, messagei);
+            deletetablerow=tr;
+            fromtablelayout=tl;
+            nid = id;
+        }
+        @Override
+        public void deleteaction(){
+            String token_s = UserFileUtility.get_token();
+            Hashtable<String, String> ht = new Hashtable<String, String>();
+            ht.put("os", "Android");
+            ht.put("token", token_s);
+            ht.put("nid",nid);
+            new FetchTask() {
+                @Override
+                protected void executeSuccess(JSONObject result) throws JSONException {
+                    fromtablelayout.removeView(deletetablerow);
+                }
+            }.execute(AppCodeResources.postUrl("usdafriendship", "notifications_mark_selectednotification", ht));
+
+        }
+    }
+    public static void markAllNotifications(){
+        String token_s = UserFileUtility.get_token();
+        Hashtable<String,String> ht=new Hashtable<String, String>();
+        ht.put("os", "Android");
+        ht.put("token", token_s);
+        new FetchTask() {
+            @Override
+            protected void executeSuccess(JSONObject result) throws JSONException {
+                shownotifications();
+            }
+        }.execute(AppCodeResources.postUrl("usdafriendship", "notifications_mark_all_byuser", ht));
+
+    }
+
 }

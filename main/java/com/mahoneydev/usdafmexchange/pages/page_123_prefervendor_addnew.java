@@ -29,57 +29,58 @@ import java.util.Hashtable;
  * Created by xianan on 8/3/16.
  */
 public class page_123_prefervendor_addnew extends PageOperations {
-    public static void searchprevendor() {
-
-        Hashtable<String, String> ht = new Hashtable<String, String>();
-        String token_s = UserFileUtility.get_token();
-        ht.put("os", "Android");
-        ht.put("token", token_s);
-        ht.put("search", "");
-        ht.put("lstate", "");
-
-                int length= AppCodeResources.state_list.size();
-                SpinnerElement[] arraySpinner = new SpinnerElement[length];
-                arraySpinner[0] = new SpinnerElement("Select a State", "0");
-                for(int i=0;i<length;i++)
-                {
-                    arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
-                }
-                ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                        R.layout.simple_spinner_item, arraySpinner);
-                ((Spinner) hashelements.get("vendorstateSpinner")).setAdapter(adapter);
-
-                setupUI(playout);
-
-
-
-
-        ((Spinner) hashelements.get("vendorstateSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
-                    searchvendor("");
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-
-    }
+//    public static void searchprevendor() {
+//
+//        Hashtable<String, String> ht = new Hashtable<String, String>();
+//        String token_s = UserFileUtility.get_token();
+//        ht.put("os", "Android");
+//        ht.put("token", token_s);
+//        ht.put("search", "");
+//        ht.put("lstate", "");
+//
+//                int length= AppCodeResources.state_list.size();
+//                SpinnerElement[] arraySpinner = new SpinnerElement[length];
+//                arraySpinner[0] = new SpinnerElement("Select a State", "0");
+//                for(int i=0;i<length;i++)
+//                {
+//                    arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
+//                }
+//                ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+//                        R.layout.simple_spinner_item, arraySpinner);
+//                ((Spinner) hashelements.get("vendorstateSpinner")).setAdapter(adapter);
+//
+//                setupUI(playout);
+//
+//
+//
+//
+//        ((Spinner) hashelements.get("vendorstateSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                if (i != 0) {
+//                    searchvendor("");
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//            }
+//        });
+//
+//
+//    }
 
 
     public static void searchvendor(final String name) {
-        String selecteditem = ((SpinnerElement) (((Spinner) hashelements.get("vendorstateSpinner")).getSelectedItem())).getName();
+        final String vn = name;
+//        String selecteditem = ((SpinnerElement) (((Spinner) hashelements.get("vendorstateSpinner")).getSelectedItem())).getName();
         Hashtable<String, String> ht = new Hashtable<String, String>();
         String token_s = UserFileUtility.get_token();
         ht.put("os", "Android");
         ht.put("token", token_s);
-        ht.put("search", name);
-        ht.put("lstate", selecteditem);
+        ht.put("search", vn);
+//        ht.put("lstate", selecteditem);
         new FetchTask() {
             @Override
             protected void executeSuccess(JSONObject result) throws JSONException {

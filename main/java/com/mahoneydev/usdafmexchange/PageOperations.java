@@ -1,6 +1,8 @@
 package com.mahoneydev.usdafmexchange;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -120,7 +122,7 @@ public class PageOperations {
         }
         hideKey(context.findViewById(R.id.appbar));
     }
-    public static void setupperrightbutton(int code, final ImageButton qbutton)
+    public static void setupperrightbutton(int code, final ImageButton qbutton, final ImageButton qbutton2)
     {
         switch (code) {
             case (R.array.page_001_front):{
@@ -132,20 +134,9 @@ public class PageOperations {
                         setupperrightbuttonaction();
                     }
                 });
+                qbutton2.setVisibility(View.GONE);
                 break;
             }
-//            case (R.array.page_401_friendship):{
-//                qbutton.setImageResource(android.R.drawable.ic_menu_add);
-//                qbutton.setColorFilter(Color.WHITE);
-//                qbutton.setVisibility(View.VISIBLE);
-//                qbutton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        pushNewPage(R.array.page_406_searchfriend,new Hashtable<String, String>());
-//                    }
-//                });
-//                break;
-//            }
             case (R.array.page_199_scanqr):{
                 qbutton.setImageResource(R.drawable.camera_white);
                 //qbutton.setImageResource(android.R.drawable.ic_menu_camera);
@@ -158,11 +149,142 @@ public class PageOperations {
                         page_199_scanqr.startScanQR();
                     }
                 });
+                qbutton2.setVisibility(View.GONE);
+                break;
+            }
+            case (R.array.page_309_farmermarket):{
+                qbutton.setImageResource(R.drawable.add_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_311_addmarketform, new Hashtable<String, String>());
+                    }
+                });
+                qbutton2.setVisibility(View.GONE);
+                break;
+            }
+//            case (R.array.page_311_addmarketform):{
+//                TextView tx = new TextView(context);
+//                qbutton.set(tx);
+//                qbutton.setVisibility(View.VISIBLE);
+//                qbutton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        pushNewPage(R.array.page_311_addmarketform, new Hashtable<String, String>());
+//                    }
+//                });
+//                break;
+//            }
+            case (R.array.page_305_productsell):{
+                qbutton.setImageResource(R.drawable.add_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_306_addproductform, new Hashtable<String, String>());
+                    }
+                });
+                qbutton2.setVisibility(View.GONE);
+                break;
+            }
+            case (R.array.page_401_friendship):{
+                qbutton.setImageResource(R.drawable.add_friend_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_406_searchfriend, new Hashtable<String, String>());
+                    }
+                });
+
+                qbutton2.setVisibility(View.VISIBLE);
+                qbutton2.setImageResource(R.drawable.send_all_white);
+                qbutton2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Hashtable<String,String> ht=new Hashtable<String, String>();
+                        ht.put("recipientsname","All Friends");
+                        ht.put("recipientsid","-1");
+                        pushNewPage(R.array.page_408_sendmessage,ht);
+                    }
+                });
+                break;
+            }
+            case (R.array.page_402_message):{
+                qbutton.setImageResource(R.drawable.compose_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_401_friendship, new Hashtable<String, String>());
+                    }
+                });
+
+                qbutton2.setVisibility(View.VISIBLE);
+                qbutton2.setImageResource(R.drawable.delete_all_white);
+                qbutton2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        qbutton2.setClickable(false);
+                        page_402_message.removeAllmessage();
+                        qbutton2.setClickable(true);
+                    }
+                });
+                break;
+            }
+            case (R.array.page_404_notification):{
+                qbutton.setImageResource(R.drawable.delete_all_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        page_404_notification.markAllNotifications();
+                    }
+                });
+                qbutton2.setVisibility(View.GONE);
+                break;
+            }
+            case (R.array.page_122_preferproduct):{
+                qbutton.setImageResource(R.drawable.add_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_122_preferproduct_addnew, null);
+                    }
+                });
+                break;
+            }
+            case (R.array.page_123_prefervendor):{
+                qbutton.setImageResource(R.drawable.add_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_123_prefervendor_addnew, null);
+                    }
+                });
+                qbutton2.setVisibility(View.GONE);
+                break;
+            }
+            case (R.array.page_124_prefermarket):{
+                qbutton.setImageResource(R.drawable.add_white);
+                qbutton.setVisibility(View.VISIBLE);
+                qbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        pushNewPage(R.array.page_124_prefermarket_addnew, null);
+                    }
+                });
+                qbutton2.setVisibility(View.GONE);
                 break;
             }
             default:{
                 qbutton.setVisibility(View.INVISIBLE);
+                qbutton2.setVisibility(View.GONE);
                 qbutton.setOnClickListener(null);
+                qbutton2.setOnClickListener(null);
                 break;
             }
         }
@@ -179,81 +301,103 @@ public class PageOperations {
         }
     }
 
-    public static void addImageButton(int code,ImageButton bt1, TextView bl, ImageButton bt2)
-    {
-        switch (code) {
-            case (R.array.page_401_friendship):{
-                bt1.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                bt1.setImageResource(R.drawable.send_all_white);
-                bt1.setBackgroundResource(R.drawable.button_style);
-//                hashelements.put(jsonelements.getString("id") + "Button", bt1);
-                bt1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Hashtable<String,String> ht=new Hashtable<String, String>();
-                        ht.put("recipientsname","All Friends");
-                        ht.put("recipientsid","-1");
-                        pushNewPage(R.array.page_408_sendmessage,ht);
-                    }
-                });
-                bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
-
-                bl.setPadding(20,0,20,0);
-
-                bt2.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                bt2.setImageResource(R.drawable.add_friend_white);
-                bt2.setBackgroundResource(R.drawable.button_style);
-//                hashelements.put(jsonelements.getString("id") + "Button", bt2);
-                bt2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        pushNewPage(R.array.page_406_searchfriend, new Hashtable<String, String>());
-                    }
-                });
-                bt2.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
-                break;
-            }
-
-            case (R.array.page_402_message):{
-                bt1.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                bt1.setImageResource(R.drawable.delete_all_white);
-                bt1.setBackgroundResource(R.drawable.button_style);
-//                hashelements.put(jsonelements.getString("id") + "Button", bt1);
-                bt1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Hashtable<String,String> ht=new Hashtable<String, String>();
-                        ht.put("recipientsname","All Friends");
-                        ht.put("recipientsid","-1");
-                        pushNewPage(R.array.page_408_sendmessage,ht);
-                    }
-                });
-                bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
-
-                bl.setPadding(20,0,20,0);
-
-                bt2.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                bt2.setImageResource(R.drawable.compose_white);
-                bt2.setBackgroundResource(R.drawable.button_style);
-//                hashelements.put(jsonelements.getString("id") + "Button", bt2);
-                bt2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        pushNewPage(R.array.page_401_friendship, new Hashtable<String, String>());
-                    }
-                });
-                bt2.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
-                break;
-            }
-            default:{
-                bt1.setVisibility(View.INVISIBLE);
-                bt2.setVisibility(View.INVISIBLE);
-                bt1.setOnClickListener(null);
-                bt2.setOnClickListener(null);
-                break;
-            }
-        }
-    }
+//    public static void addImageButton(int code, final ImageButton bt1, TextView bl, final ImageButton bt2)
+//    {
+//        switch (code) {
+//            case (R.array.page_401_friendship):{
+//                bt1.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                bt1.setImageResource(R.drawable.send_all_white);
+//                bt1.setBackgroundResource(R.drawable.button_style);
+////                hashelements.put(jsonelements.getString("id") + "Button", bt1);
+//                bt1.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Hashtable<String,String> ht=new Hashtable<String, String>();
+//                        ht.put("recipientsname","All Friends");
+//                        ht.put("recipientsid","-1");
+//                        pushNewPage(R.array.page_408_sendmessage,ht);
+//                    }
+//                });
+//                bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+//
+//                bl.setPadding(20,0,20,0);
+//
+//                bt2.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                bt2.setImageResource(R.drawable.add_friend_white);
+//                bt2.setBackgroundResource(R.drawable.button_style);
+////                hashelements.put(jsonelements.getString("id") + "Button", bt2);
+//                bt2.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        pushNewPage(R.array.page_406_searchfriend, new Hashtable<String, String>());
+//                    }
+//                });
+//                bt2.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+//                break;
+//            }
+//
+//            case (R.array.page_402_message):{
+//                bt1.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                bt1.setImageResource(R.drawable.delete_all_white);
+//                bt1.setBackgroundResource(R.drawable.button_style);
+////                hashelements.put(jsonelements.getString("id") + "Button", bt1);
+//                bt1.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        bt1.setClickable(false);
+//                        AlertDialog.Builder alert = new AlertDialog.Builder(context);
+//                        alert.setTitle("Delete all the messages");
+//                        alert.setMessage("DO you want to DELETE all the messages?");
+//                        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                //do your work here
+//                                page_402_message.removeAllmessage();
+//                                dialog.dismiss();
+//
+//                            }
+//                        });
+//                        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                dialog.dismiss();
+//                            }
+//                        });
+//
+//                        alert.show();
+//                        bt1.setClickable(true);
+//                    }
+//                });
+//
+//                bt1.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+//
+//                bl.setPadding(20,0,20,0);
+//
+//                bt2.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                bt2.setImageResource(R.drawable.compose_white);
+//                bt2.setBackgroundResource(R.drawable.button_style);
+////                hashelements.put(jsonelements.getString("id") + "Button", bt2);
+//                bt2.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        pushNewPage(R.array.page_401_friendship, new Hashtable<String, String>());
+//                    }
+//                });
+//                bt2.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.13), (int)(height*0.08)));
+//                break;
+//            }
+//            default:{
+//                bt1.setVisibility(View.INVISIBLE);
+//                bt2.setVisibility(View.INVISIBLE);
+//                bt1.setOnClickListener(null);
+//                bt2.setOnClickListener(null);
+//                break;
+//            }
+//        }
+//    }
 
     public static void generateLayout(int code, LinearLayout layout,RelativeLayout toolbar, Hashtable<String, String> params) {
         if ((res == null) || (context == null)||(toolbar==null))
@@ -280,32 +424,11 @@ public class PageOperations {
                 if (jsonelements.has("element")) {
                     String element = jsonelements.getString("element");
                     if (element.equals("TextView")) {
-                        RelativeLayout rl = new RelativeLayout(context);
-                        //rl.setLayoutParams(new RelativeLayout.LayoutParams((int)(width*0.9), RelativeLayout.LayoutParams.WRAP_CONTENT));
                         TextView tv = new TextView(context);
-                        RelativeLayout.LayoutParams parms1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                        parms1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-                        parms1.addRule(RelativeLayout.CENTER_VERTICAL);
-                        tv.setLayoutParams(parms1);
                         tv.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         hashelements.put(jsonelements.getString("id"), tv);
                         tv.setVisibility(View.INVISIBLE);
-                        if (jsonelements.getString("id").equals("forgotView")){
-                            RelativeLayout.LayoutParams parms3 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                            parms3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-                            parms3.addRule(RelativeLayout.CENTER_VERTICAL);
-                            tv.setLayoutParams(parms3);
-                           // tv.setGravity(Gravity.RIGHT);
-                            tv.setTextAppearance(context,R.style.Date);
-                            tv.setTextSize(width/45);
-                            tv.setPadding(0,0,0,20);
-                            tv.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    pushNewPage(R.array.page_103_retrievepin, new Hashtable<String, String>());
-                                }
-                            });
-                        } else if(jsonelements.getString("id").equals("newView")){
+                        if(jsonelements.getString("id").equals("newView")){
                             tv.setTextAppearance(context,R.style.Normal);
                             tv.setTextSize(width/45);
                             tv.setPadding(0,0,0,20);
@@ -331,6 +454,43 @@ public class PageOperations {
                             tv.setTextSize(width / 45);
                             tv.setPadding(0,30,0,0);
                         }
+                        layout.addView(tv);
+
+                    }
+                    else if (element.equals("TextRightView")){
+                        LinearLayout rl = new LinearLayout(context);
+                        rl.setLayoutParams(new LinearLayout.LayoutParams((int)(width*0.9), LinearLayout.LayoutParams.WRAP_CONTENT));
+                        rl.setGravity(Gravity.RIGHT);
+                        TextView tv = new TextView(context);
+                        tv.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
+                        hashelements.put(jsonelements.getString("id"), tv);
+                        tv.setVisibility(View.INVISIBLE);
+                            tv.setGravity(Gravity.RIGHT);
+                            tv.setTextAppearance(context,R.style.Date);
+                            tv.setTextSize(width/45);
+                            tv.setPadding(0,0,0,20);
+                            tv.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    pushNewPage(R.array.page_103_retrievepin, new Hashtable<String, String>());
+                                }
+                            });
+                        rl.addView(tv);
+                        layout.addView(rl);
+                    }
+                    else if (element.equals("TextButtonView")){
+                        RelativeLayout rl = new RelativeLayout(context);
+                        TextView tv = new TextView(context);
+                        RelativeLayout.LayoutParams parms1 = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        parms1.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                        parms1.addRule(RelativeLayout.CENTER_VERTICAL);
+                        tv.setLayoutParams(parms1);
+                        tv.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
+                        hashelements.put(jsonelements.getString("id"), tv);
+                        tv.setVisibility(View.INVISIBLE);
+                        tv.setTextAppearance(context, R.style.Bold);
+                        tv.setTextSize(width / 45);
+                        tv.setPadding(0,30,0,0);
                         rl.addView(tv);
                         if (jsonelements.getString("id").equals("marketView1")) {
                             Button addpro = new Button(context);
@@ -368,17 +528,17 @@ public class PageOperations {
                             rl.addView(addmar);
                         }
                         layout.addView(rl);
-
                     }
                     else if (element.equals("Title")){
                         ImageButton qbutton =(ImageButton)context.findViewById(R.id.camerabutton);
+                        ImageButton qbutton2 =(ImageButton)context.findViewById(R.id.camerabutton2);
                         toolbar.removeAllViewsInLayout();
                         toolbar.setGravity(Gravity.CENTER);
                         TextView tb = new TextView(context);
                         tb.setTextAppearance(context,R.style.Normal);
                         tb.setTextColor(Color.WHITE);
                         String value=jsonelements.getString("value");
-                        setupperrightbutton(code,qbutton);
+                        setupperrightbutton(code,qbutton,qbutton2);
                         if (value.equals("image")||value.equals("special"))
                         {
                             generateTitle(code, toolbar) ;
@@ -582,22 +742,22 @@ public class PageOperations {
                         bt.setVisibility(View.INVISIBLE);
                         layout.addView(bt);
                     }
-                    else if (element.equals("ImageButton")){
-                        LinearLayout ll = new LinearLayout(context);
-                        ll.setOrientation(LinearLayout.HORIZONTAL);
-                        ll.setGravity(Gravity.END);
-                        ImageButton bt1 = new ImageButton(context);
-                        ImageButton bt2 = new ImageButton(context);
-                        TextView bl = new TextView(context);
-                        addImageButton(code,bt1,bl,bt2);
-                        ll.addView(bt1);
-                        ll.addView(bl);
-                        ll.addView(bt2);
-                        layout.addView(ll);
-
-
-
-                    }
+//                    else if (element.equals("ImageButton")){
+//                        LinearLayout ll = new LinearLayout(context);
+//                        ll.setOrientation(LinearLayout.HORIZONTAL);
+//                        ll.setGravity(Gravity.END);
+//                        ImageButton bt1 = new ImageButton(context);
+//                        ImageButton bt2 = new ImageButton(context);
+//                        TextView bl = new TextView(context);
+//                        addImageButton(code,bt1,bl,bt2);
+//                        ll.addView(bt1);
+//                        ll.addView(bl);
+//                        ll.addView(bt2);
+//                        layout.addView(ll);
+//
+//
+//
+//                    }
                     else if (element.equals("LineView")) {
                         View line = new View(context);
                         line.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2));
@@ -705,7 +865,7 @@ public class PageOperations {
                         dp.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                         dp.setVisibility(View.INVISIBLE);
                         dp.setPadding(0,20,0,8);
-                        dp.setText("Select the Date");
+                        dp.setText(AppCodeResources.getStringbyName(res,packagename,jsonelements.getString("value")));
                         dp.setTextAppearance(context, R.style.EditText);
                         dp.setBackgroundResource(R.drawable.spinner_style);
                         dp.setTextSize(width/35);
@@ -732,7 +892,7 @@ public class PageOperations {
                     ((TextView) hashelements.get("testView")).setText(k);
                 }
             });
-        } else if (action.equals("searchfriend")) {
+        }else if (action.equals("searchfriend")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -789,6 +949,8 @@ public class PageOperations {
             });
         } else if (action.equals("selectImage")) {
             bt.setOnClickListener(new page_106_uploadlogo.startUploadImageListener(bt));
+        } else if (action.equals("sendemail")) {
+            bt.setOnClickListener(new page_103_retrievepin.retrievepinListener(bt));
         }
         //View Post
         else if (action.equals("productlist")) {
@@ -880,7 +1042,17 @@ public class PageOperations {
                     pushNewPage(R.array.page_328_postschedule, new Hashtable<String, String>());
                 }
             });
-        } else if (action.equals("postpublish")) {
+        } else if (action.equals("postpending")) {
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bt.setClickable(false);
+                    Hashtable<String,String> ht=new Hashtable<String, String>();
+                    pushNewPage(R.array.page_332_postpending,ht);
+                }
+            });
+        }
+        else if (action.equals("postpublish")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -1108,14 +1280,16 @@ public class PageOperations {
                     pushNewPage(R.array.page_122_preferproduct, new Hashtable<String, String>());
                 }
             });
-        }else if (action.equals("addpreproduct")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pushNewPage(R.array.page_122_preferproduct_addnew, null);
-                }
-            });
-        } else if (action.equals("prefervendor")) {
+        }
+//        else if (action.equals("addpreproduct")) {
+//            bt.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    pushNewPage(R.array.page_122_preferproduct_addnew, null);
+//                }
+//            });
+//        }
+        else if (action.equals("prefervendor")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1123,14 +1297,16 @@ public class PageOperations {
                     pushNewPage(R.array.page_123_prefervendor, new Hashtable<String, String>());
                 }
             });
-        } else if (action.equals("addprevendor")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pushNewPage(R.array.page_123_prefervendor_addnew, null);
-                }
-            });
-        }else if (action.equals("prefermarket")) {
+        }
+//        else if (action.equals("addprevendor")) {
+//            bt.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    pushNewPage(R.array.page_123_prefervendor_addnew, null);
+//                }
+//            });
+//        }
+        else if (action.equals("prefermarket")) {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1138,14 +1314,15 @@ public class PageOperations {
                     pushNewPage(R.array.page_124_prefermarket, new Hashtable<String, String>());
                 }
             });
-        }else if (action.equals("addpremarket")) {
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    pushNewPage(R.array.page_124_prefermarket_addnew, null);
-                }
-            });
         }
+//        else if (action.equals("addpremarket")) {
+//            bt.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    pushNewPage(R.array.page_124_prefermarket_addnew, null);
+//                }
+//            });
+//        }
         //Account
         else if (action.equals("saveinfo")) {
             bt.setOnClickListener(new View.OnClickListener() {
@@ -1229,14 +1406,18 @@ public class PageOperations {
             page_404_notification.shownotifications();
         } else if (code == R.array.page_309_farmermarket) {
             page_309_farmermarket.showmarkets();
-        } else if (code == R.array.page_311_addmarketform) {
-            page_311_addmarketform.searchmarket();
-        } else if (code == R.array.page_305_productsell) {
+        }
+//        else if (code == R.array.page_311_addmarketform) {
+//            page_311_addmarketform.searchmarket();
+//        }
+        else if (code == R.array.page_305_productsell) {
             page_305_productsell.showproducts();
         } else if (code == R.array.page_324_posttemplate) {
             page_324_posttemplate.showtemplate();
         } else if (code == R.array.page_328_postschedule) {
             page_328_postschedule.showschedule();
+        } else if (code == R.array.page_332_postpending) {
+            page_332_postpending.showpending();
         } else if (code == R.array.page_330_postpublish) {
             page_330_postpublish.showpublished();
         } else if (code == R.array.page_122_preferproduct) {
@@ -1247,13 +1428,16 @@ public class PageOperations {
 //        }
         else if (code == R.array.page_123_prefervendor) {
             page_123_prefervendor.showPreferVendor();
-        } else if (code == R.array.page_123_prefervendor_addnew) {
-            page_123_prefervendor_addnew.searchprevendor();
-        } else if (code == R.array.page_124_prefermarket) {
-            page_124_prefermarket.showPreferMarket();
-        } else if (code == R.array.page_124_prefermarket_addnew) {
-            page_124_prefermarket_addnew.searchpremarket();
         }
+//      else if (code == R.array.page_123_prefervendor_addnew) {
+//            page_123_prefervendor_addnew.searchprevendor();
+//        }
+           else if (code == R.array.page_124_prefermarket) {
+            page_124_prefermarket.showPreferMarket();
+        }
+//        else if (code == R.array.page_124_prefermarket_addnew) {
+//            page_124_prefermarket_addnew.searchpremarket();
+//        }
         else if (code == R.array.page_112_deleteaccount) {
             String name = UserFileUtility.get_username();
 //            String name = getRecentPage().params.get("username");

@@ -48,39 +48,33 @@ public class page_322_newpost extends PageOperations {
             ja.put("price_product_name");
             ja.put("price_productunit_name");
             ja.put("price_market_name");
-            ja.put("price_street");
-            ja.put("price_city");
-            ja.put("price_state");
-            ja.put("price_zipcode");
             ht.put("form_args",ja.toString());
             new FetchTask() {
                 @Override
                 protected void executeSuccess(JSONObject result) throws JSONException {
-                    JSONObject jo=new JSONObject(result.getString("results"));
-                    ((EditText)hashelements.get("unitInput")).setText(jo.getString("price_productunit_name"));
-//                    ((EditText)hashelements.get("busaddressInput")).setText(jo.getString("business_street"));
-//                    ((EditText)hashelements.get("buscityInput")).setText(jo.getString("business_city"));
-//                    ((EditText)hashelements.get("buszipcodeInput")).setText(jo.getString("business_zip"));
-                    int length=AppCodeResources.state_list.size();
-                    SpinnerElement[] arraySpinner = new SpinnerElement[length];
-                    int selected=0;
-                    String exstate=jo.getString("business_state");
-                    for(int i=0;i<length;i++)
-                    {
-                        arraySpinner[i] = new SpinnerElement(AppCodeResources.state_list.get(i).getName(),AppCodeResources.state_list.get(i).getValue());
-                        if (exstate.equals(AppCodeResources.state_list.get(i).getValue()))
-                        {
-                            selected=i;
-                        }
-                    }
-                    ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                            R.layout.simple_spinner_item, arraySpinner);
-                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-                    ((Spinner) hashelements.get("busstateSpinner")).setAdapter(adapter);
-                    ((Spinner) hashelements.get("busstateSpinner")).setSelection(selected);
-                    setupUI(playout);
+//                    JSONObject jo=new JSONObject(result.getString("results"));
+//                    ((EditText)hashelements.get("unitInput")).setText(jo.getString("price_productunit_name"));
+//                    int length=((Spinner) hashelements.get("productSpinner")).size();
+//                    SpinnerElement[] arraySpinner = new SpinnerElement[length];
+//                    int selected=0;
+//                    String exproduct=jo.getString("price_product_name");
+//                    for(int i=0;i<length;i++)
+//                    {
+//                        arraySpinner[i] = new SpinnerElement(((Spinner) hashelements.get("productSpinner")).get(i).getName(),((Spinner) hashelements.get("productSpinner")).get(i).getValue());
+//                        if (exproduct.equals(((Spinner) hashelements.get("productSpinner")).get(i).getValue()))
+//                        {
+//                            selected=i;
+//                        }
+//                    }
+//                    ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
+//                            R.layout.simple_spinner_item, arraySpinner);
+//                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+//                    ((Spinner) hashelements.get("productSpinner")).setAdapter(adapter);
+//                    ((Spinner) hashelements.get("productSpinner")).setSelection(selected);
+//                    setupUI(playout);
                 }
             }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_populate_postform", ht));
+
             ((Spinner) hashelements.get("productSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -172,81 +166,10 @@ public class page_322_newpost extends PageOperations {
                 }
 
             }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_productlist", ht));
-            ((TextView) hashelements.get("marketDay")).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-                    Date date;
-                    Calendar newCalendar = Calendar.getInstance();
-                    try {
-                        date = dateFormatter.parse(((TextView) hashelements.get("marketDay")).getText().toString());
-                        newCalendar.setTime(date);
-                    } catch (ParseException e) {
 
-                    }
-                    Calendar currentday = Calendar.getInstance();
-                    DatePickerDialog fromDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            Calendar newDate = Calendar.getInstance();
-                            newDate.set(year, monthOfYear, dayOfMonth);
-                            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-                            ((TextView) hashelements.get("marketDay")).setText(dateFormatter.format(newDate.getTime()));
-                            Calendar currentday = Calendar.getInstance();
-                            Calendar publishday = Calendar.getInstance();
-                            publishday.set(year, monthOfYear, dayOfMonth - 2);
-                            if (currentday.getTimeInMillis() > publishday.getTimeInMillis())
-                                ((TextView) hashelements.get("publishDay")).setText(dateFormatter.format(currentday.getTime()));
-                            else
-                                ((TextView) hashelements.get("publishDay")).setText(dateFormatter.format(publishday.getTime()));
-                        }
-                    }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-                    fromDatePickerDialog.getDatePicker().setMinDate(currentday.getTimeInMillis());
-                    newCalendar.set(currentday.get(Calendar.YEAR), currentday.get(Calendar.MONTH), currentday.get(Calendar.DAY_OF_MONTH) + 42);
-                    fromDatePickerDialog.getDatePicker().setMaxDate(newCalendar.getTimeInMillis());
-                    fromDatePickerDialog.show();
-                }
-            });
-            ((TextView) hashelements.get("publishDay")).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Calendar newCalendar = Calendar.getInstance();
-                    SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-                    Date date;
-                    try {
-                        date = dateFormatter.parse(((TextView) hashelements.get("publishDay")).getText().toString());
-                    } catch (ParseException e) {
-                        return;
-                    }
-                    newCalendar.setTime(date);
-                    DatePickerDialog fromDatePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            Calendar newDate = Calendar.getInstance();
-                            newDate.set(year, monthOfYear, dayOfMonth);
-                            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-                            ((TextView) hashelements.get("publishDay")).setText(dateFormatter.format(newDate.getTime()));
-                        }
-                    }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-                    Calendar currentday = Calendar.getInstance();
-                    Calendar marketday = Calendar.getInstance();
-                    try {
-                        date = dateFormatter.parse(((TextView) hashelements.get("marketDay")).getText().toString());
-                    } catch (ParseException e) {
-                        return;
-                    }
-                    marketday.setTime(date);
-                    fromDatePickerDialog.getDatePicker().setMaxDate(marketday.getTimeInMillis());
-                    Calendar publishday = Calendar.getInstance();
-                    publishday.set(newCalendar.get(marketday.YEAR), marketday.get(Calendar.MONTH), marketday.get(Calendar.DAY_OF_MONTH) - 2);
-                    if (currentday.getTimeInMillis() > publishday.getTimeInMillis())
-                        fromDatePickerDialog.getDatePicker().setMinDate(currentday.getTimeInMillis());
-                    else
-                        fromDatePickerDialog.getDatePicker().setMinDate(publishday.getTimeInMillis());
 
-                    fromDatePickerDialog.show();
-                }
-            });
-
-        }else {
+        }
+        else {
             Hashtable<String, String> ht = new Hashtable<String, String>();
             String token_s = UserFileUtility.get_token();
             ht.put("os", "Android");
@@ -342,6 +265,8 @@ public class page_322_newpost extends PageOperations {
                 }
 
             }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_productlist", ht));
+        }
+
             ((TextView) hashelements.get("marketDay")).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -415,7 +340,6 @@ public class page_322_newpost extends PageOperations {
                     fromDatePickerDialog.show();
                 }
             });
-        }
     }
 
     public static class savepostListener extends ClickOnceListener {
