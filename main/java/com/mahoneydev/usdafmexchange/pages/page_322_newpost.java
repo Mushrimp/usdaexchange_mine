@@ -1,6 +1,7 @@
 package com.mahoneydev.usdafmexchange.pages;
 
 import android.app.DatePickerDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,44 +39,11 @@ import java.util.Locale;
  * Created by bichongg on 7/25/2016.
  */
 public class page_322_newpost extends PageOperations {
-    public static void preparepostform(String id) {
-        if (id != null){
+    public static void preparepostform(final String id) {
             Hashtable<String, String> ht = new Hashtable<String, String>();
             String token_s = UserFileUtility.get_token();
             ht.put("os", "Android");
             ht.put("token", token_s);
-            ht.put("post_id",id);
-            JSONArray ja=new JSONArray();
-            ja.put("price_product_name");
-            ja.put("price_productunit_name");
-            ja.put("price_market_name");
-            ht.put("form_args",ja.toString());
-            new FetchTask() {
-                @Override
-                protected void executeSuccess(JSONObject result) throws JSONException {
-//                    JSONObject jo=new JSONObject(result.getString("results"));
-//                    ((EditText)hashelements.get("unitInput")).setText(jo.getString("price_productunit_name"));
-//                    int length=((Spinner) hashelements.get("productSpinner")).size();
-//                    SpinnerElement[] arraySpinner = new SpinnerElement[length];
-//                    int selected=0;
-//                    String exproduct=jo.getString("price_product_name");
-//                    for(int i=0;i<length;i++)
-//                    {
-//                        arraySpinner[i] = new SpinnerElement(((Spinner) hashelements.get("productSpinner")).get(i).getName(),((Spinner) hashelements.get("productSpinner")).get(i).getValue());
-//                        if (exproduct.equals(((Spinner) hashelements.get("productSpinner")).get(i).getValue()))
-//                        {
-//                            selected=i;
-//                        }
-//                    }
-//                    ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-//                            R.layout.simple_spinner_item, arraySpinner);
-//                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-//                    ((Spinner) hashelements.get("productSpinner")).setAdapter(adapter);
-//                    ((Spinner) hashelements.get("productSpinner")).setSelection(selected);
-//                    setupUI(playout);
-                }
-            }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_populate_postform", ht));
-
             ((Spinner) hashelements.get("productSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -112,6 +81,7 @@ public class page_322_newpost extends PageOperations {
                     ((Spinner) hashelements.get("productSpinner")).setAdapter(adapter);
                     hashvalues = new Hashtable<String, String>();
                     JSONArray results = result.getJSONArray("result");
+                    //Log.e("result",results.toString());
                     for (i = 0; i < results.length(); i++) {
                         JSONObject unititem = results.getJSONObject(i);
                         hashvalues.put(unititem.getString("id"), unititem.getString("productunit_name"));
@@ -155,105 +125,48 @@ public class page_322_newpost extends PageOperations {
                                     AutoCompleteTextView actv = ((AutoCompleteTextView) hashelements.get("unitInput"));
                                     actv.setAdapter(adapter);
                                     actv.setThreshold(2);
-                                    setupUI(playout);
-                                }
 
-                            }.execute(AppCodeResources.postUrl("usdatestyue", "autocomplete_getproductunit", ht));
+                                    Log.e("id",id);
+                                    if (!id.equals("")) {
+                                        Hashtable<String, String> ht = new Hashtable<String, String>();
+                                        String token_s = UserFileUtility.get_token();
+                                        ht.put("os", "Android");
+                                        ht.put("token", token_s);
+                                        ht.put("post_id", id);
+//                                    ht.put("form_args",ja.toString());
+                                        new FetchTask() {
+                                            @Override
+                                            protected void executeSuccess(JSONObject result) throws JSONException {
+                                                JSONObject jo = new JSONObject(result.getString("results"));
+                                                ((EditText) hashelements.get("unitInput")).setText(jo.getString("price_productunit_name"));
+                                                String marketid = jo.getString("price_market_userindex_id");
+                                                String productid = jo.getString("price_product_userindex_id");
 
-                        }
+                                                Spinner productlist = ((Spinner) hashelements.get("productSpinner"));
+                                                SpinnerAdapter productitem = productlist.getAdapter();
+                                                int selectedpro = 0;
+                                                for (int i = 0; i < productitem.getCount(); i++) {
+                                                    if (productid.equals(((SpinnerElement) productitem.getItem(i)).getValue())) {
+                                                        selectedpro = i;
+                                                    }
+                                                }
+                                                productlist.setSelection(selectedpro);
 
-                    }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_marketlist", ht));
-                }
+                                                Spinner marketlist = ((Spinner) hashelements.get("marketSpinner"));
+                                                SpinnerAdapter marketitem = marketlist.getAdapter();
 
-            }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_productlist", ht));
+                                                int selectedmar = 0;
+                                                for (int i = 0; i < marketitem.getCount(); i++) {
+                                                    if (marketid.equals(((SpinnerElement) marketitem.getItem(i)).getValue())) {
+                                                        selectedmar = i;
+                                                    }
+                                                }
+                                                marketlist.setSelection(selectedmar);
 
-
-        }
-        else {
-            Hashtable<String, String> ht = new Hashtable<String, String>();
-            String token_s = UserFileUtility.get_token();
-            ht.put("os", "Android");
-            ht.put("token", token_s);
-            ((Spinner) hashelements.get("productSpinner")).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (i != 0) {
-                        SpinnerElement selecteditem = (SpinnerElement) adapterView.getItemAtPosition(i);
-                        String id = selecteditem.getValue();
-                        ((AutoCompleteTextView) hashelements.get("unitInput")).setText(hashvalues.get(id));
-                    } else {
-                        ((AutoCompleteTextView) hashelements.get("unitInput")).setText("");
-                    }
-                    ((AutoCompleteTextView) hashelements.get("unitInput")).clearFocus();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-            new FetchTask() {
-                @Override
-                protected void executeSuccess(JSONObject result) throws JSONException {
-                    JSONObject ja = result.getJSONObject("results");
-                    SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
-                    Iterator<?> keys = ja.keys();
-                    int i = 0;
-                    while (keys.hasNext()) {
-                        String key = (String) keys.next();
-                        arraySpinner[i] = new SpinnerElement(ja.getString(key), key);
-                        i++;
-                    }
-
-                    ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                            R.layout.simple_spinner_item, arraySpinner);
-                    adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-                    ((Spinner) hashelements.get("productSpinner")).setAdapter(adapter);
-                    hashvalues = new Hashtable<String, String>();
-                    JSONArray results = result.getJSONArray("result");
-                    for (i = 0; i < results.length(); i++) {
-                        JSONObject unititem = results.getJSONObject(i);
-                        hashvalues.put(unititem.getString("id"), unititem.getString("productunit_name"));
-                    }
-                    Hashtable<String, String> ht = new Hashtable<String, String>();
-                    String token_s = UserFileUtility.get_token();
-                    ht.put("os", "Android");
-                    ht.put("token", token_s);
-                    new FetchTask() {
-                        @Override
-                        protected void executeSuccess(JSONObject result) throws JSONException {
-                            JSONObject ja = result.getJSONObject("results");
-                            SpinnerElement[] arraySpinner = new SpinnerElement[ja.length()];
-                            Iterator<?> keys = ja.keys();
-                            int i = 0;
-                            while (keys.hasNext()) {
-                                String key = (String) keys.next();
-                                arraySpinner[i] = new SpinnerElement(ja.getString(key), key);
-                                i++;
-                            }
-
-                            ArrayAdapter<SpinnerElement> adapter = new ArrayAdapter<SpinnerElement>(context,
-                                    R.layout.simple_spinner_item, arraySpinner);
-                            adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-                            ((Spinner) hashelements.get("marketSpinner")).setAdapter(adapter);
-                            Hashtable<String, String> ht = new Hashtable<String, String>();
-                            String token_s = UserFileUtility.get_token();
-                            ht.put("os", "Android");
-                            ht.put("token", token_s);
-                            new FetchTask() {
-                                @Override
-                                protected void executeSuccess(JSONObject result) throws JSONException {
-                                    JSONArray ja = result.getJSONArray("results");
-                                    String[] arrayString = new String[ja.length()];
-                                    for (int i = 0; i < ja.length(); i++) {
-                                        JSONObject jsonobject = ja.getJSONObject(i);
-                                        arrayString[i] = jsonobject.getString("label");
+                                                setupUI(playout);
+                                            }
+                                        }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_populate_postform", ht));
                                     }
-                                    MatchAdapter adapter = new MatchAdapter(context,
-                                            android.R.layout.simple_spinner_item, arrayString);
-                                    AutoCompleteTextView actv = ((AutoCompleteTextView) hashelements.get("unitInput"));
-                                    actv.setAdapter(adapter);
-                                    actv.setThreshold(2);
                                     setupUI(playout);
                                 }
 
@@ -265,7 +178,6 @@ public class page_322_newpost extends PageOperations {
                 }
 
             }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_user_productlist", ht));
-        }
 
             ((TextView) hashelements.get("marketDay")).setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -115,6 +115,16 @@ public class page_328_postschedule extends PageOperations {
                         lk.addView(ldivider);
                         lk.addView(rdivider);
                         tl.addView(lk);
+
+                        final String id = schedule.getString("ID");
+                        lv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Hashtable<String, String> pam = new Hashtable<String, String>();
+                                pam.put("id", id);
+                                pushNewPage(R.array.page_322_newpost, pam);
+                            }
+                        });
                     }
                 }else if(count.equals("0")){
                     Toast.makeText(context,"There are no new scheduled posts.",Toast.LENGTH_SHORT).show();

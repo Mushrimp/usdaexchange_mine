@@ -130,6 +130,16 @@ public class page_332_postpending extends PageOperations {
                         lk.addView(ldivider);
                         lk.addView(rdivider);
                         tl.addView(lk);
+
+                        final String id = pending.getString("ID");
+                        lv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Hashtable<String, String> pam = new Hashtable<String, String>();
+                                pam.put("id", id);
+                                pushNewPage(R.array.page_322_newpost, pam);
+                            }
+                        });
                     }
                 }else if (count.equals("0")){
                     Toast.makeText(context,"There are no new pending posts.",Toast.LENGTH_SHORT).show();
@@ -140,6 +150,7 @@ public class page_332_postpending extends PageOperations {
             }
         }.execute(AppCodeResources.postUrl("usdatestyue", "usda_pricepost_list_byuser", ht));
     }
+
     public static class removependingListener extends LongPressDeleteDialogListener {
         private TableRow deletetablerow;
         private TableLayout fromtablelayout;

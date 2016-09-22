@@ -1383,6 +1383,12 @@ public class PageOperations {
             page_207_website.preparevendorwebform();
         } else if (code == R.array.page_322_newpost) {
             String id = "";
+            if (getRecentPage().params.containsKey("id")){
+                id = getRecentPage().params.get("id");
+            }else {
+                id = "";
+            }
+//            Log.e("ID",id);
             page_322_newpost.preparepostform(id);
         } else if (code == R.array.page_306_addproductform) {
             page_306_addproductform.prepareproductform();
